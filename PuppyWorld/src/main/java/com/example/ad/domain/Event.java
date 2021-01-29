@@ -23,6 +23,7 @@ public class Event {
 	
 	private int capacity;
 	
+	//clarify with YK
 	private User creator;
 	
 	private List<User> participants;
