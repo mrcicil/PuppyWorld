@@ -19,7 +19,7 @@ public class Product {
 	
 	private int productQuantity;
 	
-	private ProductCategory productCategory;
+	private ProductType productType;
 	
 	private byte[] productImage;
 	

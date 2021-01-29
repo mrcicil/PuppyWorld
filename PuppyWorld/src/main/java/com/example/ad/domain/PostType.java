@@ -1,5 +1,5 @@
 package com.example.ad.domain;
 
-public enum PostCategory {
+public enum PostType {
 	LOST, FOUND
 }

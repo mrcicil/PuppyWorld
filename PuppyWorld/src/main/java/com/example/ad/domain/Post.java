@@ -12,7 +12,7 @@ public class Post {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long postId;
 	
-	private PostCategory postCategory;
+	private PostType postType;
 	
 	private String postTitle, postMessage;
 	
