@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.ad.domain.Product;
 import com.example.ad.repo.ProductRepository;
 
+
+//Joe added @Service annotation
+@Service
 public class ProductServiceImplementation implements ProductService {
 	
 	@Autowired

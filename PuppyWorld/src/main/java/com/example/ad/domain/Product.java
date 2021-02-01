@@ -1,6 +1,11 @@
 package com.example.ad.domain;
 
 import javax.persistence.Entity;
+
+//Joe changed: added Null Constructor 
+
+
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -92,5 +97,11 @@ public class Product {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public Product() {
+		super();
+	}
+	
+	
 
 }
