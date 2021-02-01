@@ -34,7 +34,7 @@ public class BreedController {
 	}
 	
 	@RequestMapping(value = "/checkBreedsave")
-	public String save(@RequestParam("image") MultipartFile multipartFile, Model model) throws IllegalStateException, IOException 
+	public String save(@RequestParam("fileImage") MultipartFile multipartFile, Model model) throws IllegalStateException, IOException 
 	{
 		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);

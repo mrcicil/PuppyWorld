@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="fragments/general.html :: header">
+
 <!-- <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <title>Check Breed</title>
+
 </head>
 <body>
   <div th:insert="fragments/general.html :: menu"></div>
@@ -12,24 +14,38 @@
 	<form th:action="@{/checkBreedsave}" method="post"
     enctype="multipart/form-data">
 	
-        <fieldset style="margin-bottom: 20px">
-			<label>Photos: </label>
-    				<input type="file" name="image" accept="image/png, image/jpeg" />
-		</fieldset>
+        <!-- <fieldset style="margin-bottom: 20px"> -->
+			<!-- <label>Photos: </label> -->
+			
+    				<input type="file" name="fileImage" accept="image/*" onchange="loadFile(event)" />
+    		
+		<!-- </fieldset> -->
+		
+			<img id="output" alt="Preview" th:src="@{'data:image/jpeg;base64,'+${image}}"/>
 		
 		
-		
-		
+	
 		<fieldset>
 			<button type="submit" >Check</button>
 		</fieldset>
 		
 	</form>
 	</div>
-	<img th:src="@{'data:image/jpeg;base64,'+${image}}"/>
-<h1 style="color:red" th:text=${result}></h1>
+	<!-- <img th:src="@{'data:image/jpeg;base64,'+${image}}"/> -->
+<h1 style="text-align: center; margin-bottom: 20px; color:red" th:text=${result}></h1>
 	</div>
 	
 	<div th:insert="fragments/general.html :: footer"></div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+
+</script>
 </html>

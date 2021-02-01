@@ -55,21 +55,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/product}"><span data-hover="Product">Product</span></a></li>
                         <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/service}"><span data-hover="Service">Service</span></a></li>
                         <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/post}"><span data-hover="Lost&Found">Lost&Found</span></a></li>
-                        <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/breed}"><span data-hover="CheckBreed"> Check Breed </span></a></li>
+                       <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/breed}"><span data-hover="CheckBreed"> Check Breed </span></a></li>
                         <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/profile}"><span data-hover="Profile">Profile</span></a></li>
                         <li th:if="${#lists.isEmpty(session.usession)}"><a href="#" th:href="@{/login}"><span data-hover="Login"> Login </span></a></li>
                         <li th:if="${#lists.isEmpty(session.usession)}"><a href="#" th:href="@{/register}"><span data-hover="Register New User"> Register New User </span></a></li>
                           <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/logout}"><span data-hover="Logout"> Logout </span></a></li>
                     </nav>
-					</ul>
-						
-					<ul>
-					<nav class="cl-effect-5"> -->
-						<li th:if="${#lists.isEmpty(session.usession)}"><a href="#" th:href="@{/login}"> Login </a></li>
-						<li th:if="${#lists.isEmpty(session.usession)}"><a href="#" th:href="@{/register}"> Register New User </a></li>
-<!--       					<li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:utext="${session.usession.userName}" style="font-family:Lucida Handwriting; font-size:15px"> User </a></li> -->
-      					<li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-					</nav>
 					</ul>
 				</div>
 				<!-- script for menu -->
