@@ -8,8 +8,8 @@ public interface UserService {
 	
 	 public void saveUser(User user);
 	 public ArrayList<User> findAllUsers();
-	 public User findUserById(Long id);
-	 public void deleteUserById(Long id);
+	 public User findUserById(int id);
+	 public void deleteUserById(int id);
 	 public User findUserByUserName(String userName);
 	 public boolean authenticateUser(User user);
 

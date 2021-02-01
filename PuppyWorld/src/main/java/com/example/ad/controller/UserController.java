@@ -99,6 +99,44 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping (value = "/profile")
+	public String profile (Model model, HttpSession session) {
+		
+		User currentUser = (User) session.getAttribute("usession");
+		model.addAttribute("userProfile", currentUser);
+		return "profile";
+	}
+	
+	@RequestMapping (value = "/edit")
+	public String editProfile (Model model, HttpSession session) {
+		
+		User currentUser = (User) session.getAttribute("usession");
+		model.addAttribute("user", currentUser);
+		return "editProfile";
+	}
+	
+	@RequestMapping(value = "/saveProfile")
+	public String saveProfile (@ModelAttribute("user") User user, 
+			BindingResult bindingResult, Model model, HttpSession session, Errors errors) {
+		if (bindingResult.hasErrors()) {
+			return "editProfile";
+		}
+		
+		User editUser = uservice.findUserById(user.getUserId());
+		
+		if (editUser!=null) {
+			editUser.setName(user.getName());
+			editUser.setUserName(user.getUserName());
+			editUser.setPassword(user.getPassword());
+			editUser.setEmailAddress(user.getEmailAddress());
+			uservice.saveUser(editUser);
+			return "index";
+		}
+		
+		return "editProfile";
+		
+	}
+	
 	
 
 }

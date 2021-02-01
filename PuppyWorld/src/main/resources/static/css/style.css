@@ -523,6 +523,16 @@ i.googlepluse:hover{
 	margin-left:5px
 }
 /* General button style (reset) */
+button{
+	background: #4597a8;
+	color: #FFFFFF;
+	font-weight: bold;
+	border: none;
+	letter-spacing: 1px;
+	padding: 0.4em 1.5em;
+	outline: none;
+}
+
 .btn {
 	border: none;
 	font-family: inherit;
