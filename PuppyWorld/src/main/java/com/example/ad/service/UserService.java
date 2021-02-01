@@ -8,7 +8,7 @@ public interface UserService {
 	
 	 public void saveUser(User user);
 	 public ArrayList<User> findAllUsers();
-	 public User findUserById(Long id);
-	 public void deleteUserById(Long id);
+	 public User findUserById(Integer id);
+	 public void deleteUserById(Integer id);
 
 }

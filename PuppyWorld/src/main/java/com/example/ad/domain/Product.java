@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -11,7 +12,7 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long productId;
+	private Integer productId;
 	
 	private String productName;
 	
@@ -21,27 +22,17 @@ public class Product {
 	
 	private ProductType productType;
 	
+	@Lob
 	private byte[] productImage;
 	
 	@OneToOne
 	private User user;
 
-	public Product(String productName, float productPrice, int productQuantity, ProductType productType,
-			byte[] productImage, User user) {
-		super();
-		this.productName = productName;
-		this.productPrice = productPrice;
-		this.productQuantity = productQuantity;
-		this.productType = productType;
-		this.productImage = productImage;
-		this.user = user;
-	}
-
-	public long getProductId() {
+	public Integer getProductId() {
 		return productId;
 	}
 
-	public void setProductId(long productId) {
+	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
 
@@ -92,5 +83,24 @@ public class Product {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public Product(String productName, float productPrice, int productQuantity, ProductType productType,
+			byte[] productImage, User user) {
+		super();
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.productQuantity = productQuantity;
+		this.productType = productType;
+		this.productImage = productImage;
+		this.user = user;
+	}
+
+	public Product() {
+		super();
+	}
+
+
+	
+	
 
 }

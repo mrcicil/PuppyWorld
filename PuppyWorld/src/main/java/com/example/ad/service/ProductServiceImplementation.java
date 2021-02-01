@@ -3,11 +3,16 @@ package com.example.ad.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.ad.domain.Product;
 import com.example.ad.repo.ProductRepository;
 
+@Service
+@Transactional
 public class ProductServiceImplementation implements ProductService {
 	
 	@Autowired
@@ -26,7 +31,7 @@ public class ProductServiceImplementation implements ProductService {
 	}
 
 	@Override
-	public Product findProductById(Long Id) {
+	public Product findProductById(Integer Id) {
 		// TODO Auto-generated method stub
 		ArrayList<Product> pList = findAllProducts();
 		Product searchProduct = null;
@@ -40,10 +45,14 @@ public class ProductServiceImplementation implements ProductService {
 	}
 
 	@Override
-	public void deleteProductById(Long Id) {
+	public void deleteProductById(Integer Id) {
 		// TODO Auto-generated method stub
 		Product searchProduct = findProductById(Id);
 		prepo.delete(searchProduct);
 	}
+	
+
+	
+	
 
 }

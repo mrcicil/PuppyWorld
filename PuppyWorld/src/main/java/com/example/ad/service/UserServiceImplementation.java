@@ -3,11 +3,16 @@ package com.example.ad.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.ad.domain.User;
 import com.example.ad.repo.UserRepository;
 
+@Service
+@Transactional
 public class UserServiceImplementation implements UserService{
 	
 	@Autowired
@@ -27,7 +32,7 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public User findUserById(Long id) {
+	public User findUserById(Integer id) {
 		// TODO Auto-generated method stub
 		ArrayList<User> uList = findAllUsers();
 		User searchUser = null;
@@ -41,7 +46,7 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public void deleteUserById(Long Id) {
+	public void deleteUserById(Integer Id) {
 		// TODO Auto-generated method stub
 		User searchUser = findUserById(Id);
 		urepo.delete(searchUser);

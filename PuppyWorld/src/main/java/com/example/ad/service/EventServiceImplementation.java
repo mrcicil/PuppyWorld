@@ -3,11 +3,16 @@ package com.example.ad.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.ad.domain.Event;
 import com.example.ad.repo.EventRepository;
 
+@Service
+@Transactional
 public class EventServiceImplementation implements EventService {
 	
 	@Autowired

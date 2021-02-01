@@ -13,7 +13,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long userId;
+	private Integer userId;
 	
 	private UserType userType;
 	
@@ -31,21 +31,11 @@ public class User {
 	@Email
 	private String emailAddress;
 
-	public User(UserType userType, @NotEmpty String userName, @NotEmpty String name, @NotEmpty String password,
-			@NotEmpty @Email String emailAddress) {
-		super();
-		this.userType = userType;
-		this.userName = userName;
-		this.name = name;
-		this.password = password;
-		this.emailAddress = emailAddress;
-	}
-
-	public long getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
@@ -88,5 +78,22 @@ public class User {
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
+
+	public User(UserType userType, @NotEmpty String userName, @NotEmpty String name, @NotEmpty String password,
+			@NotEmpty @Email String emailAddress) {
+		super();
+		this.userType = userType;
+		this.userName = userName;
+		this.name = name;
+		this.password = password;
+		this.emailAddress = emailAddress;
+	}
+
+	public User() {
+		super();
+	}
+
+	
+	
 
 }
