@@ -21,20 +21,19 @@ import com.example.ad.domain.MLPath;
 import com.example.ad.repo.MLPathRepository;
 
 @Controller
-@RequestMapping("/checkBreed")
 public class BreedController {
 	
 	@Autowired
 	MLPathRepository mlrepo;
 	
-	@RequestMapping(value = "/home")
+	@RequestMapping(value = "/checkBreed")
 	public String add() 
 	{
 		mlrepo.deleteAll();
 		return "ml-form";
 	}
 	
-	@RequestMapping(value = "/save")
+	@RequestMapping(value = "/checkBreedsave")
 	public String save(@RequestParam("image") MultipartFile multipartFile, Model model) throws IllegalStateException, IOException 
 	{
 		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
