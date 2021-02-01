@@ -31,7 +31,7 @@ public class BreedController {
 	public String add() 
 	{
 		mlrepo.deleteAll();
-		return "blog";
+		return "ml-form";
 	}
 	
 	@RequestMapping(value = "/save")
@@ -44,8 +44,8 @@ public class BreedController {
 		MLPath mlPath = new MLPath();
 		mlPath.setPath(pathWay);
 		mlrepo.save(mlPath);
-		
-		String result = mlMethod1();
+		String result = "Its a....";
+		result += mlMethod1();
 		
 		byte[] fileContent = FileUtils.readFileToByteArray(convFile);
 		String encodedString = Base64.getEncoder().encodeToString(fileContent);
