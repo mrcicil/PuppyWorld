@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 @Entity
-public class Service {
+public class Services {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Service {
 	
 	private LimitDogs limitDogs;
 
-	public Service(String serviceName, String serviceDescription, String serviceDuration, String charges,
+	public Services(String serviceName, String serviceDescription, String serviceDuration, String charges,
 			byte[] serviceImage, ReservationType reservationType, LimitDogs limitDogs) {
 		super();
 		this.serviceName = serviceName;

@@ -5,8 +5,9 @@ import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.ad.domain.Service;
+import com.example.ad.domain.Services;
 import com.example.ad.repo.ServiceRepository;
+
 
 public class ServiceServiceImplementation implements ServiceService {
 	
@@ -14,25 +15,25 @@ public class ServiceServiceImplementation implements ServiceService {
 	ServiceRepository srepo;
 
 	@Override
-	public void saveService(Service service) {
+	public void saveService(Services service) {
 		// TODO Auto-generated method stub
 		srepo.save(service);
 		
 	}
 
 	@Override
-	public ArrayList<Service> findAllServices() {
+	public ArrayList<Services> findAllServices() {
 		// TODO Auto-generated method stub
-		return (ArrayList<Service>) srepo.findAll();
+		return (ArrayList<Services>) srepo.findAll();
 	}
 
 	@Override
-	public Service findServiceById(Long Id) {
+	public Services findServiceById(Long Id) {
 		// TODO Auto-generated method stub
-		ArrayList<Service> sList = findAllServices();
-		Service searchService = null;
-		for (Iterator <Service>iterator = sList.iterator(); iterator.hasNext();) {
-			Service service = iterator.next();
+		ArrayList<Services> sList = findAllServices();
+		Services searchService = null;
+		for (Iterator <Services>iterator = sList.iterator(); iterator.hasNext();) {
+			Services service = iterator.next();
 			if(service.getServiceId() == Id) {
 				searchService = service;
 			}
@@ -43,7 +44,7 @@ public class ServiceServiceImplementation implements ServiceService {
 	@Override
 	public void deleteServiceById(Long Id) {
 		// TODO Auto-generated method stub
-		Service searchService = findServiceById(Id);
+		Services searchService = findServiceById(Id);
 		srepo.delete(searchService);
 	}
 
