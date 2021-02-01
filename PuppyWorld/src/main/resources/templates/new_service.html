@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragement="html_head">
+	<meta charset="UTF-8">
+	<script scr="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<title>Create New Service</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Create New Service</h1>
+		<br />
+		<form action="#" th:action="@{/save}" th:object="${service}"
+			method="post">
+			<table border="0" cellpadding="10">
+				<tr>
+					<td>Service Name:</td>
+					<td><input type="text" th:field="*{serviceName}"></td>
+				</tr>
+				<tr>
+					<td>Service Description:</td>
+					<td><input type="text" th:field="*{serviceDescription}"></td>
+				</tr>
+				<tr>
+					<td align="right">Booking</td>
+				</tr>
+				<tr>
+					<td>Reservation required?
+					<br/>
+						<form>
+							<input type="radio" name="reservation" value="Yes">Yes<input type="radio" name="reservation"
+								value="No">No
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>Number of dogs?
+						<form>
+							<input type="radio" name="number" value="one">One<input type="radio" name="number"
+								value="multiple">Multiple
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>Changes:</td>
+					<td><input type="text" th:field="*{charges}"></td>
+				</tr>
+				<tr>
+					<td>Duration:</td>
+					<td><input type="text" th:field="*{serviceDuration}"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="submit">Clear</button></td>
+					<td colspan="2"><button type="submit">Submit</button></td>
+				</tr>
+			</table>
+		</form>
+		<p>
+			<label>Brand Logo:</label>
+			<input type="file" name="fileImage" id="fileImage" accept="image/png,image/ipeg" />
+		</p>
+		<p>
+			<img id="thumbnail" alt="Logo Preview" />
+		</p>
+	</div>
+</body>
+</html>
