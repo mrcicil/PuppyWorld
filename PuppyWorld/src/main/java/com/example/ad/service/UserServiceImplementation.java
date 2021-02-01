@@ -33,7 +33,7 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public User findUserById(Long id) {
+	public User findUserById(int id) {
 		// TODO Auto-generated method stub
 		ArrayList<User> uList = findAllUsers();
 		User searchUser = null;
@@ -72,7 +72,7 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public void deleteUserById(Long Id) {
+	public void deleteUserById(int Id) {
 		// TODO Auto-generated method stub
 		User searchUser = findUserById(Id);
 		urepo.delete(searchUser);
