@@ -9,13 +9,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 import com.example.ad.domain.Services;
+import com.example.ad.repo.ServiceRepository;
 import com.example.ad.service.ServiceServiceImplementation;
 
 @Controller
 public class ServiceController {
 	@Autowired
 	private ServiceServiceImplementation Iservice;
+	
+	@Autowired
+	private ServiceRepository repo;
 	
 	@RequestMapping("/service")
 	public String viewHomePage(Model model) {

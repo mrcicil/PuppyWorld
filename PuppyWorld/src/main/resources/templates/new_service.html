@@ -2,8 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragement="html_head">
 	<meta charset="UTF-8">
-	<script scr="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<title>Create New Service</title>
+	<script scr="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+     $(document).ready(function() 
+     { 
+     	$('#fileImage').change(function()
+     	{
+     		showImageThumbnail(this);
+     	});
+     
+     	function showImageThumbnail(fileInput)
+     	{
+     		file=fileInput.files[0];
+     		reader=new FileReader();
+     
+     		reader.onload=function(e)
+     		{
+     			$('#thumbnail').attr('src',e.target.result);
+     		}
+     	};
+     
+     	reader.readAsDataURL(file);
+     	
+     });
+     </script>
 </head>
 <body>
 	<div align="center">
@@ -24,20 +48,25 @@
 					<td align="right">Booking</td>
 				</tr>
 				<tr>
-					<td>Reservation required?
-					<br/>
-						<form>
-							<input type="radio" name="reservation" value="Yes">Yes<input type="radio" name="reservation"
-								value="No">No
-						</form>
+					<td>Reservation required?</td>
+					<td>
+						<fieldset style="border:0px">
+						<select th:field="*{reservationType}">
+							<option th:each="reservationType : ${T(com.example.ad.domain.ReservationType).values()}" 
+							th:value="${reservationType}" th:text="${reservationType}"/>
+						</select>
+						</fieldset>
 					</td>
 				</tr>
 				<tr>
-					<td>Number of dogs?
-						<form>
-							<input type="radio" name="number" value="one">One<input type="radio" name="number"
-								value="multiple">Multiple
-						</form>
+					<td>Number of Dogs?</td>
+					<td>
+						<fieldset style="border:0px">
+						<select th:field="*{limitDogs}">
+							<option th:each="limitDogs : ${T(com.example.ad.domain.LimitDogs).values()}" 
+							th:value="${limitDogs}" th:text="${limitDogs}"/>
+						</select>
+						</fieldset>
 					</td>
 				</tr>
 				<tr>
@@ -62,5 +91,6 @@
 			<img id="thumbnail" alt="Logo Preview" />
 		</p>
 	</div>
+	
 </body>
 </html>
