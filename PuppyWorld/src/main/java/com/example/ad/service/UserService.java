@@ -10,5 +10,7 @@ public interface UserService {
 	 public ArrayList<User> findAllUsers();
 	 public User findUserById(Long id);
 	 public void deleteUserById(Long id);
+	 public User findUserByUserName(String userName);
+	 public boolean authenticateUser(User user);
 
 }

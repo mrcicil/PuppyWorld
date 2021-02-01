@@ -31,6 +31,8 @@ public class User {
 	@Email
 	private String emailAddress;
 
+	public User() {}
+	
 	public User(UserType userType, @NotEmpty String userName, @NotEmpty String name, @NotEmpty String password,
 			@NotEmpty @Email String emailAddress) {
 		super();
