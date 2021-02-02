@@ -28,6 +28,10 @@ public class Product {
 	@OneToOne
 	private User user;
 
+	public Product() {
+		super();
+	}
+
 	public Product(String productName, float productPrice, int productQuantity, ProductType productType,
 			byte[] productImage, User user) {
 		super();
