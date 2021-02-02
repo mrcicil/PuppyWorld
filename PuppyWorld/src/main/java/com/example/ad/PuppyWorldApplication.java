@@ -24,6 +24,8 @@ public class PuppyWorldApplication {
 	CommandLineRunner commandLineRunner() {
 		return args -> {
 			
+			//dummy
+			
 			/*
 			 * User user1 = new User(UserType.CUSTOMER, "keyin", "Tan Ke Yin", "keyin1994",
 			 * "keyint94@gmail.com"); User user2 = new User(UserType.CUSTOMER, "xutian",
