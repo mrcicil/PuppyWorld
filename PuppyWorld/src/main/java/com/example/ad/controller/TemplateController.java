@@ -12,6 +12,7 @@ import com.example.ad.service.ProductService;
 import com.example.ad.service.ProductServiceImplementation;
 import com.example.ad.service.ReservationService;
 import com.example.ad.service.ReservationServiceImplementation;
+import com.example.ad.service.ServiceService;
 import com.example.ad.service.ServiceServiceImplementation;
 import com.example.ad.service.UserService;
 import com.example.ad.service.UserServiceImplementation;
@@ -59,7 +60,11 @@ public class TemplateController {
 	}
 	
 	@Autowired
+	private ServiceService sservice;
+	
+	@Autowired
 	public void setSService(ServiceServiceImplementation sServiceImpl) {
+		this.sservice = sServiceImpl;
 	}
 	
 	@Autowired
