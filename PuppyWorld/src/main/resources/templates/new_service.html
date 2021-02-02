@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragement="html_head">
+<head th:insert="fragments/general.html :: header">
 	<meta charset="UTF-8">
 	<title>Create New Service</title>
 </head>
 <body>
-	<div align="center">
+	<div th:insert="fragments/general.html :: menu"></div>
 		<h1>Create New Service</h1>
 		<br />
 		<form action="#" th:action="@{/save}" th:object="${service}"
@@ -70,7 +70,7 @@
 		</form>
 		
 	</div>
-	
+	<div th:insert="fragments/general.html :: footer"></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
