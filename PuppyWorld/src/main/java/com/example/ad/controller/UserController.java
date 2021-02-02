@@ -191,23 +191,22 @@ public class UserController {
 
 	        Random random = new Random(); 
 
-	        char[] password = new char[length]; 
+	        String password = ""; 
 
 	        for (int i = 0; i < length; i++) 
 	        { 
-	            password[i] = 
-	                    finalString.charAt(random.nextInt(finalString.length())); 
+	            password = password + finalString.charAt(random.nextInt(finalString.length())); 
 
 	        } 
 	        
 	        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	        dbuser.setPassword(passwordEncoder.encode(password.toString()));
+	        dbuser.setPassword(passwordEncoder.encode(password));
 	        uservice.saveUser(dbuser);
 	        
 	        System.out.println(password);
-	        System.out.println(passwordEncoder.encode(password.toString()));
+	        System.out.println(passwordEncoder.encode(password));
 			
-	        String mail = "The new password is being generated: " + password.toString() + ". Please use this new password to login to your account.";
+	        String mail = "The new password is being generated: " + password + ". Please use this new password to login to your account.";
 			eservice.sendNotification(mail, dbuser.getEmailAddress());
 
 			return "login";

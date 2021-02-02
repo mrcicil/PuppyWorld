@@ -16,23 +16,24 @@ public class PuppyWorldApplication {
 
 	@Autowired
 	public UserRepository urepo;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(PuppyWorldApplication.class, args);
 	}
-	
+
 	@Bean
 	CommandLineRunner commandLineRunner() {
 		return args -> {
+
 			
-			
+			  
 			/*
 			 * BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); String
 			 * encodedPassword1 = passwordEncoder.encode("keyin1994"); String
 			 * encodedPassword2 = passwordEncoder.encode("xutian2021");
 			 * 
 			 * User user1 = new User(UserType.CUSTOMER, "keyin", "Tan Ke Yin",
-			 * encodedPassword1, "keyint94@gmail.com");
+			 * encodedPassword1, "keyintan94@gmail.com");
 			 * 
 			 * User user2 = new User(UserType.CUSTOMER, "xutian", "Ho Xu Tian",
 			 * encodedPassword2, "xutian2021@gmail.com");
@@ -40,6 +41,7 @@ public class PuppyWorldApplication {
 			 * urepo.save(user1); urepo.save(user2);
 			 */
 			 
+
 		};
 	}
 
