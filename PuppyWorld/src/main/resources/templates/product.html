@@ -11,8 +11,7 @@
 	<div th:replace="fragments/general.html :: menu"></div>
 
 	<h1>Product</h1>
-	<!-- Add Hyperlink -->
-	<a href="AddProduct.html" th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}" th:href="@{/product/add}">New Product</a>
+	
 
 	<h2 th:if="${not #lists.isEmpty(productList)}">Product</h2>
 	<table th:if="${not #lists.isEmpty(productList)}"  class="table">

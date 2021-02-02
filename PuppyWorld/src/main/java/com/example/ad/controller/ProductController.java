@@ -72,22 +72,7 @@ public class ProductController {
 		return "productlist";
 	}
 	
-	@RequestMapping(value="/testlist")
-	public String testlist(Model model)
-	{
-		//model.addAttribute("productList", proservice.listAllProducts());
-		model.addAttribute("productList", proservice.findAllProducts()); //I used the build in JPA repo
-		
-		
-		return "testingt";
-	}
 	
-	@RequestMapping(value = "/testproduct}")
-	public String test(@PathVariable("id") Integer id, Model model) {
-		//model.addAttribute("product", proservice.findById(number).get());
-		model.addAttribute("product", proservice.findProductById(id));
-		return "testproduct";
-	}
 	
 	@RequestMapping(value = "/edit/{id}")
 	public String editForm(@PathVariable("id") Integer id, Model model) {

@@ -21,7 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 
 @Service
-@Transactional
+//@Transactional
 public class ProductServiceImplementation implements ProductService {
 	
 	@Autowired
@@ -62,7 +62,7 @@ public class ProductServiceImplementation implements ProductService {
 	
 	
 	
-	
+	@Override
 	public void convertFileToString(MultipartFile multipartFile) throws IOException {
 	String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
     System.out.println(fileName);
@@ -74,6 +74,7 @@ public class ProductServiceImplementation implements ProductService {
     String encodedString = java.util.Base64.getEncoder().encodeToString(fileContent);
 	}
     
+	@Override
 	public void convertStringToImage(String encodedString, String outputFileName) throws IOException {
     //convert string to byte and convert byte to image 
     byte[] decodedBytes = java.util.Base64.getDecoder().decode(encodedString);
