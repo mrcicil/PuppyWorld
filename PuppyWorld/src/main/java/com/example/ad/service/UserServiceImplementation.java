@@ -81,4 +81,19 @@ public class UserServiceImplementation implements UserService{
 		User searchUser = findUserById(Id);
 		urepo.delete(searchUser);
 	}
+
+	@Override
+	public User findUserByUserEmail(String emailAddress) {
+		// TODO Auto-generated method stub
+		ArrayList<User> uList = findAllUsers();
+		User searchUser = null;
+		for (Iterator <User> iterator = uList.iterator(); iterator.hasNext();) {
+			User user = iterator.next();
+			if(user.getEmailAddress().equals(emailAddress)){
+				searchUser = user;
+			}
+		}
+		return searchUser;
+		
+	}
 }
