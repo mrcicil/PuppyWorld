@@ -12,53 +12,19 @@ public class Services {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long serviceId;
+	private int serviceId;
 	
 	@Column(length=45,nullable=true)
 	private String logo;
 	
 	private String serviceName, serviceDescription, serviceDuration, charges;
+	
 	@Lob
 	private byte[] serviceImage;
 	
 	private ReservationType reservationType;
 	
 	private LimitDogs limitDogs;
-
-	public Services() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
-	}
-
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
-
-	@Override
-	protected void finalize() throws Throwable {
-		// TODO Auto-generated method stub
-		super.finalize();
-	}
 
 	public Services(String serviceName, String serviceDescription, String serviceDuration, String charges,
 			byte[] serviceImage, ReservationType reservationType, LimitDogs limitDogs) {
@@ -71,12 +37,17 @@ public class Services {
 		this.reservationType = reservationType;
 		this.limitDogs = limitDogs;
 	}
+	
+	public Services() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-	public long getServiceId() {
+	public int getServiceId() {
 		return serviceId;
 	}
 
-	public void setServiceId(long serviceId) {
+	public void setServiceId(int serviceId) {
 		this.serviceId = serviceId;
 	}
 
@@ -136,12 +107,6 @@ public class Services {
 		this.limitDogs = limitDogs;
 	}
 
-	public String getLogo() {
-		return logo;
-	}
 
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
 
 }

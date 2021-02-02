@@ -8,7 +8,8 @@ public interface ServiceService {
 	
 	public void saveService(Services service);
 	public ArrayList<Services> findAllServices();
-	public Services findServiceById(Long Id);
-	public void deleteServiceById(Long Id);
+	public Services findServiceById(int Id);
+	public void deleteServiceById(int Id);
+
 
 }

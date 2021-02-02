@@ -8,7 +8,7 @@ public interface ReservationService {
 	
 	public void saveReservation(Reservation reservation);
 	public ArrayList<Reservation> findAllReservations();
-	public Reservation findReservationById(Long Id);
-	public void deleteReservationById(Long Id);
+	public Reservation findReservationById(int Id);
+	public void deleteReservationById(int Id);
 
 }

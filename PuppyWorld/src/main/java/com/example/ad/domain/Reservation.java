@@ -13,7 +13,7 @@ public class Reservation {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long reservationId;
+	private int reservationId;
 	
 	private LocalDate reserveDate;
 	private LocalTime reserveTime;
@@ -30,11 +30,11 @@ public class Reservation {
 		this.remarks = remarks;
 	}
 
-	public long getReservationId() {
+	public int getReservationId() {
 		return reservationId;
 	}
 
-	public void setReservationId(long reservationId) {
+	public void setReservationId(int reservationId) {
 		this.reservationId = reservationId;
 	}
 
@@ -69,4 +69,5 @@ public class Reservation {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+
 }
