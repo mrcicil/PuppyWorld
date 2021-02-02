@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/general.html :: header">
+<!-- <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<title>PuppyWorld Profile</title>
+</head>
+<body>
+  <div th:insert="fragments/general.html :: menu"></div>
+  	<div class="main">
+	<div class="container" style="text-align: center; margin-bottom: 20px">
+	
+	<h2 style="padding:25px">Your Profile</h2>
+	<table th:if="${not #lists.isEmpty(userProfile)}"  class="table" style="width:35%; margin-left: auto; margin-right: auto; padding: 10px">
+		<tr>
+			<td>Name</td>
+			<td th:text=${userProfile.name}>Your Name</td>
+		</tr>
+		
+		<tr>
+			<td>User Name</td>
+			<td th:text="${userProfile.userName}"> Your Username</td>
+		</tr>
+		
+		<tr>
+			<td>Password</td>
+			<td th:text=${userProfile.password}>Your Password</td>
+		</tr>
+		
+		<tr>
+			<td>Email Address</td>
+			<td th:text=${userProfile.emailAddress}>Your Email Address</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<button>
+					<a style="color:white" href="EditProfile.html" th:href="@{/edit}">Edit Profile</a>
+				</button></td>
+		</tr>
+	</table>
+	
+	<div>
+		<button>
+			<a style="color:white" href="Home" th:href="@{/}">Back to Home</a>
+		</button>
+	</div>
+	
+	</div>
+	</div>
+	
+	<div th:insert="fragments/general.html :: footer"></div>
+</body>
+</html>

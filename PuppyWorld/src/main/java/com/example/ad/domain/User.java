@@ -13,7 +13,10 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer userId;
+	private int userId;
+
+
+
 	
 	private UserType userType;
 	
@@ -31,11 +34,11 @@ public class User {
 	@Email
 	private String emailAddress;
 
-	public Integer getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -92,6 +95,9 @@ public class User {
 	public User() {
 		super();
 	}
+
+
+	
 
 	
 	

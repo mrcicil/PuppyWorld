@@ -1,5 +1,6 @@
 package com.example.ad;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +23,12 @@ import javax.imageio.ImageIO;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+import com.example.ad.domain.User;
+import com.example.ad.domain.UserType;
+import com.example.ad.repo.UserRepository;
+import org.springframework.util.Base64Utils;
+
+
 @SpringBootApplication
 public class PuppyWorldApplication {
 	
@@ -32,9 +39,12 @@ public class PuppyWorldApplication {
 	UserRepository urepo; 
 	
 
+
+	
 	public static void main(String[] args) {
 		SpringApplication.run(PuppyWorldApplication.class, args);
 	}
+
 		
 		@Bean
 		CommandLineRunner commandLineRunner() {
@@ -45,11 +55,13 @@ public class PuppyWorldApplication {
 			      ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			      ImageIO.write(bImage, "jpg", bos );
 			      byte [] data1 = bos.toByteArray();
+					data1 = Base64Utils.encode(data1);
 			      
 			      BufferedImage bImage2 = ImageIO.read(new File("src/main/resources/static/images/2.jpg"));
 			      ByteArrayOutputStream bos2 = new ByteArrayOutputStream();
 			      ImageIO.write(bImage2, "jpg", bos2 );
 			      byte [] data2 = bos2.toByteArray();
+			      data2 = Base64Utils.encode(data2);
 			      
 			      User u1 = new User(UserType.STAFF, "joe", "Joe", "password",
 			  			"e0533420@u.nus.edu");
@@ -74,8 +86,17 @@ public class PuppyWorldApplication {
 		prepo.save(p1);
 		prepo.save(p2); 
 		
-		};
+
 		
+			
+			/*
+			 * User user1 = new User(UserType.CUSTOMER, "keyin", "Tan Ke Yin", "keyin1994",
+			 * "keyint94@gmail.com"); User user2 = new User(UserType.CUSTOMER, "xutian",
+			 * "Ho Xu Tian", "xutian2021", "xutian2021@gmail.com"); urepo.save(user1);
+			 * urepo.save(user2);
+			 */
+		};
+
 	}
 
 }
