@@ -1,16 +1,23 @@
 package com.example.ad.controller;
 
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,5 +83,34 @@ public class ProductController {
 		
 		return "redirect:/";
 
+	}
+	
+	@RequestMapping(value="/productList")
+	public String list(Model model)
+	{
+		//model.addAttribute("productList", proservice.listAllProducts());
+		model.addAttribute("productList", pservice.findAllProducts()); //I used the build in JPA repo
+		
+		
+		return "productlist";
+	}
+	
+	@GetMapping("/product/image/{id}")
+	public void showProductImage(@PathVariable String id, HttpServletResponse response) throws IOException {
+		response.setContentType("image/jpeg"); // Or whatever format you wanna use
+		
+		int newId = Integer.parseInt(id);
+		Product product = pservice.findProductById(newId);
+
+		InputStream is = new ByteArrayInputStream(product.getProductImage());
+		IOUtils.copy(is, response.getOutputStream());
+		
+	}
+	
+	@RequestMapping(value = "/product/delete/{id}")
+	public String deleteProduct(@PathVariable("id") Integer id) {
+		
+		pservice.deleteProductById(id);
+		return "redirect:/productList";
 	}
 }
