@@ -28,11 +28,14 @@ public class ServiceController {
 	private ServiceService sservice;
 	
 	@Autowired
-	private ServiceServiceImplementation sServiceImpl;
-	
-	@Autowired
 	public void setSService(ServiceServiceImplementation sServiceImpl) {
 		this.sservice = sServiceImpl;
+	}
+	
+	@RequestMapping(value = "/serviceList")
+	public String list(Model model) {
+		model.addAttribute("serviceList", sservice.findAllServices());
+		return "service";
 	}
 	
 	@RequestMapping("/service")
@@ -62,6 +65,7 @@ public class ServiceController {
 		return "redirect:/";
 	}
 	
+
 	@RequestMapping("/edit/{serviceId}")
 	public ModelAndView showEditServiceForm(@PathVariable(name="serviceId") int id){
 		ModelAndView mav=new ModelAndView("edit_service");	
@@ -75,4 +79,32 @@ public class ServiceController {
 		sservice.deleteServiceById(id);
 		return "redirect:/service";
 	}
+
+	
+//	@GetMapping("/search")
+//	public String listPage(Model model, @Param("keyword") String keyword) {
+//		return searchList(model, 1, keyword);
+//	}
+//	
+//	@GetMapping("/search/page/{pageNumber}")
+//	public String searchList(Model model, @PathVariable("pageNumber") int currentPage, @Param("keyword") String keyword) {
+//		
+//
+//		Page<Services> page = sservice.searchService(currentPage, keyword);
+//		long totalElements = page.getTotalElements();
+//		int totalPages = page.getTotalPages();
+//		
+//
+//		List<Services> invList = page.getContent();
+//		
+//		model.addAttribute("currentPage", currentPage);
+//		model.addAttribute("totalElements", totalElements);
+//		model.addAttribute("totalPages", totalPages);
+//		model.addAttribute("invList", invList);
+//		model.addAttribute("keyword", keyword);
+//
+//		return "searchservices";
+//	}
+
+
 }

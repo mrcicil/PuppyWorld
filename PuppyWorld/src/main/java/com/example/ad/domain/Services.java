@@ -107,6 +107,4 @@ public class Services {
 		this.limitDogs = limitDogs;
 	}
 
-
-
 }
