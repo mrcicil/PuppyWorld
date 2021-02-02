@@ -6,32 +6,31 @@
 </head>
 
 <body>
-
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
 	<h1>Product List</h1>
 	<a href="AddProduct.html" th:href="@{/product/add}">New Product</a>
 
-	<h2 th:if="${not #lists.isEmpty(productList)}">Product List</h2>
-	<table th:if="${not #lists.isEmpty(productList)}"  class="table">
+	<h2>Product List</h2>
+	<table class="table">
 		<tr>
 			<th>Product ID</th>
 			<th>Product Name</th>
 			<th>Product Price</th>
-			<th>Product Quantity</th>
 			<th>Product Type</th>
-			<th>Image</th>
+			<!-- <th>Image</th> -->
 			
 		</tr>
 		<tr th:each="product:${productList}" >
 			<td th:text=${product.productId}>Product ID</td>
 			<td th:text="${product.productName}">Product Name</td>
 			<td th:text=${product.productPrice}>Product Price</td>
-			<td th:text=${product.productQuantity}>Product Quantity</td>
 			<td th:text=${product.productType}>Product Type</td>
-			<td th:text=${product.productImage}>Image</td>
-			<td><a href="EditProduct.html"
+			<!-- <td th:text=${product.productImage}>Image</td> -->
+			<!-- <td><a href="EditProduct.html"
 				th:href="@{/product/edit/}+${product.partNumber}">Edit</a></td>
 			<td><a href="DeleteProduct.html"
-				th:href="@{/product/delete/}+${product.partNumber}">Deactivate</a></td>	
+				th:href="@{/product/delete/}+${product.partNumber}">Deactivate</a></td>	 -->
 		</tr>
 	</table>
     <br/>

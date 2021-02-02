@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.ad.domain.Product;
 import com.example.ad.repo.ProductRepository;
 
+@Service
+@Transactional
 public class ProductServiceImplementation implements ProductService {
 	
 	@Autowired

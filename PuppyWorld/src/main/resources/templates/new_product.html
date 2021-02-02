@@ -46,16 +46,16 @@
 				<tr>
 				<td>
 					<label>Product Image:</label>
-						<input type="file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
+						<input type="file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" size="30"/>
 				</td>
 				<td>
-					<img id="output" alt="Preview" />
+					<img id="output" alt="Preview" width="200" height="200"/>
 				</td>
 				
 				</tr>
 				<tr>
-					<td colspan="2"><button type="submit">Clear</button></td>
-					<td colspan="2"><button type="submit">Submit</button></td>
+					<td colspan="2"><a th:href="@{/createProduct}">Clear</a></td>
+					<td colspan="2"><button type="submit" name="upload" id="upload"  class="send_upload" value="upload" >Submit</button></td>
 				</tr>
 			</table>
 		</form>
@@ -72,6 +72,21 @@ var loadFile = function(event) {
       URL.revokeObjectURL(output.src) // free memory
     }
   };
+  
+  $(document).ready(function() {
+	    $('#upload').bind("click",function() 
+	    { 
+	        var imgVal = $('#fileImage').val(); 
+	        if(imgVal=='') 
+	        { 
+	            alert("empty input file"); 
+	            return false; 
+
+	        } 
+	        return true; 
+
+	    }); 
+	});
 
 </script>
 </html>

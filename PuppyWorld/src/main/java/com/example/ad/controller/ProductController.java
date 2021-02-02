@@ -48,15 +48,30 @@ public class ProductController {
 		return "new_product";
 	}
 	
+	@RequestMapping("/product")
+	public String showAllProduct(Model model) {
+		model.addAttribute("productList", pservice.findAllProducts());
+		return "product";
+	}
+	
 	@RequestMapping(value="/saveProduct",method=RequestMethod.POST)
 	public String saveService(@ModelAttribute("product")Product product, @RequestParam("fileImage") MultipartFile multipartFile) throws IllegalStateException, IOException {
-		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-		System.out.println(fileName);
-		File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
-		multipartFile.transferTo(convFile);
-		byte[] fileContent = FileUtils.readFileToByteArray(convFile);
 		
-		product.setProductImage(fileContent);
+		try {
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			System.out.println(fileName);
+			File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
+			multipartFile.transferTo(convFile);
+			byte[] fileContent = FileUtils.readFileToByteArray(convFile);
+			
+			product.setProductImage(fileContent);
+		}
+		catch(IllegalStateException e) {
+			System.out.println(e.toString());
+		}
+		catch(IOException e) {
+			System.out.println(e.toString());
+		}
 		pservice.saveProduct(product);
 		
 		return "redirect:/";
