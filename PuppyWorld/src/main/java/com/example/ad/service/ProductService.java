@@ -18,8 +18,6 @@ public interface ProductService {
 	public Product findProductById(int Id);
 	public void deleteProductById(int Id);
 	
-	public void showProductImage(@PathVariable int id,
-            HttpServletResponse response) throws IOException;
 	
 
 

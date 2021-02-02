@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Product List</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>Product</h1>
+	<!-- Add Hyperlink -->
+	<a href="AddProduct.html" th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}" th:href="@{/product/add}">New Product</a>
+
+	<h2 th:if="${not #lists.isEmpty(productList)}">Product</h2>
+	<table th:if="${not #lists.isEmpty(productList)}"  class="table">
+		<tr>
+			
+			<th>Product Image</th>
+			
+			<!-- 
+			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">Edit Product</th>
+			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">Delete Product</th>
+			 -->
+
+
+
+		
+			<td>  <img class="product-image" th:src="@{'product/image/' + @{product.image}}"></td>
+		
+			<!-- 
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">
+				<a href="EditProduct.html" th:href="@{/product/edit/}+${product.productId}">Edit</a></td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">
+				<a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.productId}">Delete</a></td>	
+			-->
+			
+		</tr>
+	</table>
+    <br/>
+	<div th:replace="fragments/general.html :: footer"></div>
+	
+</body>
+</html>

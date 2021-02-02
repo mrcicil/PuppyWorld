@@ -62,17 +62,6 @@ public class ProductServiceImplementation implements ProductService {
 	
 	
 	
-	@Override
-	@GetMapping("/product/image/{id}")
-	public void showProductImage(int id, HttpServletResponse response) throws IOException {
-		response.setContentType("image/jpeg"); // Or whatever format you wanna use
-
-		Product product = prepo.findById(id).get();
-
-		InputStream is = new ByteArrayInputStream(product.getProductImage());
-		IOUtils.copy(is, response.getOutputStream());
-		
-	}
 	
 	public void convertFileToString(MultipartFile multipartFile) throws IOException {
 	String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());

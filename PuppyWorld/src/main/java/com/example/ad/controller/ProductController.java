@@ -1,15 +1,21 @@
 package com.example.ad.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Base64Utils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,6 +70,23 @@ public class ProductController {
 		
 		
 		return "productlist";
+	}
+	
+	@RequestMapping(value="/testlist")
+	public String testlist(Model model)
+	{
+		//model.addAttribute("productList", proservice.listAllProducts());
+		model.addAttribute("productList", proservice.findAllProducts()); //I used the build in JPA repo
+		
+		
+		return "testingt";
+	}
+	
+	@RequestMapping(value = "/testproduct}")
+	public String test(@PathVariable("id") Integer id, Model model) {
+		//model.addAttribute("product", proservice.findById(number).get());
+		model.addAttribute("product", proservice.findProductById(id));
+		return "testproduct";
 	}
 	
 	@RequestMapping(value = "/edit/{id}")
@@ -123,6 +146,21 @@ public class ProductController {
 	}
 		return msg;
 	}
+	
+	
+
+
+	@GetMapping("/product/image/{id}")
+	public void showProductImage(int id, HttpServletResponse response) throws IOException {
+		response.setContentType("image/jpeg"); // Or whatever format you wanna use
+
+		Product product = proservice.findProductById(id);
+
+		InputStream is = new ByteArrayInputStream(product.getProductImage());
+		IOUtils.copy(is, response.getOutputStream());
+		
+	}
+	
 }
 
 
