@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Services {
@@ -17,7 +18,7 @@ public class Services {
 	private String logo;
 	
 	private String serviceName, serviceDescription, serviceDuration, charges;
-	
+	@Lob
 	private byte[] serviceImage;
 	
 	private ReservationType reservationType;

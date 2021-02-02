@@ -3,38 +3,13 @@
 <head th:fragement="html_head">
 	<meta charset="UTF-8">
 	<title>Create New Service</title>
-	<script scr="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-	<script type="text/javascript">
-     $(document).ready(function() 
-     { 
-     	$('#fileImage').change(function()
-     	{
-     		showImageThumbnail(this);
-     	});
-     
-     	function showImageThumbnail(fileInput)
-     	{
-     		file=fileInput.files[0];
-     		reader=new FileReader();
-     
-     		reader.onload=function(e)
-     		{
-     			$('#thumbnail').attr('src',e.target.result);
-     		}
-     	};
-     
-     	reader.readAsDataURL(file);
-     	
-     });
-     </script>
 </head>
 <body>
 	<div align="center">
 		<h1>Create New Service</h1>
 		<br />
 		<form action="#" th:action="@{/save}" th:object="${service}"
-			method="post">
+			method="post" enctype="multipart/form-data">
 			<table border="0" cellpadding="10">
 				<tr>
 					<td>Service Name:</td>
@@ -78,19 +53,34 @@
 					<td><input type="text" th:field="*{serviceDuration}"></td>
 				</tr>
 				<tr>
+				<td>
+					<label>Brand Logo:</label>
+						<input type="file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
+				</td>
+				<td>
+					<img id="output" alt="Preview" />
+				</td>
+				
+				</tr>
+				<tr>
 					<td colspan="2"><button type="submit">Clear</button></td>
 					<td colspan="2"><button type="submit">Submit</button></td>
 				</tr>
 			</table>
 		</form>
-		<p>
-			<label>Brand Logo:</label>
-			<input type="file" name="fileImage" id="fileImage" accept="image/png,image/ipeg" />
-		</p>
-		<p>
-			<img id="thumbnail" alt="Logo Preview" />
-		</p>
+		
 	</div>
 	
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+
+</script>
 </html>
