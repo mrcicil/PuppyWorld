@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Services;
 import com.example.ad.repo.ServiceRepository;
+import com.example.ad.service.ServiceService;
 import com.example.ad.service.ServiceServiceImplementation;
 
 @Controller
@@ -25,7 +26,16 @@ public class ServiceController {
 	private ServiceServiceImplementation Iservice;
 	
 	@Autowired
-	private ServiceRepository repo;
+	private ServiceRepository srepo;
+	
+	@Autowired
+	private ServiceService iservice;
+	
+	@RequestMapping(value = "/serviceList")
+	public String list(Model model) {
+		model.addAttribute("serviceList", iservice.findAllServices());
+		return "service";
+	}
 	
 	@RequestMapping("/service")
 	public String viewHomePage(Model model) {

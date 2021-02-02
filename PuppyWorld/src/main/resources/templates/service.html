@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Service</title>
+<meta charset="ISO-8859-1">
+<title>Service List</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
+
 <body>
-	<div align="center">
-		<h1>Service</h1>
-		<a href="new">Create new Service</a>
-		<br/><br/>
-		<table border="1" cellpadding="10">
-			<thead>
-				<tr>
-					<th>Service name</th>
-					<th>Service Description</th>
-					<th>Charges</th>
-					<th>Duration</th>
-					<th>Upload picture</th>
-				</tr>
-			</thead>
-			<tbody>
-			<tr th:each="services :${listService}">
-					<td th:text="${services.serviceId}">Service ID</td>
-					<td th:text="${services.serviceDescription}">Service Description</td>
-					<td th:text="${services.charges}">Charges</td>
-					<td th:text="${services.serviceDuration}">Duration</td>
-					<td th:text="${services.serviceImage}">Upload picture</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>Service List</h1>
+	<!-- Add Hyperlink -->
+	<a href="new">Create New Service</a>
+	
+	<br/><br/>
+
+	<h2>Service List</h2>
+	<table class="table">
+		<tr>
+     <th>Service name</th>
+     <th>Service Description</th>
+     <th>Reservation Type</th>
+     <th>Number of Dogs</th>
+     <th>Charges</th>
+     <th>Duration</th>
+        </tr>
+		<tbody>
+   <tr th:each="service:${serviceList}">
+     <td th:text="${service.serviceName}">Service ID</td>
+     <td th:text="${service.serviceDescription}">Service Description</td>
+     <td th:text="${service.reservationType}">Reservation Type</td>
+     <td th:text="${service.limitDogs}">Number of Dogs</td>
+     <td th:text="${service.charges}">Charges</td>
+     <td th:text="${service.serviceDuration}">Duration</td>
+    </tr>
+   </tbody>
+	</table>
+    <br/>
+	<div th:replace="fragments/general.html :: footer"></div>
+	
 </body>
 </html>
