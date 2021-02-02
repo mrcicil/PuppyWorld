@@ -26,6 +26,11 @@
 					<td th:text="${services.charges}">Charges</td>
 					<td th:text="${services.serviceDuration}">Duration</td>
 					<td th:text="${services.serviceImage}">Upload picture</td>
+					<td>
+						<a th:href="@{'/edit/'+${services.serviceId}}">Edit</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<a th:href="@{'/delete/'+${services.serviceId}}">Delete</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>
