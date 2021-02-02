@@ -27,7 +27,7 @@ public class PuppyWorldApplication {
 	@Bean
 	CommandLineRunner commandLineRunner() {
 		return args -> {
-
+			
 			
 			/*
 			 * User user1 = new User(UserType.CUSTOMER, "keyin", "Tan Ke Yin", "keyin1994",

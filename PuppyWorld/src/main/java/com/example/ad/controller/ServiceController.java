@@ -23,7 +23,7 @@ import com.example.ad.service.ServiceServiceImplementation;
 @Controller
 public class ServiceController {
 	@Autowired
-	private ServiceService sservice;
+	private ServiceServiceImplementation Iservice;
 	
 	@Autowired
 	private ServiceRepository srepo;
@@ -39,7 +39,7 @@ public class ServiceController {
 	
 	@RequestMapping("/service")
 	public String viewHomePage(Model model) {
-		List<Services> listService=sservice.findAllServices();
+		List<Services> listService=Iservice.findAllServices();
 		model.addAttribute("listService",listService);
 		return "service";
 	}
@@ -60,7 +60,7 @@ public class ServiceController {
 		byte[] fileContent = FileUtils.readFileToByteArray(convFile);
 		
 		service.setServiceImage(fileContent);
-		sservice.saveService(service);
+		Iservice.saveService(service);
 		
 		return "redirect:/";
 	}
