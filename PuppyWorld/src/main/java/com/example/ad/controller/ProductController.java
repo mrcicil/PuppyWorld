@@ -1,22 +1,31 @@
 package com.example.ad.controller;
 
-import javax.validation.Valid;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Product;
+import com.example.ad.domain.Services;
+import com.example.ad.repo.ServiceRepository;
 import com.example.ad.service.ProductService;
 import com.example.ad.service.ProductServiceImplementation;
+import com.example.ad.service.ServiceService;
+import com.example.ad.service.ServiceServiceImplementation;
 
 @Controller
 public class ProductController {
-
 	@Autowired
 	private ProductService pservice;
 	
@@ -25,39 +34,32 @@ public class ProductController {
 		this.pservice = pServiceImpl;
 	}
 	
-	@RequestMapping(value = "/createProduct")
-	public String add(Model model) 
-	{
+//	@RequestMapping("/service")
+//	public String viewHomePage(Model model) {
+//		List<Services> listService=sservice.findAllServices();
+//		model.addAttribute("listService",listService);
+//		return "service";
+//	}
+	
+	@RequestMapping("/createProduct")
+	public String showNewProductForm(Model model) {
 		Product product = new Product();
-		model.addAttribute("product", product);
+		model.addAttribute("product",product);
 		return "new_product";
 	}
 	
-	@RequestMapping(value = "/save")
-	public String saveProduct(@ModelAttribute("product") @Valid Product product, 
-			BindingResult bindingResult,  Model model) {
-		pservice.saveProduct(product);
-		return "forward:/product/list";
-	}
-	
-	@RequestMapping(value="/list")
-	public String list(Model model)
-	{
-		model.addAttribute("productList", pservice.findAllProducts()); 
-		return "product";
-	}
-	
-	@RequestMapping(value = "/edit/{id}")
-	public String editForm(@PathVariable("id") int id, Model model) {
-		model.addAttribute("product", pservice.findProductById(id));
-		return "editProduct";
-	}
-	
-//	@RequestMapping(value = "/delete/{id}")
-//	public String deleteProduct(@PathVariable("id") Long id) {
-//		//Product product = proservice.findById(number).get();
-//		Product product = proservice.findProductById(id);
-//		proservice.saveProduct(product);
-//		return "forward:/product/list";
+//	@RequestMapping(value="/save",method=RequestMethod.POST)
+//	public String saveService(@ModelAttribute("service")Services service, @RequestParam("fileImage") MultipartFile multipartFile) throws IllegalStateException, IOException {
+//		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+//		System.out.println(fileName);
+//		File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
+//		multipartFile.transferTo(convFile);
+//		byte[] fileContent = FileUtils.readFileToByteArray(convFile);
+//		
+//		service.setServiceImage(fileContent);
+//		sservice.saveService(service);
+//		
+//		return "redirect:/";
+
 //	}
 }

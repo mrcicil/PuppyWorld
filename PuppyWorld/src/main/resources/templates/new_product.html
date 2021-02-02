@@ -8,7 +8,8 @@
 	<div th:insert="fragments/general.html :: menu"></div>
 		<h1>Create New Product</h1>
 		<br />
-		<form action="#" th:action="@{/save}" th:object="${service}"
+
+		<form action="#" th:action="@{/saveProduct}" th:object="${product}"
 			method="post" enctype="multipart/form-data">
 			<table border="0" cellpadding="10">
 				<tr>
@@ -17,16 +18,15 @@
 				</tr>
 				<tr>
 					<td>Product Price:</td>
-					<td><input type="text" th:field="*{productPrice}"></td>
+					<td><input type="number" th:field="*{productPrice}"></td>
 				</tr>
-				
 				<tr>
 					<td>Product Quantity:</td>
-					<td><input type="text" th:field="*{productQuantity}"></td>
+					<td><input type="number" th:field="*{productQuantity}"></td>
 				</tr>
 				
 				<tr>
-					<td>Product Type:</td>
+					<td>Product Type</td>
 					<td>
 						<fieldset style="border:0px">
 						<select th:field="*{productType}">
@@ -37,11 +37,12 @@
 					</td>
 				</tr>
 				<fieldset>
-				User <select th:field="*{user.userId}">
+			User <select th:field="*{user.userId}">
 				<option th:each="user:${users}" th:value="${user.userId}"
 					th:text="${user.userId}"></option>
-				</select>
-				</fieldset>
+			</select>
+		</fieldset>
+
 				<tr>
 				<td>
 					<label>Product Image:</label>

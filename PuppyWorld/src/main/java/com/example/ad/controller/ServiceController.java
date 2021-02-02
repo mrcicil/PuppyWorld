@@ -17,19 +17,22 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Services;
 import com.example.ad.repo.ServiceRepository;
+import com.example.ad.service.ServiceService;
 import com.example.ad.service.ServiceServiceImplementation;
 
 @Controller
 public class ServiceController {
 	@Autowired
-	private ServiceServiceImplementation Iservice;
+	private ServiceService sservice;
 	
 	@Autowired
-	private ServiceRepository repo;
+	public void setSService(ServiceServiceImplementation sServiceImpl) {
+		this.sservice = sServiceImpl;
+	}
 	
 	@RequestMapping("/service")
 	public String viewHomePage(Model model) {
-		List<Services> listService=Iservice.findAllServices();
+		List<Services> listService=sservice.findAllServices();
 		model.addAttribute("listService",listService);
 		return "service";
 	}
@@ -50,7 +53,7 @@ public class ServiceController {
 		byte[] fileContent = FileUtils.readFileToByteArray(convFile);
 		
 		service.setServiceImage(fileContent);
-		Iservice.saveService(service);
+		sservice.saveService(service);
 		
 		return "redirect:/";
 	}

@@ -3,10 +3,13 @@ package com.example.ad.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.transaction.Transactional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import org.springframework.transaction.annotation.Transactional;
+
 
 import com.example.ad.domain.Product;
 import com.example.ad.repo.ProductRepository;
