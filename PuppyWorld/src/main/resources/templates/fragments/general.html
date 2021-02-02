@@ -53,6 +53,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<nav class="cl-effect-5">
                         <li><a class="active" a href="Home" th:href="@{/}"><span data-hover="Home">Home</span></a></li>
                         <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/product}"><span data-hover="Product">Product</span></a></li>
+                        
+                        <li><a href="#" th:href="@{/createProduct}"><span data-hover="Product">Create Product</span></a></li>
+                        
+                        
                         <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/service}"><span data-hover="Service">Service</span></a></li>
                         <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/post}"><span data-hover="Lost&Found">Lost&Found</span></a></li>
                        <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/breed}"><span data-hover="CheckBreed"> Check Breed </span></a></li>
