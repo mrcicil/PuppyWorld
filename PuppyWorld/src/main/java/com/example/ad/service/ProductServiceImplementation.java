@@ -26,7 +26,7 @@ public class ProductServiceImplementation implements ProductService {
 	}
 
 	@Override
-	public Product findProductById(Long Id) {
+	public Product findProductById(int Id) {
 		// TODO Auto-generated method stub
 		ArrayList<Product> pList = findAllProducts();
 		Product searchProduct = null;
@@ -40,7 +40,7 @@ public class ProductServiceImplementation implements ProductService {
 	}
 
 	@Override
-	public void deleteProductById(Long Id) {
+	public void deleteProductById(int Id) {
 		// TODO Auto-generated method stub
 		Product searchProduct = findProductById(Id);
 		prepo.delete(searchProduct);

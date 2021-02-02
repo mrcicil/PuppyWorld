@@ -8,7 +8,7 @@ public interface PostService {
 	
 	public void savePostService(Post post);
 	public ArrayList<Post> findAllPosts();
-	public Post findPostById (Long Id);
-	public void deletePostById (Long Id);
+	public Post findPostById (int Id);
+	public void deletePostById (int Id);
 
 }

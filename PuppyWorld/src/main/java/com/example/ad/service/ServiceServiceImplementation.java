@@ -28,7 +28,7 @@ public class ServiceServiceImplementation implements ServiceService {
 	}
 
 	@Override
-	public Services findServiceById(Long Id) {
+	public Services findServiceById(int Id) {
 		// TODO Auto-generated method stub
 		ArrayList<Services> sList = findAllServices();
 		Services searchService = null;
@@ -42,7 +42,7 @@ public class ServiceServiceImplementation implements ServiceService {
 	}
 
 	@Override
-	public void deleteServiceById(Long Id) {
+	public void deleteServiceById(int Id) {
 		// TODO Auto-generated method stub
 		Services searchService = findServiceById(Id);
 		srepo.delete(searchService);

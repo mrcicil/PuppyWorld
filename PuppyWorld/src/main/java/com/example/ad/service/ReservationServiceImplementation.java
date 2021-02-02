@@ -26,7 +26,7 @@ public class ReservationServiceImplementation implements ReservationService {
 	}
 
 	@Override
-	public Reservation findReservationById(Long Id) {
+	public Reservation findReservationById(int Id) {
 		// TODO Auto-generated method stub
 		ArrayList<Reservation> rList = findAllReservations();
 		Reservation searchReservation = null;
@@ -40,7 +40,7 @@ public class ReservationServiceImplementation implements ReservationService {
 	}
 
 	@Override
-	public void deleteReservationById(Long Id) {
+	public void deleteReservationById(int Id) {
 		// TODO Auto-generated method stub
 		Reservation searchReservation = findReservationById(Id);
 		rrepo.delete(searchReservation);
