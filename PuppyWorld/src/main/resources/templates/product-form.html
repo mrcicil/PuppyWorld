@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<<<<<<< HEAD
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <title>Product Form</title>
@@ -84,6 +85,46 @@
 	<h1 style="color:red" th:text=${message}></h1>
 	<br />
 	<div th:replace="fragments/general.html :: footer"></div>
+=======
+<meta charset="UTF-8">
+<title>Product Form</title>
+</head>
+<body>
+
+	<div align ="center"></div>
+
+	<h1>Product Form</h1>
+	<br/>
+	<form action="#" th:object="${product}" th:action="@{/product/save}"
+		method="post">
+
+		<fieldset>
+			Product Name <input type="text" th:field="*{productName}">
+		</fieldset>
+
+		<fieldset>
+			Product Price <input type="text" th:field="*{productPrice}">
+		</fieldset>
+		
+		<fieldset>
+			Product Quantity <input type="text" th:field="*{productQuantity}">
+		</fieldset>
+		
+		<fieldset>
+			Product Type <input type="text" th:field="*{productType}">
+		</fieldset>
+		
+		<fieldset>
+			Image <input type="file" th:field="*{image}">
+		</fieldset>
+
+		<fieldset>
+			<input type="submit" value="Save" /> &nbsp; &nbsp; 
+			<input type="button" value="Reset" onclick="window.location.href='/product/add'; return false"/>
+		</fieldset>
+
+	</form>
+>>>>>>> refs/remotes/origin/master
 
 </body>
 </html>

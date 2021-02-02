@@ -32,7 +32,7 @@ public class EventServiceImplementation implements EventService {
 	}
 
 	@Override
-	public Event findEventById(Long Id) {
+	public Event findEventById(int Id) {
 		// TODO Auto-generated method stub
 		ArrayList<Event> eList = findAllEvents();
 		Event searchEvent = null;
@@ -46,7 +46,7 @@ public class EventServiceImplementation implements EventService {
 	}
 
 	@Override
-	public void deleteEventById(Long Id) {
+	public void deleteEventById(int Id) {
 		// TODO Auto-generated method stub
 		Event searchEvent = findEventById(Id);
 		erepo.delete(searchEvent);

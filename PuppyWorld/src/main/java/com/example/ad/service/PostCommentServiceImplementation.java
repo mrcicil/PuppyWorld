@@ -31,7 +31,7 @@ public class PostCommentServiceImplementation implements PostCommentService {
 	}
 
 	@Override
-	public PostComment findPostCommentById(Long Id) {
+	public PostComment findPostCommentById(int Id) {
 		// TODO Auto-generated method stub
 		ArrayList<PostComment> pcList = findAllPostComments();
 		PostComment searchPostComment = null;
@@ -45,7 +45,7 @@ public class PostCommentServiceImplementation implements PostCommentService {
 	}
 
 	@Override
-	public void deleteEventById(Long Id) {
+	public void deleteEventById(int Id) {
 		// TODO Auto-generated method stub
 		PostComment searchPostComment = findPostCommentById(Id);
 		pcrepo.delete(searchPostComment);

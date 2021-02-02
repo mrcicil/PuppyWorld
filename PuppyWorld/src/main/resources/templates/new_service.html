@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/general.html :: header">
+	<meta charset="UTF-8">
+	<title>Create New Service</title>
+</head>
+<body>
+	<div th:insert="fragments/general.html :: menu"></div>
+		<h1>Create New Service</h1>
+		<br />
+		<form action="#" th:action="@{/save}" th:object="${service}"
+			method="post" enctype="multipart/form-data">
+			<table border="0" cellpadding="10">
+				<tr>
+					<td>Service Name:</td>
+					<td><input type="text" th:field="*{serviceName}"></td>
+				</tr>
+				<tr>
+					<td>Service Description:</td>
+					<td><input type="text" th:field="*{serviceDescription}"></td>
+				</tr>
+				<tr>
+					<td align="right">Booking</td>
+				</tr>
+				<tr>
+					<td>Reservation required?</td>
+					<td>
+						<fieldset style="border:0px">
+						<select th:field="*{reservationType}">
+							<option th:each="reservationType : ${T(com.example.ad.domain.ReservationType).values()}" 
+							th:value="${reservationType}" th:text="${reservationType}"/>
+						</select>
+						</fieldset>
+					</td>
+				</tr>
+				<tr>
+					<td>Number of Dogs?</td>
+					<td>
+						<fieldset style="border:0px">
+						<select th:field="*{limitDogs}">
+							<option th:each="limitDogs : ${T(com.example.ad.domain.LimitDogs).values()}" 
+							th:value="${limitDogs}" th:text="${limitDogs}"/>
+						</select>
+						</fieldset>
+					</td>
+				</tr>
+				<tr>
+					<td>Charges:</td>
+					<td><input type="text" th:field="*{charges}"></td>
+				</tr>
+				<tr>
+					<td>Duration:</td>
+					<td><input type="text" th:field="*{serviceDuration}"></td>
+				</tr>
+				<tr>
+				<td>
+					<label>Brand Logo:</label>
+						<input type="file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
+				</td>
+				<td>
+					<img id="output" alt="Preview" />
+				</td>
+				
+				</tr>
+				<tr>
+					<td colspan="2"><button type="submit">Clear</button></td>
+					<td colspan="2"><button type="submit">Submit</button></td>
+				</tr>
+			</table>
+		</form>
+		
+	</div>
+	<div th:insert="fragments/general.html :: footer"></div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+
+</script>
+</html>

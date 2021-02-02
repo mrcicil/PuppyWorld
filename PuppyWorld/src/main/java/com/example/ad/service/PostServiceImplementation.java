@@ -31,7 +31,7 @@ public class PostServiceImplementation implements PostService {
 	}
 
 	@Override
-	public Post findPostById(Long Id) {
+	public Post findPostById(int Id) {
 		// TODO Auto-generated method stub
 		ArrayList<Post> pList = findAllPosts();
 		Post searchPost = null;
@@ -45,7 +45,7 @@ public class PostServiceImplementation implements PostService {
 	}
 
 	@Override
-	public void deletePostById(Long Id) {
+	public void deletePostById(int Id) {
 		// TODO Auto-generated method stub
 		Post searchPost = findPostById(Id);
 		ptrepo.delete(searchPost);
