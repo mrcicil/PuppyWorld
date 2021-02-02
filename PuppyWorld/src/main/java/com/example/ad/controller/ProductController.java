@@ -63,9 +63,7 @@ public class ProductController {
 		model.addAttribute("productList", proservice.findAllProducts()); //I used the build in JPA repo
 		
 		
-		
-		
-		return "product";
+		return "productlist";
 	}
 	
 	@RequestMapping(value = "/edit/{id}")
@@ -73,6 +71,13 @@ public class ProductController {
 		//model.addAttribute("product", proservice.findById(number).get());
 		model.addAttribute("product", proservice.findProductById(id));
 		return "editProduct";
+	}
+	
+	@RequestMapping(value = "/view/{id}")
+	public String view(@PathVariable("id") Integer id, Model model) {
+		//model.addAttribute("product", proservice.findById(number).get());
+		model.addAttribute("product", proservice.findProductById(id));
+		return "product";
 	}
 	
 	@RequestMapping(value = "/delete/{id}")

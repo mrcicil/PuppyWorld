@@ -1,6 +1,7 @@
 package com.example.ad;
 
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +14,8 @@ import com.example.ad.domain.User;
 import com.example.ad.domain.UserType;
 import com.example.ad.repo.ProductRepository;
 import com.example.ad.repo.UserRepository;
+
+import antlr.StringUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.awt.image.BufferedImage;
@@ -27,6 +30,11 @@ import com.example.ad.domain.User;
 import com.example.ad.domain.UserType;
 import com.example.ad.repo.UserRepository;
 import org.springframework.util.Base64Utils;
+import org.springframework.web.multipart.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.*;
+import org.apache.commons.lang3.*;
+
 
 
 @SpringBootApplication
@@ -50,7 +58,8 @@ public class PuppyWorldApplication {
 		CommandLineRunner commandLineRunner() {
 			return args -> {
 				
-			
+				
+		        
 				BufferedImage bImage = ImageIO.read(new File("src/main/resources/static/images/1.jpg"));
 			      ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			      ImageIO.write(bImage, "jpg", bos );
@@ -61,8 +70,9 @@ public class PuppyWorldApplication {
 			      ByteArrayOutputStream bos2 = new ByteArrayOutputStream();
 			      ImageIO.write(bImage2, "jpg", bos2 );
 			      byte [] data2 = bos2.toByteArray();
-			      data2 = Base64Utils.encode(data2);
+			      data2 = Base64Utils.encode(data2); 
 			      
+				
 			      User u1 = new User(UserType.STAFF, "joe", "Joe", "password",
 			  			"e0533420@u.nus.edu");
 			      
@@ -73,20 +83,24 @@ public class PuppyWorldApplication {
 			      
 			      urepo.save(u2);
 			      
-			 /*     User u1 = urepo.findById(1).get();
-			      User u2 = urepo.findById(2).get(); */
+			    
 			
 		
-		Product p1 = new Product("Waggie Dog Food 1kg", (float) 34.00, 23, ProductType.FOOD,
+			      Product p1 = new Product("Waggie Dog Food 1kg", (float) 34.00, 23, ProductType.FOOD,
 				data1, u1);
 		
-		Product p2 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
+			      Product p2 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
 				data2, u2);
 		
-		prepo.save(p1);
-		prepo.save(p2); 
+			      prepo.save(p1);
+			      prepo.save(p2); 
 		
-
+				
+/*
+		  User u1 = urepo.findById(1).get();
+		  User u2 = urepo.findById(2).get(); 
+		
+*/
 		
 			
 			/*
