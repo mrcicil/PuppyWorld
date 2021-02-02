@@ -2,59 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="fragments/general.html :: header">
 	<meta charset="UTF-8">
-	<title>Create New Service</title>
+	<title>Create New Product</title>
 </head>
 <body>
 	<div th:insert="fragments/general.html :: menu"></div>
-		<h1>Create New Service</h1>
+		<h1>Create New Product</h1>
 		<br />
-		<form action="#" th:action="@{/save}" th:object="${service}"
+
+		<form action="#" th:action="@{/saveProduct}" th:object="${product}"
 			method="post" enctype="multipart/form-data">
 			<table border="0" cellpadding="10">
 				<tr>
-					<td>Service Name:</td>
-					<td><input type="text" th:field="*{serviceName}"></td>
+					<td>Product Name:</td>
+					<td><input type="text" th:field="*{productName}"></td>
 				</tr>
 				<tr>
-					<td>Service Description:</td>
-					<td><input type="text" th:field="*{serviceDescription}"></td>
+					<td>Product Price:</td>
+					<td><input type="number" th:field="*{productPrice}"></td>
 				</tr>
 				<tr>
-					<td align="right">Booking</td>
+					<td>Product Quantity:</td>
+					<td><input type="number" th:field="*{productQuantity}"></td>
 				</tr>
+				
 				<tr>
-					<td>Reservation required?</td>
+					<td>Product Type</td>
 					<td>
 						<fieldset style="border:0px">
-						<select th:field="*{reservationType}">
-							<option th:each="reservationType : ${T(com.example.ad.domain.ReservationType).values()}" 
-							th:value="${reservationType}" th:text="${reservationType}"/>
+						<select th:field="*{productType}">
+							<option th:each="productType : ${T(com.example.ad.domain.ProductType).values()}" 
+							th:value="${productType}" th:text="${productType}"/>
 						</select>
 						</fieldset>
 					</td>
 				</tr>
-				<tr>
-					<td>Number of Dogs?</td>
-					<td>
-						<fieldset style="border:0px">
-						<select th:field="*{limitDogs}">
-							<option th:each="limitDogs : ${T(com.example.ad.domain.LimitDogs).values()}" 
-							th:value="${limitDogs}" th:text="${limitDogs}"/>
-						</select>
-						</fieldset>
-					</td>
-				</tr>
-				<tr>
-					<td>Charges:</td>
-					<td><input type="text" th:field="*{charges}"></td>
-				</tr>
-				<tr>
-					<td>Duration:</td>
-					<td><input type="text" th:field="*{serviceDuration}"></td>
-				</tr>
+				<fieldset>
+			User <select th:field="*{user.userId}">
+				<option th:each="user:${users}" th:value="${user.userId}"
+					th:text="${user.userId}"></option>
+			</select>
+		</fieldset>
+
 				<tr>
 				<td>
-					<label>Brand Logo:</label>
+					<label>Product Image:</label>
 						<input type="file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
 				</td>
 				<td>
