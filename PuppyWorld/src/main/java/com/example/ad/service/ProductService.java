@@ -8,7 +8,7 @@ public interface ProductService {
 	
 	public void saveProduct(Product product);
 	public ArrayList<Product> findAllProducts();
-	public Product findProductById(Long Id);
-	public void deleteProductById(Long Id);
+	public Product findProductById(int Id);
+	public void deleteProductById(int Id);
 
 }

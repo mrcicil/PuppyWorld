@@ -8,7 +8,7 @@ public interface EventService {
 	
 	public void saveEvent(Event event);
 	public ArrayList<Event> findAllEvents();
-	public Event findEventById(Long Id);
-	public void deleteEventById(Long Id);
+	public Event findEventById(int Id);
+	public void deleteEventById(int Id);
 
 }

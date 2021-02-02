@@ -2,13 +2,14 @@ package com.example.ad.service;
 
 import java.util.ArrayList;
 
-import com.example.ad.domain.Service;
+import com.example.ad.domain.Services;
 
 public interface ServiceService {
 	
-	public void saveService(Service service);
-	public ArrayList<Service> findAllServices();
-	public Service findServiceById(Long Id);
-	public void deleteServiceById(Long Id);
+	public void saveService(Services service);
+	public ArrayList<Services> findAllServices();
+	public Services findServiceById(int Id);
+	public void deleteServiceById(int Id);
+
 
 }

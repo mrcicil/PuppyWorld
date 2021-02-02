@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>404</title>
+<title>PuppyWorld</title>
+<head th:fragment="header">
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
@@ -34,30 +34,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
     <!-- header-section-starts -->
-	<div class="header">
+	<div class="header" th:fragment="menu">
 		<div class="header-top">
 			<div class="container">
-				<p class="location"><i class="location"></i>18A, Polo Street (Yellow Door)</p>
-				<p class="phonenum">+ 655 8858 2068 54892</p>
+				<p class="location"><i class="location"></i>3 New Bugis Street, Singapore 188867</p>
+				<p class="phonenum">+ 65 8858 2068</p>
 				<div class="clearfix"></div>
 			</div>
 		</div>
 		<div class="header-bottom">
 			<div class="container">
 				<div class="logo">
-					<a href="index.html"><img src="images/logo.png" alt="" /></a>
+					<a href="Home" th:href="@{/}"><img src="images/logo.png" alt="" /></a>
 				</div>
 				<span class="menu"></span>
 				<div class="top-menu">
 					<ul>
 					<nav class="cl-effect-5">
-						<li><a href="index.html"><span data-hover="Home">Home</span></a></li> 
-						<li><a href="about.html"><span data-hover="About">About</span></a></li>
-						<li><a href="photos.html"><span data-hover="Photos">Photos</span></a></li> 
-						<li><a class="active" href="404.html"><span data-hover="Care">Care</span></a></li> 
-						<li><a href="blog.html"><span data-hover="Blog">Blog</span></a></li> 
-						<li><a href="contact.html"><span data-hover="Contact">Contact</span></a></li>
-					</nav>
+                        <li><a class="active" a href="Home" th:href="@{/}"><span data-hover="Home">Home</span></a></li>
+                        <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/product}"><span data-hover="Product">Product</span></a></li>
+                        <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/service}"><span data-hover="Service">Service</span></a></li>
+                        <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/post}"><span data-hover="Lost&Found">Lost&Found</span></a></li>
+                       <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/breed}"><span data-hover="CheckBreed"> Check Breed </span></a></li>
+                        <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/profile}"><span data-hover="Profile">Profile</span></a></li>
+                        <li th:if="${#lists.isEmpty(session.usession)}"><a href="#" th:href="@{/login}"><span data-hover="Login"> Login </span></a></li>
+                        <li th:if="${#lists.isEmpty(session.usession)}"><a href="#" th:href="@{/register}"><span data-hover="Register New User"> Register New User </span></a></li>
+                          <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/logout}"><span data-hover="Logout"> Logout </span></a></li>
+                    </nav>
 					</ul>
 				</div>
 				<!-- script for menu -->
@@ -74,22 +77,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 	<!-- header-section-ends -->
-	<!-- content-section-starts -->
-	<div class="content">
-			<div class="container">
-			    <!--404-->
-			<div class="error">
-				<div class="error-head">
-					<h1>404</h1>
-					<h2>Sorry This page is not found...!</h2>
-					<a class="hvr-bounce-to-left button" href="index.html">Go Back</a>
-				</div>
-			</div>				
-	       </div>
-	</div> 
+	
+</div>			
+		</div>
 	<!-- content-section-ends -->
 	<!-- footer-section-starts -->
-	<div class="footer">
+	<div class="footer" th:fragment="footer">
 		<div class="container">
 			<div class="col-md-5 contact-section">
 				<h4>Contact Form</h4>

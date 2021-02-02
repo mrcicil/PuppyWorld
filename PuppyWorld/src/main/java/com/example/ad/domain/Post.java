@@ -4,18 +4,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Post {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long postId;
+	private int postId;
 	
 	private PostType postType;
 	
 	private String postTitle, postMessage;
-	
+	@Lob
 	private byte[] postImage;
 
 	public Post(PostType postType, String postTitle, String postMessage, byte[] postImage) {
@@ -26,11 +27,11 @@ public class Post {
 		this.postImage = postImage;
 	}
 
-	public long getPostId() {
+	public int getPostId() {
 		return postId;
 	}
 
-	public void setPostId(long postId) {
+	public void setPostId(int postId) {
 		this.postId = postId;
 	}
 
@@ -65,4 +66,6 @@ public class Post {
 	public void setPostImage(byte[] postImage) {
 		this.postImage = postImage;
 	}
+
+	
 }
