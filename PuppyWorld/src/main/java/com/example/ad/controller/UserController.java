@@ -1,8 +1,10 @@
 package com.example.ad.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,50 +28,39 @@ public class UserController {
 		this.uservice = uServiceImpl;
 	}
 	
-	@RequestMapping(value = "/authenticate")
-	public String authenticate (@ModelAttribute("user") User user, 
-			BindingResult bindingResult, Model model, HttpSession session, Errors errors) 
-	{
-		
-		if (uservice.findUserByUserName(user.getUserName()) == null)
-		{
-			errors.rejectValue("userName", "wrong username", "username not found in system");
-		}
-		else if (!uservice.authenticateUser(user))
-		{
-			errors.rejectValue("password", "wrong password", "username/ password is incorrect");
-		}
-
-		
-		if (bindingResult.hasErrors()) {
-			return "login";
-		}
-		
-		if (uservice.authenticateUser(user))
-		{
-			User currentUser = uservice.findUserByUserName(user.getUserName());
-			session.setAttribute("usession", currentUser);
-			return "index";
-		}
-
-
-		return "forward:/user/login";
-	}
+	/*
+	 * @RequestMapping(value = "/authenticate") public String authenticate
+	 * (@ModelAttribute("user") User user, BindingResult bindingResult, Model model,
+	 * HttpSession session, Errors errors) {
+	 * 
+	 * 
+	 * if (uservice.findUserByUserName(user.getUserName()) == null) {
+	 * errors.rejectValue("userName", "wrong username",
+	 * "username not found in system"); } else if (!uservice.authenticateUser(user))
+	 * { errors.rejectValue("password", "wrong password",
+	 * "username/ password is incorrect"); }
+	 * 
+	 * 
+	 * if (bindingResult.hasErrors()) { return "login"; }
+	 * 
+	 * if (uservice.authenticateUser(user)) { User currentUser =
+	 * uservice.findUserByUserName(user.getUserName());
+	 * session.setAttribute("usession", currentUser); return "index"; }
+	 * 
+	 * 
+	 * return "forward:/user/login"; }
+	 */
 	
-	@RequestMapping(value = "/login")
-	public String login(Model model) 
-	{
-		User user = new User();
-		model.addAttribute("user", user);
-		return "login";
-	}
+	/*
+	 * @RequestMapping(value = "/login") public String login(Model model) { User
+	 * user = new User(); model.addAttribute("user", user); return "login"; }
+	 */
 	
-	@RequestMapping(value = "/logout")
-	public String logout(Model model, HttpSession session) 
-	{
-		session.removeAttribute("usession");
-		return "index";
-	}
+	/*
+	 * @RequestMapping(value = "/logout") public String logout(Model model,
+	 * HttpServletRequest request) { session.removeAttribute("usession"); return
+	 * "index"; }
+	 */
 	
 	
 	@RequestMapping (value = "/register")
@@ -82,16 +73,19 @@ public class UserController {
 	
 	@RequestMapping(value = "/save")
 	public String saveNewUser (@ModelAttribute("user") User user, 
-			BindingResult bindingResult, Model model, HttpSession session, Errors errors) {
+			BindingResult bindingResult, Model model, HttpServletRequest request, Errors errors) {
 		if (bindingResult.hasErrors()) {
 			return "register";
 		}
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
 		
 		User createUser = new User();
 		createUser.setUserType(UserType.CUSTOMER);
 		createUser.setName(user.getName());
 		createUser.setUserName(user.getUserName());
-		createUser.setPassword(user.getPassword());
+		createUser.setPassword(encodedPassword);
 		createUser.setEmailAddress(user.getEmailAddress());
 		uservice.saveUser(createUser);
 		
@@ -100,24 +94,24 @@ public class UserController {
 	}
 	
 	@RequestMapping (value = "/profile")
-	public String profile (Model model, HttpSession session) {
+	public String profile (Model model, HttpServletRequest request) {
 		
-		User currentUser = (User) session.getAttribute("usession");
+		User currentUser = (User) uservice.findUserByUserName(request.getRemoteUser());
 		model.addAttribute("userProfile", currentUser);
 		return "profile";
 	}
 	
 	@RequestMapping (value = "/edit")
-	public String editProfile (Model model, HttpSession session) {
+	public String editProfile (Model model, HttpServletRequest request) {
 		
-		User currentUser = (User) session.getAttribute("usession");
+		User currentUser = (User) uservice.findUserByUserName(request.getRemoteUser());
 		model.addAttribute("user", currentUser);
 		return "editProfile";
 	}
 	
 	@RequestMapping(value = "/saveProfile")
 	public String saveProfile (@ModelAttribute("user") User user, 
-			BindingResult bindingResult, Model model, HttpSession session, Errors errors) {
+			BindingResult bindingResult, Model model, HttpServletRequest request, Errors errors) {
 		if (bindingResult.hasErrors()) {
 			return "editProfile";
 		}
@@ -125,9 +119,13 @@ public class UserController {
 		User editUser = uservice.findUserById(user.getUserId());
 		
 		if (editUser!=null) {
+			
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	        String encodedPassword = passwordEncoder.encode(user.getPassword());
+	        
 			editUser.setName(user.getName());
 			editUser.setUserName(user.getUserName());
-			editUser.setPassword(user.getPassword());
+			editUser.setPassword(encodedPassword);
 			editUser.setEmailAddress(user.getEmailAddress());
 			uservice.saveUser(editUser);
 			return "index";

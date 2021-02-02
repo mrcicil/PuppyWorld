@@ -1,5 +1,6 @@
 package com.example.ad.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +12,10 @@ public class Services {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long serviceId;
+	private int serviceId;
+	
+	@Column(length=45,nullable=true)
+	private String logo;
 	
 	private String serviceName, serviceDescription, serviceDuration, charges;
 	
@@ -33,12 +37,17 @@ public class Services {
 		this.reservationType = reservationType;
 		this.limitDogs = limitDogs;
 	}
+	
+	public Services() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-	public long getServiceId() {
+	public int getServiceId() {
 		return serviceId;
 	}
 
-	public void setServiceId(long serviceId) {
+	public void setServiceId(int serviceId) {
 		this.serviceId = serviceId;
 	}
 
@@ -97,5 +106,7 @@ public class Services {
 	public void setLimitDogs(LimitDogs limitDogs) {
 		this.limitDogs = limitDogs;
 	}
+
+
 
 }

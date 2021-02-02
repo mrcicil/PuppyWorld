@@ -1,18 +1,23 @@
 package com.example.ad.service;
 
 import java.util.ArrayList;
+
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ad.domain.Services;
 import com.example.ad.repo.ServiceRepository;
 
 
+@Service
+@Transactional
 public class ServiceServiceImplementation implements ServiceService {
 	
 	@Autowired
-	ServiceRepository srepo;
+	private ServiceRepository srepo;
 
 	@Override
 	public void saveService(Services service) {
@@ -28,7 +33,7 @@ public class ServiceServiceImplementation implements ServiceService {
 	}
 
 	@Override
-	public Services findServiceById(Long Id) {
+	public Services findServiceById(int Id) {
 		// TODO Auto-generated method stub
 		ArrayList<Services> sList = findAllServices();
 		Services searchService = null;
@@ -42,7 +47,7 @@ public class ServiceServiceImplementation implements ServiceService {
 	}
 
 	@Override
-	public void deleteServiceById(Long Id) {
+	public void deleteServiceById(int Id) {
 		// TODO Auto-generated method stub
 		Services searchService = findServiceById(Id);
 		srepo.delete(searchService);

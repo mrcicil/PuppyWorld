@@ -20,7 +20,7 @@ public class Event {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long eventId;
+	private int eventId;
 	
 	private String eventName, eventDetails;
 	
@@ -50,11 +50,11 @@ public class Event {
 		this.creator = creator;
 	}
 
-	public long getEventId() {
+	public int getEventId() {
 		return eventId;
 	}
 
-	public void setEventId(long eventId) {
+	public void setEventId(int eventId) {
 		this.eventId = eventId;
 	}
 
@@ -129,5 +129,7 @@ public class Event {
 	public void setParticipants(List<User> participants) {
 		this.participants = participants;
 	}
+
+	
 
 }
