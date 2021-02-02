@@ -6,11 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Service {
+public class Services {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long serviceId;
+	private int serviceId;
 	
 	private String serviceName, serviceDescription, serviceDuration, charges;
 	
@@ -20,7 +20,7 @@ public class Service {
 	
 	private LimitDogs limitDogs;
 
-	public Service(String serviceName, String serviceDescription, String serviceDuration, String charges,
+	public Services(String serviceName, String serviceDescription, String serviceDuration, String charges,
 			byte[] serviceImage, ReservationType reservationType, LimitDogs limitDogs) {
 		super();
 		this.serviceName = serviceName;
@@ -36,7 +36,7 @@ public class Service {
 		return serviceId;
 	}
 
-	public void setServiceId(long serviceId) {
+	public void setServiceId(int serviceId) {
 		this.serviceId = serviceId;
 	}
 

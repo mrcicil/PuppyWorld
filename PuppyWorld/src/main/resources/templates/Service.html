@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Service List</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+	<h1>Service List</h1>
+	<!-- Add Hyperlink -->
+	<a th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.Services).ADMIN)}" th:href="SearchServiceList.html" th:href="@{/services/search}">Search Service</a>
+
+	<h2>Service</h2>
+	<table class="table">
+		<tr>
+		    <th>S/No.</th>
+			<th>Service Name</th>
+			<th>Service Description</th>
+			<th>Service Duration</th>
+			<th>Charges</th>
+			<th>Reservation Type</th>
+			<th>Limit Dogs</th>
+			<th>ServiceImage</th>
+			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.Services).ADMIN)}">
+			Edit Services</th>
+			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.Services).ADMIN)}">
+			Delete Services</th>
+
+		</tr>
+		<tr th:each="service:${services}" class="table-row">
+			<td th:text=${service.serviceId}>Service Id</td>
+			<td th:text=${service.serviceName}>Service Name</td>
+			<td th:text=${service.serviceDescription}>Service Description</td>
+			<td th:text=${service.serviceDuration}>Service Duration</td>
+			<td th:text=${service.charges}>Charges</td>
+			<td th:text=${service.reservationType}>Reservation Type</td>
+			<td th:text=${service.limitDogs}>Limit Dogs</td>
+			<td th:text=${service.serviceImage}>Service Image</td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.Services).ADMIN)}">
+				<a href="EditService.html" th:href="@{/service/edit/}+${service.serviceId}">Edit</a></td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.Services.ADMIN)}">
+				<a href="DeleteService.html" th:href="@{/service/delete/}+${service.serviceId}">Delete</a></td>
+		</tr>
+	</table>
+    <br/>
+	
+</body>
+</html>
