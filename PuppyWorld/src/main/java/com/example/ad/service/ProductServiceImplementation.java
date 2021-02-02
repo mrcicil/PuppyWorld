@@ -3,25 +3,26 @@ package com.example.ad.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Iterator;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
-
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import com.example.ad.domain.Product;
 import com.example.ad.repo.ProductRepository;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 
 @Service
-//@Transactional
+@Transactional
 public class ProductServiceImplementation implements ProductService {
 	
 	@Autowired
@@ -64,14 +65,14 @@ public class ProductServiceImplementation implements ProductService {
 	
 	@Override
 	public void convertFileToString(MultipartFile multipartFile) throws IOException {
-	String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
+	String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
     System.out.println(fileName);
     File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
     multipartFile.transferTo(convFile);
   //  Dummy dum = new Dummy();
     //convert file to byte, and convert file to string 
-    byte[] fileContent = org.apache.commons.io.FileUtils.readFileToByteArray(convFile);
-    String encodedString = java.util.Base64.getEncoder().encodeToString(fileContent);
+    byte[] fileContent = FileUtils.readFileToByteArray(convFile);
+    String encodedString = Base64.getEncoder().encodeToString(fileContent);
 	}
     
 	@Override

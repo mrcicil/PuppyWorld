@@ -18,10 +18,12 @@ public interface ProductService {
 	public ArrayList<Product> findAllProducts();
 	public Product findProductById(int Id);
 	public void deleteProductById(int Id);
+
 	void convertFileToString(MultipartFile multipartFile) throws IOException;
 	void convertStringToImage(String encodedString, String outputFileName) throws IOException;
 	
 	
+
 
 
 }

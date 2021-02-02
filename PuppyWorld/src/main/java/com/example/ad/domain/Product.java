@@ -28,6 +28,25 @@ public class Product {
 	@OneToOne
 	private User user;
 
+
+	public Product() {
+		super();
+	}
+
+
+	public Product(String productName, float productPrice, int productQuantity, ProductType productType,
+			byte[] productImage, User user) {
+		super();
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.productQuantity = productQuantity;
+		this.productType = productType;
+		this.productImage = productImage;
+		this.user = user;
+	}
+
+	
+
 	public int getProductId() {
 		return productId;
 	}
@@ -84,23 +103,7 @@ public class Product {
 		this.user = user;
 	}
 
-	public Product(String productName, float productPrice, int productQuantity, ProductType productType,
-			byte[] productImage, User user) {
-		super();
-		this.productName = productName;
-		this.productPrice = productPrice;
-		this.productQuantity = productQuantity;
-		this.productType = productType;
-		this.productImage = productImage;
-		this.user = user;
-	}
-
-	public Product() {
-		super();
-	}
 
 
-	
-	
 
 }

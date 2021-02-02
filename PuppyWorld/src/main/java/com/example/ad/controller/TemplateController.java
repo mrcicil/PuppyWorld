@@ -12,11 +12,9 @@ import com.example.ad.service.ProductService;
 import com.example.ad.service.ProductServiceImplementation;
 import com.example.ad.service.ReservationService;
 import com.example.ad.service.ReservationServiceImplementation;
-<<<<<<< HEAD
 
-=======
 import com.example.ad.service.ServiceServiceImplementation;
->>>>>>> refs/remotes/origin/master
+
 import com.example.ad.service.UserService;
 import com.example.ad.service.UserServiceImplementation;
 
@@ -62,13 +60,11 @@ public class TemplateController {
 		this.rservice = rServiceImpl;
 	}
 	
-<<<<<<< HEAD
 
-=======
 	@Autowired
 	public void setSService(ServiceServiceImplementation sServiceImpl) {
 	}
->>>>>>> refs/remotes/origin/master
+
 	
 	@Autowired
 	private UserService uservice;

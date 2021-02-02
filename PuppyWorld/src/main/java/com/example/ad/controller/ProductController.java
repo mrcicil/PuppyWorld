@@ -1,26 +1,38 @@
 package com.example.ad.controller;
 
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.io.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Base64Utils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Product;
+import com.example.ad.service.ProductService;
+import com.example.ad.service.ProductServiceImplementation;
+
+
+
 
 
 
@@ -33,7 +45,12 @@ public class ProductController {
 //	}
 	
 	@Autowired
-	com.example.ad.service.ProductService proservice;
+	ProductService pservice;
+	
+	@Autowired
+	public void setPService(ProductServiceImplementation pServiceImpl) {
+		this.pservice = pServiceImpl;
+	}
 	
 	@RequestMapping(value = "/add")
 	public String add(Model model) 
@@ -58,7 +75,7 @@ public class ProductController {
 //			return "product-form";
 //		}
 		
-		proservice.saveProduct(product);
+		pservice.saveProduct(product);
 		return "forward:/product/list";
 	}
 	
@@ -66,7 +83,7 @@ public class ProductController {
 	public String list(Model model)
 	{
 		//model.addAttribute("productList", proservice.listAllProducts());
-		model.addAttribute("productList", proservice.findAllProducts()); //I used the build in JPA repo
+		model.addAttribute("productList", pservice.findAllProducts()); //I used the build in JPA repo
 		
 		
 		return "productlist";
@@ -77,23 +94,23 @@ public class ProductController {
 	@RequestMapping(value = "/edit/{id}")
 	public String editForm(@PathVariable("id") Integer id, Model model) {
 		//model.addAttribute("product", proservice.findById(number).get());
-		model.addAttribute("product", proservice.findProductById(id));
+		model.addAttribute("product", pservice.findProductById(id));
 		return "editProduct";
 	}
 	
 	@RequestMapping(value = "/view/{id}")
 	public String view(@PathVariable("id") Integer id, Model model) {
 		//model.addAttribute("product", proservice.findById(number).get());
-		model.addAttribute("product", proservice.findProductById(id));
+		model.addAttribute("product", pservice.findProductById(id));
 		return "product";
 	}
 	
 	@RequestMapping(value = "/delete/{id}")
 	public String deleteProduct(@PathVariable("id") Integer id) {
 		//Product product = proservice.findById(number).get();
-		Product product = proservice.findProductById(id);
+		Product product = pservice.findProductById(id);
 
-		proservice.saveProduct(product);
+		pservice.saveProduct(product);
 		return "forward:/product/list";
 	}
 
@@ -107,14 +124,14 @@ public class ProductController {
 			return "editProduct";
 		}
 		
-		proservice.saveProduct(product);
+		pservice.saveProduct(product);
 		return "forward:/product/list";
 	}
 	
 	public String checkError(Product product) {
 		String msg = null;
 		ArrayList<Product> flist = new ArrayList<Product>();
-		flist = (ArrayList<Product>) proservice.findAllProducts();
+		flist = (ArrayList<Product>) pservice.findAllProducts();
 		//Product lastProduct = flist.get(flist.size()-1);
 		for (Iterator <Product> iterator = flist.iterator(); iterator.hasNext();) {
 			Product product2 = iterator.next();
@@ -139,13 +156,40 @@ public class ProductController {
 	public void showProductImage(int id, HttpServletResponse response) throws IOException {
 		response.setContentType("image/jpeg"); // Or whatever format you wanna use
 
-		Product product = proservice.findProductById(id);
+		Product product = pservice.findProductById(id);
 
 		InputStream is = new ByteArrayInputStream(product.getProductImage());
 		IOUtils.copy(is, response.getOutputStream());
 		
 	}
 	
-}
 
+
+
+	
+
+
+	
+	@RequestMapping("/createProduct")
+	public String showNewProductForm(Model model) {
+		Product product = new Product();
+		model.addAttribute("product",product);
+		return "new_product";
+	}
+	
+	@RequestMapping(value="/saveProduct",method=RequestMethod.POST)
+	public String saveService(@ModelAttribute("product")Product product, @RequestParam("fileImage") MultipartFile multipartFile) throws IllegalStateException, IOException {
+		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		System.out.println(fileName);
+		File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
+		multipartFile.transferTo(convFile);
+		byte[] fileContent = FileUtils.readFileToByteArray(convFile);
+		
+		product.setProductImage(fileContent);
+		pservice.saveProduct(product);
+		
+		return "redirect:/";
+
+	}
+}
 
