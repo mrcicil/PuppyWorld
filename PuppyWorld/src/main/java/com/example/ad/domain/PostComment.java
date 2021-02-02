@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class PostComment {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long commentId;
+	private int commentId;
 	
 	private String commentMessage;
 	private LocalDateTime commentDateTime;
@@ -20,10 +20,10 @@ public class PostComment {
 		this.commentMessage = commentMessage;
 		this.commentDateTime = commentDateTime;
 	}
-	public long getCommentId() {
+	public int getCommentId() {
 		return commentId;
 	}
-	public void setCommentId(long commentId) {
+	public void setCommentId(int commentId) {
 		this.commentId = commentId;
 	}
 	public String getCommentMessage() {
@@ -38,4 +38,5 @@ public class PostComment {
 	public void setCommentDateTime(LocalDateTime commentDateTime) {
 		this.commentDateTime = commentDateTime;
 	}
+	
 }

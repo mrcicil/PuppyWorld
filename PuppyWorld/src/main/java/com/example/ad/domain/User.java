@@ -13,7 +13,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long userId;
+	private int userId;
 	
 	private UserType userType;
 	
@@ -31,6 +31,8 @@ public class User {
 	@Email
 	private String emailAddress;
 
+	public User() {}
+	
 	public User(UserType userType, @NotEmpty String userName, @NotEmpty String name, @NotEmpty String password,
 			@NotEmpty @Email String emailAddress) {
 		super();
@@ -41,11 +43,11 @@ public class User {
 		this.emailAddress = emailAddress;
 	}
 
-	public long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
