@@ -39,7 +39,8 @@
 			<td th:text=${product.productPrice}>Product Price</td>
 			<td th:text=${product.productQuantity}>Product Quantity</td>
 		<td th:text=${product.productType}>Product Type</td>  
-			<td>  <img class="product-image" th:src="@{'product/image/' + @{product.image}}"></td>
+			<td><img th:src="@{${'/product/image/'+ product.productId}}" 
+                class="card img-fluid" style="width:300px" alt=""/></td>
 			<td th:text=${product.user.userId}>Created By</td>
 			<!-- 
 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">

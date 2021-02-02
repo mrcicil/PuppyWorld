@@ -17,9 +17,11 @@ import com.example.ad.repo.UserRepository;
 
 import antlr.StringUtils;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Optional;
 
 import javax.imageio.ImageIO;
@@ -68,13 +70,13 @@ public class PuppyWorldApplication {
 			      ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			      ImageIO.write(bImage, "jpg", bos );
 			      byte [] data1 = bos.toByteArray();
-					data1 = Base64Utils.encode(data1);
+					//data1 = Base64Utils.encode(data1);
 			      
 			      BufferedImage bImage2 = ImageIO.read(new File("src/main/resources/static/images/2.jpg"));
 			      ByteArrayOutputStream bos2 = new ByteArrayOutputStream();
 			      ImageIO.write(bImage2, "jpg", bos2 );
 			      byte [] data2 = bos2.toByteArray();
-			      data2 = Base64Utils.encode(data2); 
+			      //data2 = Base64Utils.encode(data2); 
 			      
 				
 			      User u1 = new User(UserType.STAFF, "joe", "Joe", "password",

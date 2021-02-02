@@ -63,24 +63,7 @@ public class ProductServiceImplementation implements ProductService {
 	
 	
 	
-	@Override
-	public void convertFileToString(MultipartFile multipartFile) throws IOException {
-	String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-    System.out.println(fileName);
-    File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
-    multipartFile.transferTo(convFile);
-  //  Dummy dum = new Dummy();
-    //convert file to byte, and convert file to string 
-    byte[] fileContent = FileUtils.readFileToByteArray(convFile);
-    String encodedString = Base64.getEncoder().encodeToString(fileContent);
-	}
-    
-	@Override
-	public void convertStringToImage(String encodedString, String outputFileName) throws IOException {
-    //convert string to byte and convert byte to image 
-    byte[] decodedBytes = java.util.Base64.getDecoder().decode(encodedString);
-    org.apache.commons.io.FileUtils.writeByteArrayToFile(new File(outputFileName), decodedBytes);
-	}
+	
 	
 	
 
