@@ -48,18 +48,18 @@ public class ProductController {
 		return "new_product";
 	}
 	
-//	@RequestMapping(value="/save",method=RequestMethod.POST)
-//	public String saveService(@ModelAttribute("service")Services service, @RequestParam("fileImage") MultipartFile multipartFile) throws IllegalStateException, IOException {
-//		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-//		System.out.println(fileName);
-//		File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
-//		multipartFile.transferTo(convFile);
-//		byte[] fileContent = FileUtils.readFileToByteArray(convFile);
-//		
-//		service.setServiceImage(fileContent);
-//		sservice.saveService(service);
-//		
-//		return "redirect:/";
+	@RequestMapping(value="/saveProduct",method=RequestMethod.POST)
+	public String saveService(@ModelAttribute("product")Product product, @RequestParam("fileImage") MultipartFile multipartFile) throws IllegalStateException, IOException {
+		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		System.out.println(fileName);
+		File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
+		multipartFile.transferTo(convFile);
+		byte[] fileContent = FileUtils.readFileToByteArray(convFile);
+		
+		product.setProductImage(fileContent);
+		pservice.saveProduct(product);
+		
+		return "redirect:/";
 
-//	}
+	}
 }
