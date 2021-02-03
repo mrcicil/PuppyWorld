@@ -7,20 +7,24 @@
 
 <style>
 
+
+
 div.container{
 margin-top: 5px;
 margin-bottom: 5px; 
 width: 100%;
+display: block;
 
 }
 
 div.gallery {
-  margin: 5px;
+  margin: 10px;
   border: 1px solid #ccc;
   float: left;
-  width: 360px;
-  height: 500px;
-  padding: 50px;
+  width: 15%;
+  height: auto
+  padding: 5px;
+  text-align: center;
 }
 
 div.gallery:hover {
@@ -30,9 +34,15 @@ div.gallery:hover {
 div.gallery img {
   width: 100%;
   height: 50%;
-  margin: auto; 
+  float: left;
   display: block;
 }
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
 </style>
 
 </head>
@@ -54,26 +64,23 @@ div.gallery img {
 			&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
 		</form>
 	</div>
-	
+	<div>
+	<p>
+	</div>
 	<div class ="container">
 		<div th:each="product : ${productList}">
 		<div class="gallery">
 			<img th:src="@{${'/product/image/'+ product.productId}}" 
-                class="card img-fluid" style="width:300px" alt="">
-                
-              
-        
-                
-           <p></p> <div> Product ID: <span th:text=  ${product.productId}>Product ID</span><p></p>
-             Product Name: <span th:text=  ${product.productName}>Product Name</span><p></p>
-             Product Price: <span th:text=  ${product.productPrice}>Product Price</span><p></p>
-             Product Quantity: <span th:text=  ${product.productQuantity}>Product Quantity</span><p></p>
-              Product Type: <span th:text=  ${product.productType}>Product Type</span><p></p>
-              Created By: <span th:text=  ${product.user.userName}>Created By</span><p></p>	<a href="EditProduct.html" th:href="@{/product/edit/}+${product.productId}">Edit</a><p></p>
-				<a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.productId}">Delete</a></div>	
+                class="card img-fluid" style="width:100%" alt="">
+               
+                <div class="desc">Product Name: <span th:text=  ${product.productName}>Product Name</span><p>
+              	Product Price: <span th:text=  ${product.productPrice}>Product Price</span><p>
+           	<a href="EditProduct.html" th:href="@{/product/edit/}+${product.productId}">Edit</a><p>
+				<i class="glyphicon glyphicon-trash"><a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.productId}"></a></i></div>	
 		
 		 
-		</div>
+		
+	</div>
 	</div>
 	</div>
 
