@@ -4,6 +4,37 @@
 <meta charset="ISO-8859-1">
 <title>Product List</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<style>
+
+div.container{
+margin-top: 5px;
+margin-bottom: 5px; 
+width: 100%;
+
+}
+
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 360px;
+  height: 500px;
+  padding: 50px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: 50%;
+  margin: auto; 
+  display: block;
+}
+</style>
+
 </head>
 
 <body>
@@ -24,7 +55,7 @@
 		</form>
 	</div>
 	
-	
+	<div class ="container">
 		<div th:each="product : ${productList}">
 		<div class="gallery">
 			<img th:src="@{${'/product/image/'+ product.productId}}" 
@@ -38,11 +69,12 @@
              Product Price: <span th:text=  ${product.productPrice}>Product Price</span><p></p>
              Product Quantity: <span th:text=  ${product.productQuantity}>Product Quantity</span><p></p>
               Product Type: <span th:text=  ${product.productType}>Product Type</span><p></p>
-              Created By: <span th:text=  ${product.user.userName}>Created By</span><p></p>	<a href="EditProduct.html" th:href="@{/product/edit/}+${product.productId}">Edit</a></div>
+              Created By: <span th:text=  ${product.user.userName}>Created By</span><p></p>	<a href="EditProduct.html" th:href="@{/product/edit/}+${product.productId}">Edit</a><p></p>
 				<a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.productId}">Delete</a></div>	
 		
 		 
 		</div>
+	</div>
 	</div>
 
     <br/>
