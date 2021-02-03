@@ -90,7 +90,7 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value = "/save")
+	@RequestMapping(value = "/saveNewUser")
 	public String saveNewUser (@ModelAttribute("user") User user, 
 			BindingResult bindingResult, Model model, HttpServletRequest request, Errors errors) {
 		if (bindingResult.hasErrors()) {
@@ -108,7 +108,7 @@ public class UserController {
 		createUser.setEmailAddress(user.getEmailAddress());
 		uservice.saveUser(createUser);
 		
-		return "index";
+		return "login";
 		
 	}
 	
