@@ -174,12 +174,6 @@ public class UserController {
 		
 		if (dbuser != null) {
 			
-//			char[] possibleCharacters = (new String("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?")).toCharArray();
-		
-			
-//			String randomStr = RandomStringUtils.random( 15, 0, possibleCharacters.length-1, false, false, possibleCharacters, new SecureRandom() );
-//			System.out.println( randomStr );
-			
 			int length = 15;
 //	        String symbol = "-/.^&*_!@%=+>)"; 
 	        String cap_letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
