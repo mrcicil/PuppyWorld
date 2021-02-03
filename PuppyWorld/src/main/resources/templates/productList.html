@@ -52,9 +52,9 @@ div.desc {
 	<div th:replace="fragments/general.html :: menu"></div>
 
 	<h1>Product List</h1>
-	<!-- 
-	<a href="AddProduct.html" th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}" th:href="@{/product/add}">New Product</a>
-	-->
+	 
+	<a href="productCreate.html" th:href="@{/productCreate}">New Product</a>
+	
 	<h3>Product Search</h3>
 	<div>
 		<form th:action="@{/product/search/}" method="get">
@@ -76,7 +76,7 @@ div.desc {
                 <div class="desc">Product Name: <span th:text=  ${product.productName}>Product Name</span><p>
               	Product Price: <span th:text=  ${product.productPrice}>Product Price</span><p>
            	<a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}">Edit</a><p>
-				<i class="glyphicon glyphicon-trash"><a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.productId}"></a></i></div>	
+				<i class="glyphicon glyphicon-trash"><a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}"></a></i></div>	
 		
 		 
 		

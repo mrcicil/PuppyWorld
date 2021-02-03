@@ -2,7 +2,9 @@ package com.example.ad.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.ad.domain.Product;
 import com.example.ad.domain.Reservation;
 import com.example.ad.domain.Services;
 import com.example.ad.repo.ServiceRepository;
@@ -56,31 +61,74 @@ public class ServiceController {
 //		return "service";
 //	}
 	
-	@RequestMapping("/createService")
+	@RequestMapping("/serviceCreate")
 	public String showNewServiceForm(Model model) {
 		Services service=new Services();
 		model.addAttribute("service",service);
-		return "new_service";
+		return "serviceCreate";
 	}
 	
-	@RequestMapping(value="/save",method=RequestMethod.POST)
-	public String saveService(@ModelAttribute("service")Services service, @RequestParam("fileImage") MultipartFile multipartFile) throws IllegalStateException, IOException {
-		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-		System.out.println(fileName);
-		File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
-		multipartFile.transferTo(convFile);
-		byte[] fileContent = FileUtils.readFileToByteArray(convFile);
+	@RequestMapping(value="/serviceSave",method=RequestMethod.POST)
+	public String saveService(@ModelAttribute("service")Services service, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile) throws IllegalStateException, IOException {
+		try {
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			System.out.println(fileName);
+			File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
+			multipartFile.transferTo(convFile);
+			byte[] fileContent = FileUtils.readFileToByteArray(convFile);
+			
+			service.setServiceImage(fileContent);
+		}
+		catch(IllegalStateException e) {
+			System.out.println(e.toString());
+		}
+		catch(IOException e) {
+			System.out.println(e.toString());
+		}
 		
-		service.setServiceImage(fileContent);
+		ArrayList<Services> sList = sservice.findAllServices();
+		for (Iterator <Services>iterator = sList.iterator(); iterator.hasNext();) {
+			Services service2 =  iterator.next();
+			if(service2.getServiceName() == service.getServiceName()) {
+				errors.rejectValue("serviceName", "exist", "Service Exist");
+			}
+			
+		}
+		
+		if(service.getServiceName().isEmpty()) {
+			errors.rejectValue("serviceName", "null", "Must be filled");
+		}
+		if(service.getCharges() == 0) {
+			errors.rejectValue("charges", "null", "Must be filled");
+		}
+		if(service.getServiceDuration() == 0) {
+			errors.rejectValue("serviceDuration", "null", "Must be filled");
+		}
+		
+		if (bindingResult.hasErrors()) {
+			return "serviceCreate";
+		}
+		
+		
 		sservice.saveService(service);
 		
-		return "redirect:/";
+		return "redirect:/serviceList";
 	}
 	
 	@RequestMapping(value = "/serviceDelete/{id}")
 	public String deleteService(@PathVariable("id") Integer id) {
 		sservice.deleteServiceById(id);
 		return "redirect:/serviceList";
+	}
+	
+	@RequestMapping(value = "/serviceEdit/{id}")
+	public String editProduct(@PathVariable("id") Integer id, Model model) {
+		
+		Services service = sservice.findServiceById(id);
+		String encodedString = Base64.getEncoder().encodeToString(service.getServiceImage());
+		model.addAttribute("image", encodedString);
+		model.addAttribute("service",service);
+		return "serviceEdit";
 	}
 	
 	
