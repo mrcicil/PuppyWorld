@@ -59,11 +59,11 @@ public class ProductController {
 		return "new_product";
 	}
 	
-	@RequestMapping("/product")
-	public String showAllProduct(Model model) {
-		model.addAttribute("productList", pservice.findAllProducts());
-		return "product";
-	}
+//	@RequestMapping("/product")
+//	public String showAllProduct(Model model) {
+//		model.addAttribute("productList", pservice.findAllProducts());
+//		return "product";
+//	}
 	
 	@RequestMapping(value="/saveProduct",method=RequestMethod.POST)
 	public String saveService(@ModelAttribute("product")Product product, @RequestParam("fileImage") MultipartFile multipartFile) throws IllegalStateException, IOException {
@@ -85,7 +85,7 @@ public class ProductController {
 		}
 		pservice.saveProduct(product);
 		
-		return "redirect:/";
+		return "redirect:/productList";
 
 	}
 	
@@ -94,8 +94,6 @@ public class ProductController {
 	{
 		//model.addAttribute("productList", proservice.listAllProducts());
 		model.addAttribute("productList", pservice.findAllProducts()); //I used the build in JPA repo
-		
-		
 		return "productlist";
 	}
 	
@@ -119,12 +117,12 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/productEdit/{id}")
-	public String editProduct(@PathVariable("id") Integer id, Model model) {
+	public String editProduct(@PathVariable("id") Integer id, Model model, HttpSession session) {
 		Product product = pservice.findProductById(id);
 		String encodedString = Base64.getEncoder().encodeToString(product.getProductImage());
-		
+		session.setAttribute("product", "something");
 		model.addAttribute("image", encodedString);
 		model.addAttribute("product",product);
-		return "new_product";
+		return "edit_product";
 	}
 }

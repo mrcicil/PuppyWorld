@@ -51,7 +51,9 @@
 				<td>
 					<img id="output" alt="Preview" width="200" height="200"/>
 				</td>
-				
+				<td th:if="${not #lists.isEmpty(session.product)}">
+					<img th:src="@{'data:image/jpeg;base64,'+${image}}"/>
+				</td>
 				</tr>
 				<tr>
 					<td colspan="2"><a th:href="@{/createProduct}">Clear</a></td>
