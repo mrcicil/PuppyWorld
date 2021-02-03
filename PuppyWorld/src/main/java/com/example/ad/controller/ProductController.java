@@ -5,9 +5,13 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -112,5 +116,15 @@ public class ProductController {
 		
 		pservice.deleteProductById(id);
 		return "redirect:/productList";
+	}
+	
+	@RequestMapping(value = "/productEdit/{id}")
+	public String editProduct(@PathVariable("id") Integer id, Model model) {
+		Product product = pservice.findProductById(id);
+		String encodedString = Base64.getEncoder().encodeToString(product.getProductImage());
+		
+		model.addAttribute("image", encodedString);
+		model.addAttribute("product",product);
+		return "new_product";
 	}
 }
