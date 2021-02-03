@@ -4,6 +4,47 @@
 <meta charset="ISO-8859-1">
 <title>Product List</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<style>
+
+
+
+div.container{
+margin-top: 5px;
+margin-bottom: 5px; 
+width: 100%;
+display: block;
+
+}
+
+div.gallery {
+  margin: 10px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 15%;
+  height: auto;
+  padding: 5px;
+  text-align: center;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: 50%;
+  float: left;
+  display: block;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -25,25 +66,29 @@
 			&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
 		</form>
 	</div>
-	
-	<h2 >Product List</h2>
-	<table th:if="${not #lists.isEmpty(productList)}"  class="table">
-		<tr>
-			<th>Product ID</th>
-			<th>Product Name</th>
-			<th>Product Price</th>
-			<th>Product Quantity</th>
-			<th>Product Type</th>  
-			<th>Product Image</th>
-			<!-- <th>Created By</th> -->
-			<!-- 
-			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">Edit Product</th>
-			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">Delete Product</th>
-			 -->
+	<div>
+	<p>
+	</div>
+	<div class ="container">
+		<div th:each="product : ${productList}">
+		<div class="gallery">
+			<img th:src="@{${'/product/image/'+ product.productId}}" 
+                class="card img-fluid" style="width:100%" alt="">
+               
+                <div class="desc">Product Name: <span th:text=  ${product.productName}>Product Name</span><p>
+              	Product Price: <span th:text=  ${product.productPrice}>Product Price</span><p>
+           	<a href="EditProduct.html" th:href="@{/product/edit/}+${product.productId}">Edit</a><p>
+				<i class="glyphicon glyphicon-trash"><a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.productId}"></a></i></div>	
+		
+		 
+		
+	</div>
+	</div>
+	</div>
 
 
 
-		</tr>
+<!-- 		</tr>
 		<tr th:each="product:${productList}" >
 			<td th:text=${product.productId}>Product ID</td>
 			<td th:text=${product.productName}>Product Name</td>
@@ -54,16 +99,17 @@
 			<td> <a href="DeleteProduct.html" th:href="@{/productEdit/}+${product.productId}">Edit</a></td>
 			<td> <a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.productId}">Delete</a></td>
 			
-			<!-- <td th:text=${product.user.userId}>Created By</td> -->
-			<!-- 
+			<td th:text=${product.user.userId}>Created By</td>
+			
 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">
 				<a href="EditProduct.html" th:href="@{/product/edit/}+${product.productId}">Edit</a></td>
 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">
 				<a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.productId}">Delete</a></td>	
-			-->
+			
 			
 		</tr>
-	</table>
+	</table> -->
+
     <br/>
     <h1 th:if="${#lists.isEmpty(productList)}">Empty List</h1>
 	<div th:replace="fragments/general.html :: footer"></div>
