@@ -83,6 +83,8 @@ public class ServiceController {
 		return "redirect:/serviceList";
 	}
 	
+	
+	
 	@RequestMapping(value = "/serviceReserve/{id}")
 	public String reserveService(@PathVariable("id") Integer id, Model model) {
 		Services service = new Services();
@@ -94,6 +96,12 @@ public class ServiceController {
 		String encodedString = Base64.getEncoder().encodeToString(service.getServiceImage());
 		model.addAttribute("image", encodedString);
 		return "reservationCreate";
+	}
+	
+	@RequestMapping(value = "/reservationSave")
+	public String saveReservation(@ModelAttribute("reservation")Reservation reservation) {
+		rservice.saveReservation(reservation);
+		return "reservationSuccess";
 	}
 	
 	

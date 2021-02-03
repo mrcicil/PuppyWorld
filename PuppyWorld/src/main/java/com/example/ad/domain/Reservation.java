@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Reservation {
 
@@ -16,6 +18,7 @@ public class Reservation {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int reservationId;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate reserveDate;
 	private LocalTime reserveTime;
 	
