@@ -24,44 +24,27 @@
 		</form>
 	</div>
 	
-	<h2 >Product List</h2>
-	<table th:if="${not #lists.isEmpty(productList)}"  class="table">
-		<tr>
-			<th>Product ID</th>
-			<th>Product Name</th>
-			<th>Product Price</th>
-			<th>Product Quantity</th>
-			<th>Product Type</th>  
-			<th>Product Image</th>
-			<!-- <th>Created By</th> -->
-			<!-- 
-			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">Edit Product</th>
-			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">Delete Product</th>
-			 -->
+	
+		<div th:each="product : ${productList}">
+		<div class="gallery">
+			<img th:src="@{${'/product/image/'+ product.productId}}" 
+                class="card img-fluid" style="width:300px" alt="">
+                
+              
+        
+                
+           <p></p> <div> Product ID: <span th:text=  ${product.productId}>Product ID</span><p></p>
+             Product Name: <span th:text=  ${product.productName}>Product Name</span><p></p>
+             Product Price: <span th:text=  ${product.productPrice}>Product Price</span><p></p>
+             Product Quantity: <span th:text=  ${product.productQuantity}>Product Quantity</span><p></p>
+              Product Type: <span th:text=  ${product.productType}>Product Type</span><p></p>
+              Created By: <span th:text=  ${product.user.userName}>Created By</span><p></p>	<a href="EditProduct.html" th:href="@{/product/edit/}+${product.productId}">Edit</a></div>
+				<a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.productId}">Delete</a></div>	
+		
+		 
+		</div>
+	</div>
 
-
-
-		</tr>
-		<tr th:each="product:${productList}" >
-			<td th:text=${product.productId}>Product ID</td>
-			<td th:text=${product.productName}>Product Name</td>
-			<td th:text=${product.productPrice}>Product Price</td>
-			<td th:text=${product.productQuantity}>Product Quantity</td>
-			<td th:text=${product.productType}>Product Type</td>  
-			<td>  <img class="product-image" th:src="@{/product/image/}+${product.productId}" width="200" height="200"></td>
-			<td> <a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}">Edit</a></td>
-			<td> <a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.productId}">Delete</a></td>
-			
-			<!-- <td th:text=${product.user.userId}>Created By</td> -->
-			<!-- 
-			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">
-				<a href="EditProduct.html" th:href="@{/product/edit/}+${product.productId}">Edit</a></td>
-			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}">
-				<a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.productId}">Delete</a></td>	
-			-->
-			
-		</tr>
-	</table>
     <br/>
     <h1 th:if="${#lists.isEmpty(productList)}">Empty List</h1>
 	<div th:replace="fragments/general.html :: footer"></div>
