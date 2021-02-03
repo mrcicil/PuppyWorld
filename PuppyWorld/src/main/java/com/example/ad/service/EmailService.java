@@ -1,5 +1,10 @@
 package com.example.ad.service;
 
+import java.io.IOException;
+
+import javax.mail.MessagingException;
+import javax.mail.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -15,11 +20,13 @@ private JavaMailSender javaMailSender;
 		this.javaMailSender=javaMailSender;
 	}
 
-	public void sendNotification(String msg, String userEmail) throws MailException{
+	public void sendNotification(String msg, String userEmail) throws MailException, MessagingException, IOException{
+		
+		
 		
 		SimpleMailMessage mail=new SimpleMailMessage();
 		mail.setTo(userEmail);
-		mail.setFrom("keyint94@gmail.com");
+//		mail.setFrom("keyintan94@gmail.com");
 		mail.setSubject("New Password");
 		mail.setText(msg);
 		

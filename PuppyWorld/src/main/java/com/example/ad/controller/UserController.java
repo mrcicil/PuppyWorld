@@ -1,16 +1,13 @@
 package com.example.ad.controller;
 
-import java.security.SecureRandom;
+import java.io.IOException;
 import java.util.Random;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 //import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -201,7 +197,16 @@ public class UserController {
 	        System.out.println(passwordEncoder.encode(password));
 			
 	        String mail = "The new password is being generated: " + password + ". Please use this new password to login to your account.";
-			eservice.sendNotification(mail, dbuser.getEmailAddress());
+			
+	        try {
+	        	eservice.sendNotification(mail, dbuser.getEmailAddress());
+			} catch (MessagingException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        
+	        System.out.println("Done");
 
 			return "login";
 		}
