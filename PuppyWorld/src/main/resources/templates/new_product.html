@@ -12,6 +12,16 @@
 		<form action="#" th:action="@{/saveProduct}" th:object="${product}"
 			method="post" enctype="multipart/form-data">
 			<table border="0" cellpadding="10">
+			
+				<tr>
+					<td>User</td>
+					<td>
+						<fieldset>
+							<p><span th:text="${user.userName}"></span></p>
+						</fieldset>
+					</td>
+				</tr>
+				
 				<tr>
 					<td>Product Name:</td>
 					<td><input type="text" th:field="*{productName}"></td>
@@ -36,12 +46,8 @@
 						</fieldset>
 					</td>
 				</tr>
-				<fieldset>
-			User <select th:field="*{user.userId}">
-				<option th:each="user:${users}" th:value="${user.userId}"
-					th:text="${user.userId}"></option>
-			</select>
-		</fieldset>
+				
+				
 
 				<tr>
 				<td>

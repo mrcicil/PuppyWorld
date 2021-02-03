@@ -10,6 +10,7 @@ import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -29,11 +30,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Product;
 import com.example.ad.domain.Services;
+import com.example.ad.domain.User;
 import com.example.ad.repo.ServiceRepository;
 import com.example.ad.service.ProductService;
 import com.example.ad.service.ProductServiceImplementation;
 import com.example.ad.service.ServiceService;
 import com.example.ad.service.ServiceServiceImplementation;
+import com.example.ad.service.UserService;
+import com.example.ad.service.UserServiceImplementation;
 
 @Controller
 public class ProductController {
@@ -45,6 +49,15 @@ public class ProductController {
 		this.pservice = pServiceImpl;
 	}
 	
+	@Autowired
+	private UserService uservice;
+	
+	@Autowired
+	public void setUService(UserServiceImplementation uServiceImpl) {
+		this.uservice = uServiceImpl;
+	}
+	
+	
 //	@RequestMapping("/service")
 //	public String viewHomePage(Model model) {
 //		List<Services> listService=sservice.findAllServices();
@@ -53,9 +66,13 @@ public class ProductController {
 //	}
 	
 	@RequestMapping("/createProduct")
-	public String showNewProductForm(Model model) {
+	public String showNewProductForm(Model model, HttpServletRequest request) {
 		Product product = new Product();
 		model.addAttribute("product",product);
+		
+		User currentUser = uservice.findUserByUserName(request.getRemoteUser());
+		model.addAttribute("user", currentUser);
+		
 		return "new_product";
 	}
 	
@@ -94,6 +111,11 @@ public class ProductController {
 	{
 		//model.addAttribute("productList", proservice.listAllProducts());
 		model.addAttribute("productList", pservice.findAllProducts()); //I used the build in JPA repo
+		
+		int productId= 0;
+		
+		model.addAttribute("productId", productId);
+		
 		return "productlist";
 	}
 	
