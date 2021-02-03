@@ -15,7 +15,7 @@
 	<a href="AddProduct.html" th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.example.ad.domain.UserType).ADMIN)}" th:href="@{/product/add}">New Product</a>
 	-->
 	<h3>Product Search</h3>
-	<a href="#" th:href="@{/createProduct}">Create New Service</a>
+	<a href="#" th:href="@{/createProduct}">Create New Product</a>
 	
 	<div>
 		<form th:action="@{/product/search/}" method="get">

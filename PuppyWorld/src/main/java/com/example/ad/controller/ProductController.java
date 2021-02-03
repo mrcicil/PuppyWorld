@@ -56,7 +56,7 @@ public class ProductController {
 	public void setUService(UserServiceImplementation uServiceImpl) {
 		this.uservice = uServiceImpl;
 	}
-	
+
 	
 //	@RequestMapping("/service")
 //	public String viewHomePage(Model model) {
@@ -70,9 +70,6 @@ public class ProductController {
 		Product product = new Product();
 		model.addAttribute("product",product);
 		
-		User currentUser = uservice.findUserByUserName(request.getRemoteUser());
-		model.addAttribute("user", currentUser);
-		
 		return "new_product";
 	}
 	
@@ -83,7 +80,7 @@ public class ProductController {
 //	}
 	
 	@RequestMapping(value="/saveProduct",method=RequestMethod.POST)
-	public String saveService(@ModelAttribute("product")Product product, @RequestParam("fileImage") MultipartFile multipartFile) throws IllegalStateException, IOException {
+	public String saveService(@ModelAttribute("product")Product product, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {
 		
 		try {
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -100,6 +97,9 @@ public class ProductController {
 		catch(IOException e) {
 			System.out.println(e.toString());
 		}
+		
+		User user = uservice.findUserByUserName(request.getRemoteUser());
+		product.setUser(user);
 		pservice.saveProduct(product);
 		
 		return "redirect:/productList";
@@ -145,6 +145,7 @@ public class ProductController {
 		session.setAttribute("product", "something");
 		model.addAttribute("image", encodedString);
 		model.addAttribute("product",product);
+//		model.addAttribute("username",product.getUser().getUserName());
 		return "edit_product";
 	}
 }
