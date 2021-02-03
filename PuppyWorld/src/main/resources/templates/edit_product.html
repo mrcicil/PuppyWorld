@@ -2,11 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="fragments/general.html :: header">
 	<meta charset="UTF-8">
-	<title>Create New Product</title>
+	<title>Edit Product</title>
 </head>
 <body>
 	<div th:insert="fragments/general.html :: menu"></div>
-		<h1>Create New Product</h1>
+	<link rel="stylesheet" th:href="@{/css/jquery.fancybox.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+		<h1>Edit Product</h1>
 		<br />
 
 		<form action="#" th:action="@{/saveProduct}" th:object="${product}"
@@ -48,7 +51,7 @@
 					<label>Product Image:</label>
 						<input type="file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" size="30"/>
 				</td>
-				<td>
+				<td id="preview" style="display:none">
 					<img id="output" alt="Preview" width="200" height="200"/>
 				</td>
 				<td th:if="${not #lists.isEmpty(session.product)}">
@@ -56,7 +59,7 @@
 				</td>
 				</tr>
 				<tr>
-					<td colspan="2"><a th:href="@{/createProduct}">Clear</a></td>
+					<td colspan="2"><ath:href="@{/createProduct}"><button  type="submit" >Clear</button></a></td>
 					<td colspan="2"><button type="submit" name="upload" id="upload"  class="send_upload" value="upload" >Submit</button></td>
 				</tr>
 			</table>
@@ -91,4 +94,17 @@ var loadFile = function(event) {
 	});
 
 </script>
+<!-- <script>
+$(function(){
+	$("#preview").hide();
+	$("#type").change(function(){
+	if($(this).val()==1||$(this).val()==2||$(this).val()==3){
+		$("#preview").hide();
+	}else if($(this).val()==4||$(this).val()==5||$(this).val()==6){
+		$("#preview").show();
+	}
+	})
+})
+
+</script> -->
 </html>
