@@ -11,7 +11,7 @@
 	<div class="container" style="text-align: center; margin-bottom: 20px">
 	
 	<h2 style="padding:25px">Your Profile</h2>
-	<table th:if="${not #lists.isEmpty(userProfile)}"  class="table" style="width:35%; margin-left: auto; margin-right: auto; padding: 10px">
+	<table th:if="${not #httpServletRequest.remoteUser.isEmpty()}"  class="table" style="width:35%; margin-left: auto; margin-right: auto; padding: 10px">
 		<tr>
 			<td>Name</td>
 			<td th:text=${userProfile.name}>Your Name</td>
@@ -22,10 +22,10 @@
 			<td th:text="${userProfile.userName}"> Your Username</td>
 		</tr>
 		
-		<tr>
+		<!-- <tr>
 			<td>Password</td>
 			<td th:text=${userProfile.password}>Your Password</td>
-		</tr>
+		</tr> -->
 		
 		<tr>
 			<td>Email Address</td>
