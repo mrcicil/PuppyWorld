@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.example.ad.domain.User;
 import com.example.ad.domain.UserType;
+import com.example.ad.repo.ServiceRepository;
 import com.example.ad.repo.UserRepository;
 
 @SpringBootApplication
@@ -16,6 +17,8 @@ public class PuppyWorldApplication {
 
 	@Autowired
 	public UserRepository urepo;
+
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(PuppyWorldApplication.class, args);
@@ -26,7 +29,12 @@ public class PuppyWorldApplication {
 		return args -> {
 
 			
-			  
+
+
+			//dummy1
+
+			
+
 			/*
 			 * BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); String
 			 * encodedPassword1 = passwordEncoder.encode("keyin1994"); String
@@ -40,7 +48,6 @@ public class PuppyWorldApplication {
 			 * 
 			 * urepo.save(user1); urepo.save(user2);
 			 */
-			 
 
 		};
 	}

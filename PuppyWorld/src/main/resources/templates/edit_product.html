@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/general.html :: header">
+	<meta charset="UTF-8">
+	<title>Create New Product</title>
+</head>
+<body>
+	<div th:insert="fragments/general.html :: menu"></div>
+		<h1>Create New Product</h1>
+		<br />
+
+		<form action="#" th:action="@{/saveProduct}" th:object="${product}"
+			method="post" enctype="multipart/form-data">
+			<table border="0" cellpadding="10">
+				<tr>
+					<td>Product Name:</td>
+					<td><input type="text" th:field="*{productName}"></td>
+				</tr>
+				<tr>
+					<td>Product Price:</td>
+					<td><input type="number" th:field="*{productPrice}"></td>
+				</tr>
+				<tr>
+					<td>Product Quantity:</td>
+					<td><input type="number" th:field="*{productQuantity}"></td>
+				</tr>
+				
+				<tr>
+					<td>Product Type</td>
+					<td>
+						<fieldset style="border:0px">
+						<select th:field="*{productType}">
+							<option th:each="productType : ${T(com.example.ad.domain.ProductType).values()}" 
+							th:value="${productType}" th:text="${productType}"/>
+						</select>
+						</fieldset>
+					</td>
+				</tr>
+				<fieldset>
+			User <select th:field="*{user.userId}">
+				<option th:each="user:${users}" th:value="${user.userId}"
+					th:text="${user.userId}"></option>
+			</select>
+		</fieldset>
+
+				<tr>
+				<td>
+					<label>Product Image:</label>
+						<input type="file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" size="30"/>
+				</td>
+				<td>
+					<img id="output" alt="Preview" width="200" height="200"/>
+				</td>
+				<td th:if="${not #lists.isEmpty(session.product)}">
+					<img th:src="@{'data:image/jpeg;base64,'+${image}}"/>
+				</td>
+				</tr>
+				<tr>
+					<td colspan="2"><a th:href="@{/createProduct}">Clear</a></td>
+					<td colspan="2"><button type="submit" name="upload" id="upload"  class="send_upload" value="upload" >Submit</button></td>
+				</tr>
+			</table>
+		</form>
+		
+	</div>
+	<div th:insert="fragments/general.html :: footer"></div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+  
+  $(document).ready(function() {
+	    $('#upload').bind("click",function() 
+	    { 
+	        var imgVal = $('#fileImage').val(); 
+	        if(imgVal=='') 
+	        { 
+	            alert("empty input file"); 
+	            return false; 
+
+	        } 
+	        return true; 
+
+	    }); 
+	});
+
+</script>
+</html>

@@ -28,6 +28,11 @@ public class Product {
 	@OneToOne
 	private User user;
 
+	public Product() {
+		super();
+	}
+
+
 	public Product(String productName, float productPrice, int productQuantity, ProductType productType,
 			byte[] productImage, User user) {
 		super();
@@ -39,6 +44,7 @@ public class Product {
 		this.user = user;
 	}
 
+	
 	public int getProductId() {
 		return productId;
 	}

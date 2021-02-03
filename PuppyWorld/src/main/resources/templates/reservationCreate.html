@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/general.html :: header">
+	<meta charset="UTF-8">
+	<title>Book Service</title>
+</head>
+<body>
+	<div th:insert="fragments/general.html :: menu"></div>
+		<h1>Make Reservation</h1>
+		<br />
+		<form action="#" th:action="@{/reservationSave}" th:object="${reservation}"
+			method="post" enctype="multipart/form-data">
+			<table border="0" cellpadding="10">
+				<tr>
+					<img th:src="@{'data:image/jpeg;base64,'+${image}}"/>
+				</tr>
+				<tr>
+					<td>Service:</td>
+					<td th:text = "${service.serviceName}"></td>
+				</tr>
+				<tr>
+					<td>Date:</td>
+					<td><input type="date" th:field="*{reserveDate}"></td>
+				</tr>
+				<tr>
+					<td>Reserve Time:</td>
+					<td><input type="time" th:field="*{reserveTime}"></td>
+				</tr>
+				
+				<tr>
+					<td>Number of Dogs</td>
+					<td><input type="number" step= 1 min=1 th:field="*{noOfDogs}"></td>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="submit">Submit</button></td>
+				</tr>
+			</table>
+		</form>
+		
+	</div>
+	<div th:insert="fragments/general.html :: footer"></div>
+</body>
+</html>
