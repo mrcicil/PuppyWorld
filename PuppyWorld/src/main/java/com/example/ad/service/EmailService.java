@@ -26,7 +26,7 @@ private JavaMailSender javaMailSender;
 		
 		SimpleMailMessage mail=new SimpleMailMessage();
 		mail.setTo(userEmail);
-//		mail.setFrom("keyintan94@gmail.com");
+//		mail.setFrom("1400941583a@gmail.com");
 		mail.setSubject("New Password");
 		mail.setText(msg);
 		
