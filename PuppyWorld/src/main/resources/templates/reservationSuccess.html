@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Product List</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>Success Reserve</h1>
+	<div th:replace="fragments/general.html :: footer"></div>
+	
+</body>
+<script>
+    setTimeout(function(){
+        window.location.href = 'productList';
+    }, 3000);
+</script>
+</html>

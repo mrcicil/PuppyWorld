@@ -2,14 +2,14 @@
 <html>
 <title>PuppyWorld</title>
 <head th:fragment="header">
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
 <!-- Custom Theme files -->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- Custom Theme files -->
 <!-- navigation -->
-<link href="css/component.css" rel="stylesheet" type="text/css"  />
+<link href="/css/component.css" rel="stylesheet" type="text/css"  />
 <!-- navigation -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -39,6 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="container">
 				<p class="location"><i class="location"></i>3 New Bugis Street, Singapore 188867</p>
 				<p class="phonenum">+ 65 8858 2068</p>
+				<p style="text-align:center; font-size:20px; font-weight:bold; color:white">Welcome [[${#httpServletRequest.remoteUser}]]</p>
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -51,27 +52,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="top-menu">
 					<ul>
 					<nav class="cl-effect-5">
-                        <li><a class="active" a href="Home" th:href="@{/}"><span data-hover="Home">Home</span></a></li>
-                        <li><a href="#" th:href="@{/productList}"><span data-hover="Product">Product</span></a></li>
 
-                        
+						<li><a class="active" a href="Home" th:href="@{/}"><span data-hover="Home">Home</span></a></li> 
+						<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/productList}"><span data-hover="Product">Product</span></a></li>
+						<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/serviceList}"><span data-hover="Service">Service</span></a></li> 
+<!-- 						<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/post}"><span data-hover="Lost&Found">Lost&Found</span></a></li>  -->
+						<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/checkBreed}"><span data-hover="CheckBreed"> Check Breed </span></a></li> 
+						<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/profile}"><span data-hover="Profile">Profile</span></a></li>
+						<li th:if="${#httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/login}"><span data-hover="Login"> Login </span></a></li>
+						<li th:if="${#httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/register}"><span data-hover="Register New User"> Register New User </span></a></li>
+      					<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/logout}"><span data-hover="Logout"> Logout </span></a></li>
+					</nav>
 
-
-                        <li><a href="#" th:href="@{/createProduct}"><span data-hover="Product">CreateProduct</span></a></li>
-         
-
-                        <li><a href="#" th:href="@{/service}"><span data-hover="Service">Service</span></a></li>
-                        
-                        <li><a href="#" th:href="@{/new}"><span data-hover="Service">Create Service</span></a></li>
-                        
-
-                        <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/post}"><span data-hover="Lost&Found">Lost&Found</span></a></li>
-                       <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/breed}"><span data-hover="CheckBreed"> Check Breed </span></a></li>
-                        <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/profile}"><span data-hover="Profile">Profile</span></a></li>
-                        <li th:if="${#lists.isEmpty(session.usession)}"><a href="#" th:href="@{/login}"><span data-hover="Login"> Login </span></a></li>
-                        <li th:if="${#lists.isEmpty(session.usession)}"><a href="#" th:href="@{/register}"><span data-hover="Register New User"> Register New User </span></a></li>
-                          <li th:if="${not #lists.isEmpty(session.usession)}"><a href="#" th:href="@{/logout}"><span data-hover="Logout"> Logout </span></a></li>
-                    </nav>
 					</ul>
 				</div>
 				<!-- script for menu -->

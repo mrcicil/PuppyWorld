@@ -6,6 +6,7 @@ import java.util.Iterator;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.ad.domain.User;
@@ -65,7 +66,10 @@ public class UserServiceImplementation implements UserService{
 		// TODO Auto-generated method stub
 		User dbuser = findUserByUserName(user.getUserName());
 		
-		if (dbuser.getUserName().equals(user.getUserName()) && dbuser.getPassword().equals(user.getPassword()))
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedUserPassword = passwordEncoder.encode(user.getPassword());
+		
+		if (dbuser.getUserName().equals(user.getUserName()) && dbuser.getPassword().equals(encodedUserPassword))
 			return true;
 		else
 			return false;
@@ -76,5 +80,20 @@ public class UserServiceImplementation implements UserService{
 		// TODO Auto-generated method stub
 		User searchUser = findUserById(Id);
 		urepo.delete(searchUser);
+	}
+
+	@Override
+	public User findUserByUserEmail(String emailAddress) {
+		// TODO Auto-generated method stub
+		ArrayList<User> uList = findAllUsers();
+		User searchUser = null;
+		for (Iterator <User> iterator = uList.iterator(); iterator.hasNext();) {
+			User user = iterator.next();
+			if(user.getEmailAddress().equals(emailAddress)){
+				searchUser = user;
+			}
+		}
+		return searchUser;
+		
 	}
 }
