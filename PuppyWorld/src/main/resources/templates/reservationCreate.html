@@ -8,6 +8,8 @@
 	<div th:insert="fragments/general.html :: menu"></div>
 		<h1>Make Reservation</h1>
 		<br />
+		<p>Service:</p>
+					<p th:text = "${service.serviceName}" ></p>
 		<form action="#" th:action="@{/reservationSave}" th:object="${reservation}"
 			method="post" enctype="multipart/form-data">
 			<table border="0" cellpadding="10">
@@ -15,8 +17,7 @@
 					<img th:src="@{'data:image/jpeg;base64,'+${image}}"/>
 				</tr>
 				<tr>
-					<td>Service:</td>
-					<td th:text = "${service.serviceName}"></td>
+					<input type="hidden" th:field="*{service.serviceId}" th:value="${service.serviceId}">
 				</tr>
 				<tr>
 					<td>Date:</td>
