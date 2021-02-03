@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Reservation {
@@ -21,13 +22,12 @@ public class Reservation {
 	private int noOfDogs;
 	
 	private String remarks;
+	
+	@OneToOne
+	private Services service;
 
-	public Reservation(LocalDate reserveDate, LocalTime reserveTime, int noOfDogs, String remarks) {
+	public Reservation() {
 		super();
-		this.reserveDate = reserveDate;
-		this.reserveTime = reserveTime;
-		this.noOfDogs = noOfDogs;
-		this.remarks = remarks;
 	}
 
 	public int getReservationId() {
@@ -68,6 +68,14 @@ public class Reservation {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public Services getService() {
+		return service;
+	}
+
+	public void setService(Services service) {
+		this.service = service;
 	}
 
 }
