@@ -41,8 +41,10 @@ div.gallery img {
 }
 
 div.desc {
-  padding: 15px;
+  padding: 100px;
   text-align: center;
+  vertical-align: middle;
+
 }
 
 </style>
@@ -75,8 +77,8 @@ div.desc {
 			<img th:src="@{${'/product/image/'+ product.productId}}" 
                 class="card img-fluid" style="width:100%" alt="">
                
-                <div class="desc">Name: <span th:text=  ${product.productName}>Name</span><p>
-              	Price: $ <span th:text=  "${#numbers.formatDecimal(product.productPrice, 0, 2)}">Price</span><p>
+                <div class="desc"><p><br><span th:text=  ${product.productName}>Name</span><p>
+              	<span th:text=  "${#numbers.formatDecimal(product.productPrice, 0, 2)}">Price</span><p>
            	<a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}">Edit</a><p>
 				<a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}"><i class="glyphicon glyphicon-trash"></i></a></div>	
 		
