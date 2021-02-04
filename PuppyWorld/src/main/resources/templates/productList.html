@@ -22,7 +22,7 @@ div.gallery {
   border: 1px solid #ccc;
   float: left;
   width: 350px;
-  height: 235px;
+  height: 350px;
   position: relative;
   text-align: center;
 }
@@ -76,9 +76,9 @@ div.desc {
                 class="card img-fluid" style="width:100%" alt="">
                
                 <div class="desc">Name: <span th:text=  ${product.productName}>Name</span><p>
-              	Price: <span th:text=  ${product.productPrice}>Price</span><p>
+              	Price: $ <span th:text=  "${#numbers.formatDecimal(product.productPrice, 0, 2)}">Price</span><p>
            	<a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}">Edit</a><p>
-				<i class="glyphicon glyphicon-trash"><a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}"></a></i></div>	
+				<a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}"><i class="glyphicon glyphicon-trash"></i></a></div>	
 		
 		 
 		
