@@ -8,14 +8,17 @@
 <body>
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
-
-	<h1>Service</h1>
+	<div class="main" height="150%">
+	<div class="container" style="text-align:center">
+	
+	<h1 style="font-weight:bold">Service</h1>
 	<!-- Add Hyperlink -->
-	<a th:if="${(user.UserType == T(com.example.ad.domain.UserType).STAFF)}" th:href="@{/serviceCreate}">Create New Service</a>
+	<button style="margin-left:75%">
+	<a th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:white" th:href="@{/serviceCreate}">Create New Service</a>
+	</button>
 	
 	<br/><br/>
 
-	<h2>Service</h2>
 	<table class="table">
 		<tr>
      <th>Name</th>
@@ -42,6 +45,9 @@
     </tr>
    </tbody>
 	</table>
+	
+	</div>
+	</div>
     <br/>
 	<div th:replace="fragments/general.html :: footer"></div>
 	

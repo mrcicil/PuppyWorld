@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.example.ad.domain.User;
-import com.example.ad.domain.UserType;
+import com.example.ad.domain.Role;
 import com.example.ad.repo.ServiceRepository;
 import com.example.ad.repo.UserRepository;
 
@@ -37,13 +37,13 @@ public class PuppyWorldApplication {
 //			  String encodedPassword1 = passwordEncoder.encode("keyin1994"); 
 //			  String encodedPassword2 = passwordEncoder.encode("xutian2021");
 //			  
-//			  User user1 = new User(UserType.STAFF, "keyin", "Tan Ke Yin", encodedPassword1, "keyintan94@gmail.com");
+//			  User user1 = new User(Role.ROLE_ADMIN, "keyin", "Tan Ke Yin", encodedPassword1, "keyintan94@gmail.com");
 //			  
-//			  User user2 = new User(UserType.STAFF, "xutian", "Ho Xu Tian", encodedPassword2, "xutian2021@gmail.com");
+//			  User user2 = new User(Role.ROLE_ADMIN, "xutian", "Ho Xu Tian", encodedPassword2, "xutian2021@gmail.com");
 //			  
 //			  urepo.save(user1); 
 //			  urepo.save(user2);
-//			 
+			 
 
 		};
 	}

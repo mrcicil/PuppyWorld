@@ -68,7 +68,7 @@ public class ProductController {
 //	}
 	
 	@RequestMapping("/productCreate")
-	public String showNewProductForm(Model model, HttpServletRequest request) {
+	public String showNewProductForm(Model model) {
 		Product product = new Product();
 		model.addAttribute("product",product);
 		return "productCreate";
@@ -134,15 +134,16 @@ public class ProductController {
 	@RequestMapping(value="/productList") // ???
 	public String list(Model model, HttpServletRequest request)
 	{
-		
-		User currentUser = uservice.findUserByUserName(request.getRemoteUser());
-		model.addAttribute("user", currentUser);
+
 		//model.addAttribute("productList", proservice.listAllProducts());
 		model.addAttribute("productList", pservice.findAllProducts()); //I used the build in JPA repo
 		
 		int productId= 0;
 		
 		model.addAttribute("productId", productId);
+		
+		User user = uservice.findUserByUserName(request.getRemoteUser());
+		model.addAttribute("user", user);
 		
 		return "productList";
 	}

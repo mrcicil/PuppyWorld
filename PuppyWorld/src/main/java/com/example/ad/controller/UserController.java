@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.ad.domain.User;
-import com.example.ad.domain.UserType;
+import com.example.ad.domain.Role;
 import com.example.ad.service.EmailService;
 import com.example.ad.service.UserService;
 import com.example.ad.service.UserServiceImplementation;
@@ -110,7 +110,7 @@ public class UserController {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
 		
 		User createUser = new User();
-		createUser.setUserType(UserType.CUSTOMER);
+		createUser.setUserType(Role.ROLE_USER);
 		createUser.setName(user.getName());
 		createUser.setUserName(user.getUserName());
 		createUser.setPassword(encodedPassword);
@@ -133,7 +133,7 @@ public class UserController {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
 		
 		User createUser = new User();
-		createUser.setUserType(UserType.STAFF);
+		createUser.setUserType(Role.ROLE_ADMIN);
 		createUser.setName(user.getName());
 		createUser.setUserName(user.getUserName());
 		createUser.setPassword(encodedPassword);

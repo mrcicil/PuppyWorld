@@ -8,73 +8,78 @@
 	<div th:insert="fragments/general.html :: menu"></div>
 	<div class="main">
 	<div class="container" style="text-align: center; margin-bottom: 20px">
-		<h1>Create New Service</h1>
+	<table width="50%" style="text-align:left; margin-left:50%">
+		<h1 style="font-weight:bold">Create New Service</h1>
 		<br />
 		
 		<form action="#" th:action="@{/serviceSave}" th:object="${service}"
 			method="post" enctype="multipart/form-data">
 
-			<div class="form-group">
-				<label>Name:</label>
+			<div class="form-group"  style="margin-left:35%; text-align:left">
+				<label style="width: 170px; text-align:left">Name:</label>
 				<input type="text" placeholder="Enter service name" th:field="*{serviceName}">
 				<p style="color:red" th:if="${#fields.hasErrors('serviceName')}" th:errors="*{serviceName}"></p>
 				</div>
 			
-			<div class="form-group">
-				<label>Description:</label>
+			<div class="form-group"  style="margin-left:35%; text-align:left">
+				<label style="width: 170px; text-align:left">Description:</label>
 				<input type="text" placeholder="Enter description" th:field="*{serviceDescription}">
 				<p style="color:red" th:if="${#fields.hasErrors('serviceDescription')}" th:errors="*{serviceDescription}"></p>
 				</div>
 				
-			<div class="form-group">
-				<label align="center">Booking</label>
-			</div>
+<!-- 			<div class="form-group">
+				<label align="center" >Booking</label>
+			</div> -->
 
-			<div class="form-group">
-				<label>Reservation required?</label>
+			<div class="form-group" style="margin-left:35%; text-align:left">
+				<label style="width: 170px; text-align:left">Reservation required?</label>
 				<select th:field="*{reservationType}">
 							<option th:each="reservationType : ${T(com.example.ad.domain.ReservationType).values()}" 
 							th:value="${reservationType}" th:text="${reservationType}"/>
 						</select>
 				</div>
 
-			<div class="form-group">
-				<label>Number of Dogs?</label>
+			<div class="form-group" style="margin-left:35%; text-align:left">
+				<label style="width: 170px; text-align:left">Number of Dogs?</label>
 				<select th:field="*{limitDogs}">
 							<option th:each="limitDogs : ${T(com.example.ad.domain.LimitDogs).values()}" 
 							th:value="${limitDogs}" th:text="${limitDogs}"/>
 						</select>
 				</div>
 
-			<div class="form-group">
-				<label>Charges:</label>
+			<div class="form-group"  style="margin-left:35%; text-align:left">
+				<label style="width: 170px; text-align:left">Charges:</label>
 				<input type="number" step=0.01 min=0  th:field="*{charges}">
 				<p style="color:red" th:if="${#fields.hasErrors('charges')}" th:errors="*{charges}"></p>
 				</div>
 			
-			<div class="form-group">
-				<label>Duration:</label>
+			<div class="form-group"  style="margin-left:35%; text-align:left">
+				<label style="width: 170px; text-align:left">Duration:</label>
 				<input type="number" step=0.5 min=0  th:field="*{serviceDuration}">
 				<p style="color:red" th:if="${#fields.hasErrors('serviceDuration')}" th:errors="*{serviceDuration}"></p>
 				</div>
 
-			
+			<br/><br/>
 
-			<div class="form-group">
-				<label>Image:</label>
-				<center>
+			<div class="form-group" style="margin-left:35%; text-align:left">
+				<label style="width: 170px; text-align:left">Upload Image:</label>
+				<br/><br/>
+				<div>
 					<input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
-				</center>
-				<div class="form-group">
+				</div>
+				<br/>
+				<div class="form-group" style="margin-left:20%">
 					<img id="output" alt="Preview" width="200" height="200"/>
 				</div>
 				</div>
 
 				
-				<a th:href="@{/serviceCreate}">Clear</a>
-				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" >Submit</button>
+				<button style="margin:5px"><a th:href="@{/serviceCreate}" style="color:white;">Clear</a></button> 
+				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="margin:5px">Submit</button>
 				
 		</form>
+		</table>
+		</div>
 		
 	</div>
 	<div th:insert="fragments/general.html :: footer"></div>

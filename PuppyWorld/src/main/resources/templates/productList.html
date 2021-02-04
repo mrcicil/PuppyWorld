@@ -51,9 +51,14 @@ div.desc {
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 
-	<h1>Product</h1>
-	 
-	<a th:if="${(user.UserType == T(com.example.ad.domain.UserType).STAFF)}" href="productCreate.html" th:href="@{/productCreate}">New Product</a>
+	<h1 style="font-weight:bold">Product</h1>
+	
+	<ul>
+		<li th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
+			<button><a style="color:white" href="#" th:href="@{/productCreate}">Create New Product</a></button>
+		</li>
+	</ul> 
+	
 	
 	<h3>Search</h3>
 	<div>
