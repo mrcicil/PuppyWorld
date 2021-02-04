@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.ad.domain.User;
 import com.example.ad.domain.UserType;
 import com.example.ad.service.EmailService;
+import com.example.ad.service.ReservationService;
+import com.example.ad.service.ReservationServiceImplementation;
 import com.example.ad.service.UserService;
 import com.example.ad.service.UserServiceImplementation;
 
@@ -34,6 +36,13 @@ public class UserController {
 	@Autowired
 	private EmailService eservice;
 	
+	@Autowired
+	private ReservationService rservice;
+	
+	@Autowired
+	public void setRService(ReservationServiceImplementation rServiceImpl) {
+		this.rservice = rServiceImpl;
+	}
 	
 	@Autowired
 	public void setUService(UserServiceImplementation uServiceImpl) {
@@ -114,7 +123,7 @@ public class UserController {
 	
 	@RequestMapping (value = "/profile")
 	public String profile (Model model, HttpServletRequest request) {
-		
+		model.addAttribute("reservationList", rservice.findAllReservations());
 		User currentUser = (User) uservice.findUserByUserName(request.getRemoteUser());
 		model.addAttribute("userProfile", currentUser);
 		return "profile";

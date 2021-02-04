@@ -38,9 +38,25 @@
 					<a style="color:white" href="EditProfile.html" th:href="@{/edit}">Edit Profile</a>
 				</button></td>
 		</tr>
-	</table>
+	</table> 
 	
+	<h2 style="padding:25px">Your Reservation Details</h2>
+	<table class="table" border="1" cellpadding="3" cellspacing="0" style="width: 60%;margin:auto">
+		<tr>
+			<th>Number of Dogs</th>
+			<th>Reservation Date</th>
+			<th>Reservation Time</th>  
+		</tr>
+		<tbody>
+		<tr th:each="reservation:${reservationList}" >
+			<td th:text=${reservation.reserveDate}>Reservation Date</td>
+			<td th:text=${reservation.reserveTime}>Reservation Time</td>
+			<td th:text=${reservation.noOfDogs}>Number Of Dogs</td>
+		</tr>
+		</tbody>
+	</table>
 	<div>
+	<br/>
 		<button>
 			<a style="color:white" href="Home" th:href="@{/}">Back to Home</a>
 		</button>

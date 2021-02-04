@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.ad.domain.Product;
 import com.example.ad.domain.Reservation;
 import com.example.ad.domain.Services;
 import com.example.ad.repo.ServiceRepository;
@@ -103,7 +106,6 @@ public class ServiceController {
 		rservice.saveReservation(reservation);
 		return "reservationSuccess";
 	}
-	
 	
 //	@GetMapping("/search")
 //	public String listPage(Model model, @Param("keyword") String keyword) {
