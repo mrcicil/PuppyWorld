@@ -102,8 +102,9 @@ public class ProductController {
 		ArrayList<Product> pList = pservice.findAllProducts();
 		for (Iterator <Product>iterator = pList.iterator(); iterator.hasNext();) {
 			Product product2 =  iterator.next();
-			if(product2.getProductName() == product.getProductName()) {
+			if(product2.getProductName().equalsIgnoreCase(product.getProductName())) {
 				errors.rejectValue("productName", "exist", "Product Exist");
+				break;
 			}
 			
 		}

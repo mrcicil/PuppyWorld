@@ -9,17 +9,17 @@
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 
-	<h1>Service List</h1>
+	<h1>Service</h1>
 	<!-- Add Hyperlink -->
 	<a th:href="@{/serviceCreate}">Create New Service</a>
 	
 	<br/><br/>
 
-	<h2>Service List</h2>
+	<h2>Service</h2>
 	<table class="table">
 		<tr>
-     <th>Service name</th>
-     <th>Service Description</th>
+     <th>Name</th>
+     <th>Description</th>
      <th>Reservation Type</th>
      <th>Number of Dogs</th>
      <th>Charges</th>

@@ -15,25 +15,25 @@
 			method="post" enctype="multipart/form-data">
 
 			<div class="form-group">
-				<label>Product Name:</label>
+				<label>Name:</label>
 				<input type="text" th:field="*{productName}" >
 				<p style="color:red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></p>
 				</div>
 
 			<div class="form-group">
-				<label>Product Price:</label>
+				<label>Price:</label>
 				<input type="number" step=0.01 min=0 th:field="*{productPrice}">
 				<p style="color:red" th:if="${#fields.hasErrors('productPrice')}" th:errors="*{productPrice}"></p>
 				</div>
 
 			<div class="form-group">
-				<label>Product Quantity:</label>
+				<label>Quantity:</label>
 				<input type="number" step=1 min=0  th:field="*{productQuantity}">
 				<p style="color:red" th:if="${#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></p>
 				</div>
 
 			<div class="form-group">
-				<label>Product Type:</label>
+				<label>Type:</label>
 				<select th:field="*{productType}">
 				<option th:each="productType : ${T(com.example.ad.domain.ProductType).values()}" 
 							th:value="${productType}" th:text="${productType}"/>
@@ -43,7 +43,7 @@
 			
 
 			<div class="form-group">
-				<label>Product Image:</label>
+				<label>Image:</label>
 				<center>
 					<input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
 				</center>

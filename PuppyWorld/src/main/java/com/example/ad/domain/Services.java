@@ -1,5 +1,7 @@
 package com.example.ad.domain;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -117,6 +119,14 @@ public class Services {
 
 	public void setLimitDogs(LimitDogs limitDogs) {
 		this.limitDogs = limitDogs;
+	}
+
+	@Override
+	public String toString() {
+		return "Services [serviceId=" + serviceId + ", logo=" + logo + ", serviceName=" + serviceName
+				+ ", serviceDescription=" + serviceDescription + ", charges=" + charges + ", serviceDuration="
+				+ serviceDuration + ", serviceImage=" + Arrays.toString(serviceImage) + ", reservationType="
+				+ reservationType + ", limitDogs=" + limitDogs + "]";
 	}
 
 	

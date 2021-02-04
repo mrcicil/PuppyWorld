@@ -15,13 +15,13 @@
 			method="post" enctype="multipart/form-data">
 
 			<div class="form-group">
-				<label>Service Name:</label>
+				<label>Name:</label>
 				<input type="text" placeholder="Enter service name" th:field="*{serviceName}">
 				<p style="color:red" th:if="${#fields.hasErrors('serviceName')}" th:errors="*{serviceName}"></p>
 				</div>
 			
 			<div class="form-group">
-				<label>Service Description:</label>
+				<label>Description:</label>
 				<input type="text" placeholder="Enter description" th:field="*{serviceDescription}">
 				<p style="color:red" th:if="${#fields.hasErrors('serviceDescription')}" th:errors="*{serviceDescription}"></p>
 				</div>
@@ -61,7 +61,7 @@
 			
 
 			<div class="form-group">
-				<label>Service Image:</label>
+				<label>Image:</label>
 				<center>
 					<input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
 				</center>
