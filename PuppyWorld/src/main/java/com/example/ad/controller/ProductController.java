@@ -20,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,12 +67,11 @@ public class ProductController {
 //		return "service";
 //	}
 	
-	@RequestMapping("/createProduct")
+	@RequestMapping("/productCreate")
 	public String showNewProductForm(Model model, HttpServletRequest request) {
 		Product product = new Product();
 		model.addAttribute("product",product);
-		
-		return "new_product";
+		return "productCreate";
 	}
 	
 //	@RequestMapping("/product")
@@ -79,8 +80,8 @@ public class ProductController {
 //		return "product";
 //	}
 	
-	@RequestMapping(value="/saveProduct",method=RequestMethod.POST)
-	public String saveService(@ModelAttribute("product")Product product, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {
+	@RequestMapping(value="/productSave",method=RequestMethod.POST)
+	public String saveService(@ModelAttribute("product")Product product, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {
 		
 		try {
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -98,6 +99,30 @@ public class ProductController {
 			System.out.println(e.toString());
 		}
 		
+		ArrayList<Product> pList = pservice.findAllProducts();
+		for (Iterator <Product>iterator = pList.iterator(); iterator.hasNext();) {
+			Product product2 =  iterator.next();
+			if(product2.getProductName().equalsIgnoreCase(product.getProductName())) {
+				errors.rejectValue("productName", "exist", "Product Exist");
+				break;
+			}
+			
+		}
+		
+		if(product.getProductName().isEmpty()) {
+			errors.rejectValue("productName", "null", "Must be filled");
+		}
+		if(product.getProductPrice() == 0) {
+			errors.rejectValue("productPrice", "null", "Must be filled");
+		}
+		if(product.getProductQuantity() == 0) {
+			errors.rejectValue("productQuantity", "null", "Must be filled");
+		}
+		
+		if (bindingResult.hasErrors()) {
+			return "productCreate";
+		}
+		
 		User user = uservice.findUserByUserName(request.getRemoteUser());
 		product.setUser(user);
 		pservice.saveProduct(product);
@@ -106,7 +131,7 @@ public class ProductController {
 
 	}
 	
-	@RequestMapping(value="/productList")
+	@RequestMapping(value="/productList") // ???
 	public String list(Model model)
 	{
 		//model.addAttribute("productList", proservice.listAllProducts());
@@ -116,7 +141,7 @@ public class ProductController {
 		
 		model.addAttribute("productId", productId);
 		
-		return "productlist";
+		return "productList";
 	}
 	
 	@GetMapping("/product/image/{id}")
@@ -131,21 +156,18 @@ public class ProductController {
 		
 	}
 	
-	@RequestMapping(value = "/product/delete/{id}")
+	@RequestMapping(value = "/productDelete/{id}")
 	public String deleteProduct(@PathVariable("id") Integer id) {
-		
 		pservice.deleteProductById(id);
 		return "redirect:/productList";
 	}
 	
 	@RequestMapping(value = "/productEdit/{id}")
-	public String editProduct(@PathVariable("id") Integer id, Model model, HttpSession session) {
+	public String editProduct(@PathVariable("id") Integer id, Model model) {
 		Product product = pservice.findProductById(id);
 		String encodedString = Base64.getEncoder().encodeToString(product.getProductImage());
-		session.setAttribute("product", "something");
 		model.addAttribute("image", encodedString);
 		model.addAttribute("product",product);
-//		model.addAttribute("username",product.getUser().getUserName());
-		return "edit_product";
+		return "productEdit";
 	}
 }

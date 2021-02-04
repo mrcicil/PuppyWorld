@@ -30,7 +30,7 @@ public class BreedController {
 	public String add() 
 	{
 		mlrepo.deleteAll();
-		return "ml-form";
+		return "checkBreed";
 	}
 	
 	@RequestMapping(value = "/checkBreedsave")
@@ -51,7 +51,7 @@ public class BreedController {
 		
 		model.addAttribute("image", encodedString);
 		model.addAttribute("result", result);
-		return "ml-form";
+		return "checkBreed";
 	}
 	
 	public String mlMethod1() {
