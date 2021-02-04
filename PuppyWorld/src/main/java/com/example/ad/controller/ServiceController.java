@@ -126,6 +126,10 @@ public class ServiceController {
 			errors.rejectValue("serviceDuration", "null", "Must be filled");
 		}
 		
+		if(service.getServiceDuration() > 3) {
+			errors.rejectValue("serviceDuration", "null", "Maximum hours is 3");
+		}
+		
 		if (bindingResult.hasErrors()) {
 			return "serviceCreate";
 		}
@@ -175,16 +179,19 @@ public class ServiceController {
 		System.out.println("this is the service" + service);
 		String mail = "Thank you " + user.getName() + " for booking with us. Your reservation for " + service.getServiceName() + " has been success. Looking forward to see you";
 		
-		try {
-			eservice.sendNotification(mail, user.getEmailAddress());
-		} catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		double hours = service.getServiceDuration();
+//		try {
+//			eservice.sendSuccessNotification(mail, user.getEmailAddress());
+//		} catch (MessagingException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+		
+		double duration = service.getServiceDuration();
+		long hours = (long) (duration - (duration%1));
+		long mins = (long) (duration%1*60);
 		System.out.println(hours);
-		LocalTime endTime = reservation.getReserveTime().plusHours((long) hours);
+		LocalTime endTime = reservation.getReserveTime().plusHours((long) hours).minusMinutes(mins);
 		reservation.setReserveEnd(endTime);
 		rservice.saveReservation(reservation);
 		return "reservationSuccess";
