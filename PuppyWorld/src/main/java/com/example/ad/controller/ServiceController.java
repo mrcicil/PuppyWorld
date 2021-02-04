@@ -71,9 +71,6 @@ public class ServiceController {
 	public String list(Model model, HttpServletRequest request) {
 		model.addAttribute("serviceList", sservice.findAllServices());
 		
-		User currentUser = uservice.findUserByUserName(request.getRemoteUser());
-		model.addAttribute("user", currentUser);
-		
 		return "serviceList";
 	}
 	
@@ -132,6 +129,8 @@ public class ServiceController {
 		if (bindingResult.hasErrors()) {
 			return "serviceCreate";
 		}
+		
+		sservice.saveService(service);
 		
 		
 		return "redirect:/serviceList";
