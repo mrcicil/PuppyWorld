@@ -21,6 +21,7 @@ public class Reservation {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate reserveDate;
 	private LocalTime reserveTime;
+	private LocalTime reserveEnd;
 	
 	private int noOfDogs;
 	
@@ -28,6 +29,17 @@ public class Reservation {
 	
 	@OneToOne
 	private Services service;
+
+	public Reservation(LocalDate reserveDate, LocalTime reserveTime, LocalTime reserveEnd, int noOfDogs, String remarks,
+			Services service) {
+		super();
+		this.reserveDate = reserveDate;
+		this.reserveTime = reserveTime;
+		this.reserveEnd = reserveEnd;
+		this.noOfDogs = noOfDogs;
+		this.remarks = remarks;
+		this.service = service;
+	}
 
 	public Reservation() {
 		super();
@@ -57,6 +69,14 @@ public class Reservation {
 		this.reserveTime = reserveTime;
 	}
 
+	public LocalTime getReserveEnd() {
+		return reserveEnd;
+	}
+
+	public void setReserveEnd(LocalTime reserveEnd) {
+		this.reserveEnd = reserveEnd;
+	}
+
 	public int getNoOfDogs() {
 		return noOfDogs;
 	}
@@ -80,5 +100,7 @@ public class Reservation {
 	public void setService(Services service) {
 		this.service = service;
 	}
+
+	
 
 }

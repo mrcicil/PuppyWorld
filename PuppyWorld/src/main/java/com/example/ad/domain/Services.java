@@ -1,5 +1,7 @@
 package com.example.ad.domain;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +19,11 @@ public class Services {
 	@Column(length=45,nullable=true)
 	private String logo;
 	
-	private String serviceName, serviceDescription, serviceDuration, charges;
+	private String serviceName, serviceDescription;
+	
+	private double charges;
+	
+	private double serviceDuration;
 	
 	@Lob
 	private byte[] serviceImage;
@@ -26,21 +32,21 @@ public class Services {
 	
 	private LimitDogs limitDogs;
 
-	public Services(String serviceName, String serviceDescription, String serviceDuration, String charges,
+	public Services(String logo, String serviceName, String serviceDescription, double charges, double serviceDuration,
 			byte[] serviceImage, ReservationType reservationType, LimitDogs limitDogs) {
 		super();
+		this.logo = logo;
 		this.serviceName = serviceName;
 		this.serviceDescription = serviceDescription;
-		this.serviceDuration = serviceDuration;
 		this.charges = charges;
+		this.serviceDuration = serviceDuration;
 		this.serviceImage = serviceImage;
 		this.reservationType = reservationType;
 		this.limitDogs = limitDogs;
 	}
-	
+
 	public Services() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getServiceId() {
@@ -49,6 +55,14 @@ public class Services {
 
 	public void setServiceId(int serviceId) {
 		this.serviceId = serviceId;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 
 	public String getServiceName() {
@@ -67,20 +81,20 @@ public class Services {
 		this.serviceDescription = serviceDescription;
 	}
 
-	public String getServiceDuration() {
-		return serviceDuration;
-	}
-
-	public void setServiceDuration(String serviceDuration) {
-		this.serviceDuration = serviceDuration;
-	}
-
-	public String getCharges() {
+	public double getCharges() {
 		return charges;
 	}
 
-	public void setCharges(String charges) {
+	public void setCharges(double charges) {
 		this.charges = charges;
+	}
+
+	public double getServiceDuration() {
+		return serviceDuration;
+	}
+
+	public void setServiceDuration(double serviceDuration) {
+		this.serviceDuration = serviceDuration;
 	}
 
 	public byte[] getServiceImage() {
@@ -106,5 +120,15 @@ public class Services {
 	public void setLimitDogs(LimitDogs limitDogs) {
 		this.limitDogs = limitDogs;
 	}
+
+	@Override
+	public String toString() {
+		return "Services [serviceId=" + serviceId + ", logo=" + logo + ", serviceName=" + serviceName
+				+ ", serviceDescription=" + serviceDescription + ", charges=" + charges + ", serviceDuration="
+				+ serviceDuration + ", serviceImage=" + Arrays.toString(serviceImage) + ", reservationType="
+				+ reservationType + ", limitDogs=" + limitDogs + "]";
+	}
+
+	
 
 }
