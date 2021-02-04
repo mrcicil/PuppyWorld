@@ -53,7 +53,7 @@ div.desc {
 
 	<h1>Product</h1>
 	 
-	<a href="productCreate.html" th:href="@{/productCreate}">New Product</a>
+	<a th:if="${(user.UserType == T(com.example.ad.domain.UserType).STAFF)}" href="productCreate.html" th:href="@{/productCreate}">New Product</a>
 	
 	<h3>Search</h3>
 	<div>

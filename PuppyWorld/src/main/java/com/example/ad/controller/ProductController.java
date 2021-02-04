@@ -132,8 +132,11 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/productList") // ???
-	public String list(Model model)
+	public String list(Model model, HttpServletRequest request)
 	{
+		
+		User currentUser = uservice.findUserByUserName(request.getRemoteUser());
+		model.addAttribute("user", currentUser);
 		//model.addAttribute("productList", proservice.listAllProducts());
 		model.addAttribute("productList", pservice.findAllProducts()); //I used the build in JPA repo
 		

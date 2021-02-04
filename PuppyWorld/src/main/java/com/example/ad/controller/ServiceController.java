@@ -68,8 +68,12 @@ public class ServiceController {
 	private EmailService eservice;
 	
 	@RequestMapping(value = "/serviceList")
-	public String list(Model model) {
+	public String list(Model model, HttpServletRequest request) {
 		model.addAttribute("serviceList", sservice.findAllServices());
+		
+		User currentUser = uservice.findUserByUserName(request.getRemoteUser());
+		model.addAttribute("user", currentUser);
+		
 		return "serviceList";
 	}
 	
@@ -130,14 +134,13 @@ public class ServiceController {
 		}
 		
 		
-		sservice.saveService(service);
-		
 		return "redirect:/serviceList";
 	}
 	
 	@RequestMapping(value = "/serviceDelete/{id}")
 	public String deleteService(@PathVariable("id") Integer id) {
 		sservice.deleteServiceById(id);
+		
 		return "redirect:/serviceList";
 	}
 	

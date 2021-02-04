@@ -77,7 +77,9 @@ public class UserController {
 	 */
 		
 	@RequestMapping(value="/")
-	public String indexPage() {
+	public String indexPage(HttpServletRequest request, Model model) {
+		User user = uservice.findUserByUserName(request.getRemoteUser());
+		model.addAttribute("user", user);
 		return "index";
 	}
 	
@@ -87,6 +89,13 @@ public class UserController {
 		User newUser = new User();
 		model.addAttribute("user", newUser);
 		return "register";
+	}
+	
+	@RequestMapping (value = "/registerStaff")
+	public String registerStaff (Model model) {
+		User newUser = new User();
+		model.addAttribute("user", newUser);
+		return "registerStaff";
 	}
 	
 	
@@ -111,6 +120,30 @@ public class UserController {
 		return "login";
 		
 	}
+	
+	
+	@RequestMapping(value = "/saveNewStaff")
+	public String saveNewStaff (@ModelAttribute("user") User user, 
+			BindingResult bindingResult, Model model, HttpServletRequest request, Errors errors) {
+		if (bindingResult.hasErrors()) {
+			return "registerStaff";
+		}
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+		
+		User createUser = new User();
+		createUser.setUserType(UserType.STAFF);
+		createUser.setName(user.getName());
+		createUser.setUserName(user.getUserName());
+		createUser.setPassword(encodedPassword);
+		createUser.setEmailAddress(user.getEmailAddress());
+		uservice.saveUser(createUser);
+		
+		return "login";
+		
+	}
+	
 	
 	@RequestMapping (value = "/profile")
 	public String profile (Model model, HttpServletRequest request) {

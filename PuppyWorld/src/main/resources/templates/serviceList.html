@@ -11,7 +11,7 @@
 
 	<h1>Service</h1>
 	<!-- Add Hyperlink -->
-	<a th:href="@{/serviceCreate}">Create New Service</a>
+	<a th:if="${(user.UserType == T(com.example.ad.domain.UserType).STAFF)}" th:href="@{/serviceCreate}">Create New Service</a>
 	
 	<br/><br/>
 
