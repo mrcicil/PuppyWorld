@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -197,6 +199,14 @@ public class ServiceController {
 		return "reservationSuccess";
 	}
 	
+	@GetMapping("/searchBySId")
+	public String findByServiceId(Model model, @Param("sId") int sId) {
+		List<Services> services = sservice.searchServiceById(sId);
+		model.addAttribute("services", services);
+		model.addAttribute("sId", sId);
+		
+		return "servicesById";
+	}
 	
 //	@GetMapping("/search")
 //	public String listPage(Model model, @Param("keyword") String keyword) {

@@ -46,7 +46,7 @@ public class ServiceServiceImplementation implements ServiceService {
     }
 
  
-
+    //edit
     @Override
     public Services findServiceById(int Id) {
         // TODO Auto-generated method stub
@@ -61,7 +61,11 @@ public class ServiceServiceImplementation implements ServiceService {
         return searchService;
     }
 
- 
+    @Override
+    @Transactional
+    public List<Services> searchServiceById(int sId){
+    	return srepo.searchServiceById(sId);
+    }
 
     @Override
     public void deleteServiceById(int Id) {

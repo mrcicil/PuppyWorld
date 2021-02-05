@@ -1,6 +1,7 @@
 package com.example.ad.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.example.ad.domain.Services;
 
@@ -10,6 +11,6 @@ public interface ServiceService {
 	public ArrayList<Services> findAllServices();
 	public Services findServiceById(int Id);
 	public void deleteServiceById(int Id);
-	
+	public List<Services> searchServiceById(int sId);
 
 }

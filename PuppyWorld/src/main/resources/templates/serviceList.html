@@ -11,12 +11,24 @@
 	<div class="main" height="150%">
 	<div class="container" style="text-align:center">
 	
-	<h1 style="font-weight:bold">Service</h1>
+	<h1 style="font-weight:bold ; padding:15px;">Service</h1>
 	<!-- Add Hyperlink -->
-	<button style="margin-left:75%">
-	<a th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:white" th:href="@{/serviceCreate}">Create New Service</a>
-	</button>
-	
+	<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
+		<li th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" 
+			style="float:left">
+			<button><a style="color:white" href="#" th:href="@{/serviceCreate}">Create New Service</a></button>
+	</li>
+	<li style="float:right">
+		<div>
+					<form th:action="@{/searchBySId}" method="get">
+						<input type="number" name="sId" id="sId" th:value="${sId}"
+							size="50" required /> &nbsp;
+						<button type="submit">Search By Id</button>
+						&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
+					</form>
+				</div>
+				<div>
+	</ul>
 	<br/><br/>
 
 	<table class="table">
