@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.example.ad.domain.Product;
 import com.example.ad.domain.ProductType;
 import com.example.ad.domain.User;
-import com.example.ad.domain.UserType;
+import com.example.ad.domain.Role;
 import com.example.ad.repo.ProductRepository;
 import com.example.ad.repo.ServiceRepository;
 import com.example.ad.repo.UserRepository;
@@ -57,10 +57,10 @@ public class PuppyWorldApplication {
 		      BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		      String encodedPassword1 = passwordEncoder.encode("password");
 		      
-		      User u1 = new User(UserType.STAFF, "joe", "Joe", encodedPassword1,
+		      User u1 = new User(Role.ROLE_ADMIN, "joe", "Joe", encodedPassword1,
 		  			"e0533420@u.nus.edu");
 		      
-		      User u2 = new User(UserType.STAFF, "ann", "Ann", encodedPassword1,
+		      User u2 = new User(Role.ROLE_ADMIN, "ann", "Ann", encodedPassword1,
 		  			"chenyihan@gmail.com");
 		      
 		      urepo.save(u1);
@@ -153,28 +153,7 @@ public class PuppyWorldApplication {
 		      
 		      
 
-
-
 			
-
-
-			//dummy11
-
-			
-
-			/*
-			 * 
-			 * ; String
-			 * encodedPassword2 = passwordEncoder.encode("xutian2021");
-			 * 
-			 * User user1 = new User(UserType.CUSTOMER, "keyin", "Tan Ke Yin",
-			 * encodedPassword1, "keyintan94@gmail.com");
-			 * 
-			 * User user2 = new User(UserType.CUSTOMER, "xutian", "Ho Xu Tian",
-			 * encodedPassword2, "xutian2021@gmail.com");
-			 * 
-			 * urepo.save(user1); urepo.save(user2);
-			 */
 
 		};
 	}

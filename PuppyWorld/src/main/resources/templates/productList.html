@@ -54,39 +54,53 @@ div.desc {
 <body>
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
+	<div class="main" style="height:150%; width:85%;margin-left:auto; margin-right:auto">
+	<div class="container" style="text-align:center">
+		<h1 style="font-weight:bold; padding:15px;">Product</h1>
 
-	<h1>Product</h1>
-	 
-	<a href="productCreate.html" th:href="@{/productCreate}">New Product</a>
+		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
+			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"
+				style="float:left">
+				<button><a style="color:white" href="#" th:href="@{/productCreate}">Create New Product</a></button>
+			</li>
+			<li style="float:right">
+	<!-- 			<h3>Search</h3> -->
+				<div>
+					<form th:action="@{/product/search/}" method="get">
+						<input type="text" name="keyword" id="keyword" th:value="${keyword}"
+							size="50" required /> &nbsp;
+						<button type="submit">Search</button>
+						&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
+					</form>
+				</div>
+				<div>
+			</li>
+		</ul> 
+
 	
-	<h3>Search</h3>
-	<div>
-		<form th:action="@{/product/search/}" method="get">
-			<input type="text" name="keyword" id="keyword" th:value="${keyword}"
-				size="50" required /> &nbsp;
-			<button type="submit">Search</button>
-			&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
-		</form>
+	
+	
+		<p></p>
+		</div>
+
+		<div class="container">
+			<div th:each="product : ${productList}">
+			<div class="gallery">
+				<img th:src="@{${'/product/image/'+ product.productId}}" 
+	                class="card img-fluid" style="width:100%" alt="">
+	               
+	                <div class="desc"><p><br><span th:text=  ${product.productName}>Name</span><p>
+	              	$<span th:text=  "${#numbers.formatDecimal(product.productPrice, 0, 2)}">Price</span><p>
+	           	<a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}">Edit</a><p>
+					<a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}"><i class="glyphicon glyphicon-trash"></i></a></div>	
+			
+			 
+			
+			</div>
+			</div>
+		</div>
 	</div>
-	<div>
-	<p>
-	</div>
-	<div class ="container">
-		<div th:each="product : ${productList}">
-		<div class="gallery">
-			<img th:src="@{${'/product/image/'+ product.productId}}" 
-                class="card img-fluid" style="width:100%" alt="">
-               
-                <div class="desc"><p><br><span th:text=  ${product.productName}>Name</span><p>
-              	$<span th:text=  "${#numbers.formatDecimal(product.productPrice, 0, 2)}">Price</span><p>
-           	<a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}">Edit</a><p>
-				<a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}"><i class="glyphicon glyphicon-trash"></i></a></div>	
-		
-		 
-		
-	</div>
-	</div>
-	</div>
+
 
     <br/>
     <h1 th:if="${#lists.isEmpty(productList)}">Empty List</h1>
