@@ -70,10 +70,37 @@ public class ServiceController {
 	@RequestMapping(value = "/serviceList")
 	public String list(Model model, HttpServletRequest request) {
 		model.addAttribute("serviceList", sservice.findAllServices());
-		
+		Reservation reservation = new Reservation();
+		model.addAttribute("reservation", reservation);
 		return "serviceList";
 	}
 	
+	@RequestMapping(value = "/reservationCreate")
+	public String createReservation(@ModelAttribute("reservation")Reservation reservation) {
+		System.out.println("reservation: ");
+		rservice.saveReservation(reservation);
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/reservationSave")
+	public String saveReservation(@ModelAttribute("reservation")Reservation reservation) {
+	//	User user = uservice.findUserByUserName(request.getRemoteUser());
+		Services service = sservice.findServiceById(reservation.getService().getServiceId());
+		System.out.println(service);
+		reservation.setService(service);
+		rservice.saveReservation(reservation);
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/reservationCreate/{id}")
+	public String createReservation(@PathVariable("id") Integer id, Model model) {
+		System.out.println(id);
+		Services service = sservice.findServiceById(id);
+		model.addAttribute("service", service);
+		Reservation reservation = new Reservation();
+		model.addAttribute(reservation);
+		return "reservationCreate";
+	}
 //	@RequestMapping("/service")
 //	public String viewHomePage(Model model) {
 //		List<Services> listService=sservice.findAllServices();
@@ -116,19 +143,19 @@ public class ServiceController {
 			
 		}
 		
-		if(service.getServiceName().isEmpty()) {
-			errors.rejectValue("serviceName", "null", "Must be filled");
-		}
-		if(service.getCharges() == 0) {
-			errors.rejectValue("charges", "null", "Must be filled");
-		}
-		if(service.getServiceDuration() == 0) {
-			errors.rejectValue("serviceDuration", "null", "Must be filled");
-		}
-		
-		if(service.getServiceDuration() > 3) {
-			errors.rejectValue("serviceDuration", "null", "Maximum hours is 3");
-		}
+//		if(service.getServiceName().isEmpty()) {
+//			errors.rejectValue("serviceName", "null", "Must be filled");
+//		}
+//		if(service.getCharges() == 0) {
+//			errors.rejectValue("charges", "null", "Must be filled");
+//		}
+//		if(service.getServiceDuration() == 0) {
+//			errors.rejectValue("serviceDuration", "null", "Must be filled");
+//		}
+//		
+//		if(service.getServiceDuration() > 3) {
+//			errors.rejectValue("serviceDuration", "null", "Maximum hours is 3");
+//		}
 		
 		if (bindingResult.hasErrors()) {
 			return "serviceCreate";
@@ -137,7 +164,7 @@ public class ServiceController {
 		sservice.saveService(service);
 		
 		
-		return "redirect:/serviceList";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/serviceDelete/{id}")
@@ -159,43 +186,43 @@ public class ServiceController {
 	
 	
 	
-	@RequestMapping(value = "/serviceReserve/{id}")
-	public String reserveService(@PathVariable("id") Integer id, Model model) {
-		Services service = new Services();
-		service = sservice.findServiceById(id);
-		Reservation reservation = new Reservation();
-		reservation.setService(service);
-		model.addAttribute("service", service);
-		model.addAttribute("reservation", reservation);
-		String encodedString = Base64.getEncoder().encodeToString(service.getServiceImage());
-		model.addAttribute("image", encodedString);
-		return "reservationCreate";
-	}
+//	@RequestMapping(value = "/serviceReserve/{id}")
+//	public String reserveService(@PathVariable("id") Integer id, Model model) {
+//		Services service = new Services();
+//		service = sservice.findServiceById(id);
+//		Reservation reservation = new Reservation();
+//		reservation.setService(service);
+//		model.addAttribute("service", service);
+//		model.addAttribute("reservation", reservation);
+//		String encodedString = Base64.getEncoder().encodeToString(service.getServiceImage());
+//		model.addAttribute("image", encodedString);
+//		return "reservationCreate";
+//	}
 	
-	@RequestMapping(value = "/reservationSave")
-	public String saveReservation(@ModelAttribute("reservation")Reservation reservation, HttpServletRequest request) {
-		User user = uservice.findUserByUserName(request.getRemoteUser());
-		Services service = sservice.findServiceById(reservation.getService().getServiceId());
-		System.out.println("this is the service" + service);
-		String mail = "Thank you " + user.getName() + " for booking with us. Your reservation for " + service.getServiceName() + " has been success. Looking forward to see you";
-		
-//		try {
-//			eservice.sendSuccessNotification(mail, user.getEmailAddress());
-//		} catch (MessagingException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-		
-		double duration = service.getServiceDuration();
-		long hours = (long) (duration - (duration%1));
-		long mins = (long) (duration%1*60);
-		System.out.println(hours);
-		LocalTime endTime = reservation.getReserveTime().plusHours((long) hours).minusMinutes(mins);
-		reservation.setReserveEnd(endTime);
-		rservice.saveReservation(reservation);
-		return "reservationSuccess";
-	}
+//	@RequestMapping(value = "/reservationSave")
+//	public String saveReservation(@ModelAttribute("reservation")Reservation reservation, HttpServletRequest request) {
+//		User user = uservice.findUserByUserName(request.getRemoteUser());
+//		Services service = sservice.findServiceById(reservation.getService().getServiceId());
+//		System.out.println("this is the service" + service);
+//		String mail = "Thank you " + user.getName() + " for booking with us. Your reservation for " + service.getServiceName() + " has been success. Looking forward to see you";
+//		
+////		try {
+////			eservice.sendSuccessNotification(mail, user.getEmailAddress());
+////		} catch (MessagingException e) {
+////            e.printStackTrace();
+////        } catch (IOException e) {
+////            e.printStackTrace();
+////        }
+//		
+//		double duration = service.getServiceDuration();
+//		long hours = (long) (duration - (duration%1));
+//		long mins = (long) (duration%1*60);
+//		System.out.println(hours);
+//		LocalTime endTime = reservation.getReserveTime().plusHours((long) hours).minusMinutes(mins);
+//		reservation.setReserveEnd(endTime);
+//		rservice.saveReservation(reservation);
+//		return "reservationSuccess";
+//	}
 	
 	
 //	@GetMapping("/search")

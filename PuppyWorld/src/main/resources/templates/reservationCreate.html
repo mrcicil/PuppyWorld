@@ -6,41 +6,40 @@
 </head>
 <body>
 	<div th:insert="fragments/general.html :: menu"></div>
-		<h1>Make Reservation</h1>
+	<div class="main">
+	<div class="container" style="text-align: center; margin-bottom: 20px">
+		<h1 style="font-weight:bold; padding:10px">Book Service</h1>
 		<br />
-		<p>Service:</p>
-					<p th:text = "${service.serviceName}" ></p>
+		<p th:text = "${service.serviceName}" ></p>
 		<form action="#" th:action="@{/reservationSave}" th:object="${reservation}"
 			method="post" enctype="multipart/form-data">
-			<table border="0" cellpadding="10">
-				<tr>
-					<img th:src="@{'data:image/jpeg;base64,'+${image}}" width="200" height="200"/>
-				</tr>
-				<tr>
-					<input type="hidden" th:field="*{service.serviceId}" th:value="${service.serviceId}">
-				</tr>
-				<tr>
-					<td>Date:</td>
-					<td><input type="date" th:field="*{reserveDate}"></td>
-				</tr>
-				<tr>
-					<td>Reserve Time:</td>
-					<td><input type="time" th:field="*{reserveTime}"></td>
-				</tr>
+			
+			
+			<input type="hidden" th:field="*{service.serviceId}" th:value="${service.serviceId}"></input>
 				
-				<tr>
-					<td>Number of Dogs</td>
-					<td><input type="number" step= 1 min=1 th:field="*{noOfDogs}"></td>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-					<td colspan="2"><button type="submit">Submit</button></td>
-				</tr>
-			</table>
+			<div class="form-group" style="margin-left:34%; text-align:left">
+				<label style="width: 200px; text-align:left">Name:</label>
+				<select th:field="*{timeSlot}">
+     				<option th:each="product:${service.timeSlots}"
+							th:text="${product}" th:value="${product}"></option>
+				</select>
+				</div>
+
+			
+
+			<br/>
+
+			
+
+				
+				
+				<button type="submit" >Submit</button>
+				
 		</form>
 		
 	</div>
 	<div th:insert="fragments/general.html :: footer"></div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </html>

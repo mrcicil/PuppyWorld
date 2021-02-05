@@ -24,24 +24,27 @@
      <th>Name</th>
      <th>Description</th>
      <th>Reservation Type</th>
-     <th>Number of Dogs</th>
      <th>Charges</th>
-     <th>Duration</th>
-     <th>Edit</th>
+     <th>Date</th>
+     <th>Slots</th>
      <th>Delete</th>
      <th>Reserve</th>
         </tr>
 		<tbody>
    <tr th:each="service:${serviceList}">
-     <td th:text="${service.serviceName}">Service ID</td>
+     <td th:text="${service.serviceName}">Service Name</td>
      <td th:text="${service.serviceDescription}">Service Description</td>
      <td th:text="${service.reservationType}">Reservation Type</td>
-     <td th:text="${service.limitDogs}">Number of Dogs</td>
      <td th:text="'$'+${service.charges}">Charges</td>
-     <td th:text="${service.serviceDuration}">Duration</td>
-     <td> <a th:href="@{/serviceEdit/}+${service.serviceId}">Edit</a></td>
+     <td th:text="'$'+${service.localDate}">Date</td>
+     <td>
+     <select>
+     	<option th:each="product:${service.timeSlots}"
+					th:text="${product}"></option>
+		</select>
+     </td>
 	 <td> <a th:href="@{/serviceDelete/}+${service.serviceId}">Delete</a></td>
-	 <td> <a th:href="@{/serviceReserve/}+${service.serviceId}">Reserve</a></td>
+	 <td> <a th:href="@{/reservationCreate/}+${service.serviceId}">Reservation</a></td>
     </tr>
    </tbody>
 	</table>

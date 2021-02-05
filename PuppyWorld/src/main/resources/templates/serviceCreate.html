@@ -34,13 +34,13 @@
 						</select>
 			</div>
 
-			<div class="form-group" style="margin-left:34%; text-align:left">
+			<!-- <div class="form-group" style="margin-left:34%; text-align:left">
 				<label style="width: 200px; text-align:left">Number of Dogs?</label>
 				<select th:field="*{limitDogs}">
 							<option th:each="limitDogs : ${T(com.example.ad.domain.LimitDogs).values()}" 
 							th:value="${limitDogs}" th:text="${limitDogs}"/>
 						</select>
-			</div>
+			</div> -->
 
 			<div class="form-group"  style="margin-left:34%; text-align:left">
 				<label style="width: 200px; text-align:left">Charges:</label>
@@ -49,9 +49,17 @@
 			</div>
 			
 			<div class="form-group"  style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Duration:</label>
-				<input type="number" step=0.5 min=0  th:field="*{serviceDuration}">
-				<p style="color:red" th:if="${#fields.hasErrors('serviceDuration')}" th:errors="*{serviceDuration}"></p>
+				<label style="width: 200px; text-align:left">Date:</label>
+				<input type="date" th:field="*{localDate}">
+				<p style="color:red" th:if="${#fields.hasErrors('localDate')}" th:errors="*{localDate}"></p>
+			</div>
+			
+			<div class="form-group"  style="margin-left:34%; text-align:left">
+				<label style="width: 200px; text-align:left">Time Slots:</label>
+				<input type="checkbox" th:field="*{timeSlots}" th:value="0800am" th:text="0800am">
+				<input type="checkbox" th:field="*{timeSlots}" th:value="1000am" th:text="1000am">
+				<input type="checkbox" th:field="*{timeSlots}" th:value="0100pm" th:text="0100pm">
+				<input type="checkbox" th:field="*{timeSlots}" th:value="0300pm" th:text="0300pm">
 			</div>
 
 			<br/>
