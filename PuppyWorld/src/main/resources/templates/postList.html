@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Post List</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<style>
+
+
+
+div.container{
+margin-top: 5px;
+margin-bottom: 5px; 
+width: 100%;
+display: block;
+
+}
+
+div.gallery {
+  margin: 10px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 350px;
+  height: 350px;
+  position: relative;
+  text-align: center;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+
+
+div.gallery img {
+  width: 350px;
+  height: 235px;
+  float: left;
+  display: block;
+}
+
+div.desc {
+  padding: 100px;
+  text-align: center;
+  vertical-align: middle;
+
+}
+
+</style>
+
+</head>
+
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+	<div class="main" style="height:150%; width:85%;margin-left:auto; margin-right:auto">
+	<div class="container" style="text-align:center">
+		<h1 style="font-weight:bold; padding:15px;">Post</h1>
+
+		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
+			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"
+				style="width:35%; margin-left: auto; margin-right: auto; padding: 10px">
+				<button><a style="color:white" href="#" th:href="@{/postCreate}">Create New Post</a></button>
+			</li>
+				<!-- <li style="float: right">
+					<h3>Search</h3>
+					<div >
+						<form th:action="@{/post/search/}" method="get">
+							<input type="text" name="keyword" id="keyword"
+								th:value="${keyword}" size="50" required /> &nbsp;
+							<button type="submit">Search</button>
+							&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
+						</form>
+					</div>
+				</li> -->
+			</ul> 
+
+	
+	
+	
+		<p></p>
+		</div>
+
+		<!-- <div class="container">
+			<div th:each="post : ${postList}">
+				<div class="gallery">
+					<img th:src="@{${'/post/image/'+ post.postId}}"
+						class="card img-fluid" style="width: 100%" alt="">
+
+					<div class="desc">
+						<p>
+							<br>
+							<span th:text=${post.postTitle}>Name</span>
+						<p>
+						<div class="desc">
+							<p>
+								<br>
+								<span th:text=${post.postMessage}>Message</span>
+							<p>
+								<a href="EditPost.html"
+									th:href="@{/postEdit/}+${post.postId}">Edit</a>
+							<p>
+								<a href="DeleteProduct.html"
+									th:href="@{/postDelete/}+${post.postId}"><i
+									class="glyphicon glyphicon-trash"></i></a>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+		<table class="table" cellpadding="3" cellspacing="0" style="width: 60%;margin:auto">
+		<tr>
+			<th>Post Title</th>
+			<th>Post Messages</th>
+			<th>Post Type</th>  
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+			<tbody>
+				<tr th:each="post:${postList}">
+					<td th:text=${post.postTitle}>Post Title</td>
+					<td th:text=${post.postMessage}>Post Messages</td>
+					<td th:text=${post.postType}>Post Type</td>
+					<td><a th:href="@{/postEdit/}+${post.postId}">Edit</a></td>
+					<td><a th:href="@{/postDelete/}+${post.postId}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+    <br/>
+    <div class="container" style="text-align:center">
+    <h1 th:if="${#lists.isEmpty(postList)}" style="font-weight:bold; padding:15px;">Empty List</h1>
+    </div>
+	<div th:replace="fragments/general.html :: footer"></div>
+	
+</body>
+</html>
+
