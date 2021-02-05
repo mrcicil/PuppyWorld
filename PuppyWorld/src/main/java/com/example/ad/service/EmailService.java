@@ -33,5 +33,19 @@ private JavaMailSender javaMailSender;
 		
 		javaMailSender.send(mail);
 	}
+	
+	public void sendSuccessNotification(String msg, String userEmail) throws MailException, MessagingException, IOException{
+		
+		
+		
+		SimpleMailMessage mail=new SimpleMailMessage();
+		mail.setTo(userEmail);
+//		mail.setFrom("keyintan94@gmail.com");
+		mail.setSubject("Reservation Success");
+		mail.setText(msg);
+		
+		
+		javaMailSender.send(mail);
+	}
 
 }
