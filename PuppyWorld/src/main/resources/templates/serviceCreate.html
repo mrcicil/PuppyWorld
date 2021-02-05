@@ -64,7 +64,7 @@
 
 			<br/>
 
-			<!-- <div class="form-group" style="margin-left:34%; text-align:left">
+			<div class="form-group" style="margin-left:34%; text-align:left">
 				<label style="width: 200px; text-align:left; padding:5px">Upload Image:</label>
 				<br/>
 				<div>
@@ -74,11 +74,11 @@
 				<div class="form-group" style="margin-left:20%">
 					<img id="output" alt="Preview" width="200" height="200"/>
 				</div>
-			</div> -->
+			</div>
 
 				
 			<button style="margin:5px"><a th:href="@{/serviceCreate}" style="color:white;">Clear</a></button> 
-			<button type="submit"style="margin:5px">Submit</button>
+			<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="margin:5px">Submit</button>
 				
 		</form>
 		</div>
@@ -87,5 +87,29 @@
 	<div th:insert="fragments/general.html :: footer"></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+  
+  $(document).ready(function() {
+	    $('#upload').bind("click",function() 
+	    { 
+	        var imgVal = $('#fileImage').val(); 
+	        if(imgVal=='') 
+	        { 
+	            alert("empty input file"); 
+	            return false; 
 
+	        } 
+	        return true; 
+
+	    }); 
+	});
+
+</script>
 </html>

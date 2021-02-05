@@ -40,7 +40,6 @@ import com.example.ad.service.UserServiceImplementation;
 
 @Controller
 public class ServiceController {
-	
 	@Autowired
 	private ServiceService sservice;
 	
@@ -71,14 +70,24 @@ public class ServiceController {
 	@RequestMapping(value = "/serviceList")
 	public String list(Model model, HttpServletRequest request) {
 		model.addAttribute("serviceList", sservice.findAllServices());
-		System.out.println("step 1");
+		Reservation reservation = new Reservation();
+		model.addAttribute("reservation", reservation);
 		return "serviceList";
 	}
 	
+//	@RequestMapping(value = "/reservationCreate")
+//	public String createReservation(@ModelAttribute("reservation")Reservation reservation) {
+//		System.out.println("reservation: ");
+//		rservice.saveReservation(reservation);
+//		return "redirect:/";
+//	}
+	
 	@RequestMapping(value = "/reservationSave")
 	public String saveReservation(@ModelAttribute("reservation")Reservation reservation) {
+	//	User user = uservice.findUserByUserName(request.getRemoteUser());
 		Services service = sservice.findServiceById(reservation.getService().getServiceId());
-		System.out.println("step 4 " + service);
+	//	Services service = reservation.getService();
+		System.out.println(service);
 		reservation.setService(service);
 		rservice.saveReservation(reservation);
 		return "redirect:/";
@@ -86,14 +95,20 @@ public class ServiceController {
 	
 	@RequestMapping(value = "/reservationCreate/{id}")
 	public String createReservation(@PathVariable("id") Integer id, Model model) {
-		System.out.println("step 2");
+		System.out.println(id);
 		Services service = sservice.findServiceById(id);
-		System.out.println("step 3 " + id);
+		System.out.println("service" + service.toString());
 		model.addAttribute("service", service);
 		Reservation reservation = new Reservation();
 		model.addAttribute("reservation", reservation);
 		return "reservationCreate";
 	}
+//	@RequestMapping("/service")
+//	public String viewHomePage(Model model) {
+//		List<Services> listService=sservice.findAllServices();
+//		model.addAttribute("listService",listService);
+//		return "service";
+//	}
 	
 	@RequestMapping("/serviceCreate")
 	public String showNewServiceForm(Model model) {
@@ -103,22 +118,23 @@ public class ServiceController {
 	}
 	
 	@RequestMapping(value="/serviceSave",method=RequestMethod.POST)
-	public String saveService(@ModelAttribute("service")Services service, Errors errors, BindingResult bindingResult) throws IllegalStateException, IOException {
-//		try {
-//			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-//			System.out.println(fileName);
-//			File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
-//			multipartFile.transferTo(convFile);
-//			byte[] fileContent = FileUtils.readFileToByteArray(convFile);
-//			
-//			//service.setServiceImage(fileContent);
-//		}
-//		catch(IllegalStateException e) {
-//			System.out.println(e.toString());
-//		}
-//		catch(IOException e) {
-//			System.out.println(e.toString());
-//		}
+	public String saveService(@ModelAttribute("service")Services service, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile) throws IllegalStateException, IOException {
+		try {
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			System.out.println(fileName);
+			File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
+			multipartFile.transferTo(convFile);
+			byte[] fileContent = FileUtils.readFileToByteArray(convFile);
+			
+			service.setServiceImage(fileContent);
+		}
+		catch(IllegalStateException e) {
+			System.out.println(e.toString());
+		}
+		catch(IOException e) {
+			System.out.println(e.toString());
+		}
+		
 		ArrayList<Services> sList = sservice.findAllServices();
 		for (Iterator <Services>iterator = sList.iterator(); iterator.hasNext();) {
 			Services service2 =  iterator.next();
@@ -126,25 +142,46 @@ public class ServiceController {
 				errors.rejectValue("serviceName", "exist", "Service Exist");
 				break;
 			}
+			
 		}
+		
+//		if(service.getServiceName().isEmpty()) {
+//			errors.rejectValue("serviceName", "null", "Must be filled");
+//		}
+//		if(service.getCharges() == 0) {
+//			errors.rejectValue("charges", "null", "Must be filled");
+//		}
+//		if(service.getServiceDuration() == 0) {
+//			errors.rejectValue("serviceDuration", "null", "Must be filled");
+//		}
+//		
+//		if(service.getServiceDuration() > 3) {
+//			errors.rejectValue("serviceDuration", "null", "Maximum hours is 3");
+//		}
+		
 		if (bindingResult.hasErrors()) {
 			return "serviceCreate";
 		}
+		
 		sservice.saveService(service);
+		
+		
 		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/serviceDelete/{id}")
 	public String deleteService(@PathVariable("id") Integer id) {
 		sservice.deleteServiceById(id);
+		
 		return "redirect:/serviceList";
 	}
 	
 	@RequestMapping(value = "/serviceEdit/{id}")
 	public String editProduct(@PathVariable("id") Integer id, Model model) {
+		
 		Services service = sservice.findServiceById(id);
-		//String encodedString = Base64.getEncoder().encodeToString(service.getServiceImage());
-		//model.addAttribute("image", encodedString);
+		String encodedString = Base64.getEncoder().encodeToString(service.getServiceImage());
+		model.addAttribute("image", encodedString);
 		model.addAttribute("service",service);
 		return "serviceEdit";
 	}
