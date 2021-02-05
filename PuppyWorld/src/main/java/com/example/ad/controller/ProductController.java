@@ -145,6 +145,7 @@ public class ProductController {
 		User user = uservice.findUserByUserName(request.getRemoteUser());
 		model.addAttribute("user", user);
 		
+		
 		return "productList";
 	}
 	

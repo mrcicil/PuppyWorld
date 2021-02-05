@@ -29,41 +29,20 @@ public class Services {
 	
 	//private double serviceDuration;
 	
-	@Lob
-	private byte[] serviceImage;
+//	@Lob
+//	private byte[] serviceImage;
 	
 	private ReservationType reservationType;
 	
 	//private LimitDogs limitDogs;
-	
+	@Lob
 	private ArrayList<String> timeSlots;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate localDate;
 
-	@Override
-	public String toString() {
-		return "Services [serviceId=" + serviceId + ", serviceName=" + serviceName + ", serviceDescription="
-				+ serviceDescription + ", charges=" + charges + ", serviceImage=" + Arrays.toString(serviceImage)
-				+ ", reservationType=" + reservationType + ", timeSlots=" + timeSlots + ", localDate=" + localDate
-				+ "]";
-	}
-
 	public Services() {
 		super();
-	
-	}
-
-	public Services(String serviceName, String serviceDescription, double charges, byte[] serviceImage,
-			ReservationType reservationType, ArrayList<String> timeSlots, LocalDate localDate) {
-		super();
-		this.serviceName = serviceName;
-		this.serviceDescription = serviceDescription;
-		this.charges = charges;
-		this.serviceImage = serviceImage;
-		this.reservationType = reservationType;
-		this.timeSlots = timeSlots;
-		this.localDate = localDate;
 	}
 
 	public int getServiceId() {
@@ -98,14 +77,6 @@ public class Services {
 		this.charges = charges;
 	}
 
-	public byte[] getServiceImage() {
-		return serviceImage;
-	}
-
-	public void setServiceImage(byte[] serviceImage) {
-		this.serviceImage = serviceImage;
-	}
-
 	public ReservationType getReservationType() {
 		return reservationType;
 	}
@@ -129,6 +100,15 @@ public class Services {
 	public void setLocalDate(LocalDate localDate) {
 		this.localDate = localDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Services [serviceId=" + serviceId + ", serviceName=" + serviceName + ", serviceDescription="
+				+ serviceDescription + ", charges=" + charges + ", reservationType=" + reservationType + ", timeSlots="
+				+ timeSlots + ", localDate=" + localDate + "]";
+	}
+
+	
 
 	
 
