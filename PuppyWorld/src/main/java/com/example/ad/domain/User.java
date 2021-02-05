@@ -15,7 +15,7 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userId;
 	
-	private UserType userType;
+	private Role userType;
 	
 	@NotEmpty
 	@Column(unique=true)
@@ -33,7 +33,7 @@ public class User {
 
 	public User() {}
 	
-	public User(UserType userType, @NotEmpty String userName, @NotEmpty String name, @NotEmpty String password,
+	public User(Role userType, @NotEmpty String userName, @NotEmpty String name, @NotEmpty String password,
 			@NotEmpty @Email String emailAddress) {
 		super();
 		this.userType = userType;
@@ -51,11 +51,11 @@ public class User {
 		this.userId = userId;
 	}
 
-	public UserType getUserType() {
+	public Role getUserType() {
 		return userType;
 	}
 
-	public void setUserType(UserType userType) {
+	public void setUserType(Role userType) {
 		this.userType = userType;
 	}
 

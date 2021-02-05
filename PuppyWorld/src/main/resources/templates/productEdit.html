@@ -8,52 +8,54 @@
 	<div th:insert="fragments/general.html :: menu"></div>
 	<div class="main">
 	<div class="container" style="text-align: center; margin-bottom: 20px">
-		<h1>Edit Product</h1>
+		<h1 style="font-weight:bold; padding:10px">Edit Product</h1>
 		<br />
 		
 		<form action="#" th:action="@{/productSave}" th:object="${product}"
 			method="post" enctype="multipart/form-data">
 
-			<div class="form-group">
-				<label>Name:</label>
+			<div class="form-group" style="margin-left:34%; text-align:left">
+				<label style="width: 200px; text-align:left">Name:</label>
 				<input type="text" th:field="*{productName}" >
 				<p style="color:red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></p>
 				</div>
 
-			<div class="form-group">
-				<label>Price:</label>
+			<div class="form-group" style="margin-left:34%; text-align:left">
+				<label style="width: 200px; text-align:left">Price:</label>
 				<input type="number" step=0.01 min=0 th:field="*{productPrice}">
 				<p style="color:red" th:if="${#fields.hasErrors('productPrice')}" th:errors="*{productPrice}"></p>
 				</div>
 
-			<div class="form-group">
-				<label>Quantity:</label>
+			<div class="form-group" style="margin-left:34%; text-align:left">
+				<label style="width: 200px; text-align:left">Quantity:</label>
 				<input type="number" step=1 min=0  th:field="*{productQuantity}">
 				<p style="color:red" th:if="${#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></p>
 				</div>
 
-			<div class="form-group">
-				<label>Type:</label>
+			<div class="form-group" style="margin-left:34%; text-align:left">
+				<label style="width: 200px; text-align:left">Type:</label>
 				<select th:field="*{productType}">
 				<option th:each="productType : ${T(com.example.ad.domain.ProductType).values()}" 
 							th:value="${productType}" th:text="${productType}"/>
 				</select>
 				</div>
 
-			
+			<br/>
 
-			<div class="form-group">
-				<label>Image:</label>
-				<center>
+			<div class="form-group" style="margin-left:34%; text-align:left"> 
+				<label style="width: 200px; text-align:left">Image:</label>
+				<br/>
+				<div>
 					<input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
-				</center>
-				<div class="form-group">
+				</div>
+				<br/>
+				<div class="form-group" style="margin-left:20%">
 					<img id="output" alt="Preview" width="200" height="200" th:src="@{'data:image/jpeg;base64,'+${image}}"/>
 				</div>
 				</div>
 
 				
-				<a th:href="@{/productCreate}">Clear</a>
+				<button style="margin:5px"><a th:href="@{/productCreate}" style="color:white;">Clear</a></button>
 				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" >Submit</button>
 				
 		</form>

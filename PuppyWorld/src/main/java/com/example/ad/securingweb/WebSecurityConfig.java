@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -54,7 +55,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/css/**", "/js/**", "/webjars/**","/index", "/register", "/forgetPassword", "/passwordRegenerate", "/saveNewUser").permitAll()
+        http.authorizeRequests()
+        		.antMatchers("/css/**", "/js/**", "/webjars/**","/index", "/register", "/forgetPassword", "/passwordRegenerate", "/saveNewUser").permitAll()
+        		.antMatchers("/registerStaff")
+        			.access("hasRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())")
+        		.antMatchers("/productCreate")
+        			.access("hasRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())")
+        		.antMatchers("/serviceCreate")
+        			.access("hasRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())")
             .anyRequest().authenticated()
             .and()
             .formLogin()
@@ -73,4 +81,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             	.logoutSuccessUrl("/login")
             	.permitAll();
     }
+    
 }

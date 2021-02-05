@@ -14,7 +14,7 @@
 			method="post" enctype="multipart/form-data">
 			<table border="0" cellpadding="10">
 				<tr>
-					<img th:src="@{'data:image/jpeg;base64,'+${image}}"/>
+					<img th:src="@{'data:image/jpeg;base64,'+${image}}" width="200" height="200"/>
 				</tr>
 				<tr>
 					<input type="hidden" th:field="*{service.serviceId}" th:value="${service.serviceId}">
