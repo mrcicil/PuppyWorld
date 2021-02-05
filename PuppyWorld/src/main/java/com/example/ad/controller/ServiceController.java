@@ -75,17 +75,18 @@ public class ServiceController {
 		return "serviceList";
 	}
 	
-	@RequestMapping(value = "/reservationCreate")
-	public String createReservation(@ModelAttribute("reservation")Reservation reservation) {
-		System.out.println("reservation: ");
-		rservice.saveReservation(reservation);
-		return "redirect:/";
-	}
+//	@RequestMapping(value = "/reservationCreate")
+//	public String createReservation(@ModelAttribute("reservation")Reservation reservation) {
+//		System.out.println("reservation: ");
+//		rservice.saveReservation(reservation);
+//		return "redirect:/";
+//	}
 	
 	@RequestMapping(value = "/reservationSave")
 	public String saveReservation(@ModelAttribute("reservation")Reservation reservation) {
 	//	User user = uservice.findUserByUserName(request.getRemoteUser());
 		Services service = sservice.findServiceById(reservation.getService().getServiceId());
+	//	Services service = reservation.getService();
 		System.out.println(service);
 		reservation.setService(service);
 		rservice.saveReservation(reservation);
@@ -96,9 +97,10 @@ public class ServiceController {
 	public String createReservation(@PathVariable("id") Integer id, Model model) {
 		System.out.println(id);
 		Services service = sservice.findServiceById(id);
+		System.out.println("service" + service.toString());
 		model.addAttribute("service", service);
 		Reservation reservation = new Reservation();
-		model.addAttribute(reservation);
+		model.addAttribute("reservation", reservation);
 		return "reservationCreate";
 	}
 //	@RequestMapping("/service")

@@ -11,17 +11,19 @@
 		<h1 style="font-weight:bold; padding:10px">Book Service</h1>
 		<br />
 		<p th:text = "${service.serviceName}" ></p>
+		
+		
 		<form action="#" th:action="@{/reservationSave}" th:object="${reservation}"
 			method="post" enctype="multipart/form-data">
 			
 			
-			<input type="hidden" th:field="*{service.serviceId}" th:value="${service.serviceId}"></input>
+			<input type="hidden" th:field="${reservation.service.serviceId}" th:value="${service.serviceId}"></input>
 				
 			<div class="form-group" style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Name:</label>
+				<label style="width: 200px; text-align:left">Timeslot:</label>
 				<select th:field="*{timeSlot}">
-     				<option th:each="product:${service.timeSlots}"
-							th:text="${product}" th:value="${product}"></option>
+     				<option th:each="time:${service.timeSlots}"
+							th:text="${time}" th:value="${time}"></option>
 				</select>
 				</div>
 
