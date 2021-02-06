@@ -82,52 +82,27 @@ div.desc {
 		<p></p>
 		</div>
 
-		<!-- <div class="container">
-			<div th:each="post : ${postList}">
-				<div class="gallery">
-					<img th:src="@{${'/post/image/'+ post.postId}}"
-						class="card img-fluid" style="width: 100%" alt="">
-
-					<div class="desc">
-						<p>
-							<br>
-							<span th:text=${post.postTitle}>Name</span>
-						<p>
-						<div class="desc">
-							<p>
-								<br>
-								<span th:text=${post.postMessage}>Message</span>
-							<p>
-								<a href="EditPost.html"
-									th:href="@{/postEdit/}+${post.postId}">Edit</a>
-							<p>
-								<a href="DeleteProduct.html"
-									th:href="@{/postDelete/}+${post.postId}"><i
-									class="glyphicon glyphicon-trash"></i></a>
-						</div>
-
-
-
-					</div>
-				</div>
-			</div>
-		</div> -->
-
 		<table class="table" cellpadding="3" cellspacing="0" style="width: 60%;margin:auto">
 		<tr>
+			<th>NO</th>
+			<th>Owner By</th>
 			<th>Post Title</th>
 			<th>Post Messages</th>
 			<th>Post Type</th>  
 			<th>Edit</th>
 			<th>Delete</th>
+			<th>View</th>
 		</tr>
 			<tbody>
 				<tr th:each="post:${postList}">
+					<td th:text=${post.postId}>NO</td>
+					<td th:text=${post.user.userName}>Owner By</td>
 					<td th:text=${post.postTitle}>Post Title</td>
 					<td th:text=${post.postMessage}>Post Messages</td>
-					<td th:text=${post.postType}>Post Type</td>
+					<td th:text=${post.postType}>Post Category</td>
 					<td><a th:href="@{/postEdit/}+${post.postId}">Edit</a></td>
 					<td><a th:href="@{/postDelete/}+${post.postId}">Delete</a></td>
+					<td><a th:href="@{/postDelete/}+${post.postId}">View</a></td>
 				</tr>
 			</tbody>
 		</table>

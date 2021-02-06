@@ -127,6 +127,7 @@ public class PostController {
 		model.addAttribute("postId", postId);
 		
 		User user = uservice.findUserByUserName(request.getRemoteUser());
+		model.addAttribute("userList",uservice.findAllUsers());
 		model.addAttribute("user", user);
 		
 		return "postList";
