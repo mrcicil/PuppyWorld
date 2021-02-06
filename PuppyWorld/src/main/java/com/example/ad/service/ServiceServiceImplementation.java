@@ -72,6 +72,16 @@ public class ServiceServiceImplementation implements ServiceService {
 
 
 
+	@Override
+	public ArrayList<Services> searchServiceByKeyword(String keyword) {
+		if(keyword!=null) {
+			return srepo.searchService(keyword);
+		}
+		return (ArrayList<Services>) srepo.findAll();
+	}
+
+
+
 
  
 

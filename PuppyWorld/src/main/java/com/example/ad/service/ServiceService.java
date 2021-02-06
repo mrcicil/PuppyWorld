@@ -11,5 +11,7 @@ public interface ServiceService {
 	public Services findServiceById(int Id);
 	public void deleteServiceById(int Id);
 	
+	public ArrayList<Services> searchServiceByKeyword(String keyword);
+	
 
 }

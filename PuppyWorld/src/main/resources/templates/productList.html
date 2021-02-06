@@ -57,11 +57,18 @@ div.desc {
 	
 	<h3>Search</h3>
 	<div>
-		<form th:action="@{/product/search/}" method="get">
+		<form action="" th:action="@{/searchProduct}" method="post">
+		     <fieldset>
+	        	Filter:<input type="text" th:value="${keyword}" name="keyword" size="50"required>
+	        </fieldset>
+	        <br/>
+	       <!--  <fieldset>
 			<input type="text" name="keyword" id="keyword" th:value="${keyword}"
-				size="50" required /> &nbsp;
+				size="50" required /> &nbsp; -->
+			<fieldset>
 			<button type="submit">Search</button>
-			&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
+			</fieldset>
+			 <br/>
 		</form>
 	</div>
 	<div>
