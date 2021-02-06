@@ -92,14 +92,14 @@ public class PostController {
 		for (Iterator <Post>iterator = poList.iterator(); iterator.hasNext();) {
 			Post post2 =  iterator.next();
 			if(post2.getPostTitle().equalsIgnoreCase(post.getPostTitle())) {
-				errors.rejectValue("postName", "exist", "Post Exist");
+				errors.rejectValue("postTitle", "exist", "Post Exist");
 				break;
 			}
 			
 		}
 		
 		if(post.getPostTitle().isEmpty()) {
-			errors.rejectValue("postName", "null", "Must be filled");
+			errors.rejectValue("postTitle", "null", "Must be filled");
 		}
 		if(post.getPostMessage().isEmpty()) {
 			errors.rejectValue("postMessage", "null", "Must be filled");
@@ -109,8 +109,10 @@ public class PostController {
 			return "postCreate";
 		}
 		
+		
 		User user = uservice.findUserByUserName(request.getRemoteUser());
 		post.setUser(user);
+		 
 		poservice.savePostService(post);
 		
 		return "redirect:/postList";
@@ -127,7 +129,6 @@ public class PostController {
 		model.addAttribute("postId", postId);
 		
 		User user = uservice.findUserByUserName(request.getRemoteUser());
-		model.addAttribute("userList",uservice.findAllUsers());
 		model.addAttribute("user", user);
 		
 		return "postList";

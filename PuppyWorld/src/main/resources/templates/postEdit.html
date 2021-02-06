@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="fragments/general.html :: header">
 	<meta charset="UTF-8">
-	<title>Edit Product</title>
+	<title>Edit Post</title>
 </head>
 <body>
 	<div th:insert="fragments/general.html :: menu"></div>
@@ -29,7 +29,7 @@
 			<div class="form-group" style="margin-left:34%; text-align:left">
 				<label style="width: 200px; text-align:left">Type:</label>
 				<select th:field="*{postType}">
-				<option th:each="postType : ${T(com.example.ad.domain.postType).values()}" 
+				<option th:each="postType : ${T(com.example.ad.domain.PostType).values()}" 
 							th:value="${postType}" th:text="${postType}"/>
 				</select>
 				</div>
