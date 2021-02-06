@@ -87,8 +87,8 @@ public class ServiceController {
 	//	User user = uservice.findUserByUserName(request.getRemoteUser());
 		Services service = sservice.findServiceById(reservation.getService().getServiceId());
 	//	Services service = reservation.getService();
-		System.out.println(service);
-		reservation.setService(service);
+		System.out.println("step 1 " + service);
+	//	reservation.setService(service);
 		rservice.saveReservation(reservation);
 		return "redirect:/";
 	}
@@ -100,6 +100,7 @@ public class ServiceController {
 		System.out.println("service" + service.toString());
 		model.addAttribute("service", service);
 		Reservation reservation = new Reservation();
+		reservation.setService(service);
 		model.addAttribute("reservation", reservation);
 		return "reservationCreate";
 	}
