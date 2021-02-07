@@ -14,7 +14,7 @@
 	<h1 style="font-weight:bold">Service</h1>
 	<!-- Add Hyperlink -->
 	<button style="margin-left:75%">
-	<a th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:white" th:href="@{/serviceCreate}">Create New Service</a>
+	<a th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:white" th:href="@{/serviceCreate}">Create New</a>
 	</button>
 	
 	<br/><br/>

@@ -61,7 +61,7 @@ div.desc {
 		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
 			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"
 				style="float:left">
-				<button><a style="color:white" href="#" th:href="@{/productCreate}">Create New Product</a></button>
+				<button><a style="color:white" href="#" th:href="@{/productCreate}">Create New</a></button>
 			</li>
 			<li style="float:right">
 	<!-- 			<h3>Search</h3> -->
@@ -97,13 +97,15 @@ div.desc {
 			 
 			
 			</div>
+			
 			</div>
 		</div>
 	</div>
+	<h1 th:if="${#lists.isEmpty(productList)}" style="font-weight:bold; padding:15px;" align="center">Empty List</h1>
 
 
     <br/>
-    <h1 th:if="${#lists.isEmpty(productList)}">Empty List</h1>
+    
 	<div th:replace="fragments/general.html :: footer"></div>
 	
 </body>
