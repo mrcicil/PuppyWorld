@@ -63,6 +63,7 @@ public class ServiceServiceImplementation implements ServiceService {
         srepo.delete(searchService);
     }
 
+
 	@Override
 	public ArrayList<Services> findAllServicesByProviderId(int Id) {
 		ArrayList<Services> sList = findAllServices();
@@ -80,5 +81,20 @@ public class ServiceServiceImplementation implements ServiceService {
 		System.out.println("step 3 ");
 		return newList;
 	}
+
+
+
+	@Override
+	public ArrayList<Services> searchServiceByKeyword(String keyword) {
+		if(keyword!=null) {
+			return srepo.searchService(keyword);
+		}
+		return (ArrayList<Services>) srepo.findAll();
+	}
+
+
+
+
+
 
 }

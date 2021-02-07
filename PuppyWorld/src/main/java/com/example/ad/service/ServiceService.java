@@ -12,5 +12,7 @@ public interface ServiceService {
 	public void deleteServiceById(int Id);
 	public ArrayList<Services> findAllServicesByProviderId(int Id);
 	
+	public ArrayList<Services> searchServiceByKeyword(String keyword);
+	
 
 }

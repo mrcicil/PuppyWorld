@@ -59,6 +59,34 @@ public class ProductController {
 		this.uservice = uServiceImpl;
 	}
 
+
+	
+//	@RequestMapping("/service")
+//	public String viewHomePage(Model model) {
+//		List<Services> listService=sservice.findAllServices();
+//		model.addAttribute("listService",listService);
+//		return "service";
+//	}
+	
+	@RequestMapping(value = "/productList")
+	public String list1(Model model) {
+		model.addAttribute("productList", pservice.findAllProducts());
+		String keyword = "";	
+		model.addAttribute("keyword", keyword);
+		return "productList";
+	}
+	
+	@RequestMapping(value = "/searchProduct")
+	public String searchProduct(Model model, @RequestParam("keyword") String keyword) {
+		
+		ArrayList<Product> searchProduct=pservice.searchProductByKeyword(keyword);
+		
+		model.addAttribute("productList",searchProduct);
+		model.addAttribute("keyword",keyword);
+		return"productList";		
+	}
+	
+
 	@RequestMapping("/productCreate")
 	public String showNewProductForm(Model model) {
 		Product product = new Product();
@@ -117,22 +145,20 @@ public class ProductController {
 
 	}
 	
-	@RequestMapping(value="/productList") // ???
-	public String list(Model model, HttpServletRequest request)
-	{
 
-		//model.addAttribute("productList", proservice.listAllProducts());
-		model.addAttribute("productList", pservice.findAllProducts()); //I used the build in JPA repo
-		
-		int productId= 0;
-		
-		model.addAttribute("productId", productId);
-		
-		User user = uservice.findUserByUserName(request.getRemoteUser());
-		model.addAttribute("user", user);
-		
-		return "productList";
-	}
+	/*
+	 * @RequestMapping(value="/productList") // ??? public String list(Model model)
+	 * { //model.addAttribute("productList", proservice.listAllProducts());
+	 * model.addAttribute("productList", pservice.findAllProducts()); //I used the
+	 * build in JPA repo
+	 * 
+	 * int productId= 0;
+	 * 
+	 * model.addAttribute("productId", productId);
+	 * 
+	 * return "productList"; }
+	 */
+
 	
 	@GetMapping("/product/image/{id}")
 	public void showProductImage(@PathVariable String id, HttpServletResponse response) throws IOException {

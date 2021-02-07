@@ -14,11 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,6 +81,7 @@ public class ServiceController {
 	@Autowired
 	private EmailService eservice;
 	
+
 	@RequestMapping(value = "/serviceList/{id}")
 	public String dateList(@PathVariable("id") Integer id, Model model) {
 		ArrayList <Services> sList = sservice.findAllServicesByProviderId(id);
@@ -88,7 +91,20 @@ public class ServiceController {
 		model.addAttribute("provider", provider);
 		return "serviceList";
 	}
+
+	//jiayuan
+//@RequestMapping(value = "/serviceList")
+//public String list(Model model) {
+//	model.addAttribute("serviceList", sservice.findAllServices());
+//	String keyword = "";
+//	
+//	model.addAttribute("keyword", keyword);
+//	return "serviceList";
+//}
+
+
 	
+
 	@RequestMapping("/serviceCreate/{id}")
 	public String showNewServiceForm(@PathVariable("id") Integer id, Model model) {
 		Services service = new Services();
@@ -171,5 +187,31 @@ public class ServiceController {
 //		model.addAttribute("image", encodedString);
 //		model.addAttribute("service",service);
 //		return "serviceEdit";
+//	}
+	
+	
+	//jiayuan
+//	@RequestMapping(value = "/searchService")
+//	public String searchService(Model model, @RequestParam("keyword") String keyword) {
+//		
+//		ArrayList<Services> searchService=sservice.searchServiceByKeyword(keyword);
+//		
+//		model.addAttribute("serviceList",searchService);
+//		model.addAttribute("keyword",keyword);
+//		return"serviceList";		
+//	}
+//	
+////	@RequestMapping("/service")
+////	public String viewHomePage(Model model) {
+////		List<Services> listService=sservice.findAllServices();
+////		model.addAttribute("listService",listService);
+////		return "service";
+////	}
+//	
+//	@RequestMapping("/serviceCreate")
+//	public String showNewServiceForm(Model model) {
+//		Services service=new Services();
+//		model.addAttribute("service",service);
+//		return "serviceCreate";
 //	}
 }
