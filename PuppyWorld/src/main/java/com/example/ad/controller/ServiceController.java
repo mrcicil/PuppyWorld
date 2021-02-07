@@ -2,6 +2,7 @@ package com.example.ad.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -26,11 +27,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Product;
+import com.example.ad.domain.Provider;
 import com.example.ad.domain.Reservation;
 import com.example.ad.domain.Services;
 import com.example.ad.domain.User;
 import com.example.ad.repo.ServiceRepository;
 import com.example.ad.service.EmailService;
+import com.example.ad.service.ProviderService;
+import com.example.ad.service.ProviderServiceImplementation;
 import com.example.ad.service.ReservationService;
 import com.example.ad.service.ReservationServiceImplementation;
 import com.example.ad.service.ServiceService;
@@ -65,93 +69,72 @@ public class ServiceController {
 	}
 	
 	@Autowired
+	private ProviderService pvservice;
+	
+	@Autowired
+	public void setPvService(ProviderServiceImplementation pvServiceImpl) {
+		this.pvservice = pvServiceImpl;
+	}
+	
+	@Autowired
 	private EmailService eservice;
 	
-	@RequestMapping(value = "/serviceList")
-	public String list(Model model, HttpServletRequest request) {
-		model.addAttribute("serviceList", sservice.findAllServices());
-		Reservation reservation = new Reservation();
-		model.addAttribute("reservation", reservation);
+	@RequestMapping(value = "/serviceList/{id}")
+	public String dateList(@PathVariable("id") Integer id, Model model) {
+		ArrayList <Services> sList = sservice.findAllServicesByProviderId(id);
+		System.out.println(sList);
+		Provider provider = pvservice.findProviderById(id);
+		model.addAttribute("serviceList", sList);
+		model.addAttribute("provider", provider);
 		return "serviceList";
 	}
 	
-	@RequestMapping(value = "/reservationSave")
-	public String saveReservation(@ModelAttribute("reservation")Reservation reservation) {
-	//	User user = uservice.findUserByUserName(request.getRemoteUser());
-		Services service = sservice.findServiceById(reservation.getService().getServiceId());
-	//	Services service = reservation.getService();
-		System.out.println("step 1 " + service);
-	//	reservation.setService(service);
-		rservice.saveReservation(reservation);
-		return "redirect:/";
-	}
-	
-	@RequestMapping(value = "/reservationCreate/{id}")
-	public String createReservation(@PathVariable("id") Integer id, Model model) {
-		System.out.println(id);
-		Services service = sservice.findServiceById(id);
-		System.out.println("service" + service.toString());
-		model.addAttribute("service", service);
-		Reservation reservation = new Reservation();
-		reservation.setService(service);
-		model.addAttribute("reservation", reservation);
-		return "reservationCreate";
-	}
-//	@RequestMapping("/service")
-//	public String viewHomePage(Model model) {
-//		List<Services> listService=sservice.findAllServices();
-//		model.addAttribute("listService",listService);
-//		return "service";
-//	}
-	
-	@RequestMapping("/serviceCreate")
-	public String showNewServiceForm(Model model) {
-		Services service=new Services();
+	@RequestMapping("/serviceCreate/{id}")
+	public String showNewServiceForm(@PathVariable("id") Integer id, Model model) {
+		Services service = new Services();
+		Provider provider = pvservice.findProviderById(id);
+		service.setProvider(provider);
 		model.addAttribute("service",service);
 		return "serviceCreate";
 	}
 	
+	@RequestMapping(value = "/reservationSave")
+	public String saveReservation(@ModelAttribute("reservation")Reservation reservation, HttpServletRequest request) {
+		Services service = sservice.findServiceById(reservation.getService().getServiceId());
+		User user = uservice.findUserByUserName(request.getRemoteUser());
+		reservation.setUser(user);
+		rservice.saveReservation(reservation);
+		return "reservationSuccess";
+	}
+	
+	@RequestMapping(value = "/reservationCreate/{id}")
+	public String createReservation(@PathVariable("id") Integer id, Model model) {
+		Services service = sservice.findServiceById(id);
+		model.addAttribute("service", service);
+		Reservation reservation = new Reservation();
+		reservation.setService(service);
+		System.out.println("step 1" + reservation.getService().getLocalDate());
+		model.addAttribute("reservation", reservation);
+		return "reservationCreate";
+	}
+
+	
 	@RequestMapping(value="/serviceSave",method=RequestMethod.POST)
-	public String saveService(@ModelAttribute("service")Services service, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile) throws IllegalStateException, IOException {
-		try {
-			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			System.out.println(fileName);
-			File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
-			multipartFile.transferTo(convFile);
-			byte[] fileContent = FileUtils.readFileToByteArray(convFile);
-			
-			service.setServiceImage(fileContent);
-		}
-		catch(IllegalStateException e) {
-			System.out.println(e.toString());
-		}
-		catch(IOException e) {
-			System.out.println(e.toString());
-		}
+	public String saveService(@ModelAttribute("service")Services service, Errors errors, BindingResult bindingResult){
 		
+		LocalDate date = LocalDate.now();
+		if(service.getLocalDate().isBefore(date) || service.getLocalDate().isEqual(date)) {
+			errors.rejectValue("localDate", "null", "Cannot be past or present");
+		}
 		ArrayList<Services> sList = sservice.findAllServices();
-		for (Iterator <Services>iterator = sList.iterator(); iterator.hasNext();) {
-			Services service2 =  iterator.next();
-			if(service2.getServiceName().equalsIgnoreCase(service.getServiceName())) {
-				errors.rejectValue("serviceName", "exist", "Service Exist");
+		for (Iterator <Services> iterator = sList.iterator(); iterator.hasNext();) {
+			Services service1 = iterator.next();
+			if(service1.getLocalDate().isEqual(service1.getLocalDate())) {
+				errors.rejectValue("localDate", "exist", "Timeslot exist");
 				break;
 			}
 			
 		}
-		
-//		if(service.getServiceName().isEmpty()) {
-//			errors.rejectValue("serviceName", "null", "Must be filled");
-//		}
-//		if(service.getCharges() == 0) {
-//			errors.rejectValue("charges", "null", "Must be filled");
-//		}
-//		if(service.getServiceDuration() == 0) {
-//			errors.rejectValue("serviceDuration", "null", "Must be filled");
-//		}
-//		
-//		if(service.getServiceDuration() > 3) {
-//			errors.rejectValue("serviceDuration", "null", "Maximum hours is 3");
-//		}
 		
 		if (bindingResult.hasErrors()) {
 			return "serviceCreate";
@@ -159,24 +142,34 @@ public class ServiceController {
 		
 		sservice.saveService(service);
 		
-		
-		return "redirect:/";
+		System.out.println("step 1" + service.getProvider().getProviderId());
+		return "redirect:/serviceList/" + service.getProvider().getProviderId();
 	}
 	
 	@RequestMapping(value = "/serviceDelete/{id}")
 	public String deleteService(@PathVariable("id") Integer id) {
+		Services service = sservice.findServiceById(id);
 		sservice.deleteServiceById(id);
 		
-		return "redirect:/serviceList";
+//		ArrayList<Reservation> rList = rservice.findAllReservations();
+//		for (Iterator <Reservation> iterator = rList.iterator(); iterator.hasNext();) {
+//			Reservation reservation = iterator.next();
+//			if(reservation.getService().getServiceId() == service.getServiceId()) {
+//				errors.rejectValue("localDate", "exist", "Timeslot exist");
+//			}
+//			
+//		}
+		
+		return "redirect:/serviceList/" + service.getProvider().getProviderId();
 	}
 	
-	@RequestMapping(value = "/serviceEdit/{id}")
-	public String editProduct(@PathVariable("id") Integer id, Model model) {
-		
-		Services service = sservice.findServiceById(id);
-		String encodedString = Base64.getEncoder().encodeToString(service.getServiceImage());
-		model.addAttribute("image", encodedString);
-		model.addAttribute("service",service);
-		return "serviceEdit";
-	}
+//	@RequestMapping(value = "/serviceEdit/{id}")
+//	public String editProduct(@PathVariable("id") Integer id, Model model) {
+//		
+//		Services service = sservice.findServiceById(id);
+//		String encodedString = Base64.getEncoder().encodeToString(service.getServiceImage());
+//		model.addAttribute("image", encodedString);
+//		model.addAttribute("service",service);
+//		return "serviceEdit";
+//	}
 }

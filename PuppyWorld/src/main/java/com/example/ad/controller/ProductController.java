@@ -59,26 +59,12 @@ public class ProductController {
 		this.uservice = uServiceImpl;
 	}
 
-	
-//	@RequestMapping("/service")
-//	public String viewHomePage(Model model) {
-//		List<Services> listService=sservice.findAllServices();
-//		model.addAttribute("listService",listService);
-//		return "service";
-//	}
-	
 	@RequestMapping("/productCreate")
 	public String showNewProductForm(Model model) {
 		Product product = new Product();
 		model.addAttribute("product",product);
 		return "productCreate";
 	}
-	
-//	@RequestMapping("/product")
-//	public String showAllProduct(Model model) {
-//		model.addAttribute("productList", pservice.findAllProducts());
-//		return "product";
-//	}
 	
 	@RequestMapping(value="/productSave",method=RequestMethod.POST)
 	public String saveService(@ModelAttribute("product")Product product, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {

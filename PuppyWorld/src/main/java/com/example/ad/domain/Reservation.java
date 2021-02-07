@@ -31,15 +31,19 @@ public class Reservation {
 	private Services service;
 	
 	private String timeSlot;
+	
+	@OneToOne
+	private User user;
 
-	public Reservation() {
-		super();
-	}
-
-	public Reservation(Services service, String timeSlot) {
+	public Reservation(Services service, String timeSlot, User user) {
 		super();
 		this.service = service;
 		this.timeSlot = timeSlot;
+		this.user = user;
+	}
+
+	public Reservation() {
+		super();
 	}
 
 	public int getReservationId() {
@@ -65,6 +69,16 @@ public class Reservation {
 	public void setTimeSlot(String timeSlot) {
 		this.timeSlot = timeSlot;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
 
 	
 	

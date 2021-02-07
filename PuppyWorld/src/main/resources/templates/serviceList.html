@@ -11,32 +11,26 @@
 	<div class="main" height="150%">
 	<div class="container" style="text-align:center">
 	
-	<h1 style="font-weight:bold">Service</h1>
+	<h1 style="font-weight:bold" th:text="${provider.providerName}">Service</h1>
 	<!-- Add Hyperlink -->
 	<button style="margin-left:75%">
-	<a th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:white" th:href="@{/serviceCreate}">Create New</a>
+	<a th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:white" th:href="@{/serviceCreate/}+${provider.providerId}">Create New</a>
 	</button>
 	
 	<br/><br/>
 
 	<table class="table">
 		<tr>
-     <th>Name</th>
-     <th>Description</th>
-     <th>Reservation Type</th>
-     <th>Charges</th>
+		<tbody>
      <th>Date</th>
-     <th>Slots</th>
+     <th>Time Slot</th>
      <th>Delete</th>
      <th>Reserve</th>
         </tr>
-		<tbody>
-   <tr th:each="service:${serviceList}">
-     <td th:text="${service.serviceName}">Service Name</td>
-     <td th:text="${service.serviceDescription}">Service Description</td>
-     <td th:text="${service.reservationType}">Reservation Type</td>
-     <td th:text="'$'+${service.charges}">Charges</td>
-     <td th:text="'$'+${service.localDate}">Date</td>
+        </tbody>
+	<tbody>
+   	<tr th:each="service:${serviceList}">
+     <td th:text="${service.localDate}">Date</td>
      <td>
      <select>
      	<option th:each="product:${service.timeSlots}"
@@ -44,7 +38,7 @@
 		</select>
      </td>
 	 <td> <a th:href="@{/serviceDelete/}+${service.serviceId}">Delete</a></td>
-	 <td> <a th:href="@{/reservationCreate/}+${service.serviceId}">Reservation</a></td>
+	 <td> <a th:href="@{/reservationCreate/}+${service.serviceId}">Choose</a></td>
     </tr>
    </tbody>
 	</table>
