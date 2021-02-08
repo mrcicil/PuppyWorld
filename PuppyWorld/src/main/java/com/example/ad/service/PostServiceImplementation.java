@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.ad.domain.Post;
 import com.example.ad.repo.PostRepository;
 
+@Service
 public class PostServiceImplementation implements PostService {
 	
 	@Autowired
