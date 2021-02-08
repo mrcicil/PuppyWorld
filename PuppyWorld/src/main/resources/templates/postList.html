@@ -96,7 +96,7 @@ div.desc {
 			<tbody>
 				<tr th:each="post:${postList}">
 					<td th:text=${post.postId}>NO</td>
-					<td th:text=${post.user.userName}>Owner By</td>
+					<td th:text=${user.userName}>Owner By</td>
 					<td th:text=${post.postTitle}>Post Title</td>
 					<td th:text=${post.postMessage}>Post Messages</td>
 					<td th:text=${post.postType}>Post Category</td>

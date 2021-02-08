@@ -13,7 +13,7 @@
 		
 		<form action="#" th:action="@{/postSave}" th:object="${post}"
 			method="post" enctype="multipart/form-data">
-
+			<input type="hidden" th:field="*{postId}">
 			<div class="form-group" style="margin-left:34%; text-align:left">
 				<label style="width: 200px; text-align:left">Title:</label>
 				<input type="text" th:field="*{postTitle}" >
