@@ -13,10 +13,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.example.ad.domain.Post;
+import com.example.ad.domain.PostType;
 import com.example.ad.domain.Product;
 import com.example.ad.domain.ProductType;
 import com.example.ad.domain.User;
 import com.example.ad.domain.Role;
+import com.example.ad.repo.PostRepository;
 import com.example.ad.repo.ProductRepository;
 import com.example.ad.repo.ServiceRepository;
 import com.example.ad.repo.UserRepository;
@@ -29,6 +32,9 @@ public class PuppyWorldApplication {
 
 	@Autowired
 	public ProductRepository prepo;
+	
+	@Autowired
+	public PostRepository porepo;
 
 
 	public static void main(String[] args) {
@@ -67,7 +73,16 @@ public class PuppyWorldApplication {
 		      
 		      urepo.save(u2);
 		      
+		      Post p1 = new Post(PostType.LOST, "Have you seen my dog?", "Dog lost around Serangoon Gardens", data1);
+		
+		      Post p2 = new Post(PostType.FOUND, "Dog roaming around NUS", "Saw a black shih tzu roaming around school today, HMU if you are its owner.", data2);
+		      
+		      porepo.save(p1);
+		      
+		      porepo.save(p2);
+		      
 		    
+		      /*
 		
 	
 		      Product p1 = new Product("Waggie Dog Food 1kg", (float) 34.00, 23, ProductType.FOOD,
@@ -151,7 +166,7 @@ public class PuppyWorldApplication {
 		      prepo.save(p19);
 		      prepo.save(p20);
 		      
-		      
+		      */
 
 			
 
