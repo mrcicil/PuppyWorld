@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.example.ad.domain.Product;
+import com.example.ad.domain.Services;
 import com.example.ad.repo.ProductRepository;
 
 @Service
@@ -54,6 +55,14 @@ public class ProductServiceImplementation implements ProductService {
 		// TODO Auto-generated method stub
 		Product searchProduct = findProductById(Id);
 		prepo.delete(searchProduct);
+	}
+
+	@Override
+	public ArrayList<Product> searchProductByKeyword(String keyword) {
+		if(keyword!=null) {
+			return prepo.searchProduct(keyword);
+		}
+		return (ArrayList<Product>) prepo.findAll();
 	}
 
 }

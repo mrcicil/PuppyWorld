@@ -2,6 +2,7 @@ package com.example.ad.domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,27 +19,27 @@ public class Reservation {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int reservationId;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate reserveDate;
-	private LocalTime reserveTime;
-	private LocalTime reserveEnd;
-	
-	private int noOfDogs;
-	
-	private String remarks;
-	
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+//	private LocalDate reserveDate;
+//	private LocalTime reserveTime;
+//	private LocalTime reserveEnd;
+//	
+//	private int noOfDogs;
+//	
+//	private String remarks;
 	@OneToOne
 	private Services service;
+	
+	private String timeSlot;
+	
+	@OneToOne
+	private User user;
 
-	public Reservation(LocalDate reserveDate, LocalTime reserveTime, LocalTime reserveEnd, int noOfDogs, String remarks,
-			Services service) {
+	public Reservation(Services service, String timeSlot, User user) {
 		super();
-		this.reserveDate = reserveDate;
-		this.reserveTime = reserveTime;
-		this.reserveEnd = reserveEnd;
-		this.noOfDogs = noOfDogs;
-		this.remarks = remarks;
 		this.service = service;
+		this.timeSlot = timeSlot;
+		this.user = user;
 	}
 
 	public Reservation() {
@@ -53,46 +54,6 @@ public class Reservation {
 		this.reservationId = reservationId;
 	}
 
-	public LocalDate getReserveDate() {
-		return reserveDate;
-	}
-
-	public void setReserveDate(LocalDate reserveDate) {
-		this.reserveDate = reserveDate;
-	}
-
-	public LocalTime getReserveTime() {
-		return reserveTime;
-	}
-
-	public void setReserveTime(LocalTime reserveTime) {
-		this.reserveTime = reserveTime;
-	}
-
-	public LocalTime getReserveEnd() {
-		return reserveEnd;
-	}
-
-	public void setReserveEnd(LocalTime reserveEnd) {
-		this.reserveEnd = reserveEnd;
-	}
-
-	public int getNoOfDogs() {
-		return noOfDogs;
-	}
-
-	public void setNoOfDogs(int noOfDogs) {
-		this.noOfDogs = noOfDogs;
-	}
-
-	public String getRemarks() {
-		return remarks;
-	}
-
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-
 	public Services getService() {
 		return service;
 	}
@@ -100,6 +61,28 @@ public class Reservation {
 	public void setService(Services service) {
 		this.service = service;
 	}
+
+	public String getTimeSlot() {
+		return timeSlot;
+	}
+
+	public void setTimeSlot(String timeSlot) {
+		this.timeSlot = timeSlot;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
+
+	
+	
+	
 
 	
 

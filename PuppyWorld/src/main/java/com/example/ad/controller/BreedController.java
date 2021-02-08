@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,19 +46,19 @@ public class BreedController {
 		MLPath mlPath = new MLPath();
 		mlPath.setPath(pathWay);
 		mlrepo.save(mlPath);
-		String result = "Its a....";
-		result += mlMethod1();
-		
+		List<String> result = mlMethod1();
+		System.out.println(result);
 		byte[] fileContent = FileUtils.readFileToByteArray(convFile);
 		String encodedString = Base64.getEncoder().encodeToString(fileContent);
 		
 		model.addAttribute("image", encodedString);
-		model.addAttribute("result", result);
+		model.addAttribute("results", result);
 		return "checkBreed";
 	}
 	
-	public String mlMethod1() {
-		String output = "";
+	public List<String> mlMethod1() {
+		List<String> output = new ArrayList<String>();
+		String adding = "";
 		try { 
 			  URL url = new URL("http://127.0.0.1:5000/predict/"); 
 			  HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -67,9 +70,11 @@ public class BreedController {
 		      String line = null;
 	          while ((line = rd.readLine()) != null)
 	          {
-	              output +=line;
+	              adding +=line;
 	              
 	          }
+	          String str[] = adding.split("&");
+	          output = Arrays.asList(str);
 	          rd.close();
 	          conn.disconnect();
 		  }

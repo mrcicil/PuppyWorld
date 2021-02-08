@@ -10,6 +10,8 @@ import com.example.ad.service.PostService;
 import com.example.ad.service.PostServiceImplementation;
 import com.example.ad.service.ProductService;
 import com.example.ad.service.ProductServiceImplementation;
+import com.example.ad.service.ProviderService;
+import com.example.ad.service.ProviderServiceImplementation;
 import com.example.ad.service.ReservationService;
 import com.example.ad.service.ReservationServiceImplementation;
 import com.example.ad.service.ServiceService;
@@ -73,6 +75,14 @@ public class TemplateController {
 	@Autowired
 	public void setUService(UserServiceImplementation uServiceImpl) {
 		this.uservice = uServiceImpl;
+	}
+	
+	@Autowired
+	private ProviderService pvservice;
+	
+	@Autowired
+	public void setPvService(ProviderServiceImplementation pvServiceImpl) {
+		this.pvservice = pvServiceImpl;
 	}
 
 }

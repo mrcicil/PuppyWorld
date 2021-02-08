@@ -10,6 +10,9 @@ public interface ServiceService {
 	public ArrayList<Services> findAllServices();
 	public Services findServiceById(int Id);
 	public void deleteServiceById(int Id);
+	public ArrayList<Services> findAllServicesByProviderId(int Id);
+	
+	public ArrayList<Services> searchServiceByKeyword(String keyword);
 	
 
 }
