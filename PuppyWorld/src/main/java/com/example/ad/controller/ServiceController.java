@@ -145,7 +145,7 @@ public class ServiceController {
 		ArrayList<Services> sList = sservice.findAllServices();
 		for (Iterator <Services> iterator = sList.iterator(); iterator.hasNext();) {
 			Services service1 = iterator.next();
-			if(service1.getLocalDate().isEqual(service.getLocalDate())) {
+			if(service1.getLocalDate().isEqual(service.getLocalDate()) & service1.getProvider().getProviderId() == service.getProvider().getProviderId()) {
 				errors.rejectValue("localDate", "exist", "Timeslot exist");
 				break;
 			}
