@@ -2,75 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="fragments/general.html :: header">
 	<meta charset="UTF-8">
-	<title>Create New Service</title>
+	<title>Create New Slot</title>
 </head>
 <body>
 	<div th:insert="fragments/general.html :: menu"></div>
 	<div class="main">
 	<div class="container" style="text-align: center; margin-bottom: 20px">
-		<h1 style="font-weight:bold; padding:10px">Create New Service</h1>
+		<h1 style="font-weight:bold; padding:10px">Create New Slot</h1>
 		<br />
 		
-		<form action="#" th:action="@{/serviceSave}" th:object="${service}" method="post" enctype="multipart/form-data">
+		<form action="#" th:action="@{/serviceSave}" th:object="${service}" method="post">
 
 			<div class="form-group"  style="margin-left:34%; text-align:left">
 				<label style="width: 200px; text-align:left">Name:</label>
-				<input type="text" placeholder="Enter service name" th:field="*{serviceName}">
-				<p style="color:red" th:if="${#fields.hasErrors('serviceName')}" th:errors="*{serviceName}"></p>
+				<input type="text" th:field="*{provider.providerName}" readonly = "readonly">
+				<p style="color:red" th:if="${#fields.hasErrors('provider.providerName')}" th:errors="*{provider.providerName}"></p>
+			</div>
+			
+
+			<input type="hidden" th:field="*{provider.providerId}">
+			
+			<div class="form-group"  style="margin-left:34%; text-align:left">
+				<label style="width: 200px; text-align:left">Date:</label>
+				<input type="date" th:field="*{localDate}">
+				<p style="color:red" th:if="${#fields.hasErrors('localDate')}" th:errors="*{localDate}"></p>
 			</div>
 			
 			<div class="form-group"  style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Description:</label>
-				<input type="text" placeholder="Enter description" th:field="*{serviceDescription}">
-				<p style="color:red" th:if="${#fields.hasErrors('serviceDescription')}" th:errors="*{serviceDescription}"></p>
-			</div>
-				
-
-			<div class="form-group" style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Reservation required?</label>
-				<select th:field="*{reservationType}">
-							<option th:each="reservationType : ${T(com.example.ad.domain.ReservationType).values()}" 
-							th:value="${reservationType}" th:text="${reservationType}"/>
-						</select>
-			</div>
-
-			<div class="form-group" style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Number of Dogs?</label>
-				<select th:field="*{limitDogs}">
-							<option th:each="limitDogs : ${T(com.example.ad.domain.LimitDogs).values()}" 
-							th:value="${limitDogs}" th:text="${limitDogs}"/>
-						</select>
-			</div>
-
-			<div class="form-group"  style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Charges:</label>
-				<input type="number" step=0.01 min=0  th:field="*{charges}">
-				<p style="color:red" th:if="${#fields.hasErrors('charges')}" th:errors="*{charges}"></p>
-			</div>
-			
-			<div class="form-group"  style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Duration:</label>
-				<input type="number" step=0.5 min=0  th:field="*{serviceDuration}">
-				<p style="color:red" th:if="${#fields.hasErrors('serviceDuration')}" th:errors="*{serviceDuration}"></p>
+				<label style="width: 200px; text-align:left">Time Slots:</label>
+				<input type="checkbox" th:field="*{timeSlots}" th:value="0800am" th:text="0800am">
+				<input type="checkbox" th:field="*{timeSlots}" th:value="1000am" th:text="1000am">
+				<input type="checkbox" th:field="*{timeSlots}" th:value="0100pm" th:text="0100pm">
+				<input type="checkbox" th:field="*{timeSlots}" th:value="0300pm" th:text="0300pm">
 			</div>
 
 			<br/>
 
-			<div class="form-group" style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left; padding:5px">Upload Image:</label>
-				<br/>
-				<div>
-					<input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
-				</div>
-				<br/>
-				<div class="form-group" style="margin-left:20%">
-					<img id="output" alt="Preview" width="200" height="200"/>
-				</div>
-			</div>
-
-				
-			<button style="margin:5px"><a th:href="@{/serviceCreate}" style="color:white;">Clear</a></button> 
-			<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="margin:5px">Submit</button>
+			<button type="submit" style="margin:5px">Submit</button>
 				
 		</form>
 		</div>

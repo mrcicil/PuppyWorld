@@ -1,5 +1,7 @@
 package com.example.ad.domain;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.persistence.Column;
@@ -8,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Services {
@@ -16,33 +21,35 @@ public class Services {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int serviceId;
 	
-	@Column(length=45,nullable=true)
-	private String logo;
+//	@Column(length=45,nullable=true)
+//	private String logo;
 	
-	private String serviceName, serviceDescription;
+//	private String serviceName, serviceDescription;
 	
-	private double charges;
+//	private double charges;
 	
-	private double serviceDuration;
+	//private double serviceDuration;
 	
-	@Lob
-	private byte[] serviceImage;
+//	@Lob
+//	private byte[] serviceImage;
 	
-	private ReservationType reservationType;
+//	private ReservationType reservationType;
 	
-	private LimitDogs limitDogs;
+	//private LimitDogs limitDogs;
+	
+	private ArrayList<String> timeSlots;
+	
+	@OneToOne
+	private Provider provider;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate localDate;
 
-	public Services(String logo, String serviceName, String serviceDescription, double charges, double serviceDuration,
-			byte[] serviceImage, ReservationType reservationType, LimitDogs limitDogs) {
+	public Services(ArrayList<String> timeSlots, Provider provider, LocalDate localDate) {
 		super();
-		this.logo = logo;
-		this.serviceName = serviceName;
-		this.serviceDescription = serviceDescription;
-		this.charges = charges;
-		this.serviceDuration = serviceDuration;
-		this.serviceImage = serviceImage;
-		this.reservationType = reservationType;
-		this.limitDogs = limitDogs;
+		this.timeSlots = timeSlots;
+		this.provider = provider;
+		this.localDate = localDate;
 	}
 
 	public Services() {
@@ -57,78 +64,35 @@ public class Services {
 		this.serviceId = serviceId;
 	}
 
-	public String getLogo() {
-		return logo;
+	public ArrayList<String> getTimeSlots() {
+		return timeSlots;
 	}
 
-	public void setLogo(String logo) {
-		this.logo = logo;
+	public void setTimeSlots(ArrayList<String> timeSlots) {
+		this.timeSlots = timeSlots;
 	}
 
-	public String getServiceName() {
-		return serviceName;
+	public Provider getProvider() {
+		return provider;
 	}
 
-	public void setServiceName(String serviceName) {
-		this.serviceName = serviceName;
+	public void setProvider(Provider provider) {
+		this.provider = provider;
 	}
 
-	public String getServiceDescription() {
-		return serviceDescription;
+	public LocalDate getLocalDate() {
+		return localDate;
 	}
 
-	public void setServiceDescription(String serviceDescription) {
-		this.serviceDescription = serviceDescription;
-	}
-
-	public double getCharges() {
-		return charges;
-	}
-
-	public void setCharges(double charges) {
-		this.charges = charges;
-	}
-
-	public double getServiceDuration() {
-		return serviceDuration;
-	}
-
-	public void setServiceDuration(double serviceDuration) {
-		this.serviceDuration = serviceDuration;
-	}
-
-	public byte[] getServiceImage() {
-		return serviceImage;
-	}
-
-	public void setServiceImage(byte[] serviceImage) {
-		this.serviceImage = serviceImage;
-	}
-
-	public ReservationType getReservationType() {
-		return reservationType;
-	}
-
-	public void setReservationType(ReservationType reservationType) {
-		this.reservationType = reservationType;
-	}
-
-	public LimitDogs getLimitDogs() {
-		return limitDogs;
-	}
-
-	public void setLimitDogs(LimitDogs limitDogs) {
-		this.limitDogs = limitDogs;
+	public void setLocalDate(LocalDate localDate) {
+		this.localDate = localDate;
 	}
 
 	@Override
 	public String toString() {
-		return "Services [serviceId=" + serviceId + ", logo=" + logo + ", serviceName=" + serviceName
-				+ ", serviceDescription=" + serviceDescription + ", charges=" + charges + ", serviceDuration="
-				+ serviceDuration + ", serviceImage=" + Arrays.toString(serviceImage) + ", reservationType="
-				+ reservationType + ", limitDogs=" + limitDogs + "]";
+		return "Services [serviceId=" + serviceId + ", timeSlots=" + timeSlots + ", provider=" + provider
+				+ ", localDate=" + localDate + "]";
 	}
-
 	
 
 }

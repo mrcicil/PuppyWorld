@@ -51,19 +51,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<span class="menu"></span>
 				<div class="top-menu">
 					<ul>
-					<nav class="cl-effect-5">
+						<nav class="cl-effect-5">
 
-						<li><a class="active" a href="Home" th:href="@{/}"><span data-hover="Home">Home</span></a></li> 
-						<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/productList}"><span data-hover="Product">Product</span></a></li>
-						<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/serviceList}"><span data-hover="Service">Service</span></a></li> 
-<!-- 						<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/post}"><span data-hover="Lost&Found">Lost&Found</span></a></li>  -->
-						<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/checkBreed}"><span data-hover="CheckBreed"> Check Breed </span></a></li> 
-						<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/profile}"><span data-hover="Profile">Profile</span></a></li>
-						<li th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" ><a href="#" th:href="@{/registerStaff}"><span data-hover="Register New Staff"> Register New Staff </span></a></li>
-						<li th:if="${#httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/login}"><span data-hover="Login"> Login </span></a></li>
-						<li th:if="${#httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/register}"><span data-hover="Register New User"> Register New User </span></a></li>
-      					<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a href="#" th:href="@{/logout}"><span data-hover="Logout"> Logout </span></a></li>
-					</nav>
+							<li><a class="active" a href="Home" th:href="@{/}"><span
+									data-hover="Home">Home</span></a></li>
+							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
+								href="#" th:href="@{/serviceCreate}"><span
+									data-hover="Service">Service</span></a></li>
+							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
+								href="#" th:href="@{/productList}"><span
+									data-hover="Product">Product</span></a></li>
+							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
+								href="#" th:href="@{/providerList}"><span
+									data-hover="Provider">Provider</span></a></li>
+							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
+								href="#" th:href="@{/postCreate}"><span
+									data-hover="Lost&Found">Lost&Found</span></a></li>
+							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
+								href="#" th:href="@{/checkBreed}"><span
+									data-hover="CheckBreed"> Check Breed </span></a></li>
+							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
+								href="#" th:href="@{/profile}"><span data-hover="Profile">Profile</span></a></li>
+							<li
+								th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"><a
+								href="#" th:href="@{/registerStaff}"><span
+									data-hover="Register New Staff"> Register New Staff </span></a></li>
+							<li th:if="${#httpServletRequest.remoteUser.isEmpty()}"><a
+								href="#" th:href="@{/login}"><span data-hover="Login">
+										Login </span></a></li>
+							<li th:if="${#httpServletRequest.remoteUser.isEmpty()}"><a
+								href="#" th:href="@{/register}"><span
+									data-hover="Register New User"> Register New User </span></a></li>
+							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
+								href="#" th:href="@{/logout}"><span data-hover="Logout">
+										Logout </span></a></li>
+						</nav>
 
 					</ul>
 				</div>

@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Post {
@@ -16,15 +19,25 @@ public class Post {
 	private PostType postType;
 	
 	private String postTitle, postMessage;
+	
 	@Lob
 	private byte[] postImage;
+	
+	@ManyToOne
+	private User user;
 
-	public Post(PostType postType, String postTitle, String postMessage, byte[] postImage) {
+	public Post() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Post(PostType postType, String postTitle, String postMessage, byte[] postImage, User user) {
 		super();
 		this.postType = postType;
 		this.postTitle = postTitle;
 		this.postMessage = postMessage;
 		this.postImage = postImage;
+		this.user=user;
 	}
 
 	public int getPostId() {
@@ -66,6 +79,12 @@ public class Post {
 	public void setPostImage(byte[] postImage) {
 		this.postImage = postImage;
 	}
-
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

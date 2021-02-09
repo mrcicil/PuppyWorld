@@ -10,7 +10,7 @@
 
 
 div.container{
-margin-top: 20px;
+margin-top: 5px;
 margin-bottom: 5px; 
 width: 100%;
 display: block;
@@ -18,14 +18,13 @@ display: block;
 }
 
 div.gallery {
-  
+  margin: 10px;
   border: 1px solid #ccc;
   float: left;
-  width: 100%;
-  height: 150px;
- 
+  width: 350px;
+  height: 350px;
+  position: relative;
   text-align: center;
-  margin-bottom: 5px;
 }
 
 div.gallery:hover {
@@ -34,42 +33,18 @@ div.gallery:hover {
 
 
 
-div.image-in-gallery {
-  width: 20%;
-  height: 150px;
+div.gallery img {
+  width: 350px;
+  height: 235px;
   float: left;
-   position: static;
-display:inline-block;
-  vertical-align: middle;
+  display: block;
 }
 
 div.desc {
-  text-align: left;
-  padding-top: 15px;
-  padding-left: 10px;
-  float: left;
-  position: relative;
-  display:inline-block;
+  padding: 100px;
+  text-align: center;
   vertical-align: middle;
-  width: 80%;
 
-
-}
-
-div.span {
-padding-left: 10%;
-width: 100%;
-height: auto;
-}
-
-img {
-    position: relative;
-    top: 0;
-    bottom: 0;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-     vertical-align: middle;
 }
 
 </style>
@@ -81,60 +56,62 @@ img {
 	<div th:replace="fragments/general.html :: menu"></div>
 	<div class="main" style="height:150%; width:85%;margin-left:auto; margin-right:auto">
 	<div class="container" style="text-align:center">
-		<h1 style="font-weight:bold; padding:15px;">Posts</h1>
+		<h1 style="font-weight:bold; padding:15px;">Post</h1>
 
 		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
-			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() }"
-				style="float:left">
+			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"
+				style="width:35%; margin-left: auto; margin-right: auto; padding: 10px">
 				<button><a style="color:white" href="#" th:href="@{/postCreate}">Create New Post</a></button>
 			</li>
-			<li style="float:right">
-	<!-- 			<h3>Search</h3> -->
-				<div>
-					<form th:action="@{/post/search/}" method="get">
-						<input type="text" name="keyword" id="keyword" th:value="${keyword}"
-							size="50" required /> &nbsp;
-						<button type="submit">Search</button>
-						&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
-					</form>
-				</div>
-				<div>
-			</li>
-		</ul> 
+				<!-- <li style="float: right">
+					<h3>Search</h3>
+					<div >
+						<form th:action="@{/post/search/}" method="get">
+							<input type="text" name="keyword" id="keyword"
+								th:value="${keyword}" size="50" required /> &nbsp;
+							<button type="submit">Search</button>
+							&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
+						</form>
+					</div>
+				</li> -->
+			</ul> 
 
 	
 	
 	
 		<p></p>
 		</div>
-		
-		
-	
-		
-		<div class="container">
-			<div th:each="post : ${postList}">
-			<div class="gallery">
-			<div class="image-in-gallery">
-				<img th:src="@{${'/post/image/'+ post.postId}}" 
-	                style="width:100%" alt=""></div>
-	               
-	                <div class="desc"><b><span th:text=  ${post.postTitle}>Title</span></b><br>
-	              	<span th:text = ${post.postMessage}>Message</span><br>
-	           	<a href="EditPost.html" th:href="@{/postEdit/}+${post.postId}">Edit</a> &emsp;
-					<a href="DeletePost.html" th:href="@{/postDelete/}+${post.postId}"><i class="glyphicon glyphicon-trash"></i></a>&emsp;
-					<a href="ViewPost.html" th:href="@{/viewPostDetails/}+${post.postId}">View Post Details</a>
-					</div>	
-			
-			 
-			
-			</div>
-		
-		</div>
-	</div>
+
+		<table class="table" cellpadding="3" cellspacing="0" style="width: 60%;margin:auto">
+		<tr>
+			<th>NO</th>
+			<th>Owner By</th>
+			<th>Post Title</th>
+			<th>Post Messages</th>
+			<th>Post Type</th>  
+			<th>Edit</th>
+			<th>Delete</th>
+			<th>View</th>
+		</tr>
+			<tbody>
+				<tr th:each="post:${postList}">
+					<td th:text=${post.postId}>NO</td>
+					<td th:text=${user.userName}>Owner By</td>
+					<td th:text=${post.postTitle}>Post Title</td>
+					<td th:text=${post.postMessage}>Post Messages</td>
+					<td th:text=${post.postType}>Post Category</td>
+					<td><a th:href="@{/postEdit/}+${post.postId}">Edit</a></td>
+					<td><a th:href="@{/postDelete/}+${post.postId}">Delete</a></td>
+					<td><a href="ViewPost.html"th:href="@{/viewPostDetails/}+${post.postId}">View</a></td>
+				</tr>
+			</tbody>
+		</table>
 
 
     <br/>
-    <h1 th:if="${#lists.isEmpty(postList)}">Empty List</h1>
+    <div class="container" style="text-align:center">
+    <h1 th:if="${#lists.isEmpty(postList)}" style="font-weight:bold; padding:15px;">Empty List</h1>
+    </div>
 	<div th:replace="fragments/general.html :: footer"></div>
 	
 </body>

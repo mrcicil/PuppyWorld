@@ -14,8 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.ad.domain.Provider;
 import com.example.ad.domain.Services;
-
+import com.example.ad.repo.ProviderRepository;
 import com.example.ad.repo.ServiceRepository;
 
 
@@ -27,25 +28,19 @@ public class ServiceServiceImplementation implements ServiceService {
     
     @Autowired
     private ServiceRepository srepo;
-
  
-
     @Override
     public void saveService(Services service) {
         // TODO Auto-generated method stub
         srepo.save(service);
         
     }
-
- 
-
+    
     @Override
     public ArrayList<Services> findAllServices() {
         // TODO Auto-generated method stub
         return (ArrayList<Services>) srepo.findAll();
     }
-
- 
 
     @Override
     public Services findServiceById(int Id) {
@@ -61,8 +56,6 @@ public class ServiceServiceImplementation implements ServiceService {
         return searchService;
     }
 
- 
-
     @Override
     public void deleteServiceById(int Id) {
         // TODO Auto-generated method stub
@@ -71,8 +64,37 @@ public class ServiceServiceImplementation implements ServiceService {
     }
 
 
+	@Override
+	public ArrayList<Services> findAllServicesByProviderId(int Id) {
+		ArrayList<Services> sList = findAllServices();
+		ArrayList<Services> newList = new ArrayList<Services>();
+		for (Iterator <Services>iterator = sList.iterator(); iterator.hasNext();) {
+			Services services = iterator.next();
+			System.out.println("step 2 " + Id);
+			System.out.println("step 2.1 " + services.getProvider().getProviderId());
+			if(services.getProvider().getProviderId() == Id) {
+				System.out.println("step 2.2");
+				newList.add(services);
+				System.out.println("step 2.3");
+			}
+		}
+		System.out.println("step 3 ");
+		return newList;
+	}
 
 
- 
+
+	@Override
+	public ArrayList<Services> searchServiceByKeyword(String keyword) {
+		if(keyword!=null) {
+			return srepo.searchService(keyword);
+		}
+		return (ArrayList<Services>) srepo.findAll();
+	}
+
+
+
+
+
 
 }

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Service List</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<style>
+
+
+
+div.container{
+margin-top: 5px;
+margin-bottom: 5px; 
+width: 100%;
+display: block;
+
+}
+
+div.gallery {
+  margin: 10px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 350px;
+  height: 350px;
+  position: relative;
+  text-align: center;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+
+
+div.gallery img {
+  width: 350px;
+  height: 235px;
+  float: left;
+  display: block;
+}
+
+div.desc {
+  padding: 100px;
+  text-align: center;
+  vertical-align: middle;
+
+}
+
+</style>
+
+</head>
+
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+	<div class="main" style="height:150%; width:85%;margin-left:auto; margin-right:auto">
+	<div class="container" style="text-align:center">
+		<h1 style="font-weight:bold; padding:15px;">Service</h1>
+
+		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
+			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"
+				style="float:left">
+				<button><a style="color:white" href="#" th:href="@{/providerCreate}">Create New</a></button>
+			</li>
+			<li style="float:right">
+	<!-- 			<h3>Search</h3> -->
+				<div>
+					<form action="" th:action="@{/searchProvider}" method="post">
+					    <fieldset>
+						Filter:<input type="text"  th:value="${keyword}" name="keyword" size="50" required />
+						</fieldset>
+						<br/>
+						<fieldset>
+						<button type="submit">Search</button>
+						</fieldset>
+					</form>
+				</div>
+				<div>
+			</li>
+		</ul> 
+
+	
+	
+	
+		<p></p>
+		</div>
+
+		<div class="container">
+			<div th:each="provider : ${providerList}">
+			<div class="gallery">
+				<img th:src="@{${'/provider/image/'+ provider.providerId}}" 
+	                class="card img-fluid" style="width:100%" alt="">
+	               
+	                <div class="desc"><p><br><span th:text=  ${provider.providerName}>Name</span>
+	                <p>$<span th:text=  "${#numbers.formatDecimal(provider.price, 0, 2)}">Price</span>
+	                <p><a href="EditProduct.html" th:href="@{/providerEdit/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">Edit</a>
+	                <p><a href="serviceList.html" th:href="@{/serviceList/}+${provider.providerId}">View</a>
+	                <p><a href="DeleteProduct.html" th:href="@{/providerDelete/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"><i class="glyphicon glyphicon-trash"></i></a>
+					</div>	
+			
+			 
+			
+			</div>
+			
+			</div>
+		</div>
+	</div>
+	<h1 th:if="${#lists.isEmpty(providerList)}" style="font-weight:bold; padding:15px;" align="center">Empty List</h1>
+
+
+    <br/>
+    
+	<div th:replace="fragments/general.html :: footer"></div>
+	
+</body>
+</html>
+

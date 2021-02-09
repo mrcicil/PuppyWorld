@@ -127,13 +127,14 @@ img {
 			
 	               
 	                <div class="desc"><b><span th:text=  ${post.postTitle}>Title</span></b><br>
-	                <span th:text = "'Owner Name: ' + ${post.user.name}">Owner's Name</span><br>
+
+	                <span th:text = "'Owner Name: ' + ${post.User.name}">Owner's Name</span><br>
 	                 <span th:text = "'Post Type: ' + ${post.PostType}">Post Type</span><br>
 	              	<span th:text = ${post.postMessage}>Message</span><br>
 	              	<div class="icons">
 	           	<a href="EditPost.html" th:href="@{/postEdit/}+${post.postId}">Edit</a> &emsp;
 					<a href="DeletePost.html" th:href="@{/postDelete/}+${post.postId}"><i class="glyphicon glyphicon-trash"></i></a>&emsp;
-					<a href="ViewPost.html" th:href="@{/viewPostDetails/}+${post.postId}">View Post Details</a>
+					
 					</div>
 					<div class="image-in-gallery">
 					<img th:src="@{${'/post/image/'+ post.postId}}" 
