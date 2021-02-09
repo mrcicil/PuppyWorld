@@ -92,7 +92,7 @@ div.desc {
 	                <div class="desc"><p><br><span th:text=  ${provider.providerName}>Name</span>
 	                <p>$<span th:text=  "${#numbers.formatDecimal(provider.price, 0, 2)}">Price</span>
 	                <p><a href="EditProduct.html" th:href="@{/providerEdit/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">Edit</a>
-	                <p><a href="EditProduct.html" th:href="@{/serviceList/}+${provider.providerId}">View</a>
+	                <p><a href="serviceList.html" th:href="@{/serviceList/}+${provider.providerId}">View</a>
 	                <p><a href="DeleteProduct.html" th:href="@{/providerDelete/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"><i class="glyphicon glyphicon-trash"></i></a>
 					</div>	
 			

@@ -13,7 +13,7 @@
 		
 		<form action="#" th:action="@{/productSave}" th:object="${product}"
 			method="post" enctype="multipart/form-data">
-
+			<input type="hidden" th:field="*{productId}">
 			<div class="form-group" style="margin-left:34%; text-align:left">
 				<label style="width: 200px; text-align:left">Name:</label>
 				<input type="text" th:field="*{productName}" >
