@@ -52,18 +52,18 @@ public class PuppyWorldApplication {
 //		      
 //			
 			
-//			 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); String
-//			 encodedPassword1 = passwordEncoder.encode("password");
-//			 
-//			 User u1 = new User(Role.ROLE_ADMIN, "joe", "Joe", encodedPassword1,
-//			 "e0533420@u.nus.edu");
-//			  
-//			 User u2 = new User(Role.ROLE_USER, "ann", "Ann", encodedPassword1,
-//			 "chenyihan@gmail.com");
-//			 
-//			 urepo.save(u1);
-//			  
-//			 urepo.save(u2);
+			 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); String
+			 encodedPassword1 = passwordEncoder.encode("password");
+			 
+			 User u1 = new User(Role.ROLE_ADMIN, "joe", "Joe", encodedPassword1,
+			 "e0533420@u.nus.edu");
+			  
+			 User u2 = new User(Role.ROLE_USER, "ann", "Ann", encodedPassword1,
+			 "chenyihan@gmail.com");
+			 
+			 urepo.save(u1);
+			  
+			 urepo.save(u2);
 			 
 //		      
 //		    
