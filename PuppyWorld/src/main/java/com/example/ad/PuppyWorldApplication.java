@@ -30,7 +30,6 @@ public class PuppyWorldApplication {
 	@Autowired
 	public ProductRepository prepo;
 
-
 	public static void main(String[] args) {
 		SpringApplication.run(PuppyWorldApplication.class, args);
 	}
@@ -39,9 +38,6 @@ public class PuppyWorldApplication {
 	CommandLineRunner commandLineRunner() {
 		return args -> {
 
-
-			
-			
 //			BufferedImage bImage = ImageIO.read(new File("src/main/resources/static/images/1.jpg"));
 //		      ByteArrayOutputStream bos = new ByteArrayOutputStream();
 //		      ImageIO.write(bImage, "jpg", bos );
@@ -55,20 +51,20 @@ public class PuppyWorldApplication {
 //		      //data2 = Base64Utils.encode(data2); 
 //		      
 //			
-//			/*
-//			 * BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); String
-//			 * encodedPassword1 = passwordEncoder.encode("password");
-//			 * 
-//			 * User u1 = new User(Role.ROLE_ADMIN, "joe", "Joe", encodedPassword1,
-//			 * "e0533420@u.nus.edu");
-//			 * 
-//			 * User u2 = new User(Role.ROLE_USER, "ann", "Ann", encodedPassword1,
-//			 * "chenyihan@gmail.com");
-//			 * 
-//			 * urepo.save(u1);
-//			 * 
-//			 * urepo.save(u2);
-//			 */
+			
+//			 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); String
+//			 encodedPassword1 = passwordEncoder.encode("password");
+//			 
+//			 User u1 = new User(Role.ROLE_ADMIN, "joe", "Joe", encodedPassword1,
+//			 "e0533420@u.nus.edu");
+//			  
+//			 User u2 = new User(Role.ROLE_USER, "ann", "Ann", encodedPassword1,
+//			 "chenyihan@gmail.com");
+//			 
+//			 urepo.save(u1);
+//			  
+//			 urepo.save(u2);
+			 
 //		      
 //		    
 //		
@@ -153,13 +149,7 @@ public class PuppyWorldApplication {
 //		      prepo.save(p18);
 //		      prepo.save(p19);
 //		      prepo.save(p20);
-		      
-		      
-
-
-			
 
 		};
 	}
 }
-
