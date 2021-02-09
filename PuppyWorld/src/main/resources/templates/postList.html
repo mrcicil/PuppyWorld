@@ -102,7 +102,7 @@ div.desc {
 					<td th:text=${post.postType}>Post Category</td>
 					<td><a th:href="@{/postEdit/}+${post.postId}">Edit</a></td>
 					<td><a th:href="@{/postDelete/}+${post.postId}">Delete</a></td>
-					<td><a th:href="@{/postDelete/}+${post.postId}">View</a></td>
+					<td><a href="ViewPost.html"th:href="@{/viewPostDetails/}+${post.postId}">View</a></td>
 				</tr>
 			</tbody>
 		</table>

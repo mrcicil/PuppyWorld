@@ -160,4 +160,13 @@ public class PostController {
 		model.addAttribute("post",post);
 		return "postEdit";
 	}
+	
+	@RequestMapping(value = "/viewPostDetails/{id}")
+	public String viewPostDetails(@PathVariable("id") Integer id, Model model) {
+		Post post = poservice.findPostById(id);
+		String encodedString = Base64.getEncoder().encodeToString(post.getPostImage());
+		model.addAttribute("image", encodedString);
+		model.addAttribute("post",post);
+		return "postDetails";
+	}
 }

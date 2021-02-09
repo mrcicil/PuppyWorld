@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Post List</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<style>
+
+
+
+div.container{
+margin-top: 20px;
+margin-bottom: 5px; 
+width: 100%;
+display: block;
+
+}
+
+div.gallery {
+  
+  border: 1px solid #ccc;
+  float: left;
+  width: 100%;
+  height: auto;
+ 
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+
+
+div.image-in-gallery {
+  width: 20%;
+  height: 150px;
+  float: left;
+   position: static;
+display:inline-block;
+  vertical-align: middle;
+}
+
+div.desc {
+  text-align: left;
+  padding-top: 15px;
+  padding-left: 10px;
+  float: left;
+  position: relative;
+  display:block;
+  vertical-align: middle;
+  width: 100%;
+  line-height: 25px;
+    line-height: 45px;
+  margin-bottom: 10px; 
+
+}
+
+div.span {
+padding-left: 10%;
+width: 100%;
+height: auto;
+}
+
+div.icons {
+margin-bottom:10px;
+display:block;
+float: left;
+width: 100%; 
+}
+
+img {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+</style>
+
+</head>
+
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+	<div class="main" style="height:150%; width:85%;margin-left:auto; margin-right:auto">
+	<div class="container" style="text-align:center">
+		<h1 style="font-weight:bold; padding:15px;">Post - <div th:object="${post}"> <b><span th:text=  ${post.postTitle}>Title</span></b> </h1>
+
+		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
+			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() }"
+				style="float:left">
+				<button><a style="color:white" href="#" th:href="@{/commentCreate}">Add New Reply</a></button>
+			</li>
+			<li style="float:right">
+	<!-- 			<h3>Search</h3> -->
+				<div>
+					<form th:action="@{/comment/search/}" method="get">
+						<input type="text" name="keyword" id="keyword" th:value="${keyword}"
+							size="50" required /> &nbsp;
+						<button type="submit">Search</button>
+						&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
+					</form>
+				</div>
+				<div>
+			</li>
+		</ul> 
+
+	
+	
+	
+		<p></p>
+		</div>
+		
+		
+	
+
+		<div class="container">
+			<div th:object="${post}">
+			<div class="gallery">
+			
+	               
+	                <div class="desc"><b><span th:text=  ${post.postTitle}>Title</span></b><br>
+	                <span th:text = "'Owner Name: ' + ${post.User.name}">Owner's Name</span><br>
+	                 <span th:text = "'Post Type: ' + ${post.PostType}">Post Type</span><br>
+	              	<span th:text = ${post.postMessage}>Message</span><br>
+	              	<div class="icons">
+	           	<a href="EditPost.html" th:href="@{/postEdit/}+${post.postId}">Edit</a> &emsp;
+					<a href="DeletePost.html" th:href="@{/postDelete/}+${post.postId}"><i class="glyphicon glyphicon-trash"></i></a>&emsp;
+					
+					</div>
+					<div class="image-in-gallery">
+					<img th:src="@{${'/post/image/'+ post.postId}}" 
+	                style="width:100%" alt=""></div>
+					
+					</div>	
+			
+			 
+			
+			</div>
+		
+		</div>
+	</div>
+
+
+
+
+    <br/>
+    <h1 th:if="${post == null}">Empty List</h1>
+	<div th:replace="fragments/general.html :: footer"></div>
+	
+</body>
+</html>
