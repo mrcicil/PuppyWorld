@@ -43,15 +43,19 @@
 	<h2 style="padding:25px">Your Reservation Details</h2>
 	<table class="table" cellpadding="3" cellspacing="0" style="width: 60%;margin:auto">
 		<tr>
-			<th>Name of service</th>
+			<th>Reservation Time</th>
 			<th>Reservation Date</th>
-			<th>Reservation Time</th>  
+			<th>Provider Name</th>
+			<th>Provider Description</th>  
+			<th>Cancel Booking</th>  
 		</tr>
 		<tbody>
 		<tr th:each="reservation:${reservationList}" >
-			<td th:text=${reservation.reserveDate}>Reservation Date</td>
-			<td th:text=${reservation.reserveTime}>Reservation Time</td>
-			<td th:text=${reservation.noOfDogs}>Number Of Dogs</td>
+			<td th:text=${reservation.timeSlot}>TimeSlot</td>
+			<td th:text=${reservation.service.localDate}>Reservation Time</td>
+			<td th:text=${reservation.service.provider.providerName}>Provider Name</td>
+			<td th:text=${reservation.service.provider.providerDescription}>Provider Description</td>
+			<td><a th:href="@{/reservationDelete/}+${reservation.reservationId}">Cancel</a></td>
 		</tr>
 		</tbody>
 	</table>

@@ -134,6 +134,12 @@ public class ServiceController {
 		model.addAttribute("reservation", reservation);
 		return "reservationCreate";
 	}
+	
+	@RequestMapping(value = "/reservationDelete/{id}")
+	public String deletePost(@PathVariable("id") Integer id) {
+		rservice.deleteReservationById(id);
+		return "redirect:/profile";
+	}
 
 	
 	@RequestMapping(value="/serviceSave",method=RequestMethod.POST)
