@@ -1,54 +1,9 @@
 <!DOCTYPE html>
- <html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="fragments/general.html :: header">
 	<meta charset="UTF-8">
-	<title>Service List</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<title>Product List</title>
 </head>
-<style>
-
-
-
-div.container{
-margin-top: 5px;
-margin-bottom: 5px; 
-width: 100%;
-display: block;
-
-}
-
-div.gallery {
-  margin: 10px;
-  border: 1px solid #ccc;
-  float: left;
-  width: 350px;
-  height: 350px;
-  position: relative;
-  text-align: center;
-}
-
-div.gallery:hover {
-  border: 1px solid #777;
-}
-
-
-
-div.gallery img {
-  width: 350px;
-  height: 235px;
-  float: left;
-  display: block;
-}
-
-div.desc {
-  padding: 100px;
-  text-align: center;
-  vertical-align: middle;
-
-}
-
-</style>
-
 
 <body>
 	<div th:replace="fragments/general.html :: menu"></div>
