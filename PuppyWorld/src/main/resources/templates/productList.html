@@ -18,9 +18,34 @@
 			</li>
 			<li style="float:right">
 	<!-- 			<h3>Search</h3> -->
-				
+
+				<h3>Search</h3>
+	            <div>
+		          <form action="" th:action="@{/searchProduct}" method="post">
+		          <fieldset>
+	        	       <input type="text" th:value="${keyword}" name="keyword" size="50"required>
+	              </fieldset>
+	              <br/>
+	                 <!--  <fieldset>
+			             <input type="text" name="keyword" id="keyword" th:value="${keyword}"
+				          size="50" required /> &nbsp; -->
+			        <fieldset>
+			        <button type="submit">Search</button>
+			       </fieldset>
+			        <br/>
+		          </form>
+
+	            </div>
+
 			</li>
 		</ul> 
+
+
+	
+	
+	
+		<p></p>
+		</div>
 
 
 		<div class="container">
@@ -41,6 +66,7 @@
 			</div>
 		</div>
 
+
 	<h3>Search</h3>
 	<div>
 		<form action="" th:action="@{/searchProduct}" method="post">
@@ -60,6 +86,7 @@
 		</div>
 		</div>
 	</div>
+
 	<h1 th:if="${#lists.isEmpty(productList)}" style="font-weight:bold; padding:15px;" align="center">Empty List</h1>
 
     
