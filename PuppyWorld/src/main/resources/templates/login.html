@@ -73,7 +73,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- header-section-ends -->
 	<!-- content-section-starts -->
 		<div class="main">
-			<div class="container">
+			<div class="container" style="text-align: center; margin-bottom: 20px">
 					<form th:action="@{/login}" method="post">
 				        <fieldset>
 				        	<legend>Please Login</legend>
@@ -84,21 +84,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				        		You have been logged out.
 				        	</div>
 				       
-				       		<label for="usernme">Username</label>
+				       		<div class="form-group" style="margin-left:35%; text-align:left">
+								<label style="width: 120px; text-align:left">Username:</label>
+								<input type="text" id="username" name="username"/>
+								</div>
+								
+							<div class="form-group" style="margin-left:35%; text-align:left">
+								<label style="width: 120px; text-align:left">Password:</label>
+								<input type="password" id="password" name="password"/>
+								</div>
+				       		
+				       		<!--  <label for="usernme">Username</label>
 				       		<input type="text" id="username" name="username"/>
 				       		<label for="password">Password</label>
-				       		<input type="password" id="password" name="password"/>
-				       		<br/><br/>
-				       		<div class="form-actions">
+				       		<input type="password" id="password" name="password"/>-->
+				       		<br/>
+				       		<div class="form-actions" style="text-align: center">
 				       			<button type="submit">Login</button>
-				       		</div>
-				        </fieldset>
+				       		</div> 
 				        
 				        </form>
-				     <br/><br/>
-					<button>
+				     <br/>
+				     <div class="form-actions" style="text-align: center; size: 15px";>
+					<button style="font-size: 10px; background: rgb(128, 128, 128)">
 						<a style="color:white" href="ForgetPassword.html" th:href="@{/forgetPassword}">Forget Password</a>
-					</button>	
+					</button>	 
+					</fieldset>
 			</div>
 		</div>
 	<!-- content-section-ends -->
