@@ -16,16 +16,16 @@
 				<button><a style="color:white" href="#" th:href="@{/providerCreate}">Create New</a></button>
 			</li>
 			<li style="float:right">
-	<!-- 			<h3>Search</h3> -->
+	
 				<div>
 					<form action="" th:action="@{/searchProvider}" method="post">
 					    <fieldset>
+					    <label style="width: 80px; text-align:left; size:50px">Search:</label>
 						<input type="text"  th:value="${keyword}" name="keyword" size="50" required />
-						</fieldset>
-						<br/>
-						<fieldset>
 						<button type="submit">Search</button>
 						</fieldset>
+						<br/>
+						
 					</form>
 				</div>
 				<div>
