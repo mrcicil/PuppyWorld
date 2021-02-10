@@ -31,10 +31,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Post;
+import com.example.ad.domain.PostComment;
 import com.example.ad.domain.Product;
 import com.example.ad.domain.Services;
 import com.example.ad.domain.User;
 import com.example.ad.repo.ServiceRepository;
+import com.example.ad.service.PostCommentService;
 import com.example.ad.service.PostService;
 import com.example.ad.service.PostServiceImplementation;
 import com.example.ad.service.ProductService;
@@ -48,6 +50,9 @@ import com.example.ad.service.UserServiceImplementation;
 public class PostController {
 	@Autowired
 	private PostService poservice;
+	
+	@Autowired
+	private PostCommentService pcservice;
 	
 	@Autowired
 	public void setPoService(PostServiceImplementation poServiceImpl) {
@@ -125,7 +130,6 @@ public class PostController {
 		model.addAttribute("postList", poservice.findAllPosts());
 		
 		int postId= 0;
-		
 		model.addAttribute("postId", postId);
 		
 		User user = uservice.findUserByUserName(request.getRemoteUser());
@@ -162,11 +166,18 @@ public class PostController {
 	}
 	
 	@RequestMapping(value = "/viewPostDetails/{id}")
-	public String viewPostDetails(@PathVariable("id") Integer id, Model model) {
+	public String viewPostDetails(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
 		Post post = poservice.findPostById(id);
 		String encodedString = Base64.getEncoder().encodeToString(post.getPostImage());
+		List<PostComment> postcommentlist = pcservice.findPostCommentsbyPostId(id);
+		PostComment postcomment = new PostComment();
+		postcomment.setPost(post);
 		model.addAttribute("image", encodedString);
 		model.addAttribute("post",post);
+		model.addAttribute("postcommentlist", postcommentlist);
+		model.addAttribute("postcomment", postcomment);
+		User user = uservice.findUserByUserName(request.getRemoteUser());
+		model.addAttribute("user", user);
 		return "postDetails";
 	}
 }

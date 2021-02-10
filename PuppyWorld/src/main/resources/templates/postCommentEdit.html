@@ -131,7 +131,7 @@ img {
 	<div th:replace="fragments/general.html :: menu"></div>
 	<div class="main" style="height:150%; width:85%;margin-left:auto; margin-right:auto">
 	<div class="container" style="text-align:center">
-		<h1 style="font-weight:bold; padding:15px;">Post - <div th:object="${post}"> <b><span th:text=  ${post.postTitle}>Title</span></b> </h1>
+		<h1 style="font-weight:bold; padding:15px;">Edit Post Comment for - <div th:object="${post}"> <b><span th:text=  ${post.postTitle}>Title</span></b> </h1>
 
 		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
 			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() }"
@@ -209,7 +209,7 @@ img {
 					<div class="textinputsection">
 					<form action="#" th:object="${postcomment}" th:action="@{/postCommentSave}" method="post" style="float: right;">
 					<fieldset>
-					Add a Comment <input type="text" th:field="*{commentMessage}"> <input type="hidden" th:field="*{post}" style="float: right"> 
+					Edit Comment here <input type="text" th:field="*{commentMessage}"> <input type="hidden" th:field="*{commentId}" style="float: right"> <input type="hidden" th:field="*{post}" style="float: right"> 
 					<p th:if="${#fields.hasErrors('commentMessage')}" th:errors="*{commentMessage}">
 					</p>
 					</fieldset>

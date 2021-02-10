@@ -1,11 +1,17 @@
 package com.example.ad.domain;
 
+import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Post {
@@ -23,9 +29,9 @@ public class Post {
 	@ManyToOne
 	private User user;
 	
-
-
-
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="post")
+	private List<PostComment> postcommentlist;
+	
 	public Post(PostType postType, String postTitle, String postMessage, byte[] postImage, User user) {
 		super();
 		this.postType = postType;
@@ -86,6 +92,22 @@ public class Post {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	@Override
+	public String toString() {
+		return "Post [postId=" + postId + ", postType=" + postType + ", postTitle=" + postTitle + ", postMessage="
+				+ postMessage + ", user=" + user + "]";
+	}
+
+	public List<PostComment> getPostcommentlist() {
+		return postcommentlist;
+	}
+
+	public void setPostcommentlist(List<PostComment> postcommentlist) {
+		this.postcommentlist = postcommentlist;
+	}
+
+	
 
 	
 	
