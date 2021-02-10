@@ -28,10 +28,10 @@
 	<table class="table" cellpadding="3" cellspacing="0" style="width: 60%;margin:auto">
 	<thead style="display:table-header-group">
 	<tr>
-     	<td style="font-weight: bold;">Date</td>
-     	<td style="font-weight: bold;">Time Slot</td>
-     	<td th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="font-weight: bold;">Delete</td>
-     	<td style="font-weight: bold;">Reserve</td>
+     	<th style="text-align:center">Date</th>
+     	<th style="text-align:center">Time Slot</th>
+     	<th th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="text-align:center">Delete</th>
+     	<th style="text-align:center">Reserve</th>
    </tr>
      </thead>
      <tbody>
