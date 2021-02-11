@@ -31,12 +31,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Post;
-import com.example.ad.domain.PostComment;
 import com.example.ad.domain.Product;
 import com.example.ad.domain.Services;
 import com.example.ad.domain.User;
 import com.example.ad.repo.ServiceRepository;
-import com.example.ad.service.PostCommentService;
 import com.example.ad.service.PostService;
 import com.example.ad.service.PostServiceImplementation;
 import com.example.ad.service.ProductService;
@@ -181,4 +179,6 @@ public class PostController {
         model.addAttribute("user", user);
         return "postDetails";
     }
+	
+
 }

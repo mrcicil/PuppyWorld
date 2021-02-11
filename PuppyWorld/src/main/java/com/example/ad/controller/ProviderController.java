@@ -54,6 +54,25 @@ public class ProviderController {
 		this.uservice = uServiceImpl;
 	}
 	
+	/*
+	 * @RequestMapping(value="/providerList") public String list1(Model model) {
+	 * model.addAttribute("providerList",pvservice.findAllProviders()); String
+	 * keyword="";
+	 * 
+	 * model.addAttribute("keyword",keyword); return "providerList"; }
+	 */
+	
+	@RequestMapping(value="/searchProvider")
+	public String searchProvider(Model model, @RequestParam("keyword") String keyword) {
+		
+		ArrayList<Provider> searchProvider=pvservice.searchProviderByKeyword(keyword);
+		model.addAttribute("providerList",searchProvider);
+		model.addAttribute("keyword",keyword);
+		return "providerList";
+	}
+	
+	
+	
 	@RequestMapping(value="/providerList") // ???
 	public String list(Model model, HttpServletRequest request)
 	{
@@ -67,6 +86,9 @@ public class ProviderController {
 		
 		User user = uservice.findUserByUserName(request.getRemoteUser());
 		model.addAttribute("user", user);
+		
+		String keyword="";
+		model.addAttribute("keyword",keyword);
 		
 		return "providerList";
 	}

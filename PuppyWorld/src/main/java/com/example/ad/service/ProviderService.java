@@ -10,5 +10,7 @@ public interface ProviderService {
 	public ArrayList<Provider> findAllProviders();
 	public Provider findProviderById(int Id);
 	public void deleteProviderById(int Id);
+	
+	public ArrayList<Provider> searchProviderByKeyword(String keyword);
 
 }

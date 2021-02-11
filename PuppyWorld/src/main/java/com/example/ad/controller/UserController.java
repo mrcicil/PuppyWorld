@@ -1,6 +1,7 @@
 package com.example.ad.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.ad.domain.User;
+import com.example.ad.domain.Reservation;
 import com.example.ad.domain.Role;
 import com.example.ad.service.EmailService;
 import com.example.ad.service.ReservationService;
@@ -156,8 +158,10 @@ public class UserController {
 	
 	@RequestMapping (value = "/profile")
 	public String profile (Model model, HttpServletRequest request) {
-		model.addAttribute("reservationList", rservice.findAllReservations());
 		User currentUser = (User) uservice.findUserByUserName(request.getRemoteUser());
+		int userId = currentUser.getUserId();
+		ArrayList<Reservation> rList = rservice.findAllReservationsByUserId(userId);
+		model.addAttribute("reservationList", rList);
 		model.addAttribute("userProfile", currentUser);
 		return "profile";
 	}

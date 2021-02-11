@@ -1,62 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<title>Service List</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-<style>
-
-
-
-div.container{
-margin-top: 5px;
-margin-bottom: 5px; 
-width: 100%;
-display: block;
-
-}
-
-div.gallery {
-  margin: 10px;
-  border: 1px solid #ccc;
-  float: left;
-  width: 350px;
-  height: 350px;
-  position: relative;
-  text-align: center;
-}
-
-div.gallery:hover {
-  border: 1px solid #777;
-}
-
-
-
-div.gallery img {
-  width: 350px;
-  height: 235px;
-  float: left;
-  display: block;
-}
-
-div.desc {
-  padding: 100px;
-  text-align: center;
-  vertical-align: middle;
-
-}
-
-</style>
-
+<head th:insert="fragments/general.html :: header">
+	<meta charset="UTF-8">
+	<title>Service List</title>
 </head>
-
 <body>
-	<header th:insert="fragments/general.html :: header"> </header>
-	<div th:replace="fragments/general.html :: menu"></div>
-	<div class="main" style="height:150%; width:85%;margin-left:auto; margin-right:auto">
-	<div class="container" style="text-align:center">
-		<h1 style="font-weight:bold; padding:15px;">Service</h1>
+	<div th:insert="fragments/general.html :: menu"></div>
+	<div class="main"> <!--  style="height:150%; width:85%;margin-left:auto; margin-right:auto"-->
+	<div class="container" style="text-align: center; margin-bottom: 20px">
+		<h1 style="font-weight:bold; padding:10px;">Service</h1>
 
 		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
 			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"
@@ -64,21 +16,22 @@ div.desc {
 				<button><a style="color:white" href="#" th:href="@{/providerCreate}">Create New</a></button>
 			</li>
 			<li style="float:right">
-	<!-- 			<h3>Search</h3> -->
+	
 				<div>
-					<form th:action="@{/provider/search/}" method="get">
-						<input type="text" name="keyword" id="keyword" th:value="${keyword}"
-							size="50" required /> &nbsp;
+					<form action="" th:action="@{/searchProvider}" method="post">
+					    <fieldset>
+					    <label style="width: 80px; text-align:left; size:50px">Search:</label>
+						<input type="text"  th:value="${keyword}" name="keyword" size="50" required />
 						<button type="submit">Search</button>
-						&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
+						</fieldset>
+						<br/>
+						
 					</form>
 				</div>
 				<div>
 			</li>
 		</ul> 
 
-	
-	
 	
 		<p></p>
 		</div>
@@ -87,12 +40,12 @@ div.desc {
 			<div th:each="provider : ${providerList}">
 			<div class="gallery">
 				<img th:src="@{${'/provider/image/'+ provider.providerId}}" 
-	                class="card img-fluid" style="width:100%" alt="">
+	                class="card img-fluid" alt="" width="200" height="200" style="margin-left:500px">
 	               
-	                <div class="desc"><p><br><span th:text=  ${provider.providerName}>Name</span>
+	                <div class="desc" style="margin-left:50px; text-align:center" ><p><br><span th:text=  ${provider.providerName}>Name</span>
 	                <p>$<span th:text=  "${#numbers.formatDecimal(provider.price, 0, 2)}">Price</span>
 	                <p><a href="EditProduct.html" th:href="@{/providerEdit/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">Edit</a>
-	                <p><a href="EditProduct.html" th:href="@{/serviceList/}+${provider.providerId}">View</a>
+	                <p><a href="serviceList.html" th:href="@{/serviceList/}+${provider.providerId}">View</a>
 	                <p><a href="DeleteProduct.html" th:href="@{/providerDelete/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"><i class="glyphicon glyphicon-trash"></i></a>
 					</div>	
 			
@@ -105,11 +58,34 @@ div.desc {
 	</div>
 	<h1 th:if="${#lists.isEmpty(providerList)}" style="font-weight:bold; padding:15px;" align="center">Empty List</h1>
 
-
-    <br/>
     
 	<div th:replace="fragments/general.html :: footer"></div>
 	
 </body>
-</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+  
+  $(document).ready(function() {
+	    $('#upload').bind("click",function() 
+	    { 
+	        var imgVal = $('#fileImage').val(); 
+	        if(imgVal=='') 
+	        { 
+	            alert("empty input file"); 
+	            return false; 
 
+	        } 
+	        return true; 
+
+	    }); 
+	});
+
+</script>
+</html>

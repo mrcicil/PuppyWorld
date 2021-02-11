@@ -51,4 +51,13 @@ public class ProviderServiceImplementation implements ProviderService {
 		pvrepo.delete(searchProvider);
 	}
 
+	@Override
+	public ArrayList<Provider> searchProviderByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		if(keyword!=null) {
+			return pvrepo.searchProvider(keyword);
+		}
+		return (ArrayList<Provider>) pvrepo.findAll();
+	}
+
 }

@@ -50,4 +50,18 @@ public class ReservationServiceImplementation implements ReservationService {
 		rrepo.delete(searchReservation);
 	}
 
+	@Override
+	public ArrayList<Reservation> findAllReservationsByUserId(int userId) {
+		ArrayList<Reservation> rList = findAllReservations(); 
+		ArrayList<Reservation> outputList = new ArrayList<Reservation>();
+		for (Iterator <Reservation> iterator = rList.iterator(); iterator.hasNext();) {
+			Reservation reservation = iterator.next();
+			if(reservation.getUser().getUserId() == userId) {
+				outputList.add(reservation);
+			}
+		}
+		// TODO Auto-generated method stub
+		return outputList;
+	}
+	
 }

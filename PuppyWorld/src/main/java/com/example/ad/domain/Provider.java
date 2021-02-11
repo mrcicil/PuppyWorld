@@ -1,5 +1,6 @@
 package com.example.ad.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,10 @@ public class Provider {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int providerId;
 	
-	private String providerName, providerDescription;
+	private String providerName; 
+	
+	@Column(columnDefinition = "TEXT")
+	private String providerDescription;
 	
 	private float price;
 	
