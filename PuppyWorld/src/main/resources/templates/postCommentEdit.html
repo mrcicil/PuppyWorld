@@ -207,9 +207,9 @@ img {
 					</div>
 					
 					<div class="textinputsection">
-					<form action="#" th:object="${postcomment}" th:action="@{/postCommentSave}" method="post" style="float: right;">
+					<form action="#" th:object="${postcomment}" th:action="@{/postCommentEditSave}" method="post" style="float: right;">
 					<fieldset>
-					Edit Comment here <input type="text" th:field="*{commentMessage}"> <input type="hidden" th:field="*{commentId}" style="float: right"> <input type="hidden" th:field="*{post}" style="float: right"> 
+					Edit Comment here <input type="text" th:field="*{commentMessage}"> <input type="hidden" th:field="*{commentId}" style="float: right"> <input type="hidden" th:field="*{user}" style="float: right"><input type="hidden" th:field="*{commentDateTime}" style="float: right"> <input type="hidden" th:field="*{post}" style="float: right"> 
 					<p th:if="${#fields.hasErrors('commentMessage')}" th:errors="*{commentMessage}">
 					</p>
 					</fieldset>
