@@ -17,8 +17,8 @@
 
     <div>
 
-	<button style="margin-left:75%;color:white" th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
-	<a th:href="@{/serviceCreate/}+${provider.providerId}">Create New</a>
+	<button style="margin-left:75%;" th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
+	<a th:href="@{/serviceCreate/}+${provider.providerId}" style="color:white">Create New</a>
 	</button>
 	</div>
 	<div>&nbsp;</div>
@@ -53,7 +53,7 @@
 
 	</div>
     <br/>
-	<!-- <div th:replace="fragments/general.html :: footer"></div> -->
+	<div th:replace="fragments/general.html :: footer"></div>
 	
 </body>
 <script>
