@@ -171,7 +171,7 @@ public class PostController {
         Post post = poservice.findPostById(id);
         String encodedString = Base64.getEncoder().encodeToString(post.getPostImage());
         List<PostComment> postcommentlist = pcservice.findPostCommentsbyPostId(id);
-        PostComment postcomment = new PostComment(encodedString, null);
+        PostComment postcomment = new PostComment();
         postcomment.setPost(post);
         model.addAttribute("image", encodedString);
         model.addAttribute("post",post);
