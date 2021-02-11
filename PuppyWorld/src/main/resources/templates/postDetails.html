@@ -22,7 +22,7 @@ div.gallery {
   border: 1px solid #ccc;
   float: left;
   width: 100%;
-  height: auto;
+  height: 500px;
  
   text-align: center;
   margin-bottom: 5px;
@@ -32,12 +32,24 @@ div.gallery:hover {
   border: 1px solid #777;
 }
 
+div.commentscontainer {
+  width: 55%;
+  height: 300px;
+float: right;
+display: inline-block;
+vertical-align: middle;
+overflow-y: auto;
+overflow-x: hidden;
+margin-top:25px;
+margin-bottom: 50px;
+}
 
 
 div.image-in-gallery {
-  width: 20%;
-  height: 150px;
+  width: 40%;
+  height: auto;
   float: left;
+  padding-left: 10px;
    position: static;
 display:inline-block;
   vertical-align: middle;
@@ -49,11 +61,11 @@ div.desc {
   padding-left: 10px;
   float: left;
   position: relative;
-  display:block;
+  display:inline-block;
   vertical-align: middle;
   width: 100%;
+  height: auto;
   line-height: 25px;
-    line-height: 45px;
   margin-bottom: 10px; 
 
 }
@@ -62,6 +74,15 @@ div.span {
 padding-left: 10%;
 width: 100%;
 height: auto;
+text-align: left;
+}
+
+div.commenticons {
+padding-left: 10%;
+width: 20%
+height: auto;
+text-align: right;
+float: right;
 }
 
 div.icons {
@@ -70,6 +91,25 @@ display:block;
 float: left;
 width: 100%; 
 }
+
+div.comment{
+margin-bottom: 50px;
+text-align: left;
+float: left;
+width: 80%;
+display: block;
+
+}
+
+div.textinputsection{
+width: 100%;
+display: block;
+height: 75px;
+float: left;
+vertical-align: bottom;
+text-align: left;
+}
+
 
 img {
     position: relative;
@@ -96,7 +136,7 @@ img {
 		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
 			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() }"
 				style="float:left">
-				<button><a style="color:white" href="#" th:href="@{/commentCreate}">Add New Reply</a></button>
+	<!--  		<button><a style="color:white" href="#" th:href="@{/commentCreate}">Add New Reply</a></button> -->	
 			</li>
 			<li style="float:right">
 	<!-- 			<h3>Search</h3> -->
@@ -119,6 +159,15 @@ img {
 		</div>
 		
 		
+		
+
+			
+			
+	               
+	              
+	           
+				
+					
 	
 
 		<div class="container">
@@ -126,21 +175,54 @@ img {
 			<div class="gallery">
 			
 	               
-	                <div class="desc"><b><span th:text=  ${post.postTitle}>Title</span></b><br>
+	                
+					<div class="image-in-gallery">
+					<div class="desc"><b><span th:text=  ${post.postTitle}>Title</span></b><br>
 	                <span th:text = "'Owner Name: ' + ${post.User.name}">Owner's Name</span><br>
-	                 <span th:text = "'Post Type: ' + ${post.PostType}">Post Type</span><br>
-	              	<span th:text = ${post.postMessage}>Message</span><br>
-	              	<div class="icons">
+	                 <span th:text = "'Post Type: ' + ${post.PostType}">Post Type</span><br><br>
+	              	<span th:text = ${post.postMessage}>Message</span><br><br><br>
+	              	<div class="icons" th:if="${post.user.userId} == ${user.userId}">
 	           	<a href="EditPost.html" th:href="@{/postEdit/}+${post.postId}">Edit</a> &emsp;
 					<a href="DeletePost.html" th:href="@{/postDelete/}+${post.postId}"><i class="glyphicon glyphicon-trash"></i></a>&emsp;
 					
 					</div>
-					<div class="image-in-gallery">
 					<img th:src="@{${'/post/image/'+ post.postId}}" 
 	                style="width:100%" alt=""></div>
 					
 					</div>	
-			
+					
+					<div class="commentscontainer">
+					
+					<span th:if="${postcommentlist == null}">There are no comments.</span>
+					<div class = "comment" th:each="comment : ${postcommentlist}">
+					<b><span th:text = "${comment.user.name}">Commenter's Name</span> </b> &emsp; <br>
+					<span th:text = "${comment.commentMessage}">Comment</span> <br>
+					<span th:text = "'on  ' + ${#temporals.format(comment.commentDateTime, 'dd-MM-yyyy HH:mm')}">Date</span>
+					<div class="commenticons" th:if="${comment.user.userId} == ${user.userId}">&emsp;
+					<a href="EditComment.html" th:href="@{/postCommentEdit/}+${comment.commentId}">Edit</a> 
+					<a href="DeleteComment.html" th:href="@{/postCommentDelete/}+${comment.commentId}"><i class="glyphicon glyphicon-trash"></i></a>&emsp; </div>
+					</div>
+					
+				
+					</div>
+					
+					<div class="textinputsection">
+					<form action="#" th:object="${postcomment}" th:action="@{/postCommentSave}" method="post" style="float: right;">
+					<fieldset>
+					Add a Comment <input type="text" th:field="*{commentMessage}"> <input type="hidden" th:field="*{post}" style="float: right"> 
+					<p th:if="${#fields.hasErrors('commentMessage')}" th:errors="*{commentMessage}">
+					</p>
+					</fieldset>
+					<fieldset>
+					<input type="submit" style="float: right"value="Save"/>
+					&nbsp; &nbsp; 	
+					<input type="reset" style="float: right"value="Reset"/>
+					</fieldset>
+					</form>
+					
+	  				</div>
+					
+	
 			 
 			
 			</div>
@@ -152,8 +234,9 @@ img {
 
 
     <br/>
-    <h1 th:if="${post == null}">Empty List</h1>
+    <h1 th:if="${post == null}">There is no post.</h1>
 	<div th:replace="fragments/general.html :: footer"></div>
 	
 </body>
 </html>
+
