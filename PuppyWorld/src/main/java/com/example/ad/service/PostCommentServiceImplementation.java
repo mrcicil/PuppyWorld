@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.ad.domain.PostComment;
 import com.example.ad.repo.PostCommentRepository;
 
+@Service
+@Transactional
 public class PostCommentServiceImplementation implements PostCommentService {
 	
 	@Autowired
@@ -42,11 +44,19 @@ public class PostCommentServiceImplementation implements PostCommentService {
 	}
 
 	@Override
-	public void deleteEventById(int Id) {
-		// TODO Auto-generated method stub
-		PostComment searchPostComment = findPostCommentById(Id);
+	public void deletePostCommentById(int commentId) {
+		PostComment searchPostComment = findPostCommentById(commentId);
 		pcrepo.delete(searchPostComment);
 		
+	}
+
+	@Override
+	public ArrayList<PostComment> findPostCommentsbyPostId(int postid) {
+		
+		ArrayList<PostComment> pclist = new ArrayList<PostComment>();
+		pclist = pcrepo.findPostCommentsbyPostId(postid);
+		
+		return pclist;
 	}
 
 }

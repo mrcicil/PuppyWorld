@@ -1,6 +1,10 @@
 package com.example.ad.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +30,9 @@ public class Post {
 	@ManyToOne
 	private User user;
 
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="post")
+	private List<PostComment> postcommentlist;
+	
 	public Post() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -86,5 +93,19 @@ public class Post {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@Override
+	public String toString() {
+		return "Post [postId=" + postId + ", postType=" + postType + ", postTitle=" + postTitle + ", postMessage="
+				+ postMessage + ", user=" + user + "]";
+	}
+
+	public List<PostComment> getPostcommentlist() {
+		return postcommentlist;
+	}
+
+	public void setPostcommentlist(List<PostComment> postcommentlist) {
+		this.postcommentlist = postcommentlist;
 	}
 }
