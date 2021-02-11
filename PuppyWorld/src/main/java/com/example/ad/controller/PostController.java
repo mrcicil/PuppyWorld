@@ -167,7 +167,7 @@ public class PostController {
 	}
 	
 	@RequestMapping(value = "/viewPostDetails/{id}")
-    public String viewPostDetails(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+    public String viewPostDetails(@PathVariable("id") int id, Model model, HttpServletRequest request) {
         Post post = poservice.findPostById(id);
         String encodedString = Base64.getEncoder().encodeToString(post.getPostImage());
         List<PostComment> postcommentlist = pcservice.findPostCommentsbyPostId(id);

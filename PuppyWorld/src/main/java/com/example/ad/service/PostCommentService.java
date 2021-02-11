@@ -9,6 +9,7 @@ public interface PostCommentService {
 	public void savePostComment(PostComment postComment);
 	public ArrayList<PostComment> findAllPostComments();
 	public PostComment findPostCommentById(int Id);
-	public void deleteEventById(int Id);
+	ArrayList<PostComment> findPostCommentsbyPostId(int postid);
+	void deletePostCommentById(int commentId);
 
 }
