@@ -33,6 +33,7 @@ import com.example.ad.domain.Product;
 import com.example.ad.domain.Provider;
 import com.example.ad.domain.Reservation;
 import com.example.ad.domain.Services;
+import com.example.ad.domain.Status;
 import com.example.ad.domain.User;
 import com.example.ad.repo.ServiceRepository;
 import com.example.ad.service.EmailService;
@@ -120,6 +121,7 @@ public class ServiceController {
 		Services service = sservice.findServiceById(reservation.getService().getServiceId());
 		User user = uservice.findUserByUserName(request.getRemoteUser());
 		reservation.setUser(user);
+		reservation.setStatus(Status.ACTIVE);
 		rservice.saveReservation(reservation);
 		return "reservationSuccess";
 	}
@@ -137,7 +139,9 @@ public class ServiceController {
 	
 	@RequestMapping(value = "/reservationDelete/{id}")
 	public String deletePost(@PathVariable("id") Integer id) {
-		rservice.deleteReservationById(id);
+		Reservation reservation = rservice.findReservationById(id);
+		reservation.setStatus(Status.INACTIVE);
+		rservice.saveReservation(reservation);
 		return "redirect:/profile";
 	}
 
