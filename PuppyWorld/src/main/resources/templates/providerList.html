@@ -16,16 +16,16 @@
 				<button><a style="color:white" href="#" th:href="@{/providerCreate}">Create New</a></button>
 			</li>
 			<li style="float:right">
-	<!-- 			<h3>Search</h3> -->
+	
 				<div>
 					<form action="" th:action="@{/searchProvider}" method="post">
 					    <fieldset>
+					    <label style="width: 80px; text-align:left; size:50px">Search:</label>
 						<input type="text"  th:value="${keyword}" name="keyword" size="50" required />
-						</fieldset>
-						<br/>
-						<fieldset>
 						<button type="submit">Search</button>
 						</fieldset>
+						<br/>
+						
 					</form>
 				</div>
 				<div>
@@ -40,9 +40,9 @@
 			<div th:each="provider : ${providerList}">
 			<div class="gallery">
 				<img th:src="@{${'/provider/image/'+ provider.providerId}}" 
-	                class="card img-fluid" style="width:100%" alt="">
+	                class="card img-fluid" alt="" width="200" height="200" style="margin-left:500px">
 	               
-	                <div class="desc"><p><br><span th:text=  ${provider.providerName}>Name</span>
+	                <div class="desc" style="margin-left:50px; text-align:center" ><p><br><span th:text=  ${provider.providerName}>Name</span>
 	                <p>$<span th:text=  "${#numbers.formatDecimal(provider.price, 0, 2)}">Price</span>
 	                <p><a href="EditProduct.html" th:href="@{/providerEdit/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">Edit</a>
 	                <p><a href="serviceList.html" th:href="@{/serviceList/}+${provider.providerId}">View</a>

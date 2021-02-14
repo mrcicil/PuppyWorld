@@ -16,63 +16,39 @@
 
 
     <div>
-	<h1>Service</h1>
 
-	<!-- Add Hyperlink -->
-
-	<button style="margin-left:75%">
-	<a th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:white" th:href="@{/serviceCreate/}+${provider.providerId}">Create New</a>
+	<button style="margin-left:75%;" th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
+	<a th:href="@{/serviceCreate/}+${provider.providerId}" style="color:white">Create New</a>
 	</button>
-
-	
 	</div>
-
-	
 	<div>&nbsp;</div>
-	
-	<div>
-	    <form action="" th:action="@{/searchService}" method="post">
-	        <fieldset>
-	        	Filter:<input type="text" th:value="${keyword}" name="keyword" required>
-	        </fieldset>
-	        <br/>
-	        <fieldset>
-	        	<button type="submit">Search</button>
-	        </fieldset>
-	        <br/>
-	    </form>
-	</div>
-	
 	<div>&nbsp;</div>
-
-
     <div>
 
-	<table class="table">
-		<tr>
-		<tbody>
-     <th>Date</th>
-     <th>Time Slot</th>
-     <th>Delete</th>
-     <th>Reserve</th>
-        </tr>
-        </tbody>
-	<tbody>
-   	<tr th:each="service:${serviceList}">
+	<table class="table" cellpadding="3" cellspacing="0" style="width: 60%;margin:auto">
+	<thead style="display:table-header-group">
+	<tr>
+     	<th style="text-align:center">Date</th>
+     	<th style="text-align:center">Time Slot</th>
+     	<th th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="text-align:center">Delete</th>
+     	<th style="text-align:center">Reserve</th>
+   </tr>
+     </thead>
+     <tbody>
+   <tr th:each="service:${serviceList}" >
      <td th:text="${service.localDate}">Date</td>
      <td>
-     <select>
-     	<option th:each="product:${service.timeSlots}"
+     	<select>
+     		<option th:each="product:${service.timeSlots}"
 					th:text="${product}"></option>
 		</select>
      </td>
-	 <td> <a th:href="@{/serviceDelete/}+${service.serviceId}">Delete</a></td>
+	 <td th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"> <a th:href="@{/serviceDelete/}+${service.serviceId}">Delete</a></td>
 	 <td> <a th:href="@{/reservationCreate/}+${service.serviceId}">Choose</a></td>
-    </tr>
+   </tr>
    </tbody>
 	</table>
-
-	
+	</div>
 	</div>
 
 	</div>
@@ -80,4 +56,7 @@
 	<div th:replace="fragments/general.html :: footer"></div>
 	
 </body>
+<script>
+
+</script>
 </html>
