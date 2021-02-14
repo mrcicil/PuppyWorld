@@ -119,6 +119,15 @@ public class ServiceController {
 	@RequestMapping(value = "/reservationSave")
 	public String saveReservation(@ModelAttribute("reservation")Reservation reservation, HttpServletRequest request) {
 		Services service = sservice.findServiceById(reservation.getService().getServiceId());
+		ArrayList<String> tSlot = service.getTimeSlots();
+		String reserveTime = reservation.getTimeSlot();
+		for (int i = 0; i<tSlot.size(); i++) {
+			if(tSlot.get(i).equalsIgnoreCase(reserveTime)) {
+				tSlot.remove(i);
+			}
+		}
+		service.setTimeSlots(tSlot);
+		sservice.saveService(service);
 		User user = uservice.findUserByUserName(request.getRemoteUser());
 		reservation.setUser(user);
 		reservation.setStatus(Status.ACTIVE);
