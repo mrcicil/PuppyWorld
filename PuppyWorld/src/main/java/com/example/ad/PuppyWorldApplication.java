@@ -56,7 +56,7 @@ public class PuppyWorldApplication {
 	@Bean
 	CommandLineRunner commandLineRunner() {
 		return args -> {
-
+/*
 //			----- Users ------
 
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -68,7 +68,6 @@ public class PuppyWorldApplication {
 			User u2 = new User(Role.ROLE_ADMIN, "ann", "Ann", encodedPassword1, "chenyihan@gmail.com");
 
 			urepo.save(u1);
-
 			urepo.save(u2);
 			
 			User u3 = new User(Role.ROLE_USER, "jay", "Jason", encodedPassword1, "jay@email.com");
@@ -533,7 +532,7 @@ public class PuppyWorldApplication {
 			byte[] ptimg3 = ptbos3.toByteArray();
 
 			Post pt3 = new Post(PostType.FOUND, "FOUND: Terrier mix", "Found this gray-white-gold terrier mix outside on the porch. Please call the number if it's yours. And provide some proof of ownership.", ptimg3, u5);
-			ptrepo.save(pt3);
+			ptrepo.save(pt3);*/
 		};
 	}
 }

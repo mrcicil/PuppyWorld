@@ -1,10 +1,54 @@
 <!DOCTYPE html>
- <html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="fragments/general.html :: header">
 	<meta charset="UTF-8">
 	<title>Product List</title>
 </head>
 
+
+
+<style>
+div.container{
+display: block;
+padding-right: 15px;
+padding-left: 15px;
+margin-right: auto;
+margin-left: auto;
+
+}
+
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 360px;
+  height: 450px;
+  position: relative;
+  text-align: center;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+
+
+div.gallery img {
+  width: 340px;
+  height: 270px;
+  float: left;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+
+}
+</style>
 
 <body>
 	<div th:replace="fragments/general.html :: menu"></div>
@@ -32,35 +76,29 @@
 			             <input type="text" name="keyword" id="keyword" th:value="${keyword}"
 				          size="50" required /> &nbsp; -->
 			        
-			        <br/>
 		          </form>
 
 	            </div>
 
-
-		</div>
-
 			</li>
 		</ul> 
-
-
-	
-	
-	
+		
 		<p></p>
 		</div>
 
 
-		<div class="container">
+		<div class="container" style="text-align:center; margin-bottom: 20px">
 			<div th:each="product : ${productList}">
 			<div class="gallery">
 				<img th:src="@{${'/product/image/'+ product.productId}}" 
-	                class="card img-fluid" alt="" width="200" height="200" style="margin-left:500px">
-	               
-	                <div class="desc" style="margin-left:50px; text-align:center" ><p><br><span th:text=  ${product.productName}>Name</span>
-	                <p>$<span th:text=  "${#numbers.formatDecimal(product.productPrice, 0, 2)}">Price</span><p>
-	           	<a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}">Edit</a><p>
-					<a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}"><i class="glyphicon glyphicon-trash"></i></a></div>	
+	                class="card img-fluid" alt="" width="150" height="150" ><!--style="margin-left:500px"-->
+	               <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	                <div class="desc" style="margin-left:5%; text-align:center; padding: 10px" >
+	                	<p><br><span th:text=  ${product.productName} style="font-weight:bold">Name</span></p>
+	                	<p>$<span th:text=  "${#numbers.formatDecimal(product.productPrice, 0, 2)}">Price</span></p>
+	           			<p><a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}">Edit</a></p>
+						<p><a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}"><i class="glyphicon glyphicon-trash"></i></a></p>
+					</div>	
 			
 			 
 			
