@@ -11,5 +11,6 @@ public interface ReservationService {
 	public Reservation findReservationById(int Id);
 	public void deleteReservationById(int Id);
 	public ArrayList<Reservation> findAllReservationsByUserId(int userId);
+	public ArrayList<Reservation> findAllActiveReservation(int userId);
 
 }
