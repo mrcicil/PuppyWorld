@@ -35,9 +35,9 @@
 	<br/><br/>
 	
 	
-	<div style="float:right; padding:20px; padding-left:80px">
+	<div style="float:right; padding:20px; padding-left:80px;  width:70%;">
 	<form action="#" th:action="@{/checkBreedsave}" 
-			method="post" enctype="multipart/form-data" style="background-color:#e6f2f5; height:550px; padding:25px; width:160%; margin-left:auto; margin-right:auto">
+			method="post" enctype="multipart/form-data" style="background-color:#e6f2f5; height:400px; padding:25px; margin-left:auto; margin-right:auto">
 
 			<div class="form-group" style="margin-left:23%; text-align:left;padding:10px;" >
 				<label style="width: 300px; font-size:18px; text-align:left; margin-left:10%;"> Upload Your Image Here:</label>
@@ -47,17 +47,20 @@
 				</div>
 				
 				<div class="form-group"  style="margin-left:11%; border-style:solid; border-color:#4597a8; border-width: thin; height: 200px; width: 200px;">
-					<img id="output" alt="Preview" width="200" height="200" th:src="@{'data:image/jpeg;base64,'+${image}}" style="margin-top:45%; margin-left: 35%;"/>
+					<img id="output" alt="Preview" width="200" height="200" th:src="@{'data:image/jpeg;base64,'+${image}}"/>
 				</div>
 				</div>
 				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="color:white; margin-left:3%">Find Breed</button>
 				
 		</form>
+		<div style="background-color:#e6f2f5;">
+		<div th:each="result:${results}" class="container" style="text-align: center; margin-bottom: 20px;">
+		<p style="text-align: left; color:rgb(0, 0, 0)" th:text=${result}></p>
+		</div>
+		</div>
 		</div>
 	</div >
-	<div th:each="result:${results}" class="container" style="text-align: center; margin-bottom: 20px; margin-left:40%;">
-		<p style="text-align: left; color:rgb(0, 0, 0)" th:text=${result}></p>
-	</div>
+	
 	</div>
 	</div>
 	
