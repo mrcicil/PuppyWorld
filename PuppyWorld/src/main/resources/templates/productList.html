@@ -67,9 +67,9 @@ div.desc {
 	            <div>
 		          <form action="" th:action="@{/searchProduct}" method="post">
 		          <fieldset>
-		          <label style="width: 80px; text-align:left; size:30px">Search:</label>
+		          
 	        	       <input type="text" th:value="${keyword}" name="keyword" size="50"required>
-	        	       <button type="submit">Search</button>
+	        	       <button type="submit" style="color:white">Search</button>
 	              </fieldset>
 	              <br/>
 	                 <!--  <fieldset>
@@ -98,6 +98,7 @@ div.desc {
 	                	<p>$<span th:text=  "${#numbers.formatDecimal(product.productPrice, 0, 2)}">Price</span></p>
 	           			<p><a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}">Edit</a></p>
 						<p><a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}"><i class="glyphicon glyphicon-trash"></i></a></p>
+						
 					</div>	
 			
 			 

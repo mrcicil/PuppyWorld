@@ -67,9 +67,9 @@ div.desc {
 				<div>
 					<form action="" th:action="@{/searchProvider}" method="post">
 					    <fieldset>
-					    <label style="width: 80px; text-align:left; size:50px">Search:</label>
+					  
 						<input type="text"  th:value="${keyword}" name="keyword" size="50" required />
-						<button type="submit">Search</button>
+						<button type="submit" style="color:white">Search</button>
 						</fieldset>
 						<br/>
 						
@@ -95,6 +95,7 @@ div.desc {
 	                <p><a href="EditProduct.html" th:href="@{/providerEdit/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">Edit</a>
 	                <p><a href="serviceList.html" th:href="@{/serviceList/}+${provider.providerId}">View</a>
 	                <p><a href="DeleteProduct.html" th:href="@{/providerDelete/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"><i class="glyphicon glyphicon-trash"></i></a>
+					<p><a th:href="@{/providerReport/}+${provider.providerId}">Generate report</a></p>
 					</div>	
 			
 			 
