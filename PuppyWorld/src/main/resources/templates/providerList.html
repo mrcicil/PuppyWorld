@@ -24,7 +24,9 @@
 						</fieldset>
 						<br/>
 						<fieldset>
-						<button type="submit">Search</button>
+						<!-- <button type="submit">Search</button> -->
+                       <button for="search_input">Search:</button>
+                       <input type="text" id="search_input">  
 						</fieldset>
 					</form>
 				</div>
@@ -87,5 +89,10 @@ var loadFile = function(event) {
 	    }); 
 	});
 
+</script>
+<script>
+$.get("/searchProvider", {term: $('#search_input').val()}, function(data) {
+// do your data manipulation and transformation here
+});
 </script>
 </html>
