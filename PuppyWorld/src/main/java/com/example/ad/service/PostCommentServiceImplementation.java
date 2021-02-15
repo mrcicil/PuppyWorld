@@ -3,9 +3,10 @@ package com.example.ad.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ad.domain.PostComment;
 import com.example.ad.repo.PostCommentRepository;
@@ -28,6 +29,8 @@ public class PostCommentServiceImplementation implements PostCommentService {
 		// TODO Auto-generated method stub
 		return (ArrayList<PostComment>) pcrepo.findAll();
 	}
+	
+	
 
 	@Override
 	public PostComment findPostCommentById(int Id) {
@@ -43,6 +46,8 @@ public class PostCommentServiceImplementation implements PostCommentService {
 		return searchPostComment;
 	}
 
+	
+	
 	@Override
 	public void deletePostCommentById(int commentId) {
 		PostComment searchPostComment = findPostCommentById(commentId);

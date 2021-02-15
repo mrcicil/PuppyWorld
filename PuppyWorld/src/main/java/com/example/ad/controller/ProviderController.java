@@ -78,8 +78,10 @@ public class ProviderController {
 	{
 
 		//model.addAttribute("productList", proservice.listAllProducts());
-		model.addAttribute("providerList", pvservice.findAllProviders());
-		
+		ArrayList<Provider> pList = pvservice.findAllProviders();
+		int length = pList.size();
+		model.addAttribute("providerList", pList);
+		model.addAttribute("length", length);
 		int productId= 0;
 		
 		model.addAttribute("productId", productId);

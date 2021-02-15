@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class PostComment {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int commentId;
@@ -23,6 +24,7 @@ public class PostComment {
 	
 	@ManyToOne
 	private Post post;
+
 	
 	/*
 	 * public PostComment(String commentMessage, LocalDateTime commentDateTime) {
@@ -30,29 +32,32 @@ public class PostComment {
 	 * commentDateTime; }
 	 */
 	
+
 	public int getCommentId() {
 		return commentId;
 	}
-	
+
 	public void setCommentId(int commentId) {
 		this.commentId = commentId;
 	}
-	
+
 	public String getCommentMessage() {
 		return commentMessage;
 	}
-	
+
 	public void setCommentMessage(String commentMessage) {
 		this.commentMessage = commentMessage;
 	}
-	
+
 	public LocalDateTime getCommentDateTime() {
 		return commentDateTime;
 	}
-	
+
 	public void setCommentDateTime(LocalDateTime commentDateTime) {
 		this.commentDateTime = commentDateTime;
 	}
+
+
 	public User getUser() {
 		return user;
 	}
@@ -72,7 +77,7 @@ public class PostComment {
 	public PostComment() {
 		super();
 	}
-	
+
 	public PostComment(String commentMessage, LocalDateTime commentDateTime, User user, Post post) {
 		super();
 		this.commentMessage = commentMessage;
