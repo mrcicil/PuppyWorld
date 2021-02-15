@@ -15,7 +15,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 			   +"WHERE p.product_name LIKE %:keyword% " 
 			   +"OR p.product_price LIKE %:keyword% " 
 			   +"OR p.product_quantity LIKE %:keyword% " 
-			   +"OR p.product_type LIKE %:keyword% ",
+			   +"OR CONCAT(p.product_type,'') LIKE %:keyword% ",
 			   nativeQuery = true)
 			public ArrayList<Product> searchProduct(@Param("keyword") String keyword);
 
