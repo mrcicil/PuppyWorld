@@ -17,10 +17,20 @@
 
 
     <div>
+    <ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
+	    <li style="float:left; margin-left:20%">
+	    <button style="width:150px">
+		<a th:href="@{/providerList/}" style="color:white">Back to List</a>
+		</button>
+		</li>
 
-	<button style="margin-left:75%;" th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
-	<a th:href="@{/serviceCreate/}+${provider.providerId}" style="color:white">Create New</a>
-	</button>
+		<li style="float:right; margin-right:20%">
+		<button th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="width:150px">
+		<a th:href="@{/serviceCreate/}+${provider.providerId}" style="color:white;">Create New</a>
+		</button>
+		</li>
+	
+	</ul>
 	</div>
 	<div>&nbsp;</div>
 	<div>&nbsp;</div>
