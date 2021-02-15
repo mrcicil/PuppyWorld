@@ -70,7 +70,10 @@ div.desc {
 		          
 	        	       <input type="text" th:value="${keyword}" name="keyword" size="50"required>
 	        	       <button type="submit" style="color:white">Search</button>
+	        	       <!-- <input type="button" style="color:white"  value="Clear" onclick="clearSearch()" /> -->
+	        	       <button style="margin:5px"><a th:href="@{/productList}" style="color:white;">Clear</a></button>
 	              </fieldset>
+	                  
 	              <br/>
 	                 <!--  <fieldset>
 			             <input type="text" name="keyword" id="keyword" th:value="${keyword}"
@@ -145,5 +148,10 @@ var loadFile = function(event) {
 	});
 
 </script>
+<!-- <script type="text/javascript">
+		function clearSearch() {
+			window.location = '/productList';
+		}
+	</script> -->
 </html>
 
