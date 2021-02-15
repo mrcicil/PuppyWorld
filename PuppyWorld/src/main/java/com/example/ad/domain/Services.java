@@ -44,9 +44,12 @@ public class Services {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate localDate;
+	
+	private Status status;
 
 	public Services(ArrayList<String> timeSlots, Provider provider, LocalDate localDate) {
 		super();
+		status = Status.ACTIVE;
 		this.timeSlots = timeSlots;
 		this.provider = provider;
 		this.localDate = localDate;
@@ -92,6 +95,14 @@ public class Services {
 	public String toString() {
 		return "Services [serviceId=" + serviceId + ", timeSlots=" + timeSlots + ", provider=" + provider
 				+ ", localDate=" + localDate + "]";
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 	
 

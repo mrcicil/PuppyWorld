@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ad.domain.Reservation;
+import com.example.ad.domain.Status;
 import com.example.ad.repo.ReservationRepository;
 
 @Service
@@ -62,6 +63,20 @@ public class ReservationServiceImplementation implements ReservationService {
 		}
 		// TODO Auto-generated method stub
 		return outputList;
+	}
+
+	@Override
+	public ArrayList<Reservation> findAllActiveReservation(int userId) {
+		ArrayList<Reservation> display = new ArrayList<Reservation>();
+		ArrayList<Reservation> rList = findAllReservationsByUserId(userId);
+		for (Iterator <Reservation> iterator = rList.iterator(); iterator.hasNext();) {
+			Reservation reservation = iterator.next();
+			if(reservation.getStatus() == Status.ACTIVE) {
+				display.add(reservation);
+			}
+			
+		}
+		return display;
 	}
 	
 }

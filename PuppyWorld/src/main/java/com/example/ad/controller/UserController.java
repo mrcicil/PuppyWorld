@@ -1,7 +1,9 @@
 package com.example.ad.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -23,9 +25,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.ad.domain.User;
 import com.example.ad.domain.Reservation;
 import com.example.ad.domain.Role;
+import com.example.ad.domain.Services;
+import com.example.ad.domain.Status;
 import com.example.ad.service.EmailService;
 import com.example.ad.service.ReservationService;
 import com.example.ad.service.ReservationServiceImplementation;
+import com.example.ad.service.ServiceService;
+import com.example.ad.service.ServiceServiceImplementation;
 import com.example.ad.service.UserService;
 import com.example.ad.service.UserServiceImplementation;
 
@@ -49,6 +55,14 @@ public class UserController {
 	@Autowired
 	public void setUService(UserServiceImplementation uServiceImpl) {
 		this.uservice = uServiceImpl;
+	}
+	
+	@Autowired
+	private ServiceService sservice;
+	
+	@Autowired
+	public void setSService(ServiceServiceImplementation sServiceImpl) {
+		this.sservice = sServiceImpl;
 	}
 	
 	
@@ -90,8 +104,30 @@ public class UserController {
 	@RequestMapping(value="/")
 	public String indexPage(HttpServletRequest request, Model model) {
 		User user = uservice.findUserByUserName(request.getRemoteUser());
+		updateReservationAndServices();
 		model.addAttribute("user", user);
 		return "index";
+	}
+	
+	public void updateReservationAndServices() {
+		ArrayList<Reservation> rList = rservice.findAllReservations();
+		LocalDate date = LocalDate.now();
+		for (Iterator <Reservation>iterator = rList.iterator(); iterator.hasNext();) {
+			Reservation reservation = iterator.next();
+			if(reservation.getService().getLocalDate().isBefore(date)) {
+				reservation.setStatus(Status.INACTIVE);
+				rservice.saveReservation(reservation);
+			}
+		}
+		ArrayList<Services> sList = sservice.findAllServices();
+		for (Iterator <Services> iterator = sList.iterator(); iterator.hasNext();) {
+			Services services = iterator.next();
+			if(services.getLocalDate().isBefore(date)) {
+				services.setStatus(Status.INACTIVE);
+				sservice.saveService(services);
+			}
+			
+		}
 	}
 	
 	
@@ -160,8 +196,8 @@ public class UserController {
 	public String profile (Model model, HttpServletRequest request) {
 		User currentUser = (User) uservice.findUserByUserName(request.getRemoteUser());
 		int userId = currentUser.getUserId();
-		ArrayList<Reservation> rList = rservice.findAllReservationsByUserId(userId);
-		model.addAttribute("reservationList", rList);
+		ArrayList<Reservation> display = rservice.findAllActiveReservation(userId);
+		model.addAttribute("reservationList", display);
 		model.addAttribute("userProfile", currentUser);
 		return "profile";
 	}

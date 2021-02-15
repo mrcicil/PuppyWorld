@@ -10,7 +10,7 @@
   	<div class="main">
 	<div class="container" style="text-align: center; margin-bottom: 20px">
 	
-	<h2 style="padding:25px;font-weight:bold">Your Profile</h2>
+	<h2 style="padding:25px;font-weight:bold">Profile</h2>
 	<table th:if="${not #httpServletRequest.remoteUser.isEmpty()}"  class="table" style="width:35%; margin-left: auto; margin-right: auto; padding: 10px">
 		<tr>
 			<td>Name</td>
@@ -40,21 +40,21 @@
 		</tr>
 	</table> 
 	
-	<h2 style="padding:25px; font-weight:bold">Your Reservation Details</h2>
+	<h2 style="padding:25px; font-weight:bold">Reservation Details</h2>
 	<table class="table" cellpadding="3" cellspacing="0" style="width: 60%;margin:auto">
 		<tr>
-			<th>Reservation Time</th>
-			<th>Reservation Date</th>
-			<th>Service</th>
-			<th>Description</th>  
-			<th>Cancel</th>  
+			<th style="text-align:center">Reservation Time</th>
+			<th style="text-align:center">Reservation Date</th>
+			<th style="text-align:center">Service</th>
+		<!-- 	<th style="text-align:center">Description</th>  --> 
+			<th style="text-align:center">Cancel</th>  
 		</tr>
 		<tbody>
 		<tr th:each="reservation:${reservationList}" >
 			<td th:text=${reservation.timeSlot}>TimeSlot</td>
 			<td th:text=${reservation.service.localDate}>Reservation Time</td>
 			<td th:text=${reservation.service.provider.providerName}>Provider Name</td>
-			<td th:text=${reservation.service.provider.providerDescription}>Provider Description</td>
+		<!-- 	<td th:text=${reservation.service.provider.providerDescription}>Provider Description</td> -->
 			<td><a th:href="@{/reservationDelete/}+${reservation.reservationId}">Cancel</a></td>
 		</tr>
 		</tbody>

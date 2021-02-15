@@ -32,7 +32,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.ad.domain.Product;
 import com.example.ad.domain.Provider;
 import com.example.ad.domain.Reservation;
+import com.example.ad.domain.Role;
 import com.example.ad.domain.Services;
+import com.example.ad.domain.Status;
 import com.example.ad.domain.User;
 import com.example.ad.repo.ServiceRepository;
 import com.example.ad.service.EmailService;
@@ -84,11 +86,14 @@ public class ServiceController {
 	
 
 	@RequestMapping(value = "/serviceList/{id}")
-	public String dateList(@PathVariable("id") Integer id, Model model) {
-		ArrayList <Services> sList = sservice.findAllServicesByProviderId(id);
-		System.out.println(sList);
+	public String dateList(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+		User user = uservice.findUserByUserName(request.getRemoteUser());
+		ArrayList<Services> display = sservice.findAllServices();
+		if(user.getUserType() == Role.ROLE_USER) {
+			display = sservice.findAllActiveServices(id);
+		}
 		Provider provider = pvservice.findProviderById(id);
-		model.addAttribute("serviceList", sList);
+		model.addAttribute("serviceList", display);
 		model.addAttribute("provider", provider);
 		return "serviceList";
 	}
@@ -118,8 +123,18 @@ public class ServiceController {
 	@RequestMapping(value = "/reservationSave")
 	public String saveReservation(@ModelAttribute("reservation")Reservation reservation, HttpServletRequest request) {
 		Services service = sservice.findServiceById(reservation.getService().getServiceId());
+		ArrayList<String> tSlot = service.getTimeSlots();
+		String reserveTime = reservation.getTimeSlot();
+		for (int i = 0; i<tSlot.size(); i++) {
+			if(tSlot.get(i).equalsIgnoreCase(reserveTime)) {
+				tSlot.remove(i);
+			}
+		}
+		service.setTimeSlots(tSlot);
+		sservice.saveService(service);
 		User user = uservice.findUserByUserName(request.getRemoteUser());
 		reservation.setUser(user);
+		reservation.setStatus(Status.ACTIVE);
 		rservice.saveReservation(reservation);
 		return "reservationSuccess";
 	}
@@ -137,6 +152,13 @@ public class ServiceController {
 	
 	@RequestMapping(value = "/reservationDelete/{id}")
 	public String deletePost(@PathVariable("id") Integer id) {
+		Reservation reservation = rservice.findReservationById(id);
+		Services service = reservation.getService();
+		ArrayList<String> tSlot = service.getTimeSlots();
+		String reserveTime = reservation.getTimeSlot();
+		tSlot.add(reserveTime);
+		service.setTimeSlots(tSlot);
+		sservice.saveService(service);
 		rservice.deleteReservationById(id);
 		return "redirect:/profile";
 	}
@@ -163,6 +185,7 @@ public class ServiceController {
 			return "serviceCreate";
 		}
 		
+		service.setStatus(Status.ACTIVE);
 		sservice.saveService(service);
 		
 		System.out.println("step 1" + service.getProvider().getProviderId());
@@ -170,19 +193,26 @@ public class ServiceController {
 	}
 	
 	@RequestMapping(value = "/serviceDelete/{id}")
-	public String deleteService(@PathVariable("id") Integer id) {
+	public String deleteService(@PathVariable("id") Integer id, Model model) {
 		Services service = sservice.findServiceById(id);
+		
+		
+		ArrayList<Reservation> rList = rservice.findAllReservations();
+		for (Iterator <Reservation> iterator = rList.iterator(); iterator.hasNext();) {
+			Reservation reservation = iterator.next();
+			if(reservation.getService().getServiceId() == service.getServiceId() & reservation.getStatus() == Status.ACTIVE) {
+				String message = "Reservation exist";
+				model.addAttribute("message", message);
+				return "redirect:/serviceList/" + service.getProvider().getProviderId();
+			}
+			else if(reservation.getService().getServiceId() == service.getServiceId()) {
+				service.setStatus(Status.INACTIVE);
+				sservice.saveService(service);
+				return "redirect:/serviceList/" + service.getProvider().getProviderId();
+			}
+			
+		}
 		sservice.deleteServiceById(id);
-		
-//		ArrayList<Reservation> rList = rservice.findAllReservations();
-//		for (Iterator <Reservation> iterator = rList.iterator(); iterator.hasNext();) {
-//			Reservation reservation = iterator.next();
-//			if(reservation.getService().getServiceId() == service.getServiceId()) {
-//				errors.rejectValue("localDate", "exist", "Timeslot exist");
-//			}
-//			
-//		}
-		
 		return "redirect:/serviceList/" + service.getProvider().getProviderId();
 	}
 	

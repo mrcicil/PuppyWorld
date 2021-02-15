@@ -70,7 +70,8 @@ public class ProductController {
 	
 	@RequestMapping(value = "/productList")
 	public String list1(Model model) {
-		model.addAttribute("productList", pservice.findAllProducts());
+		ArrayList<Product> pList = pservice.findAllProducts();
+		model.addAttribute("productList", pList);
 		String keyword = "";	
 		model.addAttribute("keyword", keyword);
 		return "productList";
