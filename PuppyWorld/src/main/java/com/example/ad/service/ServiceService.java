@@ -13,6 +13,7 @@ public interface ServiceService {
 	public ArrayList<Services> findAllServicesByProviderId(int Id);
 	
 	public ArrayList<Services> searchServiceByKeyword(String keyword);
+	public ArrayList<Services> findAllActiveServices(int id);
 	
 
 }

@@ -4,32 +4,50 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import org.springframework.lang.Nullable;
+
 @Entity
-public class MLPath {
+public class Dummy {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@Nullable
-	private String path;
-	public MLPath() {
-		super();
-	}
+	private String mamasita;
+	
+	@Lob
+	@Nullable
+	private byte[] image;
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getPath() {
-		return path;
+
+	public byte[] getImage() {
+		return image;
 	}
-	public void setPath(String path) {
-		this.path = path;
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
-	
+
+	public Dummy() {
+		super();
+	}
+
+	public String getMamasita() {
+		return mamasita;
+	}
+
+	public void setMamasita(String mamasita) {
+		this.mamasita = mamasita;
+	}
 	
 	
 

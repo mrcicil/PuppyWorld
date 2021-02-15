@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ad.domain.Provider;
 import com.example.ad.domain.Services;
+import com.example.ad.domain.Status;
 import com.example.ad.repo.ProviderRepository;
 import com.example.ad.repo.ServiceRepository;
 
@@ -90,6 +91,19 @@ public class ServiceServiceImplementation implements ServiceService {
 			return srepo.searchService(keyword);
 		}
 		return (ArrayList<Services>) srepo.findAll();
+	}
+
+	@Override
+	public ArrayList<Services> findAllActiveServices(int id) {
+		ArrayList <Services> display = new ArrayList <Services> ();
+		ArrayList <Services> sList = findAllServicesByProviderId(id);
+		for (Iterator <Services> iterator = sList.iterator(); iterator.hasNext();) {
+			Services services = iterator.next();
+			if(services.getStatus() == Status.ACTIVE) {
+				display.add(services);
+			}
+			
+		}return display;
 	}
 
 

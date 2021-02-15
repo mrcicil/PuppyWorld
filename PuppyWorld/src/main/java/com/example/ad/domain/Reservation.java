@@ -34,16 +34,19 @@ public class Reservation {
 	
 	@OneToOne
 	private User user;
+	
+	private Status status;
 
-	public Reservation(Services service, String timeSlot, User user) {
+	public Reservation() {
+		super();
+	}
+
+	public Reservation(Services service, String timeSlot, User user, Status status) {
 		super();
 		this.service = service;
 		this.timeSlot = timeSlot;
 		this.user = user;
-	}
-
-	public Reservation() {
-		super();
+		this.status = status;
 	}
 
 	public int getReservationId() {
@@ -78,12 +81,15 @@ public class Reservation {
 		this.user = user;
 	}
 
-	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	
-	
-	
-
 	
 
 }
