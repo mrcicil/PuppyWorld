@@ -58,6 +58,7 @@ public class BreedController {
         	
         	HttpURLConnection httpUrlConnection = null;
         	URL url = new URL("http://127.0.0.1:5000/predict/");
+        	//URL url = new URL("https://puppysnap.azurewebsites.net/predict/");
         	httpUrlConnection = (HttpURLConnection) url.openConnection();
         	httpUrlConnection.setUseCaches(false);
         	httpUrlConnection.setDoOutput(true);
