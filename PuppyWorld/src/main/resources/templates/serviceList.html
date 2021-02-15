@@ -5,6 +5,13 @@
 <title>Service List</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style>
+	.gallery{width:300px;float:left;}
+	.gallery img{
+		display:block;
+		width:100%;}
+	
+</style>
 </head>
 <body>
 	<header th:insert="fragments/general.html :: header"> </header>
@@ -21,38 +28,21 @@
 
 				<button style="margin-left: 75%;"
 					th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
-					<a th:href="@{/serviceCreate/}+${provider.providerId}"
-						style="color: white">Create New</a>
+					<a th:href="@{/serviceCreate/}+${provider.providerId}" style="color: white">Create New</a>
 				</button>
 			</div>
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
-			
+			<div class="gallery">
+				<img th:src="@{${'/provider/image/'+ provider.providerId}}"
+					class="card img-fluid" alt="" width="300" height="300"
+					style="margin-left: 3%; padding: 10px"> <br />
+				<p th:text="'$'+${provider.price}">Service Price</p>
+				<p th:text=${provider.providerDescription}>Service Description</p>
+			</div>
 			<div>
-				<div class="gallery">
-					<img th:src="@{${'/provider/image/'+ provider.providerId}}"
-						class="card img-fluid" alt="" width="300" height="300"
-						style="margin-left: 3%; padding: 10px"> <br />
-				</div>
-				<table th:if="${not #httpServletRequest.remoteUser.isEmpty()}"
-					class="table"
-					style="width: 80%; margin-left: auto; margin-right: auto; padding: 20px">
-					<tr>
-						<td th:text="${provider.price}">Service Price</td>
-					</tr>
-
-					<tr>
-						<td th:text=${provider.providerDescription}>Service
-							Description</td>
-					</tr>
-					
-					<!-- <tr>
-						<td th:text=${provider.reservationType}>Can Reserve or not</td>
-					</tr> -->
-				</table>
-
 				<table class="table" cellpadding="3" cellspacing="0"
-					style="width: 60%; margin: auto">
+					style="width: 60%; margin:auto">
 					<thead style="display: table-header-group">
 						<tr>
 							<th style="text-align: center">Date</th>
