@@ -134,7 +134,7 @@ display: inline-block;
 	<div th:replace="fragments/general.html :: menu"></div>
 	<div class="main" >
 	<div class="container" style="text-align:center">
-		<h1 style="font-weight:bold; padding:15px;">Post - <div th:object="${post}"> <b><span th:text=  ${post.postTitle}>Title</span></b> </h1>
+		<h1 style="font-weight:bold; padding:15px;">Post - <b><span th:object="${post}" th:text=  ${post.postTitle}>Title</span></b> </h1>
 
 		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
 			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() }"
@@ -144,14 +144,14 @@ display: inline-block;
 			<li style="float:right">
 	<!-- 			<h3>Search</h3> -->
 				<div>
-					<form th:action="@{/comment/search/}" method="get">
+			<!--  			<form th:action="@{/comment/search/}" method="get">
 						<input type="text" name="keyword" id="keyword" th:value="${keyword}"
 							size="50" required /> &nbsp;
 						<button type="submit">Search</button>
 						&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
-					</form>
+					</form> -->	
 				</div>
-				<div>
+				
 			</li>
 		</ul> 
 
