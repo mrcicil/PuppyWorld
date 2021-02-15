@@ -15,7 +15,7 @@
 	<br />
 	
 	<div style="display:flex">
-	<div style="float:left; width:50%; text-align:left">
+	<div style="float:left; width:40%; text-align:left">
 	<h3 style="font-weight:bold;">Introduction to Puppy Snap:</h3>
 	<p>Are you always confused and wondering what is the breed of the dog you met randomly on the street?</p>
 	<p>Are you always curious what is the breed of the dog your neighbor owns that is forever energetic?<p>
@@ -35,23 +35,21 @@
 	<br/><br/>
 	
 	
-	<div style="float:right; padding:20px; padding-left:90px">
+	<div style="float:right; padding:20px; padding-left:80px">
 	<form action="#" th:action="@{/checkBreedsave}" 
-			method="post" enctype="multipart/form-data" style="background-color:#e6f2f5; height:470px; padding:30px; width:120%; margin-left:auto; margin-right:auto">
+			method="post" enctype="multipart/form-data" style="background-color:#e6f2f5; height:500px; padding:25px; width:150%; margin-left:auto; margin-right:auto">
 
-			<div class="form-group" style="margin-left:13%; text-align:left;padding:15px;" >
-				<label style="width: 300px; font-size:20px; text-align:left; margin-left:6%;"> Upload Your Image Here:</label>
-				<br/><br/>
-				<div style="margin-left:15%; text-align:left">
+			<div class="form-group" style="margin-left:20%; text-align:left;padding:10px;" >
+				<label style="width: 300px; font-size:18px; text-align:left; margin-left:10%;"> Upload Your Image Here:</label>
+				<br/>
+				<div style="margin-left:15%; text-align:left; padding:5px">
 					<input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
 				</div>
-				<br/>
+				
 				<div class="form-group"  style="margin-left:11%; border-style:solid; border-color:#4597a8; border-width: thin; height: 200px; width: 200px;">
 					<img id="output" alt="Preview" width="200" height="200" th:src="@{'data:image/jpeg;base64,'+${image}}" style="margin-top:45%; margin-left: 35%;"/>
-					<br/><br/>
 				</div>
 				</div>
-
 				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="color:white">Find Breed</button>
 				
 		</form>
