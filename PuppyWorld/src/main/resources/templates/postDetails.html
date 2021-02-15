@@ -7,13 +7,24 @@
 
 <style>
 
-
-
 div.container{
+display: block;
+padding-right: 15px;
+padding-left: 15px;
+margin-right: auto;
+margin-left: auto;
+
+}
+
+
+div.bigbox{
 margin-top: 20px;
-margin-bottom: 5px; 
+margin-bottom: 20px; 
 width: 100%;
 display: block;
+float:left;
+margin-right: auto;
+margin-left: auto;
 
 }
 
@@ -121,7 +132,7 @@ display: inline-block;
 <body>
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
-	<div class="main" style="height:150%; width:85%;margin-left:auto; margin-right:auto">
+	<div class="main" >
 	<div class="container" style="text-align:center">
 		<h1 style="font-weight:bold; padding:15px;">Post - <div th:object="${post}"> <b><span th:text=  ${post.postTitle}>Title</span></b> </h1>
 
@@ -151,8 +162,8 @@ display: inline-block;
 		</div>
 		
 		
-		
-
+	
+	</div>
 			
 			
 	               
@@ -162,7 +173,7 @@ display: inline-block;
 					
 	
 
-		<div class="container">
+		<div class="bigbox">
 			<div th:object="${post}">
 			<div class="gallery">
 			
@@ -183,7 +194,7 @@ display: inline-block;
     top: 0;
     bottom: 0;
     margin: 0;
-    height: 250px;
+    height: 280px;
     object-fit: cover;
     width: 100%;
     vertical-align: middle;
@@ -223,20 +234,46 @@ display: inline-block;
 	  				</div>
 					
 	
-			 
+			 	</div>
 			
 			</div>
 		
 		</div>
-	</div>
+
 
 
 
 
     <br/>
     <h1 th:if="${post == null}">There is no post.</h1>
-	<div th:replace="fragments/general.html :: footer"></div>
-	
-</body>
+	<div style="clear: both;"></div>
+	</body>
+<div th:replace="fragments/general.html :: footer"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+  
+  $(document).ready(function() {
+	    $('#upload').bind("click",function() 
+	    { 
+	        var imgVal = $('#fileImage').val(); 
+	        if(imgVal=='') 
+	        { 
+	            alert("empty input file"); 
+	            return false; 
+
+	        } 
+	        return true; 
+
+	    }); 
+	});
+
+</script>
 </html>
 
