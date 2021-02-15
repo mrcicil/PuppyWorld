@@ -63,16 +63,16 @@ public class PuppyWorldApplication {
 		return args -> {
 
 //			----- Users ------
-			
+
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String encodedPassword1 = passwordEncoder.encode("password");
+
 
 			User u1 = new User(Role.ROLE_ADMIN, "joe", "Joe", encodedPassword1, "e0533420@u.nus.edu");
 
 			User u2 = new User(Role.ROLE_ADMIN, "ann", "Ann", encodedPassword1, "chenyihan@gmail.com");
 
 			urepo.save(u1);
-
 			urepo.save(u2);
 			
 			User u3 = new User(Role.ROLE_USER, "jay", "Jason", encodedPassword1, "jay@email.com");
@@ -543,6 +543,7 @@ public class PuppyWorldApplication {
 			byte[] ptimg3 = ptbos3.toByteArray();
 
 			Post pt3 = new Post(PostType.FOUND, "FOUND: Terrier mix", "Found this gray-white-gold terrier mix outside on the porch. Please call the number if it's yours. And provide some proof of ownership.", ptimg3, u5);
+
 			ptrepo.save(pt3);
 			
 			
@@ -1126,6 +1127,7 @@ public class PuppyWorldApplication {
 			resrepo.save(ressp9s31_c);
 			Reservation ressp9s31_d = new Reservation(sp9s31, "0300pm", u6, Status.ACTIVE);
 			resrepo.save(ressp9s31_d);
+
 		};
 	}
 }
