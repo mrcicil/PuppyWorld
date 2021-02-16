@@ -131,9 +131,10 @@ img {
 	<div th:replace="fragments/general.html :: menu"></div>
 	<div class="main" style="height:150%; width:85%;margin-left:auto; margin-right:auto">
 	<div class="container" style="text-align:center">
-		<h1 style="font-weight:bold; padding:15px;">Post - <div th:object="${post}"> <b><span th:text=  ${post.postTitle}>Title</span></b> </h1>
+		<h1 style="font-weight:bold; ">Post - <div th:object="${post}"> </h1>
+		<h3><span th:text=  ${post.postTitle}>Title</span></h3> 
 
-		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
+		<ul style="list-style: none; margin-left:auto; margin-right:auto;">
 			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() }"
 				style="float:left">
 	<!--  		<button><a style="color:white" href="#" th:href="@{/commentCreate}">Add New Reply</a></button> -->	

@@ -9,25 +9,30 @@
 	<div class="main">
 	<div class="container" style="text-align: center; margin-bottom: 20px">
 		<h1 style="font-weight:bold; padding:10px">Edit Post</h1>
-		<br />
 		
-		<form action="#" th:action="@{/postSave}" th:object="${post}"
+		<button style="width:150px; text-align:center">
+		<a th:href="@{/postList/}" style="color:white">Back to List</a>
+		</button>
+		
+		<br/><br/><br/>
+		
+		<form action="#" th:action="@{/postEditSave}" th:object="${post}"
 			method="post" enctype="multipart/form-data">
 			<input type="hidden" th:field="*{postId}">
-			<div class="form-group" style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Title:</label>
-				<input type="text" th:field="*{postTitle}" >
+			<div class="form-group" style="margin-left:30%; text-align:left">
+				<label style="width: 200px; text-align:left">Post Title:</label>
+				<input type="text" th:field="*{postTitle}" style="width: 250px">
 				<p style="color:red" th:if="${#fields.hasErrors('postTitle')}" th:errors="*{postTitle}"></p>
 				</div>
 
-			<div class="form-group" style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Message:</label>
-				<input type="text" step=0.01 min=0 th:field="*{postMessage}">
+			<div class="form-group" style="margin-left:30%; text-align:left">
+				<label style="width: 200px; text-align:left; vertical-align:top">Post Message:</label>
+				<textarea type="text" step=0.01 min=0 th:field="*{postMessage}" style="width:250px"></textarea>
 				<p style="color:red" th:if="${#fields.hasErrors('postMessage')}" th:errors="*{postMessage}"></p>
 				</div>
 
-			<div class="form-group" style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Type:</label>
+			<div class="form-group" style="margin-left:30%; text-align:left">
+				<label style="width: 200px; text-align:left">Post Type:</label>
 				<select th:field="*{postType}">
 				<option th:each="postType : ${T(com.example.ad.domain.PostType).values()}" 
 							th:value="${postType}" th:text="${postType}"/>
@@ -36,23 +41,24 @@
 
 			<br/>
 
-			<div class="form-group" style="margin-left:34%; text-align:left"> 
+			<div class="form-group" style="margin-left:30%; text-align:left"> 
 				<label style="width: 200px; text-align:left">Image:</label>
 				<br/>
 				<div>
 					<input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
 				</div>
 				<br/>
-				<div class="form-group" style="margin-left:20%">
+				<div class="form-group" style="margin-left:16%">
 					<img id="output" alt="Preview" width="200" height="200" th:src="@{'data:image/jpeg;base64,'+${image}}"/>
 				</div>
 				</div>
 
 				
 				<button style="margin:5px"><a th:href="@{/postCreate}" style="color:white;">Clear</a></button>
-				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" >Submit</button>
+				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="color:white">Submit</button>
 				
 		</form>
+		<br/><br/>
 		
 	</div>
 	<div th:insert="fragments/general.html :: footer"></div>
@@ -67,7 +73,7 @@ var loadFile = function(event) {
     }
   };
   
-  $(document).ready(function() {
+/*   $(document).ready(function() {
 	    $('#upload').bind("click",function() 
 	    { 
 	        var imgVal = $('#fileImage').val(); 
@@ -80,7 +86,7 @@ var loadFile = function(event) {
 	        return true; 
 
 	    }); 
-	});
+	}); */
 
 </script>
 </html>

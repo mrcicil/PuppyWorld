@@ -61,40 +61,24 @@ div.desc {
 <body>
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
-	<div class="main" >
-	<div class="container" style="text-align:center">
+	<div class="main" style="width: 1050px; margin-left:auto; margin-right:auto">
+		<div class="container" style="text-align:center; ">
 		<h1 style="font-weight:bold; padding:15px;">Post</h1>
 
-		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
+		<ul style="list-style: none; margin-left:auto; margin-right:auto;">
 			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"
-				style="width:35%; margin-left: auto; margin-right: auto; padding: 10px">
+				style="width:35%; margin-left: 66%; padding:5px">
 				<button><a style="color:white" href="#" th:href="@{/postCreate}">Create New Post</a></button>
 			</li>
-				<!-- <li style="float: right">
-					<h3>Search</h3>
-					<div >
-						<form th:action="@{/post/search/}" method="get">
-							<input type="text" name="keyword" id="keyword"
-								th:value="${keyword}" size="50" required /> &nbsp;
-							<button type="submit">Search</button>
-							&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
-						</form>
-					</div>
-				</li> -->
 			</ul> 
 
-	
-	
-	
-		<p></p>
-		</div>
 		</div>
 
-		<table class="table" cellpadding="3" cellspacing="0" style="width: 60%;margin:auto">
+		<table class="table" cellpadding="3" cellspacing="0">
 		<tr>
 			<th>NO</th>
-			<th>Owner By</th>
-			<th>Post Title</th>
+			<th>Owner</th>
+			<th style="width:18%">Post Title</th>
 			<th>Post Messages</th>
 			<th>Post Type</th>  
 			<th>Edit</th>
@@ -114,7 +98,7 @@ div.desc {
 				</tr>
 			</tbody>
 		</table>
-
+	</div>
 
     <br/>
     <div class="bigbox" style="text-align:center">
