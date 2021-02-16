@@ -125,20 +125,15 @@ public class PostController {
 		List<PostComment> postcommentlist = pcservice.findPostCommentsbyPostId(post.getPostId());
 		model.addAttribute("postcommentlist", postcommentlist);
 		
-			String encodedString = Base64.getEncoder().encodeToString(post.getPostImage());
-			PostComment postcomment = new PostComment();
-			postcomment.setPost(post);
-			model.addAttribute("image", encodedString);
 					
 		return "postCommentEdit";
 	}
+	
 	
 	@RequestMapping(value="/postCommentEditSave",method=RequestMethod.POST)
 	public String saveeditedPost(@ModelAttribute("postcomment")PostComment postcomment, Model model, Errors errors, BindingResult bindingResult, HttpServletRequest request)  {
 		
 		Post linkedpost = poservice.findPostById(postcomment.getPost().getPostId());
-		
-		User user = uservice.findUserByUserName(request.getRemoteUser());
 
 		int postid = linkedpost.getPostId();
 		
