@@ -1,5 +1,6 @@
 package com.example.ad.domain;
 
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -93,6 +94,7 @@ public class Post {
 		this.user = user;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Post [postId=" + postId + ", postType=" + postType + ", postTitle=" + postTitle + ", postMessage="
@@ -106,9 +108,4 @@ public class Post {
 	public void setPostcommentlist(List<PostComment> postcommentlist) {
 		this.postcommentlist = postcommentlist;
 	}
-
-	
-
-	
-	
 }

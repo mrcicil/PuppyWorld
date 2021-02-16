@@ -8,24 +8,12 @@
 <style>
 
 
+
 div.container{
-display: block;
-padding-right: 15px;
-padding-left: 15px;
-margin-right: auto;
-margin-left: auto;
-
-}
-
-
-div.bigbox{
 margin-top: 20px;
-margin-bottom: 20px; 
+margin-bottom: 5px; 
 width: 100%;
 display: block;
-float:left;
-margin-right: auto;
-margin-left: auto;
 
 }
 
@@ -34,7 +22,7 @@ div.gallery {
   border: 1px solid #ccc;
   float: left;
   width: 100%;
-  height: 600px;
+  height: 500px;
  
   text-align: center;
   margin-bottom: 5px;
@@ -91,7 +79,7 @@ text-align: left;
 
 div.commenticons {
 padding-left: 10%;
-width: 20%;
+width: 20%
 height: auto;
 text-align: right;
 float: right;
@@ -123,13 +111,15 @@ text-align: left;
 }
 
 
-div.gallery img {
-  width: 350px;
-  height: 270px;
-  float: left;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+img {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 </style>
@@ -139,9 +129,9 @@ div.gallery img {
 <body>
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
-	<div class="main">
+	<div class="main" style="height:150%; width:85%;margin-left:auto; margin-right:auto">
 	<div class="container" style="text-align:center">
-		<h1 style="font-weight:bold; padding:15px;">Edit Post Comment for - <b><span th:object="${post}" th:text=  ${post.postTitle}>Title</span></b> </h1>
+		<h1 style="font-weight:bold; padding:15px;">Post - <div th:object="${post}"> <b><span th:text=  ${post.postTitle}>Title</span></b> </h1>
 
 		<ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
 			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() }"
@@ -151,14 +141,14 @@ div.gallery img {
 			<li style="float:right">
 	<!-- 			<h3>Search</h3> -->
 				<div>
-			<!-- 			<form th:action="@{/comment/search/}" method="get">
+					<form th:action="@{/comment/search/}" method="get">
 						<input type="text" name="keyword" id="keyword" th:value="${keyword}"
 							size="50" required /> &nbsp;
 						<button type="submit">Search</button>
 						&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
-					</form> -->
+					</form>
 				</div>
-				
+				<div>
 			</li>
 		</ul> 
 
@@ -171,7 +161,7 @@ div.gallery img {
 		
 		
 
-			</div>
+			
 			
 	               
 	              
@@ -180,7 +170,7 @@ div.gallery img {
 					
 	
 
-		<div class="bigbox">
+		<div class="container">
 			<div th:object="${post}">
 			<div class="gallery">
 			
@@ -196,16 +186,8 @@ div.gallery img {
 					<a href="DeletePost.html" th:href="@{/postDelete/}+${post.postId}"><i class="glyphicon glyphicon-trash"></i></a>&emsp;
 					
 					</div>
-						<img th:src="@{${'/post/image/'+ post.postId}}" 
-	                style="position: relative;
-    top: 0;
-    bottom: 0;
-    margin: 0;
-    height: 280px;
-    object-fit: cover;
-    width: 100%;
-    vertical-align: middle;
-    display: inline-block;" alt=""></div>
+					<img th:src="@{${'/post/image/'+ post.postId}}" 
+	                style="width:100%" alt=""></div>
 					
 					</div>	
 					
@@ -225,9 +207,9 @@ div.gallery img {
 					</div>
 					
 					<div class="textinputsection">
-					<form action="#" th:object="${postcomment}" th:action="@{/postCommentEditSave}" method="post" style="float: right;">
+					<form action="#" th:object="${postcomment}" th:action="@{/postCommentSave}" method="post" style="float: right;">
 					<fieldset>
-					Edit Comment here <input type="text" th:field="*{commentMessage}"> <input type="hidden" th:field="*{commentId}" style="float: right"> <input type="hidden" th:field="*{user}" style="float: right"><input type="hidden" th:field="*{commentDateTime}" style="float: right"> <input type="hidden" th:field="*{post}" style="float: right"> 
+					Add a Comment <input type="text" th:field="*{commentMessage}"> <input type="hidden" th:field="*{post}" style="float: right"> 
 					<p th:if="${#fields.hasErrors('commentMessage')}" th:errors="*{commentMessage}">
 					</p>
 					</fieldset>
@@ -253,35 +235,8 @@ div.gallery img {
 
     <br/>
     <h1 th:if="${post == null}">There is no post.</h1>
-	<div style="clear: both;"></div>
+	<div th:replace="fragments/general.html :: footer"></div>
 	
 </body>
-<div th:replace="fragments/general.html :: footer"></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-var loadFile = function(event) {
-    var output = document.getElementById('output');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function() {
-      URL.revokeObjectURL(output.src) // free memory
-    }
-  };
-  
-  $(document).ready(function() {
-	    $('#upload').bind("click",function() 
-	    { 
-	        var imgVal = $('#fileImage').val(); 
-	        if(imgVal=='') 
-	        { 
-	            alert("empty input file"); 
-	            return false; 
-
-	        } 
-	        return true; 
-
-	    }); 
-	});
-
-</script>
 </html>
 
