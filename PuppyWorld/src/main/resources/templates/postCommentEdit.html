@@ -157,7 +157,7 @@ div.gallery img {
 		                <div style="width:1500px;">
 		                <strong th:text = "'Owner Name: ' + ${post.User.name}"/></div>
 		                <div class="icons" th:if="${post.user.userId} == ${user.userId}" style="float:right;margin-left:5%">
-		           		<a href="EditPost.html" th:href="@{/postEdit/}+${post.postId}">Edit</a> &emsp;
+		           		<a href="EditPost.html" th:href="@{/postEdit/}+${post.postId}"><i class="glyphicon glyphicon-edit"></i></a> &emsp;
 						<a href="DeletePost.html" th:href="@{/postDelete/}+${post.postId}"><i class="glyphicon glyphicon-trash"></i></a>&emsp;
 						</div>
 					</div>
@@ -189,7 +189,7 @@ div.gallery img {
 						
 						
 						<div class="commenticons" th:if="${comment.user.userId} == ${user.userId}" style="float:right">
-						<a href="EditComment.html" th:href="@{/postCommentEdit/}+${comment.commentId}">Edit</a> 
+						<a href="EditComment.html" th:href="@{/postCommentEdit/}+${comment.commentId}"><i class="glyphicon glyphicon-edit"></i></a> 
 						<a href="DeleteComment.html" th:href="@{/postCommentDelete/}+${comment.commentId}"><i class="glyphicon glyphicon-trash"></i></a> 
 						</div>
 						<br/>

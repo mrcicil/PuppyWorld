@@ -74,84 +74,7 @@ public class PostController {
 	public void setUService(UserServiceImplementation uServiceImpl) {
 		this.uservice = uServiceImpl;
 	}
-	
-	/*
-	 * @RequestMapping(value="/postCommentSave",method=RequestMethod.POST) public
-	 * String savePost(@ModelAttribute("postcomment")PostComment postcomment, Model
-	 * model, Errors errors, BindingResult bindingResult, HttpServletRequest
-	 * request) {
-	 * 
-	 * Post linkedpost = poservice.findPostById(postcomment.getPost().getPostId());
-	 * 
-	 * User user = uservice.findUserByUserName(request.getRemoteUser());
-	 * postcomment.setUser(user); postcomment.setPost(linkedpost);
-	 * postcomment.setCommentDateTime(LocalDateTime.now());
-	 * 
-	 * int postid = linkedpost.getPostId();
-	 * model.addAttribute("postcomment",postcomment);
-	 * 
-	 * if(postcomment.getCommentMessage().isEmpty()) {
-	 * errors.rejectValue("postCommentMessage", "null", "Must be filled"); }
-	 * 
-	 * if (bindingResult.hasErrors()) { return "forward:/viewPostDetails/"+postid; }
-	 * 
-	 * pcservice.savePostComment(postcomment);
-	 * 
-	 * return "forward:/viewPostDetails/"+postid;
-	 * 
-	 * }
-	 * 
-	 * @RequestMapping(value = "/postCommentDelete/{commentId}") public String
-	 * deletePostComment(@PathVariable("commentId") int commentId, Model model,
-	 * HttpServletRequest request) { PostComment currentcomment =
-	 * pcservice.findPostCommentById(commentId); Post post =
-	 * currentcomment.getPost(); model.addAttribute("post", post); int postid =
-	 * post.getPostId();
-	 * 
-	 * pcservice.deletePostCommentById(commentId); return
-	 * "forward:/viewPostDetails/"+postid; }
-	 * 
-	 * 
-	 * @RequestMapping(value = "/postCommentEdit/{commentId}") public String
-	 * editPostComment(@PathVariable("commentId") int commentId, Model model,
-	 * HttpServletRequest request) { PostComment currentcomment =
-	 * pcservice.findPostCommentById(commentId); Post post =
-	 * currentcomment.getPost(); model.addAttribute("post", post);
-	 * model.addAttribute("postcomment", currentcomment); User user =
-	 * uservice.findUserByUserName(request.getRemoteUser());
-	 * model.addAttribute("user", user); List<PostComment> postcommentlist =
-	 * pcservice.findPostCommentsbyPostId(post.getPostId());
-	 * model.addAttribute("postcommentlist", postcommentlist);
-	 * 
-	 * String encodedString =
-	 * Base64.getEncoder().encodeToString(post.getPostImage()); PostComment
-	 * postcomment = new PostComment(); postcomment.setPost(post);
-	 * model.addAttribute("image", encodedString);
-	 * 
-	 * return "postCommentEdit"; }
-	 * 
-	 * @RequestMapping(value="/postCommentEditSave",method=RequestMethod.POST)
-	 * public String saveeditedPost(@ModelAttribute("postcomment")PostComment
-	 * postcomment, Model model, Errors errors, BindingResult bindingResult,
-	 * HttpServletRequest request) {
-	 * 
-	 * Post linkedpost = poservice.findPostById(postcomment.getPost().getPostId());
-	 * 
-	 * User user = uservice.findUserByUserName(request.getRemoteUser());
-	 * 
-	 * int postid = linkedpost.getPostId();
-	 * 
-	 * if(postcomment.getCommentMessage().isEmpty()) {
-	 * errors.rejectValue("postCommentMessage", "null", "Must be filled"); }
-	 * 
-	 * if (bindingResult.hasErrors()) { return "forward:/viewPostDetails/"+postid; }
-	 * 
-	 * pcservice.savePostComment(postcomment);
-	 * 
-	 * return "forward:/viewPostDetails/"+postid;
-	 * 
-	 * }
-	 */
+
 	
 	@RequestMapping("/postCreate")
 	public String showNewPostForm(Model model) {
@@ -222,9 +145,7 @@ public class PostController {
 			multipartFile.transferTo(convFile);
 			byte[] fileContent = FileUtils.readFileToByteArray(convFile);
 			
-			if (fileContent != null) {
-				post.setPostImage(fileContent);
-			}
+			post.setPostImage(fileContent);
 		}
 		catch(IllegalStateException e) {
 			System.out.println(e.toString());

@@ -54,8 +54,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul>
 						<nav class="cl-effect-5">
 
-							<li><a class="active" a href="Home" th:href="@{/}"><span
-									data-hover="Home">Home</span></a></li>
+							<li><a href="Home" th:href="@{/}"><i class="glyphicon glyphicon-home"></i></a></li>
 							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
 								href="#" th:href="@{/productList}"><span
 									data-hover="Product">Product</span></a></li>
@@ -68,21 +67,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
 								href="#" th:href="@{/checkBreed}"><span
 									data-hover="PuppySnap">PuppySnap</span></a></li>
-							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
-								href="#" th:href="@{/profile}"><span data-hover="Profile">Profile</span></a></li>
 							<li
 								th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"><a
 								href="#" th:href="@{/registerStaff}"><span
-									data-hover="Register New Staff"> Register New Staff </span></a></li>
+									data-hover="RegisterNewStaff"> Register New Staff </span></a></li>
+							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
+								href="#" th:href="@{/profile}"><i class="glyphicon glyphicon-user"></i></a></li>
 							<li th:if="${#httpServletRequest.remoteUser.isEmpty()}"><a
-								href="#" th:href="@{/login}"><span data-hover="Login">
-										Login </span></a></li>
+								href="#" th:href="@{/login}"><i class="glyphicon glyphicon-log-in"></i></a></li>
 							<li th:if="${#httpServletRequest.remoteUser.isEmpty()}"><a
 								href="#" th:href="@{/register}"><span
 									data-hover="Register New User"> Register New User </span></a></li>
 							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
-								href="#" th:href="@{/logout}"><span data-hover="Logout">
-										Logout </span></a></li>
+								href="#" th:href="@{/logout}"><i class="glyphicon glyphicon-log-out"></i></a></li>
 						</nav>
 
 					</ul>
