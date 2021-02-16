@@ -9,9 +9,13 @@
   <div th:insert="fragments/general.html :: menu"></div>
   	<div class="main">
 	<div class="container" style="text-align: center; margin-bottom: 20px">
+	<div style="display:flex">
 	
-	<h2 style="padding:25px;font-weight:bold">Profile</h2>
-	<table th:if="${not #httpServletRequest.remoteUser.isEmpty()}"  class="table" style="width:35%; margin-left: auto; margin-right: auto; padding: 10px">
+	<div style="float:left; width: 30%">
+	<h2 style="padding:10px;font-weight:bold">Profile
+	<a href="EditProfile.html" th:href="@{/edit}" style="font-size:20px; float:right; color:#4597a8"><i class="glyphicon glyphicon-edit"></i></a></h2>
+	<table th:if="${not #httpServletRequest.remoteUser.isEmpty()}"  class="table" style="width:90%; margin-left: 10%; text-align:left; padding: 10px;">
+
 		<tr>
 			<td>Name</td>
 			<td th:text=${userProfile.name}>Your Name</td>
@@ -31,39 +35,33 @@
 			<td>Email Address</td>
 			<td th:text=${userProfile.emailAddress}>Your Email Address</td>
 		</tr>
-		<tr>
-			<td colspan="2">
-				<br/>
-				<button>
-					<a style="color:white" href="EditProfile.html" th:href="@{/edit}">Edit Profile</a>
-				</button></td>
-		</tr>
+		
 	</table> 
 	
-	<h2 style="padding:25px; font-weight:bold">Reservation Details</h2>
-	<table class="table" cellpadding="3" cellspacing="0" style="width: 60%;margin:auto">
+	</div>
+	
+	<br/>
+	<div style="float:right; width:70%">
+	<h2 style="padding:10px; font-weight:bold">Reservation Details</h2>
+	<table class="table" cellpadding="3" cellspacing="0" style="width: 90%;margin-left:10%">
 		<tr>
 			<th style="text-align:center">Reservation Time</th>
 			<th style="text-align:center">Reservation Date</th>
 			<th style="text-align:center">Service</th>
-		<!-- 	<th style="text-align:center">Description</th>  --> 
+
+
 			<th style="text-align:center">Cancel</th>  
 		</tr>
 		<tbody>
 		<tr th:each="reservation:${reservationList}" >
 			<td th:text=${reservation.timeSlot}>TimeSlot</td>
 			<td th:text=${reservation.service.localDate}>Reservation Time</td>
-			<td th:text=${reservation.service.provider.providerName}>Provider Name</td>
-		<!-- 	<td th:text=${reservation.service.provider.providerDescription}>Provider Description</td> -->
-			<td><a th:href="@{/reservationDelete/}+${reservation.reservationId}">Cancel</a></td>
+			<td th:text=${reservation.service.provider.providerName} style="text-align:left">Provider Name</td>
+			<td><a th:href="@{/reservationDelete/}+${reservation.reservationId}" style="color:#4597a8"><i class="glyphicon glyphicon-scissors"></i></a></td>
 		</tr>
 		</tbody>
 	</table>
-	<div>
-	<br/>
-		<button>
-			<a style="color:white" href="Home" th:href="@{/}">Back to Home</a>
-		</button>
+	</div>
 	</div>
 	
 	</div>

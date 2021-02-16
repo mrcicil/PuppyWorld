@@ -11,7 +11,7 @@
 		<h1 style="font-weight:bold; padding:10px">Edit Product</h1>
 		<br />
 		
-		<form action="#" th:action="@{/productSave}" th:object="${product}"
+		<form action="#" th:action="@{/productEditSave}" th:object="${product}"
 			method="post" enctype="multipart/form-data">
 			<input type="hidden" th:field="*{productId}">
 			<div class="form-group" style="margin-left:34%; text-align:left">
@@ -49,14 +49,14 @@
 					<input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
 				</div>
 				<br/>
-				<div class="form-group" style="margin-left:20%">
+				<div class="form-group" style="margin-left:12%">
 					<img id="output" alt="Preview" width="200" height="200" th:src="@{'data:image/jpeg;base64,'+${image}}"/>
 				</div>
 				</div>
 
 				
 				<button style="margin:5px"><a th:href="@{/productCreate}" style="color:white;">Clear</a></button>
-				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="color:white;">Submit</button>
+				<button type="submit"  class="send_upload" value="upload" style="color:white;">Submit</button>
 				
 		</form>
 		
@@ -65,6 +65,7 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+
 var loadFile = function(event) {
     var output = document.getElementById('output');
     output.src = URL.createObjectURL(event.target.files[0]);
@@ -73,20 +74,7 @@ var loadFile = function(event) {
     }
   };
   
-  $(document).ready(function() {
-	    $('#upload').bind("click",function() 
-	    { 
-	        var imgVal = $('#fileImage').val(); 
-	        if(imgVal=='') 
-	        { 
-	            alert("empty input file"); 
-	            return false; 
 
-	        } 
-	        return true; 
-
-	    }); 
-	});
 
 </script>
 </html>

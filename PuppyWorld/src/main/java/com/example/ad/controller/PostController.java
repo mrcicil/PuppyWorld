@@ -1,3 +1,4 @@
+
 package com.example.ad.controller;
 
 
@@ -5,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Iterator;
@@ -31,10 +33,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Post;
+import com.example.ad.domain.PostComment;
 import com.example.ad.domain.Product;
 import com.example.ad.domain.Services;
 import com.example.ad.domain.User;
 import com.example.ad.repo.ServiceRepository;
+import com.example.ad.service.PostCommentService;
+import com.example.ad.service.PostCommentServiceImplementation;
+
 import com.example.ad.service.PostService;
 import com.example.ad.service.PostServiceImplementation;
 import com.example.ad.service.ProductService;
@@ -50,8 +56,16 @@ public class PostController {
 	private PostService poservice;
 	
 	@Autowired
+	private PostCommentService pcservice;
+	
+	@Autowired
 	public void setPoService(PostServiceImplementation poServiceImpl) {
 		this.poservice = poServiceImpl;
+	}
+	
+	@Autowired
+	public void setPCService(PostCommentServiceImplementation pcServiceImpl) {
+		this.pcservice = pcServiceImpl;
 	}
 	
 	@Autowired
@@ -61,6 +75,7 @@ public class PostController {
 	public void setUService(UserServiceImplementation uServiceImpl) {
 		this.uservice = uServiceImpl;
 	}
+
 	
 	@RequestMapping("/postCreate")
 	public String showNewPostForm(Model model) {
@@ -87,6 +102,8 @@ public class PostController {
 		catch(IOException e) {
 			System.out.println(e.toString());
 		}
+		
+		
 		
 		ArrayList<Post> poList = poservice.findAllPosts();
 		for (Iterator <Post>iterator = poList.iterator(); iterator.hasNext();) {
@@ -116,6 +133,60 @@ public class PostController {
 		poservice.savePostService(post);
 		
 		return "redirect:/postList";
+
+	}
+	
+	@RequestMapping(value="/postEditSave",method=RequestMethod.POST)
+	public String saveEditPost(@ModelAttribute("post")Post post, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {
+		
+		try {
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			System.out.println(fileName);
+			File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
+			multipartFile.transferTo(convFile);
+			byte[] fileContent = FileUtils.readFileToByteArray(convFile);
+			
+			post.setPostImage(fileContent);
+		}
+		catch(IllegalStateException e) {
+			System.out.println(e.toString());
+		}
+		catch(IOException e) {
+			System.out.println(e.toString());
+		}
+
+		
+		if(post.getPostTitle().isEmpty()) {
+			errors.rejectValue("postTitle", "null", "Must be filled");
+		}
+		if(post.getPostMessage().isEmpty()) {
+			errors.rejectValue("postMessage", "null", "Must be filled");
+		}
+		
+		if (bindingResult.hasErrors()) {
+			return "postCreate";
+		}
+		
+		Post dbPost = poservice.findPostById(post.getPostId());
+		
+		if (dbPost !=null) {
+			dbPost.setPostTitle(post.getPostTitle());
+			dbPost.setPostMessage(post.getPostMessage());
+			dbPost.setPostType(post.getPostType());
+
+			if (post.getPostImage() !=null) {
+				dbPost.setPostImage(post.getPostImage());
+			}
+			
+			poservice.savePostService(dbPost);
+			
+			return "redirect:/postList";
+			
+		}
+		else {
+			return "postCreate";
+		}
+		
 
 	}
 	
@@ -162,11 +233,19 @@ public class PostController {
 	}
 	
 	@RequestMapping(value = "/viewPostDetails/{id}")
-	public String viewPostDetails(@PathVariable("id") Integer id, Model model) {
+	public String viewPostDetails(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
 		Post post = poservice.findPostById(id);
 		String encodedString = Base64.getEncoder().encodeToString(post.getPostImage());
+		List<PostComment> postcommentlist = pcservice.findPostCommentsbyPostId(id);
+		PostComment postcomment = new PostComment();
+		postcomment.setPost(post);
 		model.addAttribute("image", encodedString);
 		model.addAttribute("post",post);
+		model.addAttribute("postcommentlist", postcommentlist);
+		model.addAttribute("postcomment", postcomment);
+		User user = uservice.findUserByUserName(request.getRemoteUser());
+		model.addAttribute("user", user);
 		return "postDetails";
 	}
 }
+

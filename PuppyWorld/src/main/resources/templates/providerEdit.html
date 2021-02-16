@@ -11,7 +11,7 @@
 		<h1 style="font-weight:bold; padding:10px">Edit Service</h1>
 		<br />
 		
-		<form action="#" th:action="@{/providerSave}" th:object="${provider}"
+		<form action="#" th:action="@{/providerEditSave}" th:object="${provider}"
 			method="post" enctype="multipart/form-data">
 			
 			<input type="hidden" th:field="*{providerId}">
@@ -65,14 +65,14 @@
 					<input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
 				</div>
 				<br/>
-				<div class="form-group" style="margin-left:20%">
+				<div class="form-group" style="margin-left:11%">
 					<img id="output" alt="Preview" width="200" height="200" th:src="@{'data:image/jpeg;base64,'+${image}}"/>
 				</div>
 				</div>
 
 				
 				<button style="margin:5px"><a th:href="@{/providerCreate}" style="color:white;">Clear</a></button>
-				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="color:white;">Submit</button>
+				<button type="submit" class="send_upload" value="upload" style="color:white;">Submit</button>
 				
 		</form>
 		

@@ -121,7 +121,6 @@ public class ProductController {
 				errors.rejectValue("productName", "exist", "Product Exist");
 				break;
 			}
-			
 		}
 		
 		if(product.getProductName().isEmpty()) {
@@ -186,5 +185,51 @@ public class ProductController {
 		model.addAttribute("image", encodedString);
 		model.addAttribute("product",product);
 		return "productEdit";
+	}
+	
+	@RequestMapping(value="/productEditSave",method=RequestMethod.POST)
+	public String editSaveProduct(@ModelAttribute("product")Product product, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {
+		
+		try {
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			System.out.println(fileName);
+			File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
+			multipartFile.transferTo(convFile);
+			byte[] fileContent = FileUtils.readFileToByteArray(convFile);
+			
+			product.setProductImage(fileContent);
+		}
+		catch(IllegalStateException e) {
+			System.out.println(e.toString());
+		}
+		catch(IOException e) {
+			System.out.println(e.toString());
+		}
+		
+		if(product.getProductImage() == null) {
+			Product oldProduct = pservice.findProductById(product.getProductId());
+			product.setProductImage(oldProduct.getProductImage());
+		}
+		if(product.getProductName().isEmpty()) {
+			errors.rejectValue("productName", "null", "Must be filled");
+		}
+		if(product.getProductPrice() == 0) {
+			errors.rejectValue("productPrice", "null", "Must be filled");
+		}
+		if(product.getProductQuantity() == 0) {
+			errors.rejectValue("productQuantity", "null", "Must be filled");
+		}
+		
+		if (bindingResult.hasErrors()) {
+			return "productEdit";
+		}
+		
+		
+		User user = uservice.findUserByUserName(request.getRemoteUser());
+		product.setUser(user);
+		pservice.saveProduct(product);
+		
+		return "redirect:/productList";
+
 	}
 }

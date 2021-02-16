@@ -47,15 +47,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="header-bottom">
 			<div class="container">
 				<div class="logo">
-					<a href="Home" th:href="@{/}"><img src="images/logo.png" alt="" /></a>
+					<a href="Home" th:href="@{/}"><img src="/images/logo.png" alt="" /></a>
 				</div>
 				<span class="menu"></span>
 				<div class="top-menu">
 					<ul>
 						<nav class="cl-effect-5">
 
-							<li><a class="active" a href="Home" th:href="@{/}"><span
-									data-hover="Home">Home</span></a></li>
+							<li><a href="Home" th:href="@{/}"><i class="glyphicon glyphicon-home"></i></a></li>
 							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
 								href="#" th:href="@{/productList}"><span
 									data-hover="Product">Product</span></a></li>
@@ -68,21 +67,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
 								href="#" th:href="@{/checkBreed}"><span
 									data-hover="PuppySnap">PuppySnap</span></a></li>
-							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
-								href="#" th:href="@{/profile}"><span data-hover="Profile">Profile</span></a></li>
 							<li
 								th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"><a
 								href="#" th:href="@{/registerStaff}"><span
-									data-hover="Register New Staff"> Register New Staff </span></a></li>
+									data-hover="RegisterNewStaff"> Register New Staff </span></a></li>
+							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
+								href="#" th:href="@{/profile}"><i class="glyphicon glyphicon-user"></i></a></li>
 							<li th:if="${#httpServletRequest.remoteUser.isEmpty()}"><a
-								href="#" th:href="@{/login}"><span data-hover="Login">
-										Login </span></a></li>
+								href="#" th:href="@{/login}"><i class="glyphicon glyphicon-log-in"></i></a></li>
 							<li th:if="${#httpServletRequest.remoteUser.isEmpty()}"><a
 								href="#" th:href="@{/register}"><span
 									data-hover="Register New User"> Register New User </span></a></li>
 							<li th:if="${not #httpServletRequest.remoteUser.isEmpty()}"><a
-								href="#" th:href="@{/logout}"><span data-hover="Logout">
-										Logout </span></a></li>
+								href="#" th:href="@{/logout}"><i class="glyphicon glyphicon-log-out"></i></a></li>
 						</nav>
 
 					</ul>
@@ -108,13 +105,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- footer-section-starts -->
 	<div class="footer" th:fragment="footer">
 		<div class="container">
-			<div class="col-md-5 contact-section">
-				<h4>Contact Form</h4>
-					<input type="text" class="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
-					<input type="text" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
-					<textarea onfocus="if(this.value == 'Message') this.value='';" onblur="if(this.value == '') this.value='Message';" >Message</textarea>
-					<input type="submit" value="SEND">
-			</div>
 			<div class="col-md-7 follow-us">
 				<h4>Dog - Our Best Friend on Earth</h4>
 				<!--  <div class="social-icons">
