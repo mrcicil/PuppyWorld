@@ -3,59 +3,88 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Service List</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style>
+	.gallery{width:300px;float:left;}
+	.gallery img{
+		display:block;
+		width:100%;}
+	
+</style>
 </head>
 <body>
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 
 	<div class="main" height="150%">
-	<div class="container" style="text-align:center">
-	
-	<h1 style="font-weight:bold" th:text="${provider.providerName}">Service</h1>
-	<p th:text= "${message}"></p>
+		<div class="container" style="text-align: center">
+
+			<h1 style="font-weight: bold" th:text="${provider.providerName}">Service</h1>
+			<p th:text="${message}"></p>
+
 
 
     <div>
+    <ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
+	    <li style="float:left; margin-left:20%">
+	    <button style="width:150px">
+		<a th:href="@{/providerList/}" style="color:white">Back to List</a>
+		</button>
+		</li>
+			 <li style="float:left; margin-left:20%">
+				<button style="margin-left: 300%;"
+					th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
+					<a th:href="@{/serviceCreate/}+${provider.providerId}" style="color: white">New</a>
+				</button>
+				</li>
+			</ul>
+			</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div class="gallery">
+				<img th:src="@{${'/provider/image/'+ provider.providerId}}"
+					class="card img-fluid" alt="" width="300" height="300"
+					style="margin-left: 3%; padding: 10px"> <br />
+				<p th:text="'$'+${provider.price}">Service Price</p>
+				<p th:text=${provider.providerDescription}>Service Description</p>
+			</div>
+			<div>
+				<table class="table" cellpadding="3" cellspacing="0"
+					style="width: 60%; margin:auto">
+					<thead style="display: table-header-group">
+						<tr>
+							<th style="text-align: center">Date</th>
+							<th style="text-align: center">Time Slot</th>
+							<th
+								th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"
+								style="text-align: center">Delete</th>
+							<th style="text-align: center">Reserve</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="service:${serviceList}">
+							<td th:text="${service.localDate}">Date</td>
+							<td><select>
+									<option th:each="product:${service.timeSlots}"
+										th:text="${product}"></option>
+							</select></td>
+							<td
+								th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
+								<a th:href="@{/serviceDelete/}+${service.serviceId}">Delete</a>
+							</td>
+							<td><a th:href="@{/reservationCreate/}+${service.serviceId}">Choose</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
-	<button style="margin-left:75%;" th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
-	<a th:href="@{/serviceCreate/}+${provider.providerId}" style="color:white">Create New</a>
-	</button>
-	</div>
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-    <div>
-
-	<table class="table" cellpadding="3" cellspacing="0" style="width: 60%;margin:auto">
-	<thead style="display:table-header-group">
-	<tr>
-     	<th style="text-align:center">Date</th>
-     	<th style="text-align:center">Time Slot</th>
-     	<th th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="text-align:center">Delete</th>
-     	<th style="text-align:center">Reserve</th>
-   </tr>
-     </thead>
-     <tbody>
-   <tr th:each="service:${serviceList}" >
-     <td th:text="${service.localDate}">Date</td>
-     <td>
-     	<select>
-     		<option th:each="product:${service.timeSlots}"
-					th:text="${product}"></option>
-		</select>
-     </td>
-	 <td th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"> <a th:href="@{/serviceDelete/}+${service.serviceId}">Delete</a></td>
-	 <td> <a th:href="@{/reservationCreate/}+${service.serviceId}">Choose</a></td>
-   </tr>
-   </tbody>
-	</table>
-	</div>
-	</div>
 
 	</div>
-    <br/>
+	<br />
 	<div th:replace="fragments/general.html :: footer"></div>
-	
+
 </body>
 <script>
 

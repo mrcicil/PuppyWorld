@@ -7,10 +7,17 @@
 
 <style>
 
-
-
 div.container{
-margin-top: 5px;
+display: block;
+padding-right: 15px;
+padding-left: 15px;
+margin-right: auto;
+margin-left: auto;
+
+}
+
+div.bigbox{
+margin-top: 20px;
 margin-bottom: 5px; 
 width: 100%;
 display: block;
@@ -54,7 +61,7 @@ div.desc {
 <body>
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
-	<div class="main" style="height:150%; width:85%;margin-left:auto; margin-right:auto">
+	<div class="main" >
 	<div class="container" style="text-align:center">
 		<h1 style="font-weight:bold; padding:15px;">Post</h1>
 
@@ -80,6 +87,7 @@ div.desc {
 	
 	
 		<p></p>
+		</div>
 		</div>
 
 		<table class="table" cellpadding="3" cellspacing="0" style="width: 60%;margin:auto">
@@ -109,11 +117,38 @@ div.desc {
 
 
     <br/>
-    <div class="container" style="text-align:center">
+    <div class="bigbox" style="text-align:center">
     <h1 th:if="${#lists.isEmpty(postList)}" style="font-weight:bold; padding:15px;">Empty List</h1>
     </div>
-	<div th:replace="fragments/general.html :: footer"></div>
 	
-</body>
+	</body>
+<div th:replace="fragments/general.html :: footer"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+  
+  $(document).ready(function() {
+	    $('#upload').bind("click",function() 
+	    { 
+	        var imgVal = $('#fileImage').val(); 
+	        if(imgVal=='') 
+	        { 
+	            alert("empty input file"); 
+	            return false; 
+
+	        } 
+	        return true; 
+
+	    }); 
+	});
+
+</script>
 </html>
 
+	
