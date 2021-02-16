@@ -88,10 +88,10 @@ public class ServiceController {
 	@RequestMapping(value = "/serviceList/{id}")
 	public String dateList(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
 		User user = uservice.findUserByUserName(request.getRemoteUser());
-		ArrayList<Services> display = sservice.findAllServices();
-		if(user.getUserType() == Role.ROLE_USER) {
-			display = sservice.findAllActiveServices(id);
-		}
+		ArrayList<Services> display = sservice.findAllActiveServices(id);
+//		if(user.getUserType() == Role.ROLE_USER) {
+//			display = sservice.findAllActiveServices(id);
+//		}
 		Provider provider = pvservice.findProviderById(id);
 		model.addAttribute("serviceList", display);
 		model.addAttribute("provider", provider);

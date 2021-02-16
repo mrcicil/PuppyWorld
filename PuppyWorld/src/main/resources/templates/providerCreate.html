@@ -32,13 +32,7 @@
 				<p style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
 				</div>
 				
-			<div class="form-group" style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Reservation required?</label>
-				<select th:field="*{reservationType}">
-							<option th:each="reservationType : ${T(com.example.ad.domain.ReservationType).values()}" 
-							th:value="${reservationType}" th:text="${reservationType}"/>
-						</select>
-			</div>
+			
 
 		<!-- 	<div class="form-group" style="margin-left:34%; text-align:left">
 				<label style="width: 200px; text-align:left">Quantity:</label>
@@ -70,7 +64,7 @@
 
 				
 				<button style="margin:5px"><a th:href="@{/providerCreate}" style="color:white;">Clear</a></button>
-				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" >Submit</button>
+				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="color:white;">Submit</button>
 				
 		</form>
 		

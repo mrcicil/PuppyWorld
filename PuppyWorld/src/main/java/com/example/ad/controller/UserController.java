@@ -196,7 +196,7 @@ public class UserController {
 	public String profile (Model model, HttpServletRequest request) {
 		User currentUser = (User) uservice.findUserByUserName(request.getRemoteUser());
 		int userId = currentUser.getUserId();
-		ArrayList<Reservation> display = rservice.findAllActiveReservation(userId);
+		ArrayList<Reservation> display = rservice.findAllReservationsByUserId(userId);
 		model.addAttribute("reservationList", display);
 		model.addAttribute("userProfile", currentUser);
 		return "profile";

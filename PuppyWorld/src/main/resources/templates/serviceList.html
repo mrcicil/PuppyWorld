@@ -45,7 +45,7 @@
 				<img th:src="@{${'/provider/image/'+ provider.providerId}}"
 					class="card img-fluid" alt="" width="300" height="300"
 					style="margin-left: 3%; padding: 10px"> <br />
-				<p th:text="'$'+${provider.price}">Service Price</p>
+				<p th:text="'$'+${#numbers.formatDecimal(provider.price, 0, 2)}">Service Price</p>
 				<p th:text=${provider.providerDescription}>Service Description</p>
 			</div>
 			<div>

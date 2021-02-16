@@ -96,8 +96,8 @@ div.desc {
 	                <p>$<span th:text=  "${#numbers.formatDecimal(provider.price, 0, 2)}">Price</span>
 	                <p><a href="EditProduct.html" th:href="@{/providerEdit/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:#4597a8"><i class="glyphicon glyphicon-edit"></i></a>
 	                <a href="serviceList.html" th:href="@{/serviceList/}+${provider.providerId}" style="padding-left:15px; padding-right:15px; color:#4597a8"><i class="glyphicon glyphicon-eye-open"></i></a>
-	                <a href="DeleteProduct.html" th:href="@{/providerDelete/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:#4597a8"><i class="glyphicon glyphicon-trash"></i></a></p>
-					<p><a th:href="@{/providerReport/}+${provider.providerId}" style="color:#4597a8">Generate report</a></p>
+	                <a href="DeleteProduct.html" th:href="@{/providerDelete/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="padding-right:15px; color:#4597a8"><i class="glyphicon glyphicon-trash"></i></a>
+					<a th:href="@{/providerReport/}+${provider.providerId}" style="color:#4597a8" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"><i class="glyphicon glyphicon-stats"></i></a></p>
 					</div>	
 			
 			 

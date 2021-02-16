@@ -34,13 +34,13 @@
 				<p style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
 				</div>
 				
-			<div class="form-group" style="margin-left:34%; text-align:left">
+		<!-- 	<div class="form-group" style="margin-left:34%; text-align:left">
 				<label style="width: 200px; text-align:left">Reservation required?</label>
 				<select th:field="*{reservationType}">
 							<option th:each="reservationType : ${T(com.example.ad.domain.ReservationType).values()}" 
 							th:value="${reservationType}" th:text="${reservationType}"/>
 						</select>
-			</div>
+			</div> -->
 
 			<!-- <div class="form-group" style="margin-left:34%; text-align:left">
 				<label style="width: 200px; text-align:left">Quantity:</label>

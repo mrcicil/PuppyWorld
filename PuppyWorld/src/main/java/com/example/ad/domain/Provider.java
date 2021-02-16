@@ -21,18 +21,15 @@ public class Provider {
 	
 	private float price;
 	
-	private ReservationType reservationType;
-	
 	@Lob
 	private byte[] providerImage;
 
-	public Provider(String providerName, String providerDescription, float price, ReservationType reservationType,
+	public Provider(String providerName, String providerDescription, float price,
 			byte[] providerImage) {
 		super();
 		this.providerName = providerName;
 		this.providerDescription = providerDescription;
 		this.price = price;
-		this.reservationType = reservationType;
 		this.providerImage = providerImage;
 	}
 
@@ -70,14 +67,6 @@ public class Provider {
 
 	public void setPrice(float price) {
 		this.price = price;
-	}
-
-	public ReservationType getReservationType() {
-		return reservationType;
-	}
-
-	public void setReservationType(ReservationType reservationType) {
-		this.reservationType = reservationType;
 	}
 
 	public byte[] getProviderImage() {

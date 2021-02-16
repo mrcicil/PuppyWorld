@@ -533,7 +533,7 @@ public class PuppyWorldApplication {
 
 			Provider sp = new Provider("Dog Care Consultation",
 					"First time dog owner? Thinking of getting a particular breed? We have extensive experiential knowledge to help you with your concerns, whether it is on the health, nutritional and grooming needs, trainability or adaptability. We also advise on barking tendencies, apartment friendliness, child friendliness and hypoallergenic concerns on popular breeds. Come down to our store for hands-on advice today!",
-					(float) 0.00, ReservationType.NO, servp);
+					(float) 30.00, servp);
 			prrepo.save(sp);
 
 			BufferedImage servpImage2 = ImageIO.read(new File("src/main/resources/static/images/servp2.jpg"));
@@ -544,7 +544,7 @@ public class PuppyWorldApplication {
 
 			Provider sp2 = new Provider("Dog Grooming - Basic Package",
 					"Grooming is essential in maintaining the health, wellbeing and happiness of your dog! This services includes nail clipping, ear cleaning, shaving of anal area, between the legs, belly and paw pads. Bathing, conditioning, drying and brushing. Trimming fur off the nose bridge and around paw (if applicable). Prices start at $40++ for small dogs (~1kg), with additional $5 for every kg.",
-					(float) 40.00, ReservationType.YES, servp2);
+					(float) 40.00, servp2);
 			prrepo.save(sp2);
 
 			BufferedImage servpImage3 = ImageIO.read(new File("src/main/resources/static/images/servp3.jpg"));
@@ -554,7 +554,7 @@ public class PuppyWorldApplication {
 
 			Provider sp3 = new Provider("Dog Grooming - Full Package",
 					"Full grooming comprises of everything in the basic package, with additional hair styling/cutting. Prices start at $50++ for small dogs (~1kg), with additional $5 for every kg.",
-					(float) 50.00, ReservationType.YES, servp3);
+					(float) 50.00, servp3);
 			prrepo.save(sp3);
 
 			BufferedImage servpImage4 = ImageIO.read(new File("src/main/resources/static/images/servp4.jpg"));
@@ -564,7 +564,7 @@ public class PuppyWorldApplication {
 
 			Provider sp4 = new Provider("Pet Spa",
 					"Pamper your furkids like yourself at our award-winning facility, accredited by the Singapore Kennel Club. Our team of professional groomers tailor each service based on the needs of your pet. A day at the spa includes bathing, grooming, styling and colouring, and a spa service. Choose between skin clinic chlorhexidine treatment, Japanese Herb Treatment, nano-microbubble spa or CO2 treatment. Prices for small dogs start from $80++",
-					(float) 80.00, ReservationType.YES, servp4);
+					(float) 80.00, servp4);
 			prrepo.save(sp4);
 
 			BufferedImage servpImage5 = ImageIO.read(new File("src/main/resources/static/images/servp5.jpg"));
@@ -574,7 +574,7 @@ public class PuppyWorldApplication {
 
 			Provider sp5 = new Provider("De-Ticking",
 					"Have a bad tick infestation? Leave it to the professionals to to de-tick. Prices start at $30++. Additional charges may apply depending on the severity of infestation. ",
-					(float) 30.00, ReservationType.YES, servp5);
+					(float) 30.00, servp5);
 			prrepo.save(sp5);
 
 			BufferedImage servpImage6 = ImageIO.read(new File("src/main/resources/static/images/servp6.jpg"));
@@ -584,7 +584,7 @@ public class PuppyWorldApplication {
 
 			Provider sp6 = new Provider("Dental Care",
 					"Nervous about brushing your dog's teeth? Or perhaps your dog has a case of bad breath. We provide basic tooth brushing and cleaning services to put you at ease.",
-					(float) 20.00, ReservationType.YES, servp6);
+					(float) 20.00, servp6);
 			prrepo.save(sp6);
 
 			BufferedImage servpImage7 = ImageIO.read(new File("src/main/resources/static/images/servp7.jpg"));
@@ -594,7 +594,7 @@ public class PuppyWorldApplication {
 
 			Provider sp7 = new Provider("Pet Day Care",
 					"We provide pet day-boarding services to keep you furry companions company while you're away. Includes 2 meals, 4 walks a day and a complimentary webcam viewing for you to check up on them. Complimentary bath and blowdry for stays of more than 3 consecutive days. Check-in: 8am. Check-out: 6pm.",
-					(float) 80.00, ReservationType.YES, servp7);
+					(float) 80.00, servp7);
 			prrepo.save(sp7);
 
 			BufferedImage servpImage8 = ImageIO.read(new File("src/main/resources/static/images/servp8.jpg"));
@@ -604,7 +604,7 @@ public class PuppyWorldApplication {
 
 			Provider sp8 = new Provider("Pet Hotel",
 					"Going away for a vacation and can't bring your loved one(s) along? Fret not! We offer overnight services. Full board services start from $100 per day (12pm-12pm). Additional charges may apply depending on choice of suite, meal types and dog size.",
-					(float) 100.00, ReservationType.YES, servp8);
+					(float) 100.00, servp8);
 			prrepo.save(sp8);
 
 			BufferedImage servpImage9 = ImageIO.read(new File("src/main/resources/static/images/servp9.jpg"));
@@ -614,7 +614,7 @@ public class PuppyWorldApplication {
 
 			Provider sp9 = new Provider("Basic Dog Training",
 					"Spend quality time with you dog and get to know it better through our obedience course. We'll enable you to better understand and build a stronger connection between the two of you. Improving trust and breeding a loving relationship will give both of you greater satisfaction. The training will be conducted in groups over 10 weeks.",
-					(float) 800.00, ReservationType.YES, servp9);
+					(float) 800.00, servp9);
 			prrepo.save(sp9);
 
 			BufferedImage servpImage10 = ImageIO.read(new File("src/main/resources/static/images/servp10.jpg"));
@@ -624,7 +624,7 @@ public class PuppyWorldApplication {
 
 			Provider sp10 = new Provider("Potty Training",
 					"Toilet train your dog or puppy through our course. It is a small price to pay compared to having clean up that soiled carpet or mat many times over. The course is conducted in groups over 10 weeks.",
-					(float) 480.00, ReservationType.YES, servp10);
+					(float) 480.00, servp10);
 			prrepo.save(sp10);
 			
 			
