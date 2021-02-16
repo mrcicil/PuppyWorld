@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.example.ad.domain.Product;
+import com.example.ad.domain.ProductType;
 
 
 public interface ProductRepository extends JpaRepository<Product, Integer>{
@@ -18,6 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 			   +"OR CONCAT(p.product_type,'') LIKE %:keyword% ",
 			   nativeQuery = true)
 			public ArrayList<Product> searchProduct(@Param("keyword") String keyword);
+	        public ArrayList<Product> findByProductType(@Param("keyword") ProductType productType);
 
 
 }

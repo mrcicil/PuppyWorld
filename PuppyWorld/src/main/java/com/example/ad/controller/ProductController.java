@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Product;
+import com.example.ad.domain.ProductType;
 import com.example.ad.domain.Services;
 import com.example.ad.domain.User;
 import com.example.ad.repo.ServiceRepository;
@@ -78,12 +79,13 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/searchProduct")
-	public String searchProduct(Model model, @RequestParam("keyword") String keyword) {
+	public String searchProduct(Model model, @RequestParam("keyword") String keyword, ProductType productType) {
 		
 		ArrayList<Product> searchProduct=pservice.searchProductByKeyword(keyword);
 		
 		model.addAttribute("productList",searchProduct);
 		model.addAttribute("keyword",keyword);
+		model.addAttribute("keyword",productType);
 		return"productList";		
 	}
 	
