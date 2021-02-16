@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.ad.domain.Output;
+
 @Controller
 public class BreedController {
 	
@@ -41,8 +43,10 @@ public class BreedController {
 		byte[] fileContent = FileUtils.readFileToByteArray(convFile);
 		String encodedString = Base64.getEncoder().encodeToString(fileContent);
 		List<String> result = mlMethod(fileContent);
+		List<Output> links = convertLink(result);
 		model.addAttribute("image", encodedString);
-		model.addAttribute("results", result);
+		//model.addAttribute("results", result);
+		model.addAttribute("links", links);
 		return "resultBreed";
 	}
 	
@@ -116,5 +120,26 @@ public class BreedController {
         output = Arrays.asList(str);
         return output;
 	}
-
+	
+	public List<Output> convertLink(List<String> result){
+		
+		List<Output> output = new ArrayList<Output>();
+		
+		for(int i=0;i<result.size()-1;i++) {
+			Output solo = new Output();
+			String outcome = result.get(i).substring(22, (result.get(i).length())-26);
+			String[] outcome1 = outcome.split(" ");
+			List<String> outcome2 = Arrays.asList(outcome1);
+			String fin = "https://www.google.com/search?q=";
+			for(int j = 0;j<outcome2.size();j++) {
+				fin +=outcome2.get(j);
+				if(j != outcome2.size()-1) {
+					fin += "+";
+				}
+			}
+			solo.setBreed(result.get(i));
+			solo.setLink(fin);
+			output.add(solo);
+		}return output;
+	}
 }

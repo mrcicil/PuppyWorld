@@ -18,9 +18,15 @@
 	<div style="float:left; width:40%; text-align:left">
 	<h1 style="font-weight:bold; padding:15px">YOUR RESULT!!!!</h1>
 	<br/>
-	<div th:each="result:${results}">
-		<p th:text=${result}></p>
+	<div th:each="result:${links}">
+		
+		
+		<p >
+			<a th:href="@{${result.link}}" th:text="${result.breed} + ' Click for more info.'"></a>
+		</p>
 	</div>
+	
+	
 	
 	
 	
