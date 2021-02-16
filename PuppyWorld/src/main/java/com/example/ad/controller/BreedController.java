@@ -43,7 +43,7 @@ public class BreedController {
 		List<String> result = mlMethod(fileContent);
 		model.addAttribute("image", encodedString);
 		model.addAttribute("results", result);
-		return "checkBreed";
+		return "resultBreed";
 	}
 	
 	public List<String> mlMethod(byte[] fileContent) {

@@ -140,22 +140,10 @@ public class ProviderController {
 				break;
 			}
 			
-		}
-//		
-//		if(product.getProductName().isEmpty()) {
-//			errors.rejectValue("productName", "null", "Must be filled");
-//		}
-//		if(product.getProductPrice() == 0) {
-//			errors.rejectValue("productPrice", "null", "Must be filled");
-//		}
-//		if(product.getProductQuantity() == 0) {
-//			errors.rejectValue("productQuantity", "null", "Must be filled");
-//		}
-//		
+		}	
 		if (bindingResult.hasErrors()) {
 			return "providerCreate";
 		}
-		
 //		User user = uservice.findUserByUserName(request.getRemoteUser());
 		pvservice.saveProvider(provider);
 		
@@ -174,6 +162,44 @@ public class ProviderController {
 	@RequestMapping(value = "/providerDelete/{id}")
 	public String deleteProduct(@PathVariable("id") Integer id) {
 		pvservice.deleteProviderById(id);
+		return "redirect:/providerList";
+	}
+	
+	@RequestMapping(value="/providerEditSave",method=RequestMethod.POST)
+	public String editSaveProvider(@ModelAttribute("provider")Provider provider, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {
+		
+		try {
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			System.out.println(fileName);
+			File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + fileName);
+			multipartFile.transferTo(convFile);
+			byte[] fileContent = FileUtils.readFileToByteArray(convFile);
+			
+			provider.setProviderImage(fileContent);
+		}
+		catch(IllegalStateException e) {
+			System.out.println(e.toString());
+		}
+		catch(IOException e) {
+			System.out.println(e.toString());
+		}
+		
+		if(provider.getProviderImage() == null) {
+			Provider oldProvider = pvservice.findProviderById(provider.getProviderId());
+			provider.setProviderImage(oldProvider.getProviderImage());	
+		}
+		
+		if(provider.getPrice() == 0) {
+			errors.rejectValue("price", "null", "Must be filled");
+		}
+//		
+		if (bindingResult.hasErrors()) {
+			return "providerEdit";
+		}
+		
+//		User user = uservice.findUserByUserName(request.getRemoteUser());
+		pvservice.saveProvider(provider);
+		
 		return "redirect:/providerList";
 	}
 
