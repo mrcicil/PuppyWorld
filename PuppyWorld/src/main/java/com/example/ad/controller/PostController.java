@@ -177,7 +177,7 @@ public class PostController {
 				dbPost.setPostImage(post.getPostImage());
 			}
 			
-			poservice.savePostService(post);
+			poservice.savePostService(dbPost);
 			
 			return "redirect:/postList";
 			
