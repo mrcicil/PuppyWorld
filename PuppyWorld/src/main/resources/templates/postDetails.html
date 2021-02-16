@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:insert="fragments/general.html :: header">
 <meta charset="ISO-8859-1">
 <title>Post List</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
+</head>
 <style>
 
 div.container{
@@ -133,10 +133,8 @@ div.gallery img {
 
 </style>
 
-</head>
 
 <body>
-	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 	<div class="main">
 	<div class="container" style="text-align:center; margin-left:auto; margin-right:auto">

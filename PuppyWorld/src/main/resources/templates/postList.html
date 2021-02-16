@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:insert="fragments/general.html :: header">
 <meta charset="ISO-8859-1">
 <title>Post List</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+</head>
 
 <style>
 
@@ -56,14 +57,13 @@ div.desc {
 
 </style>
 
-</head>
+
 
 <body>
-	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
-	<div class="main" style="width: 1050px; margin-left:auto; margin-right:auto">
+	<div class="main">
 		<div class="container" style="text-align:center; ">
-		<h1 style="font-weight:bold; padding:15px;">Post</h1>
+		<h1 style="font-weight:bold; padding:10px;">Post</h1>
 
 		<ul style="list-style: none; margin-left:auto; margin-right:auto;">
 			<li th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"
@@ -72,15 +72,15 @@ div.desc {
 			</li>
 			</ul> 
 
-		</div>
+		
 
-		<table class="table" cellpadding="3" cellspacing="0">
+		<table class="table" cellpadding="3" cellspacing="0" style="width:90%; margin-left:auto; margin-right:auto; text-align:left"> 
 		<tr>
 			<th>NO</th>
 			<th>Owner</th>
 			<th style="width:18%">Post Title</th>
-			<th>Post Messages</th>
-			<th>Post Type</th>  
+			<th style="width:45%">Post Messages</th>
+			<th style="width:10%; text-align:center">Post Type</th>  
 			<th>Edit</th>
 			<th>Delete</th>
 			<th>View</th>
@@ -88,13 +88,13 @@ div.desc {
 			<tbody>
 				<tr th:each="post:${postList}">
 					<td th:text=${post.postId}>NO</td>
-					<td th:text=${user.userName}>Owner By</td>
+					<td th:text=${post.user.userName}>Owner By</td>
 					<td th:text=${post.postTitle}>Post Title</td>
 					<td th:text=${post.postMessage}>Post Messages</td>
-					<td th:text=${post.postType}>Post Category</td>
-					<td><a th:href="@{/postEdit/}+${post.postId}">Edit</a></td>
-					<td><a th:href="@{/postDelete/}+${post.postId}">Delete</a></td>
-					<td><a href="ViewPost.html"th:href="@{/viewPostDetails/}+${post.postId}">View</a></td>
+					<td th:text=${post.postType} style="text-align:center">Post Category</td>
+					<td style="text-align:center"><div th:if="${post.user.userId} == ${user.userId}"><a th:href="@{/postEdit/}+${post.postId}"><i class="glyphicon glyphicon-edit"></i></a></div></td>
+					<td style="text-align:center"><div th:if="${post.user.userId} == ${user.userId}"><a th:href="@{/postDelete/}+${post.postId}"><i class="glyphicon glyphicon-trash"></i></a></div></td>
+					<td style="text-align:center"><a href="ViewPost.html"th:href="@{/viewPostDetails/}+${post.postId}"><i class="glyphicon glyphicon-eye-open"></i></a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -104,7 +104,7 @@ div.desc {
     <div class="bigbox" style="text-align:center">
     <h1 th:if="${#lists.isEmpty(postList)}" style="font-weight:bold; padding:15px;">Empty List</h1>
     </div>
-	
+	</div>
 	</body>
 <div th:replace="fragments/general.html :: footer"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
