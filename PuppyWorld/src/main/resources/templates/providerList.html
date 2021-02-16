@@ -20,7 +20,7 @@ div.gallery {
   border: 1px solid #ccc;
   float: left;
   width: 370px;
-  height: 450px;
+  height: 400px;
   position: relative;
   text-align: center;
 }
@@ -94,10 +94,10 @@ div.desc {
 	               <br/><br/><br/><br/><br/><br/><br/>
 	                <div class="desc" style="text-align:center" ><p><br><span th:text=  ${provider.providerName} style="font-weight:bold">Name</span>
 	                <p>$<span th:text=  "${#numbers.formatDecimal(provider.price, 0, 2)}">Price</span>
-	                <p><a href="EditProduct.html" th:href="@{/providerEdit/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">Edit</a>
-	                <p><a href="serviceList.html" th:href="@{/serviceList/}+${provider.providerId}">View</a>
-	                <p><a href="DeleteProduct.html" th:href="@{/providerDelete/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"><i class="glyphicon glyphicon-trash"></i></a>
-					<p><a th:href="@{/providerReport/}+${provider.providerId}">Generate report</a></p>
+	                <p><a href="EditProduct.html" th:href="@{/providerEdit/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:#4597a8"><i class="glyphicon glyphicon-edit"></i></a>
+	                <a href="serviceList.html" th:href="@{/serviceList/}+${provider.providerId}" style="padding-left:15px; padding-right:15px; color:#4597a8"><i class="glyphicon glyphicon-eye-open"></i></a>
+	                <a href="DeleteProduct.html" th:href="@{/providerDelete/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:#4597a8"><i class="glyphicon glyphicon-trash"></i></a></p>
+					<p><a th:href="@{/providerReport/}+${provider.providerId}" style="color:#4597a8">Generate report</a></p>
 					</div>	
 			
 			 

@@ -27,14 +27,13 @@
 
     <div>
     <ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
-	    <li style="float:left; margin-left:20%">
+	    <li style="float:left; margin-left:1%">
 	    <button style="width:150px">
 		<a th:href="@{/providerList/}" style="color:white">Back to List</a>
 		</button>
 		</li>
-			 <li style="float:left; margin-left:20%">
-				<button style="margin-left: 300%;"
-					th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
+			 <li style="float:left; margin-left:73%">
+				<button th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
 					<a th:href="@{/serviceCreate/}+${provider.providerId}" style="color: white">New</a>
 				</button>
 				</li>
@@ -71,9 +70,9 @@
 							</select></td>
 							<td
 								th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
-								<a th:href="@{/serviceDelete/}+${service.serviceId}">Delete</a>
+								<a th:href="@{/serviceDelete/}+${service.serviceId}" style="color:#4597a8"><i class="glyphicon glyphicon-scissors"></i></a>
 							</td>
-							<td><a th:href="@{/reservationCreate/}+${service.serviceId}">Choose</a></td>
+							<td><a th:href="@{/reservationCreate/}+${service.serviceId}" style="color:#4597a8"><i class="glyphicon glyphicon-check"></i></a></td>
 						</tr>
 					</tbody>
 				</table>

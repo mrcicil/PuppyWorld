@@ -22,7 +22,7 @@ div.gallery {
   border: 1px solid #ccc;
   float: left;
   width: 370px;
-  height: 450px;
+  height: 410px;
   position: relative;
   text-align: center;
 }
@@ -98,9 +98,9 @@ div.desc {
 	               <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	                <div class="desc" style="margin-left:5%; text-align:center; padding: 10px" >
 	                	<p><br><span th:text=  ${product.productName} style="font-weight:bold">Name</span></p>
-	                	<p>$<span th:text=  "${#numbers.formatDecimal(product.productPrice, 0, 2)}">Price</span></p>
-	           			<p><a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}">Edit</a></p>
-						<p><a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}"><i class="glyphicon glyphicon-trash"></i></a></p>
+	                	<p style="position:absolute; bottom:35px; left:45%;">$<span th:text=  "${#numbers.formatDecimal(product.productPrice, 0, 2)}">Price</span></p>
+	           			<p><a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}" th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="padding-right:10px; vertical-align:bottom; position:absolute; bottom:10px; left:42%;color:#4597a8"><i class="glyphicon glyphicon-edit"></i></a>
+						<a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}" th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style = "vertical-align:bottom; position:absolute; bottom:10px; right: 38%; color:#4597a8"><i class="glyphicon glyphicon-trash"></i></a></p>
 						
 					</div>	
 			
