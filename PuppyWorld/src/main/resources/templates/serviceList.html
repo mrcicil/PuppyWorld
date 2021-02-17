@@ -21,8 +21,6 @@
 		<div class="container" style="text-align: center">
 
 			<h1 style="font-weight: bold" th:text="${provider.providerName}">Service</h1>
-			<p th:text="${message}"></p>
-
 
 
     <div>
@@ -39,7 +37,8 @@
 				</li>
 			</ul>
 			</div>
-			<p th:text="${message}"></p>
+			</br>
+			<p th:text="${message}" style="color:red;font-size:large"></p>
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
 			<div class="gallery">
@@ -87,7 +86,4 @@
 	<div th:replace="fragments/general.html :: footer"></div>
 
 </body>
-<script>
-
-</script>
 </html>
