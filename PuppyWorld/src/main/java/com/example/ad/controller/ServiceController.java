@@ -205,12 +205,6 @@ public class ServiceController {
 				model.addAttribute("message", message);
 				return "forward:/serviceList/" + service.getProvider().getProviderId();
 			}
-			else if(reservation.getService().getServiceId() == service.getServiceId()) {
-				service.setStatus(Status.INACTIVE);
-				sservice.saveService(service);
-				return "redirect:/serviceList/" + service.getProvider().getProviderId();
-			}
-			
 		}
 		sservice.deleteServiceById(id);
 		return "redirect:/serviceList/" + service.getProvider().getProviderId();

@@ -29,9 +29,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Product;
 import com.example.ad.domain.Provider;
+import com.example.ad.domain.Reservation;
+import com.example.ad.domain.Status;
 import com.example.ad.domain.User;
 import com.example.ad.service.ProviderService;
 import com.example.ad.service.ProviderServiceImplementation;
+import com.example.ad.service.ReservationService;
+import com.example.ad.service.ReservationServiceImplementation;
 import com.example.ad.service.UserService;
 import com.example.ad.service.UserServiceImplementation;
 
@@ -44,6 +48,14 @@ public class ProviderController {
 	@Autowired
 	public void setPvService(ProviderServiceImplementation pvServiceImpl) {
 		this.pvservice = pvServiceImpl;
+	}
+	
+	@Autowired
+	private ReservationService rservice;
+	
+	@Autowired
+	public void setRService(ReservationServiceImplementation rServiceImpl) {
+		this.rservice = rServiceImpl;
 	}
 	
 	@Autowired
@@ -160,8 +172,20 @@ public class ProviderController {
 	}
 	
 	@RequestMapping(value = "/providerDelete/{id}")
-	public String deleteProduct(@PathVariable("id") Integer id) {
+	public String deleteProduct(@PathVariable("id") Integer id, Model model) {
+		
+		Provider provider = pvservice.findProviderById(id);
+		ArrayList<Reservation> rList = rservice.findAllReservations();
+		for (Iterator <Reservation> iterator = rList.iterator(); iterator.hasNext();) {
+			Reservation reservation = iterator.next();
+			if(reservation.getService().getProvider().getProviderId() == provider.getProviderId()) {
+				String message = "Reservation exist";
+				model.addAttribute("message", message);
+				return "forward:/providerList";
+			}
+		}
 		pvservice.deleteProviderById(id);
+		
 		return "redirect:/providerList";
 	}
 	
