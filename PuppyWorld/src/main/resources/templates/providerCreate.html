@@ -16,21 +16,23 @@
 
 			<div class="form-group" style="margin-left:34%; text-align:left">
 				<label style="width: 200px; text-align:left">Name:</label>
-				<input type="text" placeholder="Enter serivce name" th:field="*{providerName}">
+				<input type="text" placeholder="Enter serivce name" th:field="*{providerName}" style="width:185px;">
 				<p style="color:red" th:if="${#fields.hasErrors('providerName')}" th:errors="*{providerName}"></p>
 				</div>
 				
 			<div class="form-group" style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Description:</label>
-				<input type="text" placeholder="Enter some description" th:field="*{providerDescription}">
+				<label style="width: 200px; text-align:left">Price:</label>
+				<input type="number" step=0.01 min=0 placeholder="Enter product price" th:field="*{price}" style="width:185px;">
+				<p style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+				</div>
+				
+			<div class="form-group" style="margin-left:34%; text-align:left">
+				<label style="width: 200px; text-align:left; vertical-align:top">Description:</label>
+				<textarea type="text" placeholder="Enter some description" th:field="*{providerDescription}" style="width:185px; height:100px"></textarea>
 				<p style="color:red" th:if="${#fields.hasErrors('providerDescription')}" th:errors="*{providerDescription}"></p>
 				</div>
 
-			<div class="form-group" style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Price:</label>
-				<input type="number" step=0.01 min=0 placeholder="Enter product price" th:field="*{price}">
-				<p style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
-				</div>
+			
 				
 			
 

@@ -189,8 +189,8 @@ div.gallery img {
 						
 						
 						<div class="commenticons" th:if="${comment.user.userId} == ${user.userId}" style="float:right">
-						<a href="EditComment.html" th:href="@{/postCommentEdit/}+${comment.commentId}"><i class="glyphicon glyphicon-edit"></i></a> 
-						<a href="DeleteComment.html" th:href="@{/postCommentDelete/}+${comment.commentId}"><i class="glyphicon glyphicon-trash"></i></a> 
+						<a href="EditComment.html" th:href="@{/postCommentEdit/}+${comment.commentId}" th:if="${(post.user.userId == user.userId)|| (#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString()))}"><i class="glyphicon glyphicon-edit"></i></a> 
+						<a href="DeleteComment.html" th:href="@{/postCommentDelete/}+${comment.commentId}" th:if="${(post.user.userId == user.userId)|| (#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString()))}"><i class="glyphicon glyphicon-trash"></i></a> 
 						</div>
 						<br/>
 						<span th:text = "${comment.commentMessage}">Comment</span>
