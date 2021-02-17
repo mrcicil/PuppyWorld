@@ -296,7 +296,7 @@ public class UserController {
 		}
 		else {
 
-			errors.rejectValue("emailAddress", "email mismatch", "Please input the correct email address");
+			errors.rejectValue("emailAddress", "email mismatch", "Email address is not registered");
 			
 			return "forgetPassword";
 			

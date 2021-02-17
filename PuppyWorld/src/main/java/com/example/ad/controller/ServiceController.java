@@ -208,6 +208,8 @@ public class ServiceController {
 			else if(reservation.getService().getServiceId() == service.getServiceId()) {
 				service.setStatus(Status.INACTIVE);
 				sservice.saveService(service);
+				String message = "Reservation exist";
+				model.addAttribute("message", message);
 				return "redirect:/serviceList/" + service.getProvider().getProviderId();
 			}
 			
