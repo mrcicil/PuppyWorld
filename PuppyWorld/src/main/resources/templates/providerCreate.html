@@ -16,7 +16,7 @@
 
 			<div class="form-group" style="margin-left:34%; text-align:left">
 				<label style="width: 200px; text-align:left">Name:</label>
-				<input type="text" placeholder="Enter serivce name" th:field="*{providerName}" style="width:185px;">
+				<input type="text" placeholder="Enter serivce name" th:field="*{providerName}" style="width:185px; ">
 				<p style="color:red" th:if="${#fields.hasErrors('providerName')}" th:errors="*{providerName}"></p>
 				</div>
 				
