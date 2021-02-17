@@ -92,8 +92,8 @@ div.desc {
 					<td th:text=${post.postTitle}>Post Title</td>
 					<td th:text=${post.postMessage}>Post Messages</td>
 					<td th:text=${post.postType} style="text-align:center">Post Category</td>
-					<td style="text-align:center"><div th:if="${post.user.userId} == ${user.userId}"><a th:href="@{/postEdit/}+${post.postId}"><i class="glyphicon glyphicon-edit"></i></a></div></td>
-					<td style="text-align:center"><div th:if="${post.user.userId} == ${user.userId}"><a th:href="@{/postDelete/}+${post.postId}"><i class="glyphicon glyphicon-trash"></i></a></div></td>
+					<td style="text-align:center"><div th:if="${(post.user.userId == user.userId) || (#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString()))}"><a th:href="@{/postEdit/}+${post.postId}"><i class="glyphicon glyphicon-edit"></i></a></div></td>
+					<td style="text-align:center"><div th:if="${(post.user.userId == user.userId) || (#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString()))}"><a th:href="@{/postDelete/}+${post.postId}"><i class="glyphicon glyphicon-trash"></i></a></div></td>
 					<td style="text-align:center"><a href="ViewPost.html"th:href="@{/viewPostDetails/}+${post.postId}"><i class="glyphicon glyphicon-eye-open"></i></a></td>
 				</tr>
 			</tbody>
