@@ -50,7 +50,7 @@
 				</select>
 				</div> -->
 
-			<br/>
+
 
 			<div class="form-group" style="margin-left:34%; text-align:left" >
 				<label style="width: 200px; text-align:left"> Upload Image:</label>
@@ -59,7 +59,7 @@
 					<input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
 				</div>
 				<br/>
-				<div class="form-group"  style="margin-left:20%">
+				<div class="form-group"  style="margin-left:11%; border-style:solid; border-color:#4597a8; border-width: thin; height: 200px; width: 200px;">
 					<img id="output" alt="Preview" width="200" height="200"/>
 				</div>
 				</div>
@@ -69,6 +69,7 @@
 				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="color:white;">Submit</button>
 				
 		</form>
+		<br/><br/>
 		
 	</div>
 	<div th:insert="fragments/general.html :: footer"></div>

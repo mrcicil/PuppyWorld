@@ -65,7 +65,7 @@
 					<tbody>
 						<tr th:each="service:${serviceList}">
 							<td th:text="${service.localDate}">Date</td>
-							<td><select>
+							<td><select style="width:60px">
 									<option th:each="product:${service.timeSlots}"
 										th:text="${product}"></option>
 							</select></td>
