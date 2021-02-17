@@ -135,6 +135,14 @@ public class ServiceController {
 		User user = uservice.findUserByUserName(request.getRemoteUser());
 		reservation.setUser(user);
 		reservation.setStatus(Status.ACTIVE);
+		String msg = "Thank you for choosing us. Your reservation with " + service.getProvider().getProviderName() + " on " + service.getLocalDate() + " at " + reserveTime + " has been successfully booked. See you soon.";
+		try {
+			eservice.sendNotification(msg, user.getEmailAddress());
+		} catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 		rservice.saveReservation(reservation);
 		return "reservationSuccess";
 	}
