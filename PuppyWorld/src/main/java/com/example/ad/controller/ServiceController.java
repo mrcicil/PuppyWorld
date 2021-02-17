@@ -137,7 +137,7 @@ public class ServiceController {
 		reservation.setStatus(Status.ACTIVE);
 		String msg = "Thank you for choosing us. Your reservation with " + service.getProvider().getProviderName() + " on " + service.getLocalDate() + " at " + reserveTime + " has been successfully booked. See you soon.";
 		try {
-			eservice.sendNotification(msg, user.getEmailAddress());
+			eservice.sendSuccessNotification(msg, user.getEmailAddress());
 		} catch (MessagingException e) {
             e.printStackTrace();
         } catch (IOException e) {
