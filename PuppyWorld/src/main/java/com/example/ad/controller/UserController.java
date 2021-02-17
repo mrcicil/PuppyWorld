@@ -3,7 +3,10 @@ package com.example.ad.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -36,7 +39,7 @@ import com.example.ad.service.UserService;
 import com.example.ad.service.UserServiceImplementation;
 
 @Controller
-public class UserController {
+public class UserController{
 	
 	@Autowired
 	private UserService uservice;
@@ -128,6 +131,7 @@ public class UserController {
 			}
 			
 		}
+		
 	}
 	
 	
@@ -197,10 +201,15 @@ public class UserController {
 		User currentUser = (User) uservice.findUserByUserName(request.getRemoteUser());
 		int userId = currentUser.getUserId();
 		ArrayList<Reservation> display = rservice.findAllReservationsByUserId(userId);
+		
+		Collections.sort(display, Reservation.ReserveComparator);
+
 		model.addAttribute("reservationList", display);
 		model.addAttribute("userProfile", currentUser);
 		return "profile";
 	}
+	
+	
 	
 	@RequestMapping (value = "/edit")
 	public String editProfile (Model model, HttpServletRequest request) {
@@ -301,6 +310,8 @@ public class UserController {
 		}
 		
 	}
+
+	
 	
 
 }
