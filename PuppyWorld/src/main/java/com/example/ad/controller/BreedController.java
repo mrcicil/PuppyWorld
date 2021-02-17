@@ -128,6 +128,13 @@ public class BreedController {
 		for(int i=0;i<result.size()-1;i++) {
 			Output solo = new Output();
 			String outcome = result.get(i).substring(22, (result.get(i).length())-26);
+			String number = result.get(i).substring((result.get(i).length())-8, (result.get(i).length())-1);
+			double num = Double.parseDouble(number);
+			double num1 = Math.round(num * 100.0);
+			if (num1 == 0.0) {
+				continue;
+			}
+			String result1 = outcome + " with " + num1 + "% confidence.";
 			String[] outcome1 = outcome.split(" ");
 			List<String> outcome2 = Arrays.asList(outcome1);
 			String fin = "https://www.google.com/search?q=";
@@ -137,7 +144,7 @@ public class BreedController {
 					fin += "+";
 				}
 			}
-			solo.setBreed(result.get(i));
+			solo.setBreed(result1);
 			solo.setLink(fin);
 			output.add(solo);
 		}return output;
