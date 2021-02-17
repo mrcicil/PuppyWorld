@@ -3,6 +3,7 @@ package com.example.ad.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -197,6 +198,7 @@ public class UserController {
 		User currentUser = (User) uservice.findUserByUserName(request.getRemoteUser());
 		int userId = currentUser.getUserId();
 		ArrayList<Reservation> display = rservice.findAllReservationsByUserId(userId);
+		Collections.sort(display, Reservation.ReserveComparator);
 		model.addAttribute("reservationList", display);
 		model.addAttribute("userProfile", currentUser);
 		return "profile";
