@@ -14,7 +14,7 @@
 	<h1 style="font-weight:bold; padding:10px">Puppy Snap</h1>
 	<br />
 	
-	<div><a th:href="@{https://www.facebook.com/}">asd</div>
+	
 	
 	<div style="display:flex">
 	<div style="float:left; width:40%; text-align:left">
@@ -80,6 +80,21 @@ var loadFile = function(event) {
       URL.revokeObjectURL(output.src) // free memory
     }
   };
+  
+  $(document).ready(function() {
+	    $('#upload').bind("click",function() 
+	    { 
+	        var imgVal = $('#fileImage').val(); 
+	        if(imgVal=='') 
+	        { 
+	            alert("empty input file"); 
+	            return false; 
+
+	        } 
+	        return true; 
+
+	    }); 
+	});
 
 </script>
 </html>

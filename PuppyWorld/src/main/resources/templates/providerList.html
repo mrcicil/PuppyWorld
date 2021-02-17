@@ -97,7 +97,9 @@ div.desc {
 	                <p><a href="EditProduct.html" th:href="@{/providerEdit/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:#4597a8"><i class="glyphicon glyphicon-edit"></i></a>
 	                <a href="serviceList.html" th:href="@{/serviceList/}+${provider.providerId}" style="padding-left:15px; padding-right:15px; color:#4597a8"><i class="glyphicon glyphicon-eye-open"></i></a>
 	                <a href="DeleteProduct.html" th:href="@{/providerDelete/}+${provider.providerId}" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="padding-right:15px; color:#4597a8"><i class="glyphicon glyphicon-trash"></i></a>
-					<a th:href="@{/providerReport/}+${provider.providerId}" style="color:#4597a8" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"><i class="glyphicon glyphicon-stats"></i></a></p>
+					<a th:onclick="showServiceBarGraph([[${​​​​​​​provider.providerId}​​​​​​​]])" style="color:#4597a8" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"><i class="glyphicon glyphicon-stats"></i></a></p>
+					
+					
 					</div>	
 			
 			 
@@ -142,6 +144,19 @@ var loadFile = function(event) {
 	});
 
 </script>
+
+<script src="js/layer/layer.js"></script>
+<script>
+    function showServiceBarGraph(providerId) {​​​​​​​
+        layer.open({​​​​​​​
+            type: 2,
+            title: 'Check Service',
+            area: ['800px', '500px'],
+            content: '/serviceBarGraph?providerId=' + providerId
+        }​​​​​​​);
+    }​​​​​​​
+</script>
+
 <!-- <script type="text/javascript">
 		function clearSearch() {
 			window.location = '/providerList';

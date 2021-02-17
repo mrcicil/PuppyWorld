@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -105,6 +106,11 @@ public class ServiceServiceImplementation implements ServiceService {
 			
 		}return display;
 	}
+	
+	@Override
+    public List<Map<String, Object>> countLocalDate(int providerId) {
+        return srepo.countLocalDate(providerId);
+    }
 
 
 

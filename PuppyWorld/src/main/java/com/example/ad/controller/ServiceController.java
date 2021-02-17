@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -215,6 +215,20 @@ public class ServiceController {
 		sservice.deleteServiceById(id);
 		return "redirect:/serviceList/" + service.getProvider().getProviderId();
 	}
+	
+	  @RequestMapping("/serviceBarGraph")
+	    public String serviceBarGraph(Integer providerId, Model model) {
+	        List localDate = new ArrayList();
+	        List serviceSum = new ArrayList();
+	        List<Map<String, Object>> list = sservice.countLocalDate(providerId);
+	        for (int i = 0; i < list.size(); i++) {
+	            localDate.add(list.get(i).get("localDate"));
+	            serviceSum.add(list.get(i).get("localDateSum"));
+	        }
+	        model.addAttribute("localDate", localDate);
+	        model.addAttribute("serviceSum", serviceSum);
+	        return "service_bar_graph";
+	    }
 	
 //	@RequestMapping(value = "/serviceEdit/{id}")
 //	public String editProduct(@PathVariable("id") Integer id, Model model) {
