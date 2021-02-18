@@ -57,7 +57,7 @@
 			<td th:text=${reservation.timeSlot}>TimeSlot</td>
 			<td th:text=${reservation.service.localDate}>Reservation Time</td>
 			<td th:text=${reservation.service.provider.providerName} style="text-align:left">Provider Name</td>
-			<td><a th:href="@{/reservationDelete/}+${reservation.reservationId}" style="color:#4597a8" th:if="${(reservation.status == T(com.example.ad.domain.Status).ACTIVE)}"><i class="glyphicon glyphicon-scissors"></i></a></td>
+			<td><a th:href="@{/reservationDelete/}+${reservation.reservationId}" style="color:#4597a8" th:if="${(reservation.status == T(com.example.ad.domain.Status).ACTIVE)}"><i class="glyphicon glyphicon-trash"></i></a></td>
 		</tr>
 		</tbody>
 	</table>

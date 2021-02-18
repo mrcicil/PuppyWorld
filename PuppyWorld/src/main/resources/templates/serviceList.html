@@ -71,7 +71,7 @@
 							</select></td>
 							<td
 								th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
-								<a th:href="@{/serviceDelete/}+${service.serviceId}" style="color:#4597a8"><i class="glyphicon glyphicon-scissors"></i></a>
+								<a th:href="@{/serviceDelete/}+${service.serviceId}" style="color:#4597a8"><i class="glyphicon glyphicon-trash"></i></a>
 							</td>
 							<td><a th:href="@{/reservationCreate/}+${service.serviceId}" style="color:#4597a8"><i class="glyphicon glyphicon-check"></i></a></td>
 						</tr>
