@@ -26,7 +26,6 @@ private JavaMailSender javaMailSender;
 		
 		SimpleMailMessage mail=new SimpleMailMessage();
 		mail.setTo(userEmail);
-//		mail.setFrom("keyintan94@gmail.com");
 		mail.setSubject("New Password");
 		mail.setText(msg);
 		
@@ -40,7 +39,6 @@ private JavaMailSender javaMailSender;
 		
 		SimpleMailMessage mail=new SimpleMailMessage();
 		mail.setTo(userEmail);
-//		mail.setFrom("keyintan94@gmail.com");
 		mail.setSubject("Reservation Success");
 		mail.setText(msg);
 		
