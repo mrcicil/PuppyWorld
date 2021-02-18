@@ -11,7 +11,6 @@ public interface UserService {
 	 public User findUserById(int id);
 	 public void deleteUserById(int id);
 	 public User findUserByUserName(String userName);
-	 public boolean authenticateUser(User user);
 	 public User findUserByUserEmail(String emailAddress);
 
 }

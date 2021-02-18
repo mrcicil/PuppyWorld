@@ -61,19 +61,6 @@ public class UserServiceImplementation implements UserService{
 		return searchUser;
 	}
 	
-	@Override
-	public boolean authenticateUser(User user) {
-		// TODO Auto-generated method stub
-		User dbuser = findUserByUserName(user.getUserName());
-		
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedUserPassword = passwordEncoder.encode(user.getPassword());
-		
-		if (dbuser.getUserName().equals(user.getUserName()) && dbuser.getPassword().equals(encodedUserPassword))
-			return true;
-		else
-			return false;
-	}
 
 	@Override
 	public void deleteUserById(int Id) {

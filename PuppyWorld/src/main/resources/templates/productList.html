@@ -86,7 +86,7 @@ div.desc {
 			<div th:each="product : ${productList}">
 			<div class="gallery">
 				<img th:src="@{${'/product/image/'+ product.productId}}" 
-	                class="card img-fluid" alt="" width="150" height="150" style="margin-left:3%; padding:10px" ><!--style="margin-left:500px"-->
+	                class="card img-fluid" alt="" width="150" height="150" style="margin-left:3%; padding:10px" >
 	               <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	                <div class="desc" style="margin-left:5%; text-align:center; padding: 10px" >
 	                	<p><br><span th:text=  ${product.productName} style="font-weight:bold">Name</span></p>
