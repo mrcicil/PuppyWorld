@@ -205,12 +205,12 @@ public class ServiceController {
 	
 	  @RequestMapping("/serviceBarGraph")
 	    public String serviceBarGraph(Integer providerId, Model model) {
-	        List<LocalDate> localDate = new ArrayList<LocalDate>();
-	        List<Integer> serviceSum = new ArrayList<Integer>();
+	        List localDate = new ArrayList();
+	        List serviceSum = new ArrayList<Integer>();
 	        List<Map<String, Object>> list = sservice.countLocalDate(providerId);
 	        for (int i = 0; i < list.size(); i++) {
-	            localDate.add((LocalDate) list.get(i).get("localDate"));
-	            serviceSum.add((Integer) list.get(i).get("localDateSum"));
+	            localDate.add(list.get(i).get("localDate"));
+	            serviceSum.add(list.get(i).get("localDateSum"));
 	        }
 	        model.addAttribute("localDate", localDate);
 	        model.addAttribute("serviceSum", serviceSum);
