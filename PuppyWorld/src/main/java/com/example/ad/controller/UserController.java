@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 import javax.mail.MessagingException;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -210,8 +211,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/saveProfile")
-	public String saveProfile (@ModelAttribute("user") User user, 
-			BindingResult bindingResult, Model model, HttpServletRequest request, Errors errors) {
+	public String saveProfile (@ModelAttribute("user")@Valid User user, 
+			Errors errors, BindingResult bindingResult, Model model, HttpServletRequest request) throws ServletException {
+		
 		if (bindingResult.hasErrors()) {
 			return "editProfile";
 		}
@@ -228,7 +230,9 @@ public class UserController {
 			editUser.setPassword(encodedPassword);
 			editUser.setEmailAddress(user.getEmailAddress());
 			uservice.saveUser(editUser);
-			return "index";
+			
+			request.logout();
+			return "redirect:/login";
 		}
 		
 		return "editProfile";
