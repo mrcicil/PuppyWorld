@@ -12,9 +12,7 @@
 	<div class="container" style="text-align: center; margin-bottom: 20px">
 		<h1 style="font-weight:bold; padding:10px">Edit Post</h1>
 		
-		<button style="width:150px; text-align:center">
-		<a th:href="@{/postList/}" style="color:white">Back to List</a>
-		</button>
+		
 		
 		<br/><br/><br/>
 		
@@ -22,19 +20,19 @@
 			method="post" enctype="multipart/form-data">
 			<input type="hidden" th:field="*{postId}">
 			<div class="form-group" style="margin-left:30%; text-align:left">
-				<label style="width: 200px; text-align:left">Post Title:</label>
+				<label style="width: 200px; text-align:left">Title:</label>
 				<input type="text" th:field="*{postTitle}" style="width: 250px">
 				<p style="color:red" th:if="${#fields.hasErrors('postTitle')}" th:errors="*{postTitle}"></p>
 				</div>
 
 			<div class="form-group" style="margin-left:30%; text-align:left">
-				<label style="width: 200px; text-align:left; vertical-align:top">Post Message:</label>
+				<label style="width: 200px; text-align:left; vertical-align:top">Message:</label>
 				<textarea type="text" step=0.01 min=0 th:field="*{postMessage}" style="width:250px"></textarea>
 				<p style="color:red" th:if="${#fields.hasErrors('postMessage')}" th:errors="*{postMessage}"></p>
 				</div>
 
 			<div class="form-group" style="margin-left:30%; text-align:left">
-				<label style="width: 200px; text-align:left">Post Type:</label>
+				<label style="width: 200px; text-align:left">Type:</label>
 				<select th:field="*{postType}">
 				<option th:each="postType : ${T(com.example.ad.domain.PostType).values()}" 
 							th:value="${postType}" th:text="${postType}"/>

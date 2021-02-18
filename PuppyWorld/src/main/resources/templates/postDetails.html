@@ -183,10 +183,10 @@ div.gallery img {
 					
 						<div class="commenticons" th:if="${comment.user.userId} == ${user.userId}" style="float:right">
 							<a href="EditComment.html" th:href="@{/postCommentEdit/}+${comment.commentId}" 
-								th:if="${(post.user.userId == user.userId) || (#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString()))}">
+								th:if="${(comment.user.userId == user.userId) || (#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString()))}">
 									<i class="glyphicon glyphicon-edit"></i></a> 
 							<a href="DeleteComment.html" th:href="@{/postCommentDelete/}+${comment.commentId}" 
-								th:if="${(post.user.userId == user.userId) || (#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString()))}">
+								th:if="${(comment.user.userId == user.userId) || (#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString()))}">
 									<i class="glyphicon glyphicon-trash"></i></a> 
 						</div>
 						<br/>
@@ -207,11 +207,11 @@ div.gallery img {
 							</fieldset>
 							
 							<fieldset style="padding-top:5px">
-								<button><input type="submit" style="float: right; background-color:transparent; border-color:transparent; 
-																	color:white" value="Save"/></button>
-								&nbsp; &nbsp; 	
 								<button><input type="reset" style="float: right; background-color:transparent; border-color:transparent; 
-																	color:white" value="Reset"/></button>
+																	color:white" value="Clear"/></button>
+								&nbsp; &nbsp; 	
+								<button><input type="submit" style="float: right; background-color:transparent; border-color:transparent; 
+																	color:white" value="Submit"/></button>
 							</fieldset>
 						</form>
 					

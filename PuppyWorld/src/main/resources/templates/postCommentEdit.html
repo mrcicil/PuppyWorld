@@ -137,8 +137,8 @@ div.gallery img {
 	<div th:replace="fragments/general.html :: menu"></div>
 	<div class="main">
 	<div class="container" style="text-align:center; margin-left:auto; margin-right:auto">
-		<h1 style="font-weight:bold; padding:15px;">Edit Post Comment - 
-		<b><span th:object="${post}" th:text=  ${post.postTitle} style="font-style:oblique">Title</span></b> </h1>
+		<h1 style="font-weight:bold; padding:15px;">
+		<b><span th:object="${post}" th:text=  ${post.postTitle} >Title</span></b> </h1>
 		
 		<button style="width:150px; float:left; margin-left:5%;">
 			<a th:href="@{/postList/}" style="color:white">Back to List</a>
@@ -183,10 +183,10 @@ div.gallery img {
 							
 							<div class="commenticons" th:if="${comment.user.userId} == ${user.userId}" style="float:right">
 								<a href="EditComment.html" th:href="@{/postCommentEdit/}+${comment.commentId}" 
-									th:if="${(post.user.userId == user.userId) || (#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString()))}">
+									th:if="${(comment.user.userId == user.userId) || (#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString()))}">
 										<i class="glyphicon glyphicon-edit"></i></a> 
 								<a href="DeleteComment.html" th:href="@{/postCommentDelete/}+${comment.commentId}" 
-									th:if="${(post.user.userId == user.userId) || (#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString()))}">
+									th:if="${(comment.user.userId == user.userId) || (#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString()))}">
 										<i class="glyphicon glyphicon-trash"></i></a> 
 							</div>
 							<br/>
