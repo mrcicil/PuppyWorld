@@ -13,12 +13,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.example.ad.domain.User;
 import com.example.ad.service.UserService;
 
+@SuppressWarnings("serial")
 public class MyUserDetails implements UserDetails {
 
 	private User user;
-	
-	@Autowired
-	private UserService uservice;
 	
 	HttpSession session;
 	

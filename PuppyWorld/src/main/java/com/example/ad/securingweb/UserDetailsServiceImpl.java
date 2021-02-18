@@ -1,14 +1,11 @@
 package com.example.ad.securingweb;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.example.ad.domain.User;
-import com.example.ad.repo.UserRepository;
 import com.example.ad.service.UserService;
 
 public class UserDetailsServiceImpl implements UserDetailsService {

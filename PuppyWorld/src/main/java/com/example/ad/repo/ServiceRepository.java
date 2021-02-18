@@ -11,8 +11,6 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.ad.domain.Services;
 
-
-
 public interface ServiceRepository extends JpaRepository<Services, Integer> {
 	
 	
@@ -27,16 +25,6 @@ public interface ServiceRepository extends JpaRepository<Services, Integer> {
 	   nativeQuery = true)
 	public ArrayList<Services> searchService(@Param("keyword") String keyword);
 
-	
-	 // @Query (value ="SELECT * FROM services s WHERE s.serviceName=:sName", nativeQuery = true )
-	 // public ArrayList<Services> searchService(String keyword);
-	 
-
-	/*
-	 * @Query (value ="SELECT * FROM services s WHERE s.serviceID=:sId", nativeQuery
-	 * = true ) ArrayList<Services> serarchServiceById(int sId);
-	 */
-	
 	@Query(value = "select DATE_FORMAT(s.local_date,'%Y-%m-%d') localDate,count(s.local_date) localDateSum from services s, reservation r where s.service_id=r.service_service_id and s.provider_provider_id=:providerId group by s.local_date order by s.local_date", nativeQuery = true)
     List<Map<String, Object>> countLocalDate(@Param("providerId")int providerId);
 	

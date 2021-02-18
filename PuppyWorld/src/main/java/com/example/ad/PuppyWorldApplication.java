@@ -22,7 +22,6 @@ import com.example.ad.domain.Product;
 import com.example.ad.domain.ProductType;
 import com.example.ad.domain.Provider;
 import com.example.ad.domain.Reservation;
-import com.example.ad.domain.ReservationType;
 import com.example.ad.domain.User;
 import com.example.ad.domain.Role;
 
