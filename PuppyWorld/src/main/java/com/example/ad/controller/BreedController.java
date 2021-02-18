@@ -42,10 +42,11 @@ public class BreedController {
 		multipartFile.transferTo(convFile);
 		byte[] fileContent = FileUtils.readFileToByteArray(convFile);
 		String encodedString = Base64.getEncoder().encodeToString(fileContent);
+		
 		List<String> result = mlMethod(fileContent);
 		List<Output> links = convertLink(result);
+		
 		model.addAttribute("image", encodedString);
-		//model.addAttribute("results", result);
 		model.addAttribute("links", links);
 		return "resultBreed";
 	}
@@ -62,7 +63,6 @@ public class BreedController {
         	
         	HttpURLConnection httpUrlConnection = null;
         	URL url = new URL("https://tut-api-37p4k2zaiq-uc.a.run.app/predict/");
-        	//URL url = new URL("https://puppysnap.azurewebsites.net/predict/");
         	httpUrlConnection = (HttpURLConnection) url.openConnection();
         	httpUrlConnection.setUseCaches(false);
         	httpUrlConnection.setDoOutput(true);

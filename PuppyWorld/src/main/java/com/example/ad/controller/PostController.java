@@ -6,7 +6,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Iterator;
@@ -14,7 +13,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -34,19 +32,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Post;
 import com.example.ad.domain.PostComment;
-import com.example.ad.domain.Product;
-import com.example.ad.domain.Services;
 import com.example.ad.domain.User;
-import com.example.ad.repo.ServiceRepository;
 import com.example.ad.service.PostCommentService;
 import com.example.ad.service.PostCommentServiceImplementation;
-
 import com.example.ad.service.PostService;
 import com.example.ad.service.PostServiceImplementation;
-import com.example.ad.service.ProductService;
-import com.example.ad.service.ProductServiceImplementation;
-import com.example.ad.service.ServiceService;
-import com.example.ad.service.ServiceServiceImplementation;
 import com.example.ad.service.UserService;
 import com.example.ad.service.UserServiceImplementation;
 
@@ -102,9 +92,7 @@ public class PostController {
 		catch(IOException e) {
 			System.out.println(e.toString());
 		}
-		
-		
-		
+
 		ArrayList<Post> poList = poservice.findAllPosts();
 		for (Iterator <Post>iterator = poList.iterator(); iterator.hasNext();) {
 			Post post2 =  iterator.next();
@@ -129,7 +117,7 @@ public class PostController {
 		
 		User user = uservice.findUserByUserName(request.getRemoteUser());
 		post.setUser(user);
-		 
+		
 		poservice.savePostService(post);
 		
 		return "redirect:/postList";

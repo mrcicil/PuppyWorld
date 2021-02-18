@@ -65,14 +65,6 @@ public class ProviderController {
 		this.uservice = uServiceImpl;
 	}
 	
-	/*
-	 * @RequestMapping(value="/providerList") public String list1(Model model) {
-	 * model.addAttribute("providerList",pvservice.findAllProviders()); String
-	 * keyword="";
-	 * 
-	 * model.addAttribute("keyword",keyword); return "providerList"; }
-	 */
-	
 	@RequestMapping(value="/searchProvider")
 	public String searchProvider(Model model, @RequestParam("keyword") String keyword) {
 		
@@ -87,8 +79,6 @@ public class ProviderController {
 	@RequestMapping(value="/providerList") // ???
 	public String list(Model model, HttpServletRequest request)
 	{
-
-		//model.addAttribute("productList", proservice.listAllProducts());
 		ArrayList<Provider> pList = pvservice.findAllProviders();
 		int length = pList.size();
 		model.addAttribute("providerList", pList);
@@ -108,7 +98,7 @@ public class ProviderController {
 	
 	@GetMapping("/provider/image/{id}")
 	public void showProviderImage(@PathVariable String id, HttpServletResponse response) throws IOException {
-		response.setContentType("image/jpeg"); // Or whatever format you wanna use
+		response.setContentType("image/jpeg"); 
 		
 		int newId = Integer.parseInt(id);
 		Provider provider = pvservice.findProviderById(newId);
@@ -160,7 +150,6 @@ public class ProviderController {
 		if (bindingResult.hasErrors()) {
 			return "providerCreate";
 		}
-//		User user = uservice.findUserByUserName(request.getRemoteUser());
 		pvservice.saveProvider(provider);
 		
 		return "redirect:/providerList";
@@ -220,12 +209,11 @@ public class ProviderController {
 		if(provider.getPrice() == 0) {
 			errors.rejectValue("price", "null", "Must be filled");
 		}
-//		
+	
 		if (bindingResult.hasErrors()) {
 			return "providerEdit";
 		}
-		
-//		User user = uservice.findUserByUserName(request.getRemoteUser());
+
 		pvservice.saveProvider(provider);
 		
 		return "redirect:/providerList";

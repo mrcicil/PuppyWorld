@@ -54,14 +54,6 @@ public class ProductController {
 		this.uservice = uServiceImpl;
 	}
 
-
-	
-//	@RequestMapping("/service")
-//	public String viewHomePage(Model model) {
-//		List<Services> listService=sservice.findAllServices();
-//		model.addAttribute("listService",listService);
-//		return "service";
-//	}
 	
 	@RequestMapping(value = "/productList")
 	public String list1(Model model) {
@@ -136,22 +128,7 @@ public class ProductController {
 		return "redirect:/productList";
 
 	}
-	
 
-	/*
-	 * @RequestMapping(value="/productList") // ??? public String list(Model model)
-	 * { //model.addAttribute("productList", proservice.listAllProducts());
-	 * model.addAttribute("productList", pservice.findAllProducts()); //I used the
-	 * build in JPA repo
-	 * 
-	 * int productId= 0;
-	 * 
-	 * model.addAttribute("productId", productId);
-	 * 
-	 * return "productList"; }
-	 */
-
-	
 	@GetMapping("/product/image/{id}")
 	public void showProductImage(@PathVariable String id, HttpServletResponse response) throws IOException {
 		response.setContentType("image/jpeg"); // Or whatever format you wanna use
@@ -215,7 +192,6 @@ public class ProductController {
 		if (bindingResult.hasErrors()) {
 			return "productEdit";
 		}
-		
 		
 		User user = uservice.findUserByUserName(request.getRemoteUser());
 		product.setUser(user);

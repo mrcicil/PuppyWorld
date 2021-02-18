@@ -77,112 +77,10 @@ public class PuppyWorldApplication {
 
 
 			User u1 = new User(Role.ROLE_ADMIN, "joe", "Joe", encodedPassword1, "e0533420@u.nus.edu");
-
-			User u2 = new User(Role.ROLE_ADMIN, "ann", "Ann", encodedPassword1, "chenyihan@gmail.com");
-
 			urepo.save(u1);
-			urepo.save(u2);
 			
-
-			/*
-			 * BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); String
-			 * encodedPassword1 = passwordEncoder.encode("password");
-			 * 
-			 * User u1 = new User(Role.ROLE_ADMIN, "joe", "Joe", encodedPassword1,
-			 * "e0533420@u.nus.edu");
-			 * 
-			 * User u2 = new User(Role.ROLE_USER, "ann", "Ann", encodedPassword1,
-			 * "chenyihan@gmail.com");
-			 * 
-			 * urepo.save(u1);
-			 * 
-			 * urepo.save(u2);
-			 */
-			 
-//		      
-//		    
-//		
-//	
-//		      Product p1 = new Product("Waggie Dog Food 1kg", (float) 34.00, 23, ProductType.FOOD,
-//			data1, u1);
-//	
-//		      Product p2 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//			data2, u2);
-//		      
-//		      Product p3 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p4 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p5 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p6 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p7 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p8 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p9 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p10 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p11 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p12 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p13 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p14 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p15 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p16 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p17 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p18 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p19 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//		  			data2, u2);
-//		      
-//		      Product p20 = new Product("Jackie Dog Food 1kg", (float) 68.00, 12, ProductType.FOOD,
-//			  			data2, u2);
-//	
-//		      prepo.save(p1);
-//		      prepo.save(p2); 
-//		      prepo.save(p3);
-//		      prepo.save(p4);
-//		      prepo.save(p5);
-//		      prepo.save(p6);
-//		      prepo.save(p7);
-//		      prepo.save(p8);
-//		      prepo.save(p9);
-//		      prepo.save(p10);
-//		      prepo.save(p11);
-//		      prepo.save(p12);
-//		      prepo.save(p13);
-//		      prepo.save(p14);
-//		      prepo.save(p15);
-//		      prepo.save(p16);
-//		      prepo.save(p17);
-//		      prepo.save(p18);
-//		      prepo.save(p19);
-//		      prepo.save(p20);
+			User u2 = new User(Role.ROLE_ADMIN, "ann", "Ann", encodedPassword1, "chenyihan@gmail.com");
+			urepo.save(u2);
 
 			User u3 = new User(Role.ROLE_USER, "jay", "Jason", encodedPassword1, "jay@email.com");
 			urepo.save(u3);
@@ -206,7 +104,6 @@ public class PuppyWorldApplication {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			ImageIO.write(bImage, "jpg", bos);
 			byte[] img1 = bos.toByteArray();
-//			img1 = Base64Utils.encode(img1);
 
 			Product p1 = new Product("PRONATURE - HOLISTIC DOG SENIOR WHITEFISH & RICE 13.6kg", (float) 149.00, 23,
 					ProductType.FOOD, img1, u1);
@@ -540,7 +437,6 @@ public class PuppyWorldApplication {
 			ByteArrayOutputStream servpbos2 = new ByteArrayOutputStream();
 			ImageIO.write(servpImage2, "jpg", servpbos2);
 			byte[] servp2 = servpbos2.toByteArray();
-//			servp1 = Base64Utils.encode(servp1);
 
 			Provider sp2 = new Provider("Dog Grooming - Basic Package",
 					"Grooming is essential in maintaining the health, wellbeing and happiness of your dog! This services includes nail clipping, ear cleaning, shaving of anal area, between the legs, belly and paw pads. Bathing, conditioning, drying and brushing. Trimming fur off the nose bridge and around paw (if applicable). Prices start at $40++ for small dogs (~1kg), with additional $5 for every kg.",
@@ -1221,81 +1117,7 @@ public class PuppyWorldApplication {
 			Reservation ressp2s17_b_2 = new Reservation(sp2s17_2, "10am", u4, Status.ACTIVE);
 			resrepo.save(ressp2s17_b_2);
 
-//			Reservation ressp2s18_a_2 = new Reservation(sp2s18_2, "8am", u3, Status.ACTIVE);
-//			resrepo.save(ressp2s18_a_2);
-//
-//			Reservation ressp2s19_c_2 = new Reservation(sp2s19_2, "1pm", u5, Status.ACTIVE);
-//			resrepo.save(ressp2s19_c_2);
-//			Reservation ressp2s19_d_2 = new Reservation(sp2s19_2, "3pm", u6, Status.ACTIVE);
-//			resrepo.save(ressp2s19_d_2);
-//			Reservation ressp2s19_e_2 = new Reservation(sp2s19_2, "5pm", u7, Status.ACTIVE);
-//			resrepo.save(ressp2s19_e_2);
-//			
-//			Reservation ressp2s20_a_2 = new Reservation(sp2s20_2, "8am", u3, Status.ACTIVE);
-//			resrepo.save(ressp2s20_a_2);
-//			Reservation ressp2s20_b_2 = new Reservation(sp2s20_2, "10am", u4, Status.ACTIVE);
-//			resrepo.save(ressp2s20_b_2);
-//			Reservation ressp2s20_c_2 = new Reservation(sp2s20_2, "1pm", u5, Status.ACTIVE);
-//			resrepo.save(ressp2s20_c_2);
-//			Reservation ressp2s20_d_2 = new Reservation(sp2s20_2, "3pm", u6, Status.ACTIVE);
-//			resrepo.save(ressp2s20_d_2);
-//			Reservation ressp2s20_e_2 = new Reservation(sp2s20_2, "5pm", u7, Status.ACTIVE);
-//			resrepo.save(ressp2s20_e_2);
-//
-//			Reservation ressp2s21_a_2 = new Reservation(sp2s21_2, "8am", u3, Status.ACTIVE);
-//			resrepo.save(ressp2s21_a_2);
-//			Reservation ressp2s21_b_2 = new Reservation(sp2s21_2, "10am", u4, Status.ACTIVE);
-//			resrepo.save(ressp2s21_b_2);
-//			Reservation ressp2s21_c_2 = new Reservation(sp2s21_2, "1pm", u5, Status.ACTIVE);
-//			resrepo.save(ressp2s21_c_2);
-//			Reservation ressp2s21_d_2 = new Reservation(sp2s21_2, "3pm", u6, Status.ACTIVE);
-//			resrepo.save(ressp2s21_d_2);
-//			Reservation ressp2s21_e_2 = new Reservation(sp2s21_2, "5pm", u7, Status.ACTIVE);
-//			resrepo.save(ressp2s21_e_2);
-//
-//			Reservation ressp2s22_c_2 = new Reservation(sp2s22_2, "1pm", u5, Status.ACTIVE);
-//			resrepo.save(ressp2s22_c_2);
-//
-//			Reservation ressp2s23_a_2 = new Reservation(sp2s23_2, "8am", u3, Status.ACTIVE);
-//			resrepo.save(ressp2s23_a_2);
-//			Reservation ressp2s23_e_2 = new Reservation(sp2s23_2, "5pm", u7, Status.ACTIVE);
-//			resrepo.save(ressp2s23_e_2);
-//
-//			Reservation ressp2s24_c_2 = new Reservation(sp2s24_2, "1pm", u5, Status.ACTIVE);
-//			resrepo.save(ressp2s24_c_2);
-//
-//			Reservation ressp2s25_a_2 = new Reservation(sp2s25_2, "8am", u3, Status.ACTIVE);
-//			resrepo.save(ressp2s25_a_2);
-//
-//			
-//			Reservation ressp2s26_c_2 = new Reservation(sp2s26_2, "1pm", u5, Status.ACTIVE);
-//			resrepo.save(ressp2s26_c_2);
-//			
-//
-//			Reservation ressp2s27_a_2 = new Reservation(sp2s27_2, "8am", u3, Status.ACTIVE);
-//			resrepo.save(ressp2s27_a_2);
-//			Reservation ressp2s27_b_2 = new Reservation(sp2s27_2, "10am", u4, Status.ACTIVE);
-//			resrepo.save(ressp2s27_b_2);
-//			Reservation ressp2s27_c_2 = new Reservation(sp2s27_2, "1pm", u5, Status.ACTIVE);
-//			resrepo.save(ressp2s27_c_2);
-//			Reservation ressp2s27_d_2 = new Reservation(sp2s27_2, "3pm", u6, Status.ACTIVE);
-//			resrepo.save(ressp2s27_d_2);
-//			Reservation ressp2s27_e_2 = new Reservation(sp2s27_2, "5pm", u7, Status.ACTIVE);
-//			resrepo.save(ressp2s27_e_2);
-//
-//			Reservation ressp2s28_a_2 = new Reservation(sp2s28_2, "8am", u3, Status.ACTIVE);
-//			resrepo.save(ressp2s28_a_2);
-//			Reservation ressp2s28_b_2 = new Reservation(sp2s28_2, "10am", u4, Status.ACTIVE);
-//			resrepo.save(ressp2s28_b_2);
-//			Reservation ressp2s28_c_2 = new Reservation(sp2s28_2, "1pm", u5, Status.ACTIVE);
-//			resrepo.save(ressp2s28_c_2);
-//			Reservation ressp2s28_d_2 = new Reservation(sp2s28_2, "3pm", u6, Status.ACTIVE);
-//			resrepo.save(ressp2s28_d_2);
-//			Reservation ressp2s28_e_2 = new Reservation(sp2s28_2, "5pm", u7, Status.ACTIVE);
-//			resrepo.save(ressp2s28_e_2);
-			
-			
-			
+		
 //			----- Service - sp9, Basic dog training ------
 			
 			Services sp9s1 = new Services(timeSlots, sp9, jan1);
@@ -1503,21 +1325,16 @@ public class PuppyWorldApplication {
 			
 //			----- Lost&Found Post ------
 			
-			BufferedImage bImage99 = ImageIO.read(new File("src/main/resources/static/images/1.jpg"));
+			  BufferedImage bImage99 = ImageIO.read(new File("src/main/resources/static/images/1.jpg"));
 		      ByteArrayOutputStream bos99 = new ByteArrayOutputStream();
 		      ImageIO.write(bImage, "jpg", bos99);
 		      byte [] data1 = bos99.toByteArray();
-				//data1 = Base64Utils.encode(data1);
 		      
 		      BufferedImage bImage100 = ImageIO.read(new File("src/main/resources/static/images/2.jpg"));
 		      ByteArrayOutputStream bos100 = new ByteArrayOutputStream();
 		      ImageIO.write(bImage2, "jpg", bos100);
 		      byte [] data2 = bos100.toByteArray();
-		      //data2 = Base64Utils.encode(data2); 
-		      
-			
-		    
-		  
+
 		      
 		      Post pt4 = new Post(PostType.LOST, "Have you seen my dog?", "Dog lost around Serangoon Gardens. Its name is Max. It was lost in the afternoon. Did anyone see it?", data1, u1);
 		
@@ -1561,10 +1378,6 @@ public class PuppyWorldApplication {
 		      pcrepo.save(pc1); pcrepo.save(pc2); pcrepo.save(pc3); pcrepo.save(pc4); pcrepo.save(pc5);pcrepo.save(pc6);pcrepo.save(pc7);pcrepo.save(pc8);pcrepo.save(pc9);pcrepo.save(pc10);
 		      pcrepo.save(pc11); pcrepo.save(pc12); pcrepo.save(pc13); pcrepo.save(pc14); pcrepo.save(pc15);pcrepo.save(pc16);pcrepo.save(pc17);pcrepo.save(pc18);pcrepo.save(pc19);pcrepo.save(pc20);
 		      pcrepo.save(pc21); pcrepo.save(pc22); pcrepo.save(pc23); pcrepo.save(pc24); pcrepo.save(pc25);pcrepo.save(pc26);pcrepo.save(pc27);pcrepo.save(pc28);pcrepo.save(pc29);pcrepo.save(pc30);
-			        
-		     
-			
-
 
 		};
 	}

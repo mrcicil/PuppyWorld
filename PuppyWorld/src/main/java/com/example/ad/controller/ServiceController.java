@@ -78,27 +78,12 @@ public class ServiceController {
 	public String dateList(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
 		User user = uservice.findUserByUserName(request.getRemoteUser());
 		ArrayList<Services> display = sservice.findAllActiveServices(id);
-//		if(user.getUserType() == Role.ROLE_USER) {
-//			display = sservice.findAllActiveServices(id);
-//		}
+
 		Provider provider = pvservice.findProviderById(id);
 		model.addAttribute("serviceList", display);
 		model.addAttribute("provider", provider);
 		return "serviceList";
 	}
-
-	//jiayuan
-//@RequestMapping(value = "/serviceList")
-//public String list(Model model) {
-//	model.addAttribute("serviceList", sservice.findAllServices());
-//	String keyword = "";
-//	
-//	model.addAttribute("keyword", keyword);
-//	return "serviceList";
-//}
-
-
-	
 
 	@RequestMapping("/serviceCreate/{id}")
 	public String showNewServiceForm(@PathVariable("id") Integer id, Model model) {
@@ -220,53 +205,16 @@ public class ServiceController {
 	
 	  @RequestMapping("/serviceBarGraph")
 	    public String serviceBarGraph(Integer providerId, Model model) {
-	        List localDate = new ArrayList();
-	        List serviceSum = new ArrayList();
+	        List<LocalDate> localDate = new ArrayList<LocalDate>();
+	        List<Integer> serviceSum = new ArrayList<Integer>();
 	        List<Map<String, Object>> list = sservice.countLocalDate(providerId);
 	        for (int i = 0; i < list.size(); i++) {
-	            localDate.add(list.get(i).get("localDate"));
-	            serviceSum.add(list.get(i).get("localDateSum"));
+	            localDate.add((LocalDate) list.get(i).get("localDate"));
+	            serviceSum.add((Integer) list.get(i).get("localDateSum"));
 	        }
 	        model.addAttribute("localDate", localDate);
 	        model.addAttribute("serviceSum", serviceSum);
 	        return "service_bar_graph";
 	    }
 	
-//	@RequestMapping(value = "/serviceEdit/{id}")
-//	public String editProduct(@PathVariable("id") Integer id, Model model) {
-//		
-//		Services service = sservice.findServiceById(id);
-//		String encodedString = Base64.getEncoder().encodeToString(service.getServiceImage());
-//		model.addAttribute("image", encodedString);
-//		model.addAttribute("service",service);
-//		return "serviceEdit";
-//	}
-	
-	
-
-	//jiayuan
-//	@RequestMapping(value = "/searchService")
-//	public String searchService(Model model, @RequestParam("keyword") String keyword) {
-//		
-//		ArrayList<Services> searchService=sservice.searchServiceByKeyword(keyword);
-//		
-//		model.addAttribute("serviceList",searchService);
-//		model.addAttribute("keyword",keyword);
-//		return"serviceList";		
-
-//	}
-//	
-////	@RequestMapping("/service")
-////	public String viewHomePage(Model model) {
-////		List<Services> listService=sservice.findAllServices();
-////		model.addAttribute("listService",listService);
-////		return "service";
-////	}
-//	
-//	@RequestMapping("/serviceCreate")
-//	public String showNewServiceForm(Model model) {
-//		Services service=new Services();
-//		model.addAttribute("service",service);
-//		return "serviceCreate";
-//	}
 }

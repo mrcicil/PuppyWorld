@@ -11,7 +11,6 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-//import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -67,41 +66,12 @@ public class UserController {
 		this.sservice = sServiceImpl;
 	}
 	
-	
-	/*
-	 * @RequestMapping(value = "/authenticate", method=RequestMethod.POST) public
-	 * String authenticate (Model model, @ModelAttribute("password") String
-	 * password,@ModelAttribute("username") String username, HttpSession session) {
-	 * User existingUser = uservice.findUserByUserName(username); if (existingUser
-	 * != null) { // Use encoder.matches to compare raw password with encrypted
-	 * password BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
-	 * 
-	 * if (encoder.matches(password, existingUser.getPassword())){ // Successfully
-	 * logged in session.setAttribute("usession", existingUser); return "index";
-	 * 
-	 * } else { // Wrong password model.addAttribute("message",
-	 * "Incorrect password. Try again."); return "login"; } } else {
-	 * model.addAttribute("message", "The username provided does not exist!");
-	 * return "login"; } }
-	 */
-	 
-	
-	
-		
-		@GetMapping("login")
-		public String login(Model model) 
-		{ 
-			  return "login";
-		  
-		}
-		 
-	 
-	
-	/*
-	 * @RequestMapping(value = "/logout") public String logout(Model model,
-	 * HttpServletRequest request) { session.removeAttribute("usession"); return
-	 * "index"; }
-	 */
+	@GetMapping("login")
+	public String login(Model model) 
+	{
+		return "login";
+
+	}
 		
 	@RequestMapping(value="/")
 	public String indexPage(HttpServletRequest request, Model model) {
@@ -131,7 +101,6 @@ public class UserController {
 			
 		}
 	}
-	
 	
 	@RequestMapping (value = "/register")
 	public String registerUser (Model model) {
@@ -283,7 +252,6 @@ public class UserController {
 		if (dbuser != null) {
 			
 			int length = 15;
-//	        String symbol = "-/.^&*_!@%=+>)"; 
 	        String cap_letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
 	        String small_letter = "abcdefghijklmnopqrstuvwxyz"; 
 	        String numbers = "0123456789"; 
