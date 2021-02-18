@@ -1,76 +1,10 @@
 <!DOCTYPE html>
 <html>
+<head th:insert="fragments/general2.html :: header">
 <title>PuppyWorld</title>
 <head>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery.min.js"></script>
-<!-- Custom Theme files -->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!-- Custom Theme files -->
-<!-- navigation -->
-<link href="css/component.css" rel="stylesheet" type="text/css"  />
-<!-- navigation -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="My Pets Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--webfont-->
-<link href='http://fonts.useso.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-<script src="js/responsiveslides.min.js"></script>
- <script>
-    $(function () {
-      $("#slider").responsiveSlides({
-      	auto: true,
-      	speed: 500,
-        namespace: "callbacks",
-        pager: true,
-      });
-    });
-  </script>
-  <script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
-</head>
 <body>
-    <!-- header-section-starts -->
-	<div class="header">
-		<div class="header-top">
-			<div class="container">
-				<p class="location"><i class="location"></i>3 New Bugis Street, Singapore 188867</p>
-				<p class="phonenum">+ 65 8858 2068</p>
-				<p style="text-align:center; font-size:20px; font-weight:bold; color:white">Welcome [[${#httpServletRequest.remoteUser}]]</p>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-		<div class="header-bottom">
-			<div class="container">
-				<div class="logo">
-					<a href="Home" th:href="@{/}"><img src="images/logo.png" alt="" /></a>
-				</div>
-				<span class="menu"></span>
-				<div class="top-menu">
-					<ul>
-					<nav class="cl-effect-5">
-						<li><a href="#" th:href="@{/register}"><span data-hover="Register New User"> Register New User </span></a></li>
-					</nav>
-					</ul>
-				</div>
-				<!-- script for menu -->
-				<script>
-				$( "span.menu" ).click(function() {
-				  $( ".top-menu" ).slideToggle( "slow", function() {
-				    // Animation complete.
-				  });
-				});
-			</script>
-			<!-- script for menu -->
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-	<!-- header-section-ends -->
-	<!-- content-section-starts -->
+    <div th:insert="fragments/general2.html :: menu"></div>
 		<div class="main">
 			<div class="container" style="text-align: center; margin-bottom: 20px">
 					<form th:action="@{/login}" method="post">
@@ -95,50 +29,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 				       		<br/>
 				       		<div class="form-actions" style="text-align: center">
-				       			<button type="submit">Login</button>
+				       			<button type="submit" style="color:white">Login</button>
 				       		</div> 
-				        
+				        </fieldset>
 				        </form>
 				     <br/>
 				     <div class="form-actions" style="text-align: center; size: 15px";>
 					<button style="font-size: 10px; background: rgb(128, 128, 128)">
 						<a style="color:white" href="ForgetPassword.html" th:href="@{/forgetPassword}">Forget Password</a>
 					</button>	 
-					</fieldset>
+					
 			</div>
 		</div>
-	<!-- content-section-ends -->
-	<!-- footer-section-starts -->
-	<div class="footer">
-		<div class="container" style="color:white">
-			<div>
-				<h4>Dog - Our Best Friend on Earth</h4>
-				<p>Dogs deserve gentle handling and an abundance of our time and attention. Love can make a dog's world go round as much as love makes our world go round. When we give our love freely to our dogs, we receive their love in return. Dogs can truly be man's and woman's and children's best friends, and we should feel honored to be theirs, as well.</p>
-				<div class="copyright">
-					<p>Copyright &copy; 2021.PuppyWorld All rights reserved. </p>
-				</div>
-			</div>
-			<div class="clearfix"></div>
 		</div>
-	</div>
-	<!-- footer-section-ends -->
-	<script type="text/javascript">
-						$(document).ready(function() {
-							/*
-							var defaults = {
-					  			containerID: 'toTop', // fading element id
-								containerHoverID: 'toTopHover', // fading element hover id
-								scrollSpeed: 1200,
-								easingType: 'linear' 
-					 		};
-							*/
-							
-							$().UItoTop({ easingType: 'easeOutQuart' });
-							
-						});
-					</script>
-				<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-
+<div th:insert="fragments/general2.html :: footer"></div>
 </body>
 </html>
 

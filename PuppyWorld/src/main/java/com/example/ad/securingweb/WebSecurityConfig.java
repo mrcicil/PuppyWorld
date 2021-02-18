@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
     	http.headers().frameOptions().disable();
         http.authorizeRequests()
-        		.antMatchers("/css/**", "/js/**", "/webjars/**","/index", "/register", "/forgetPassword", "/passwordRegenerate", "/saveNewUser", "/images/**", "glyphicon glyphicon-home").permitAll()
+        		.antMatchers("/css/**", "/js/**", "/webjars/**","/index", "/register", "/login", "/forgetPassword", "/passwordRegenerate", "/saveNewUser", "/images/**", "glyphicon glyphicon-home").permitAll()
         		.antMatchers("/registerStaff")
         			.access("hasRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())")
         		.antMatchers("/productCreate")
