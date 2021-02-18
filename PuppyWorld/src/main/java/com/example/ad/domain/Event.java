@@ -29,7 +29,6 @@ public class Event {
 	
 	private int capacity;
 	
-	//clarify with YK
 	@OneToOne
 	private User creator;
 	

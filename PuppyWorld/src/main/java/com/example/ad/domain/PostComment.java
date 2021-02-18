@@ -25,14 +25,6 @@ public class PostComment {
 	@ManyToOne
 	private Post post;
 
-	
-	/*
-	 * public PostComment(String commentMessage, LocalDateTime commentDateTime) {
-	 * super(); this.commentMessage = commentMessage; this.commentDateTime =
-	 * commentDateTime; }
-	 */
-	
-
 	public int getCommentId() {
 		return commentId;
 	}

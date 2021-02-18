@@ -1,7 +1,5 @@
 package com.example.ad.domain;
 
-
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;

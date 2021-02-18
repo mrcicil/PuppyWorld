@@ -21,22 +21,6 @@ public class Services {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int serviceId;
 	
-//	@Column(length=45,nullable=true)
-//	private String logo;
-	
-//	private String serviceName, serviceDescription;
-	
-//	private double charges;
-	
-	//private double serviceDuration;
-	
-//	@Lob
-//	private byte[] serviceImage;
-	
-//	private ReservationType reservationType;
-	
-	//private LimitDogs limitDogs;
-	
 	private ArrayList<String> timeSlots;
 	
 	@OneToOne
