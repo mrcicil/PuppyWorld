@@ -695,7 +695,7 @@ public class PuppyWorldApplication {
 			LocalDate jan28 = LocalDate.of(2021, 1, 28);
 			LocalDate jan29 = LocalDate.of(2021, 1, 29);
 			LocalDate jan30 = LocalDate.of(2021, 1, 30);
-			LocalDate jan31 = LocalDate.of(2021, 1, 30);
+			LocalDate jan31 = LocalDate.of(2021, 1, 31);
 			
 			
 			LocalDate feb1 = LocalDate.of(2021, 2, 1);
@@ -1221,78 +1221,78 @@ public class PuppyWorldApplication {
 			Reservation ressp2s17_b_2 = new Reservation(sp2s17_2, "10am", u4, Status.ACTIVE);
 			resrepo.save(ressp2s17_b_2);
 
-			Reservation ressp2s18_a_2 = new Reservation(sp2s18_2, "8am", u3, Status.ACTIVE);
-			resrepo.save(ressp2s18_a_2);
-
-			Reservation ressp2s19_c_2 = new Reservation(sp2s19_2, "1pm", u5, Status.ACTIVE);
-			resrepo.save(ressp2s19_c_2);
-			Reservation ressp2s19_d_2 = new Reservation(sp2s19_2, "3pm", u6, Status.ACTIVE);
-			resrepo.save(ressp2s19_d_2);
-			Reservation ressp2s19_e_2 = new Reservation(sp2s19_2, "5pm", u7, Status.ACTIVE);
-			resrepo.save(ressp2s19_e_2);
-			
-			Reservation ressp2s20_a_2 = new Reservation(sp2s20_2, "8am", u3, Status.ACTIVE);
-			resrepo.save(ressp2s20_a_2);
-			Reservation ressp2s20_b_2 = new Reservation(sp2s20_2, "10am", u4, Status.ACTIVE);
-			resrepo.save(ressp2s20_b_2);
-			Reservation ressp2s20_c_2 = new Reservation(sp2s20_2, "1pm", u5, Status.ACTIVE);
-			resrepo.save(ressp2s20_c_2);
-			Reservation ressp2s20_d_2 = new Reservation(sp2s20_2, "3pm", u6, Status.ACTIVE);
-			resrepo.save(ressp2s20_d_2);
-			Reservation ressp2s20_e_2 = new Reservation(sp2s20_2, "5pm", u7, Status.ACTIVE);
-			resrepo.save(ressp2s20_e_2);
-
-			Reservation ressp2s21_a_2 = new Reservation(sp2s21_2, "8am", u3, Status.ACTIVE);
-			resrepo.save(ressp2s21_a_2);
-			Reservation ressp2s21_b_2 = new Reservation(sp2s21_2, "10am", u4, Status.ACTIVE);
-			resrepo.save(ressp2s21_b_2);
-			Reservation ressp2s21_c_2 = new Reservation(sp2s21_2, "1pm", u5, Status.ACTIVE);
-			resrepo.save(ressp2s21_c_2);
-			Reservation ressp2s21_d_2 = new Reservation(sp2s21_2, "3pm", u6, Status.ACTIVE);
-			resrepo.save(ressp2s21_d_2);
-			Reservation ressp2s21_e_2 = new Reservation(sp2s21_2, "5pm", u7, Status.ACTIVE);
-			resrepo.save(ressp2s21_e_2);
-
-			Reservation ressp2s22_c_2 = new Reservation(sp2s22_2, "1pm", u5, Status.ACTIVE);
-			resrepo.save(ressp2s22_c_2);
-
-			Reservation ressp2s23_a_2 = new Reservation(sp2s23_2, "8am", u3, Status.ACTIVE);
-			resrepo.save(ressp2s23_a_2);
-			Reservation ressp2s23_e_2 = new Reservation(sp2s23_2, "5pm", u7, Status.ACTIVE);
-			resrepo.save(ressp2s23_e_2);
-
-			Reservation ressp2s24_c_2 = new Reservation(sp2s24_2, "1pm", u5, Status.ACTIVE);
-			resrepo.save(ressp2s24_c_2);
-
-			Reservation ressp2s25_a_2 = new Reservation(sp2s25_2, "8am", u3, Status.ACTIVE);
-			resrepo.save(ressp2s25_a_2);
-
-			
-			Reservation ressp2s26_c_2 = new Reservation(sp2s26_2, "1pm", u5, Status.ACTIVE);
-			resrepo.save(ressp2s26_c_2);
-			
-
-			Reservation ressp2s27_a_2 = new Reservation(sp2s27_2, "8am", u3, Status.ACTIVE);
-			resrepo.save(ressp2s27_a_2);
-			Reservation ressp2s27_b_2 = new Reservation(sp2s27_2, "10am", u4, Status.ACTIVE);
-			resrepo.save(ressp2s27_b_2);
-			Reservation ressp2s27_c_2 = new Reservation(sp2s27_2, "1pm", u5, Status.ACTIVE);
-			resrepo.save(ressp2s27_c_2);
-			Reservation ressp2s27_d_2 = new Reservation(sp2s27_2, "3pm", u6, Status.ACTIVE);
-			resrepo.save(ressp2s27_d_2);
-			Reservation ressp2s27_e_2 = new Reservation(sp2s27_2, "5pm", u7, Status.ACTIVE);
-			resrepo.save(ressp2s27_e_2);
-
-			Reservation ressp2s28_a_2 = new Reservation(sp2s28_2, "8am", u3, Status.ACTIVE);
-			resrepo.save(ressp2s28_a_2);
-			Reservation ressp2s28_b_2 = new Reservation(sp2s28_2, "10am", u4, Status.ACTIVE);
-			resrepo.save(ressp2s28_b_2);
-			Reservation ressp2s28_c_2 = new Reservation(sp2s28_2, "1pm", u5, Status.ACTIVE);
-			resrepo.save(ressp2s28_c_2);
-			Reservation ressp2s28_d_2 = new Reservation(sp2s28_2, "3pm", u6, Status.ACTIVE);
-			resrepo.save(ressp2s28_d_2);
-			Reservation ressp2s28_e_2 = new Reservation(sp2s28_2, "5pm", u7, Status.ACTIVE);
-			resrepo.save(ressp2s28_e_2);
+//			Reservation ressp2s18_a_2 = new Reservation(sp2s18_2, "8am", u3, Status.ACTIVE);
+//			resrepo.save(ressp2s18_a_2);
+//
+//			Reservation ressp2s19_c_2 = new Reservation(sp2s19_2, "1pm", u5, Status.ACTIVE);
+//			resrepo.save(ressp2s19_c_2);
+//			Reservation ressp2s19_d_2 = new Reservation(sp2s19_2, "3pm", u6, Status.ACTIVE);
+//			resrepo.save(ressp2s19_d_2);
+//			Reservation ressp2s19_e_2 = new Reservation(sp2s19_2, "5pm", u7, Status.ACTIVE);
+//			resrepo.save(ressp2s19_e_2);
+//			
+//			Reservation ressp2s20_a_2 = new Reservation(sp2s20_2, "8am", u3, Status.ACTIVE);
+//			resrepo.save(ressp2s20_a_2);
+//			Reservation ressp2s20_b_2 = new Reservation(sp2s20_2, "10am", u4, Status.ACTIVE);
+//			resrepo.save(ressp2s20_b_2);
+//			Reservation ressp2s20_c_2 = new Reservation(sp2s20_2, "1pm", u5, Status.ACTIVE);
+//			resrepo.save(ressp2s20_c_2);
+//			Reservation ressp2s20_d_2 = new Reservation(sp2s20_2, "3pm", u6, Status.ACTIVE);
+//			resrepo.save(ressp2s20_d_2);
+//			Reservation ressp2s20_e_2 = new Reservation(sp2s20_2, "5pm", u7, Status.ACTIVE);
+//			resrepo.save(ressp2s20_e_2);
+//
+//			Reservation ressp2s21_a_2 = new Reservation(sp2s21_2, "8am", u3, Status.ACTIVE);
+//			resrepo.save(ressp2s21_a_2);
+//			Reservation ressp2s21_b_2 = new Reservation(sp2s21_2, "10am", u4, Status.ACTIVE);
+//			resrepo.save(ressp2s21_b_2);
+//			Reservation ressp2s21_c_2 = new Reservation(sp2s21_2, "1pm", u5, Status.ACTIVE);
+//			resrepo.save(ressp2s21_c_2);
+//			Reservation ressp2s21_d_2 = new Reservation(sp2s21_2, "3pm", u6, Status.ACTIVE);
+//			resrepo.save(ressp2s21_d_2);
+//			Reservation ressp2s21_e_2 = new Reservation(sp2s21_2, "5pm", u7, Status.ACTIVE);
+//			resrepo.save(ressp2s21_e_2);
+//
+//			Reservation ressp2s22_c_2 = new Reservation(sp2s22_2, "1pm", u5, Status.ACTIVE);
+//			resrepo.save(ressp2s22_c_2);
+//
+//			Reservation ressp2s23_a_2 = new Reservation(sp2s23_2, "8am", u3, Status.ACTIVE);
+//			resrepo.save(ressp2s23_a_2);
+//			Reservation ressp2s23_e_2 = new Reservation(sp2s23_2, "5pm", u7, Status.ACTIVE);
+//			resrepo.save(ressp2s23_e_2);
+//
+//			Reservation ressp2s24_c_2 = new Reservation(sp2s24_2, "1pm", u5, Status.ACTIVE);
+//			resrepo.save(ressp2s24_c_2);
+//
+//			Reservation ressp2s25_a_2 = new Reservation(sp2s25_2, "8am", u3, Status.ACTIVE);
+//			resrepo.save(ressp2s25_a_2);
+//
+//			
+//			Reservation ressp2s26_c_2 = new Reservation(sp2s26_2, "1pm", u5, Status.ACTIVE);
+//			resrepo.save(ressp2s26_c_2);
+//			
+//
+//			Reservation ressp2s27_a_2 = new Reservation(sp2s27_2, "8am", u3, Status.ACTIVE);
+//			resrepo.save(ressp2s27_a_2);
+//			Reservation ressp2s27_b_2 = new Reservation(sp2s27_2, "10am", u4, Status.ACTIVE);
+//			resrepo.save(ressp2s27_b_2);
+//			Reservation ressp2s27_c_2 = new Reservation(sp2s27_2, "1pm", u5, Status.ACTIVE);
+//			resrepo.save(ressp2s27_c_2);
+//			Reservation ressp2s27_d_2 = new Reservation(sp2s27_2, "3pm", u6, Status.ACTIVE);
+//			resrepo.save(ressp2s27_d_2);
+//			Reservation ressp2s27_e_2 = new Reservation(sp2s27_2, "5pm", u7, Status.ACTIVE);
+//			resrepo.save(ressp2s27_e_2);
+//
+//			Reservation ressp2s28_a_2 = new Reservation(sp2s28_2, "8am", u3, Status.ACTIVE);
+//			resrepo.save(ressp2s28_a_2);
+//			Reservation ressp2s28_b_2 = new Reservation(sp2s28_2, "10am", u4, Status.ACTIVE);
+//			resrepo.save(ressp2s28_b_2);
+//			Reservation ressp2s28_c_2 = new Reservation(sp2s28_2, "1pm", u5, Status.ACTIVE);
+//			resrepo.save(ressp2s28_c_2);
+//			Reservation ressp2s28_d_2 = new Reservation(sp2s28_2, "3pm", u6, Status.ACTIVE);
+//			resrepo.save(ressp2s28_d_2);
+//			Reservation ressp2s28_e_2 = new Reservation(sp2s28_2, "5pm", u7, Status.ACTIVE);
+//			resrepo.save(ressp2s28_e_2);
 			
 			
 			
