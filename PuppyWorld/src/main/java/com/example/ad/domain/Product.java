@@ -1,13 +1,14 @@
 package com.example.ad.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Product {
@@ -23,6 +24,7 @@ public class Product {
 	
 	private int productQuantity;
 	
+	@Enumerated(EnumType.STRING)
 	private ProductType productType;
 	
 	@Lob

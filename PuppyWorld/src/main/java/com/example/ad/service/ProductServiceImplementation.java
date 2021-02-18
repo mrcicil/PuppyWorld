@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.example.ad.domain.Product;
+import com.example.ad.domain.ProductType;
 import com.example.ad.domain.Services;
 import com.example.ad.repo.ProductRepository;
 
@@ -64,5 +65,22 @@ public class ProductServiceImplementation implements ProductService {
 		}
 		return (ArrayList<Product>) prepo.findAll();
 	}
+
+	@Override
+	public ArrayList<Product> searchProductByKeywordAndProductType(String keyword, String productType) {
+		// TODO Auto-generated method stub
+		if (keyword != null) {
+			return prepo.searchProductByType(keyword, productType);
+		}
+		
+		return (ArrayList<Product>) prepo.findAll();
+	}
+
+	/*
+	 * @Override public ArrayList<Product> findByProductType(ProductType
+	 * productType) { // TODO Auto-generated method stub if (productType != null) {
+	 * return prepo.findByProductType(productType); } return (ArrayList<Product>)
+	 * prepo.findAll(); }
+	 */
 
 }

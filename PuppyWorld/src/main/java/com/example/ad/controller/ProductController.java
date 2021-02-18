@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Product;
+import com.example.ad.domain.ProductType;
 import com.example.ad.domain.User;
 import com.example.ad.service.ProductService;
 import com.example.ad.service.ProductServiceImplementation;
@@ -65,9 +66,22 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/searchProduct")
-	public String searchProduct(Model model, @RequestParam("keyword") String keyword) {
+	public String searchProduct(Model model, @RequestParam("keyword") String keyword){
 		
-		ArrayList<Product> searchProduct=pservice.searchProductByKeyword(keyword);
+		boolean hasEnum = false;
+		ArrayList<Product> searchProduct = new ArrayList<Product>();
+		
+		for (ProductType prod:ProductType.values()){
+			if (prod.name().equalsIgnoreCase(keyword)) {
+				hasEnum = true;
+				searchProduct = pservice.searchProductByKeywordAndProductType(keyword, prod.name());
+				break;
+			}
+		}
+
+		if (hasEnum == false) {
+			searchProduct = pservice.searchProductByKeyword(keyword);
+		}
 		
 		model.addAttribute("productList",searchProduct);
 		model.addAttribute("keyword",keyword);
