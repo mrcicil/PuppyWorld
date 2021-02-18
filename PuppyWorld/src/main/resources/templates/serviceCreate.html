@@ -35,6 +35,7 @@
 				<input type="checkbox" th:field="*{timeSlots}" th:value="1pm" th:text="1pm">
 				<input type="checkbox" th:field="*{timeSlots}" th:value="3pm" th:text="3pm">
 				<input type="checkbox" th:field="*{timeSlots}" th:value="5pm" th:text="5pm">
+				<p style="color:red" th:if="${#fields.hasErrors('timeSlots')}" th:errors="*{timeSlots}"></p>
 			</div>
 
 			<br/>

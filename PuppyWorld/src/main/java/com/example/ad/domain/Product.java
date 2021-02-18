@@ -16,6 +16,7 @@ public class Product {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int productId;
 	
+	@NotEmpty
 	private String productName;
 	
 	private float productPrice;
@@ -35,7 +36,7 @@ public class Product {
 	}
 
 
-	public Product(String productName, float productPrice, int productQuantity, ProductType productType,
+	public Product(@NotEmpty String productName, float productPrice, int productQuantity, ProductType productType,
 			byte[] productImage, User user) {
 		super();
 		this.productName = productName;

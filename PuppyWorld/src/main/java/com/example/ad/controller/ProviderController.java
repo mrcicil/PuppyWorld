@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -27,10 +28,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.ad.domain.Product;
 import com.example.ad.domain.Provider;
 import com.example.ad.domain.Reservation;
-import com.example.ad.domain.Status;
 import com.example.ad.domain.User;
 import com.example.ad.service.ProviderService;
 import com.example.ad.service.ProviderServiceImplementation;
@@ -126,7 +125,7 @@ public class ProviderController {
 	}
 	
 	@RequestMapping(value="/providerSave",method=RequestMethod.POST)
-	public String saveService(@ModelAttribute("provider")Provider provider, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {
+	public String saveService(@ModelAttribute("provider")@Valid Provider provider, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {
 		
 		try {
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -152,7 +151,12 @@ public class ProviderController {
 				break;
 			}
 			
-		}	
+		}
+		
+		if (provider.getPrice() == 0) {
+			errors.rejectValue("price","not zero", "must not be zero");
+		}
+		
 		if (bindingResult.hasErrors()) {
 			return "providerCreate";
 		}
@@ -190,7 +194,7 @@ public class ProviderController {
 	}
 	
 	@RequestMapping(value="/providerEditSave",method=RequestMethod.POST)
-	public String editSaveProvider(@ModelAttribute("provider")Provider provider, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {
+	public String editSaveProvider(@ModelAttribute("provider")@Valid Provider provider, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {
 		
 		try {
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());

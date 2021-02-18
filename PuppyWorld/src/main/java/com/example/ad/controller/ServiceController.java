@@ -1,42 +1,31 @@
 package com.example.ad.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.example.ad.domain.Product;
 import com.example.ad.domain.Provider;
 import com.example.ad.domain.Reservation;
-import com.example.ad.domain.Role;
 import com.example.ad.domain.Services;
 import com.example.ad.domain.Status;
 import com.example.ad.domain.User;
-import com.example.ad.repo.ServiceRepository;
 import com.example.ad.service.EmailService;
 import com.example.ad.service.ProviderService;
 import com.example.ad.service.ProviderServiceImplementation;
@@ -173,22 +162,33 @@ public class ServiceController {
 
 	
 	@RequestMapping(value="/serviceSave",method=RequestMethod.POST)
-	public String saveService(@ModelAttribute("service")Services service, Errors errors, BindingResult bindingResult){
+	public String saveService(@ModelAttribute("service")@Valid Services service, Errors errors, BindingResult bindingResult){
+		
+		if (service.getLocalDate()==null) {
+			errors.rejectValue("localDate","null", "must not be empty");
+		}
+		
+		if (service.getTimeSlots().size()==0) {
+			errors.rejectValue("timeSlots","empty", "must not be empty");
+		}
 		
 		LocalDate date = LocalDate.now();
-		if(service.getLocalDate().isBefore(date) || service.getLocalDate().isEqual(date)) {
-			errors.rejectValue("localDate", "null", "Cannot be past or present");
-		}
-		ArrayList<Services> sList = sservice.findAllServices();
-		for (Iterator <Services> iterator = sList.iterator(); iterator.hasNext();) {
-			Services service1 = iterator.next();
-			if(service1.getLocalDate().isEqual(service.getLocalDate()) & service1.getProvider().getProviderId() == service.getProvider().getProviderId()) {
-				errors.rejectValue("localDate", "exist", "Timeslot exist");
-				break;
+		if ( (service.getLocalDate() != null) && (service.getTimeSlots().size() != 0)) {
+			if(service.getLocalDate().isBefore(date) || service.getLocalDate().isEqual(date)) {
+				errors.rejectValue("localDate", "null", "Cannot be past or present");
 			}
 			
+			ArrayList<Services> sList = sservice.findAllServices();
+			for (Iterator <Services> iterator = sList.iterator(); iterator.hasNext();) {
+				Services service1 = iterator.next();
+				if(service1.getLocalDate().isEqual(service.getLocalDate()) & service1.getProvider().getProviderId() == service.getProvider().getProviderId()) {
+					errors.rejectValue("localDate", "exist", "Timeslot exist");
+					break;
+				}
+				
+			}
 		}
-		
+	
 		if (bindingResult.hasErrors()) {
 			return "serviceCreate";
 		}

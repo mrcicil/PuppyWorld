@@ -2,17 +2,17 @@ package com.example.ad.domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.sun.istack.NotNull;
 
 @Entity
 public class Services {

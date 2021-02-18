@@ -8,11 +8,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -31,13 +30,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Product;
-import com.example.ad.domain.Services;
 import com.example.ad.domain.User;
-import com.example.ad.repo.ServiceRepository;
 import com.example.ad.service.ProductService;
 import com.example.ad.service.ProductServiceImplementation;
-import com.example.ad.service.ServiceService;
-import com.example.ad.service.ServiceServiceImplementation;
 import com.example.ad.service.UserService;
 import com.example.ad.service.UserServiceImplementation;
 
@@ -96,7 +91,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/productSave",method=RequestMethod.POST)
-	public String saveService(@ModelAttribute("product")Product product, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {
+	public String saveService(@ModelAttribute("product")@Valid Product product, Errors errors, BindingResult bindingResult, @RequestParam("fileImage") MultipartFile multipartFile, HttpServletRequest request) throws IllegalStateException, IOException {
 		
 		try {
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -123,14 +118,11 @@ public class ProductController {
 			}
 		}
 		
-		if(product.getProductName().isEmpty()) {
-			errors.rejectValue("productName", "null", "Must be filled");
-		}
 		if(product.getProductPrice() == 0) {
-			errors.rejectValue("productPrice", "null", "Must be filled");
+			errors.rejectValue("productPrice", "null", "must not be zero");
 		}
 		if(product.getProductQuantity() == 0) {
-			errors.rejectValue("productQuantity", "null", "Must be filled");
+			errors.rejectValue("productQuantity", "null", "must not be zero");
 		}
 		
 		if (bindingResult.hasErrors()) {

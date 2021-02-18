@@ -9,6 +9,7 @@ import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 //import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,8 +149,8 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "/saveNewUser")
-	public String saveNewUser (@ModelAttribute("user") User user, 
-			BindingResult bindingResult, Model model, HttpServletRequest request, Errors errors) {
+	public String saveNewUser (@ModelAttribute("user")@Valid User user, 
+			Errors errors, BindingResult bindingResult, Model model, HttpServletRequest request ) {
 		
 		User checkUsername = uservice.findUserByUserName(user.getUserName());
 		User checkEmail = uservice.findUserByUserEmail(user.getEmailAddress());
@@ -183,8 +184,8 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "/saveNewStaff")
-	public String saveNewStaff (@ModelAttribute("user") User user, 
-			BindingResult bindingResult, Model model, HttpServletRequest request, Errors errors) {
+	public String saveNewStaff (@ModelAttribute("user")@Valid User user, 
+			Errors errors, BindingResult bindingResult, Model model, HttpServletRequest request) {
 		
 		User checkUsername = uservice.findUserByUserName(user.getUserName());
 		User checkEmail = uservice.findUserByUserEmail(user.getEmailAddress());

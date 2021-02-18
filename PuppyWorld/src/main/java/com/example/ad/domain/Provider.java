@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Provider {
@@ -14,9 +15,11 @@ public class Provider {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int providerId;
 	
+	@NotEmpty
 	private String providerName; 
 	
 	@Column(columnDefinition = "TEXT")
+	@NotEmpty
 	private String providerDescription;
 	
 	private float price;
@@ -24,7 +27,7 @@ public class Provider {
 	@Lob
 	private byte[] providerImage;
 
-	public Provider(String providerName, String providerDescription, float price,
+	public Provider(@NotEmpty String providerName, @NotEmpty String providerDescription, float price,
 			byte[] providerImage) {
 		super();
 		this.providerName = providerName;
