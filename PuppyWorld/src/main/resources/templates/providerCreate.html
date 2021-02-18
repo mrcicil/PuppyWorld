@@ -32,26 +32,6 @@
 				<p style="color:red" th:if="${#fields.hasErrors('providerDescription')}" th:errors="*{providerDescription}"></p>
 				</div>
 
-			
-				
-			
-
-		<!-- 	<div class="form-group" style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Quantity:</label>
-				<input type="number" step=1 min=0 placeholder="Enter quantity" th:field="*{productQuantity}">
-				<p style="color:red" th:if="${#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></p>
-				</div> -->
-
-			<!-- <div class="form-group" style="margin-left:34%; text-align:left">
-				<label style="width: 200px; text-align:left">Type:</label>
-				<select th:field="*{productType}">
-				<option th:each="productType : ${T(com.example.ad.domain.ProductType).values()}" 
-							th:value="${productType}" th:text="${productType}"/>
-				</select>
-				</div> -->
-
-
-
 			<div class="form-group" style="margin-left:34%; text-align:left" >
 				<label style="width: 200px; text-align:left"> Upload Image:</label>
 				<br/>

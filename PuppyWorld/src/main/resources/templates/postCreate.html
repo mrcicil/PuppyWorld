@@ -18,13 +18,14 @@
 				<label style="width: 200px; text-align:left">Title:</label>
 				<input type="text" placeholder="Enter post Title" th:field="*{postTitle}" style="width:250px">
 				<p style="color:red" th:if="${#fields.hasErrors('postTitle')}" th:errors="*{postTitle}"></p>
-				</div>
+			</div>
 
 			<div class="form-group" style="margin-left:30%; text-align:left">
 				<label style="width: 200px; text-align:left; vertical-align:top">Message:</label>
-				<textarea type="text" step=0.01 min=0 placeholder="Enter post Message" th:field="*{postMessage}" style="width:250px"></textarea>
+				<textarea type="text" step=0.01 min=0 placeholder="Enter post Message" 
+							th:field="*{postMessage}" style="width:250px"></textarea>
 				<p style="color:red" th:if="${#fields.hasErrors('postMessage')}" th:errors="*{postMessage}"></p>
-				</div>
+			</div>
 
 			<div class="form-group" style="margin-left:30%; text-align:left">
 				<label style="width: 200px; text-align:left">Type:</label>
@@ -32,7 +33,7 @@
 				<option th:each="postType : ${T(com.example.ad.domain.PostType).values()}" 
 							th:value="${postType}" th:text="${postType}"/>
 				</select>
-				</div>
+			</div>
 
 			<br/>
 
@@ -40,24 +41,25 @@
 				<label style="width: 200px; text-align:left"> Upload Image:</label>
 				<br/>
 				<div>
-					<input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
+					<input type="file" class="form-control-file" name="fileImage" id="fileImage" 
+							accept="image/*" onchange="loadFile(event)" />
 				</div>
 				<br/>
-				<div class="form-group"  style="margin-left:16%; border-style:solid; border-color:#4597a8; border-width: thin; height: 200px; width: 200px;">
+				<div class="form-group"  style="margin-left:16%; border-style:solid; border-color:#4597a8; 
+												border-width: thin; height: 200px; width: 200px;">
 					<img id="output" alt="Preview" width="200" height="200" />
 				</div>
-				</div>
+			</div>
 
-				
-				<button style="margin:5px"><a th:href="@{/postCreate}" style="color:white;">Clear</a></button>
-				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="color:white">Submit</button>
-				
+			<button style="margin:5px"><a th:href="@{/postCreate}" style="color:white;">Clear</a></button>
+			<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="color:white">Submit</button>		
 		</form>
-		
 	</div>
 	
 </body>
+
 <div th:insert="fragments/general.html :: footer"></div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 var loadFile = function(event) {

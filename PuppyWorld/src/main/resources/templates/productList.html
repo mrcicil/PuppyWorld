@@ -61,35 +61,26 @@ div.desc {
 				style="float:left">
 				<button><a style="color:white" href="#" th:href="@{/productCreate}">Create New</a></button>
 			</li>
+			
 			<li style="float:right">
-	<!-- 			<h3>Search</h3> -->
-
-	            <div>
+	          <div>
 		          <form action="" th:action="@{/searchProduct}" method="post">
-		          <fieldset>
-		          
-	        	       <input type="text" th:value="${keyword}" name="keyword" size="50"required>
-	        	       <button type="submit" style="color:white">Search</button>
-	        	       <!-- <input type="button" style="color:white"  value="Clear" onclick="clearSearch()" /> -->
-	        	       <button style="margin:5px"><a th:href="@{/productList}" style="color:white;">Clear</a></button>
-	              </fieldset>
-	                  
-	              <br/>
-	             
-	                 <!--  <fieldset>
-			             <input type="text" name="keyword" id="keyword" th:value="${keyword}"
-				          size="50" required /> &nbsp; -->
-			        
+			          <fieldset>
+		        	       <input type="text" th:value="${keyword}" name="keyword" size="50"required>
+		        	       <button type="submit" style="color:white">Search</button>
+		        	       <!-- <input type="button" style="color:white"  value="Clear" onclick="clearSearch()" /> -->
+		        	       <button style="margin:5px"><a th:href="@{/productList}" style="color:white;">Clear</a></button>
+		              </fieldset>
+		                  
+		              <br/>
+	            
 		          </form>
-
 	            </div>
-
 			</li>
 		</ul> 
 		
 		<p></p>
 		</div>
-
 
 		<div class="container" style="text-align:center; margin-bottom: 20px">
 			<div th:each="product : ${productList}">
@@ -99,48 +90,33 @@ div.desc {
 	               <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	                <div class="desc" style="margin-left:5%; text-align:center; padding: 10px" >
 	                	<p><br><span th:text=  ${product.productName} style="font-weight:bold">Name</span></p>
-	                	<p style="position:absolute; bottom:35px; left:45%;">$<span th:text=  "${#numbers.formatDecimal(product.productPrice, 0, 2)}">Price</span></p>
-	           			<p><a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}" th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="padding-right:10px; vertical-align:bottom; position:absolute; bottom:10px; left:42%;color:#4597a8"><i class="glyphicon glyphicon-edit"></i></a>
-						<a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}" th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style = "vertical-align:bottom; position:absolute; bottom:10px; right: 38%; color:#4597a8"><i class="glyphicon glyphicon-trash"></i></a></p>
-						
+	                	
+	                	<p style="position:absolute; bottom:35px; left:45%;">
+	                		$<span th:text=  "${#numbers.formatDecimal(product.productPrice, 0, 2)}">Price</span></p>
+	           			
+	           			<p><a href="EditProduct.html" th:href="@{/productEdit/}+${product.productId}" 
+	           					th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" 
+	           					style="padding-right:10px; vertical-align:bottom; position:absolute; bottom:10px; left:42%;color:#4597a8">
+	           						<i class="glyphicon glyphicon-edit"></i>
+	           				</a>
+							<a href="DeleteProduct.html" th:href="@{/productDelete/}+${product.productId}" 
+								th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" 
+								style = "vertical-align:bottom; position:absolute; bottom:10px; right: 38%; color:#4597a8">
+									<i class="glyphicon glyphicon-trash"></i>
+							</a>
+						</p>						
 					</div>	
-			
-			 
-			
 			</div>
 			
 			</div>
 		</div>
-
-
-
-	<!-- <h3>Search</h3>
-	<div>
-		<form action="" th:action="@{/searchProduct}" method="post">
-		     <fieldset>
-	        	Filter:<input type="text" th:value="${keyword}" name="keyword" size="50"required>
-	        </fieldset>
-	        <br/>
-	        <fieldset>
-			<input type="text" name="keyword" id="keyword" th:value="${keyword}"
-				size="50" required /> &nbsp;
-			<fieldset>
-			<button type="submit">Search</button>
-			</fieldset>
-			 <br/>
-		</form>
-
-		</div>
-
-		</div>
-	</div> -->
 
 	<h1 th:if="${#lists.isEmpty(productList)}" style="font-weight:bold; padding:15px;" align="center">Empty List</h1>
 
-    
-	<!--  <div th:replace="fragments/general.html :: footer"></div>-->
+	<br/><br/>
 	
 </body>
+
 <div th:replace="fragments/general.html :: footer"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">

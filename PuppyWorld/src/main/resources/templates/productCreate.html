@@ -49,7 +49,8 @@
 					<input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/*" onchange="loadFile(event)" />
 				</div>
 				<br/>
-				<div class="form-group"  style="margin-left:11%; border-style:solid; border-color:#4597a8; border-width: thin; height: 200px; width: 200px;">
+				<div class="form-group"  style="margin-left:11%; border-style:solid; border-color:#4597a8; border-width: thin; 
+												height: 200px; width: 200px;">
 					<img id="output" alt="Preview" width="200" height="200"/>
 				</div>
 				</div>
@@ -63,6 +64,7 @@
 	</div>
 	<div th:insert="fragments/general.html :: footer"></div>
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 var loadFile = function(event) {
