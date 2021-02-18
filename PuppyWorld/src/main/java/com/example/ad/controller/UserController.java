@@ -150,6 +150,18 @@ public class UserController {
 	@RequestMapping(value = "/saveNewUser")
 	public String saveNewUser (@ModelAttribute("user") User user, 
 			BindingResult bindingResult, Model model, HttpServletRequest request, Errors errors) {
+		
+		User checkUsername = uservice.findUserByUserName(user.getUserName());
+		User checkEmail = uservice.findUserByUserEmail(user.getEmailAddress());
+		
+		if (checkUsername != null) {
+			errors.rejectValue("userName", "existed", "username existed in system, please use another username.");
+		}
+		
+		if (checkEmail != null) {
+			errors.rejectValue("emailAddress", "existed", "email address existed in system, please use another email address.");
+		}
+		
 		if (bindingResult.hasErrors()) {
 			return "register";
 		}
@@ -173,9 +185,24 @@ public class UserController {
 	@RequestMapping(value = "/saveNewStaff")
 	public String saveNewStaff (@ModelAttribute("user") User user, 
 			BindingResult bindingResult, Model model, HttpServletRequest request, Errors errors) {
+		
+		User checkUsername = uservice.findUserByUserName(user.getUserName());
+		User checkEmail = uservice.findUserByUserEmail(user.getEmailAddress());
+		
+		if (checkUsername != null) {
+			errors.rejectValue("userName", "existed", "username existed in system, please use another username.");
+		}
+		
+		if (checkEmail != null) {
+			errors.rejectValue("emailAddress", "existed", "email address existed in system, please use another email address.");
+		}
+		
+		
 		if (bindingResult.hasErrors()) {
 			return "registerStaff";
 		}
+		
+		
 		
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
