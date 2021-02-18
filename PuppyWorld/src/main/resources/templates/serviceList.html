@@ -32,7 +32,7 @@
 					
 					<li style="float:left; margin-left:73%">
 						<button th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
-							<a th:href="@{/serviceCreate/}+${provider.providerId}" style="color: white">New</a>
+							<a th:href="@{/serviceCreate/}+${provider.providerId}" style="color: white">Create New</a>
 						</button>
 					</li>
 				</ul>
