@@ -21,26 +21,28 @@
 		<div class="container" style="text-align: center">
 
 			<h1 style="font-weight: bold" th:text="${provider.providerName}">Service</h1>
-
-
-    <div>
-    <ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
-	    <li style="float:left; margin-left:1%">
-	    <button style="width:150px">
-		<a th:href="@{/providerList/}" style="color:white">Back to List</a>
-		</button>
-		</li>
-			 <li style="float:left; margin-left:73%">
-				<button th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
-					<a th:href="@{/serviceCreate/}+${provider.providerId}" style="color: white">New</a>
-				</button>
-				</li>
-			</ul>
+			
+		    <div>
+			    <ul style="list-style: none; margin-left:auto; margin-right:auto; padding:10px">
+				    <li style="float:left; margin-left:1%">
+					    <button style="width:150px">
+							<a th:href="@{/providerList/}" style="color:white">Back to List</a>
+						</button>
+					</li>
+					
+					<li style="float:left; margin-left:73%">
+						<button th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
+							<a th:href="@{/serviceCreate/}+${provider.providerId}" style="color: white">New</a>
+						</button>
+					</li>
+				</ul>
 			</div>
-			</br>
+	
+			<br/>
 			<p th:text="${message}" style="color:red;font-size:large"></p>
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
+			
 			<div class="gallery">
 				<img th:src="@{${'/provider/image/'+ provider.providerId}}"
 					class="card img-fluid" alt="" width="300" height="300"
@@ -48,8 +50,8 @@
 				<p th:text="'$'+${#numbers.formatDecimal(provider.price, 0, 2)}">Service Price</p>
 				<p th:text=${provider.providerDescription}>Service Description</p>
 			</div>
-			<div>
 			
+			<div>
 				<table class="table" cellpadding="3" cellspacing="0"
 					style="width: 60%; margin:auto">
 					<thead style="display: table-header-group">
@@ -71,9 +73,11 @@
 							</select></td>
 							<td
 								th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
-								<a th:href="@{/serviceDelete/}+${service.serviceId}" style="color:#4597a8"><i class="glyphicon glyphicon-trash"></i></a>
+								<a th:href="@{/serviceDelete/}+${service.serviceId}" style="color:#4597a8">
+									<i class="glyphicon glyphicon-trash"></i></a>
 							</td>
-							<td><a th:href="@{/reservationCreate/}+${service.serviceId}" style="color:#4597a8"><i class="glyphicon glyphicon-check"></i></a></td>
+							<td><a th:href="@{/reservationCreate/}+${service.serviceId}" style="color:#4597a8">
+									<i class="glyphicon glyphicon-check"></i></a></td>
 						</tr>
 					</tbody>
 				</table>

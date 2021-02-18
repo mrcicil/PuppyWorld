@@ -60,11 +60,9 @@
                 <button><a style="color:white" href="#" th:href="@{/providerCreate}">Create New</a></button>
             </li>
             <li style="float:right">
-
                 <div>
                     <form action="" th:action="@{/searchProvider}" method="post">
                         <fieldset>
-
                             <input type="text" th:value="${keyword}" name="keyword" size="50" required/>
                             <button type="submit" style="color:white">Search</button>
                             <button style="margin:5px"><a th:href="@{/providerList}" style="color:white;">Clear</a></button>
@@ -77,7 +75,6 @@
                     <br/>
                     <p th:text="${message}" style="color:red;font-size:large; margin-right:480px"></p>
                 </div>
-                <div>
             </li>
         </ul>
 
@@ -95,24 +92,23 @@
                 <br/><br/><br/><br/><br/><br/><br/>
                 <div class="desc" style="text-align:center"><p><br><span th:text=${provider.providerName}
                                                                          style="font-weight:bold">Name</span>
-                    <p>$<span th:text="${#numbers.formatDecimal(provider.price, 0, 2)}">Price</span>
+                    <p>$<span th:text="${#numbers.formatDecimal(provider.price, 0, 2)}">Price</span></p>
                     <p><a href="EditProduct.html" th:href="@{/providerEdit/}+${provider.providerId}"
-                          th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" style="color:#4597a8"><i class="glyphicon glyphicon-edit"></i></a>
-                   <a style="padding-left:15px; padding-right:15px ; color:#4597a8" href="DeleteProduct.html" th:href="@{/providerDelete/}+${provider.providerId}"
-                          th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}"><i
-                            class="glyphicon glyphicon-trash"></i></a>
-                   <a href="serviceList.html" th:href="@{/serviceList/}+${provider.providerId}" style="color:#4597a8"><i class="glyphicon glyphicon-eye-open" ></i></a>
-                   
-                    
-                        <a style="padding-left:15px; margin-right:30px; color:#4597a8" th:onclick="showServiceBarGraph([[${provider.providerId}]])" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
-                          <i class="glyphicon glyphicon-stats"></i>
-                        </a>
+                          th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}" 
+                          style="color:#4597a8">
+                          	<i class="glyphicon glyphicon-edit"></i></a>
+	                    <a style="padding-left:15px; padding-right:15px ; color:#4597a8" href="DeleteProduct.html" 
+	                       th:href="@{/providerDelete/}+${provider.providerId}"
+	                       th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
+	                        	<i class="glyphicon glyphicon-trash"></i></a>
+	                    <a href="serviceList.html" th:href="@{/serviceList/}+${provider.providerId}" style="color:#4597a8">
+	                    		<i class="glyphicon glyphicon-eye-open" ></i></a>
+                        <a style="padding-left:15px; margin-right:30px; color:#4597a8" th:onclick="showServiceBarGraph([[${provider.providerId}]])" 
+                           th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
+                          		<i class="glyphicon glyphicon-stats"></i></a>
                     </p>
                 </div>
-
-
             </div>
-
         </div>
 
     </div>

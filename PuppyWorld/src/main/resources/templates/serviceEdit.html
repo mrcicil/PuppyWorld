@@ -8,10 +8,9 @@
 	<div th:insert="fragments/general.html :: menu"></div>
 	<div class="main">
 	<div class="container" style="text-align: center; margin-bottom: 20px">
+	<h1 style="font-weight:bold; padding:10px">Create New Service</h1>
+	<br />
 	<table width="50%" style="text-align:left; margin-left:50%">
-		<h1 style="font-weight:bold; padding:10px">Create New Service</h1>
-		<br />
-		
 		<form action="#" th:action="@{/serviceSave}" th:object="${service}"
 			method="post" enctype="multipart/form-data">
 
@@ -66,14 +65,16 @@
 				<div class="form-group"  class="form-group" style="margin-left:20%">
 					<img id="output" alt="Preview" width="200" height="200" th:src="@{'data:image/jpeg;base64,'+${image}}"/>
 				</div>
-				</div>
+			</div>
 
 				
 				<button style="margin:5px"><a th:href="@{/serviceCreate}" style="color:white;">Clear</a></button> 
 				<button type="submit" name="upload" id="upload"  class="send_upload" value="upload" style="margin:5px; color:white" >Submit</button>
 				
 		</form>
+		</table>
 		
+	</div>
 	</div>
 	<div th:insert="fragments/general.html :: footer"></div>
 </body>
