@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,6 +60,7 @@ public class ProductController {
 	@RequestMapping(value = "/productList")
 	public String list1(Model model) {
 		ArrayList<Product> pList = pservice.findAllProducts();
+		Collections.reverse(pList);
 		model.addAttribute("productList", pList);
 		String keyword = "";	
 		model.addAttribute("keyword", keyword);
@@ -83,6 +85,7 @@ public class ProductController {
 			searchProduct = pservice.searchProductByKeyword(keyword);
 		}
 		
+		Collections.reverse(searchProduct);
 		model.addAttribute("productList",searchProduct);
 		model.addAttribute("keyword",keyword);
 		return"productList";		

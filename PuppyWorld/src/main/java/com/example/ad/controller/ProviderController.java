@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,6 +72,7 @@ public class ProviderController {
 	public String searchProvider(Model model, @RequestParam("keyword") String keyword) {
 		
 		ArrayList<Provider> searchProvider=pvservice.searchProviderByKeyword(keyword);
+		Collections.reverse(searchProvider);
 		model.addAttribute("providerList",searchProvider);
 		model.addAttribute("keyword",keyword);
 		return "providerList";
@@ -83,6 +85,8 @@ public class ProviderController {
 	{
 		ArrayList<Provider> pList = pvservice.findAllProviders();
 		int length = pList.size();
+		
+		Collections.reverse(pList);
 		model.addAttribute("providerList", pList);
 		model.addAttribute("length", length);
 		int productId= 0;
