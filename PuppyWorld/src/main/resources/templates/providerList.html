@@ -59,6 +59,11 @@
                 style="float:left">
                 <button><a style="color:white" href="#" th:href="@{/providerCreate}">Create New</a></button>
             </li>
+            <li style="float:left; margin-left:1%" th:if="${not #httpServletRequest.remoteUser.isEmpty() and #httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
+					    <button style="width:150px">
+							<a th:href="@{/reservationList}" style="color:white">Reservation</a>
+						</button>
+					</li>
             <li style="float:right">
                 <div>
                     <form action="" th:action="@{/searchProvider}" method="post">

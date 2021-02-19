@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -235,6 +236,23 @@ public class ProviderController {
 		model.addAttribute("reservations",reservations);
 		model.addAttribute("provider", provider);
 		return "reservationBooked";
+	}
+	
+	@RequestMapping(value="/reservationList") // ???
+	public String reservationList(Model model, HttpServletRequest request)
+	{
+		ArrayList<Reservation> rList = rservice.findAllReservations();
+		ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+		for (Iterator <Reservation> iterator = rList.iterator(); iterator.hasNext();) {
+			Reservation reservation = iterator.next();
+			if(reservation.getStatus() == Status.ACTIVE) {
+				reservations.add(reservation);
+			}
+		}
+		Collections.sort(reservations, Reservation.ReverseComparator);
+		model.addAttribute("reservations",reservations);
+		
+		return "reservationList";
 	}
 
 }

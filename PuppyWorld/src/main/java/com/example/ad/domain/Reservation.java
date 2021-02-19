@@ -96,6 +96,21 @@ public class Reservation {
         }
    
     };
+    
+    public static Comparator<Reservation> ReverseComparator = new Comparator<Reservation>() {
+		   
+        public int compare(Reservation o1, Reservation o2) {
+            // TODO Auto-generated method stub
+           
+            if (o1.getService().getLocalDate().isEqual(o2.getService().getLocalDate()))
+                return 0;
+            else if (o1.getService().getLocalDate().isAfter(o2.getService().getLocalDate()))
+                return 1;
+            else
+                return -1;
+        }
+   
+    };
 	
 
 }
