@@ -129,12 +129,14 @@ public class BreedController {
 			Output solo = new Output();
 			String outcome = result.get(i).substring(22, (result.get(i).length())-26);
 			String number = result.get(i).substring((result.get(i).length())-8, (result.get(i).length())-1);
-			double num = Double.parseDouble(number);
-			double num1 = Math.round(num * 100.0);
-			if (num1 == 0.0) {
+			double num = Double.parseDouble(number) * 100;
+			double num1 = num*10;
+			double num2 = Math.round(num1);
+			double finn = num2/10;
+			if (finn == 0.0) {
 				continue;
 			}
-			String result1 = outcome + " with " + num1 + "% confidence.";
+			String result1 = outcome + " with " + finn + "% confidence.";
 			String[] outcome1 = outcome.split(" ");
 			List<String> outcome2 = Arrays.asList(outcome1);
 			String fin = "https://www.google.com/search?q=";
