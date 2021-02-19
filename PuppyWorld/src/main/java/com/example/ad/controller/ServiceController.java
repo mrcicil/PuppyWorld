@@ -77,10 +77,19 @@ public class ServiceController {
 	@RequestMapping(value = "/serviceList/{id}")
 	public String dateList(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
 		User user = uservice.findUserByUserName(request.getRemoteUser());
+		ArrayList<Services> output = new ArrayList<Services>();
 		ArrayList<Services> display = sservice.findAllActiveServices(id);
+		for (Iterator <Services> iterator = display.iterator(); iterator.hasNext();) {
+			Services services = iterator.next();
+			if(!services.getTimeSlots().isEmpty()) {
+				output.add(services);
+			}
+			
+		}
+		
 
 		Provider provider = pvservice.findProviderById(id);
-		model.addAttribute("serviceList", display);
+		model.addAttribute("serviceList", output);
 		model.addAttribute("provider", provider);
 		return "serviceList";
 	}
