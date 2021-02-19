@@ -67,9 +67,8 @@
 					<tbody>
 						<tr th:each="service:${serviceList}">
 							<td th:text="${service.localDate}">Date</td>
-							<td><select style="width:60px">
-									<option th:each="product:${service.timeSlots}"
-										th:text="${product}"></option>
+							<td><p style="width:60px">
+									<span th:each="product:${service.timeSlots}" th:text="${product}" style="padding-right:10px"></span>
 							</select></td>
 							<td
 								th:if="${#httpServletRequest.isUserInRole(T(com.example.ad.domain.Role).ROLE_ADMIN.toString())}">
