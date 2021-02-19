@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ad.domain.Provider;
 import com.example.ad.domain.Reservation;
+import com.example.ad.domain.Status;
 import com.example.ad.domain.User;
 import com.example.ad.service.ProviderService;
 import com.example.ad.service.ProviderServiceImplementation;
@@ -217,6 +218,23 @@ public class ProviderController {
 		pvservice.saveProvider(provider);
 		
 		return "redirect:/providerList";
+	}
+	
+	@RequestMapping(value = "/providerReservation/{id}")
+	public String providerReservation(@PathVariable("id") Integer id, Model model) {
+		
+		Provider provider = pvservice.findProviderById(id);
+		ArrayList<Reservation> rList = rservice.findAllReservations();
+		ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+		for (Iterator <Reservation> iterator = rList.iterator(); iterator.hasNext();) {
+			Reservation reservation = iterator.next();
+			if(reservation.getService().getProvider().getProviderId() == provider.getProviderId() & reservation.getStatus() == Status.ACTIVE) {
+				reservations.add(reservation);
+			}
+		}
+		model.addAttribute("reservations",reservations);
+		model.addAttribute("provider", provider);
+		return "reservationBooked";
 	}
 
 }
