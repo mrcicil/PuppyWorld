@@ -186,7 +186,7 @@ public class UserController {
 		createUser.setEmailAddress(user.getEmailAddress());
 		uservice.saveUser(createUser);
 		
-		return "login";
+		return "index";
 		
 	}
 	
